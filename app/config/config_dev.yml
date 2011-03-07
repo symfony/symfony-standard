@@ -16,3 +16,8 @@ zend:
 
 assetic:
     use_controller: true
+
+doctrine:
+  orm:
+      mappings:
+          AcmeDemoBundle: ~

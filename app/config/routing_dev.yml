@@ -1,6 +1,10 @@
 _main:
     resource: routing.yml
 
+_welcome:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+
 _demo:
     resource: "@AcmeDemoBundle/Controller/DemoController.php"
     type:     annotation
