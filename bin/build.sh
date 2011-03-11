@@ -62,6 +62,10 @@ cd $TARGET
 cd doctrine-common && rm -rf build* tests lib/vendor
 cd $TARGET
 
+# Doctrine data fixtures
+cd doctrine-data-fixtures && rm -rf tests README* lib/vendor
+cd $TARGET
+
 # Swiftmailer
 cd swiftmailer && rm -rf CHANGES README* build* docs notes test-suite tests create_pear_package.php package*
 cd $TARGET

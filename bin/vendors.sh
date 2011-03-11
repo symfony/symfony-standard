@@ -47,6 +47,9 @@ install_git symfony git://github.com/symfony/symfony.git
 # Doctrine ORM
 install_git doctrine git://github.com/doctrine/doctrine2.git 2.0.2
 
+# Doctrine Data Fixtures Extension
+install_git doctrine-data-fixtures git://github.com/doctrine/data-fixtures.git
+
 # Doctrine DBAL
 install_git doctrine-dbal git://github.com/doctrine/dbal.git 2.0.2
 
