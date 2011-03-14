@@ -26,7 +26,7 @@ install_git()
     fi
 
     if [ ! -d $INSTALL_DIR ]; then
-        git clone $SOURCE_URL $INSTALL_DIR
+        git clone --depth 1 $SOURCE_URL $INSTALL_DIR
     fi
 
     cd $INSTALL_DIR
