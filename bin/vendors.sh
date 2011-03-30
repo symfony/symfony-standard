@@ -46,8 +46,8 @@ install_git()
 install_git assetic https://github.com/kriswallsmith/assetic.git #v1.0.0alpha1
 
 # Symfony
-#install_git symfony https://github.com/symfony/symfony.git #v$VERSION
-install_git symfony https://github.com/fabpot/symfony.git #v$VERSION
+install_git symfony https://github.com/symfony/symfony.git #v$VERSION
+#install_git symfony https://github.com/fabpot/symfony.git #v$VERSION
 
 # Update the bootstrap files
 $DIR/bin/build_bootstrap.php
