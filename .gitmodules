@@ -1,0 +1,3 @@
+[submodule "src/Xuar/EPagosBundle"]
+	path = src/Xuar/EPagosBundle
+	url = https://aguirrel@github.com/aguirrel/EPagosBundle.git
