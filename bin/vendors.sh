@@ -81,6 +81,7 @@ install_git FrameworkExtraBundle https://github.com/sensio/SensioFrameworkExtraB
 mkdir -p $BUNDLES/JMS
 cd $BUNDLES/JMS
 install_git SecurityExtraBundle https://github.com/schmittjoh/SecurityExtraBundle.git
+install_git DebuggingBundle https://github.com/schmittjoh/DebuggingBundle.git
 
 # Symfony bundles
 mkdir -p $BUNDLES/Symfony/Bundle
