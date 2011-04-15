@@ -13,12 +13,6 @@
         </testsuite>
     </testsuites>
 
-    <!--
-    <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
-    </php>
-    -->
-
     <filter>
         <whitelist>
             <directory>../src</directory>
@@ -30,5 +24,34 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <!--
+    <php>
+        <server
+            name  = "KERNEL_DIR"
+            value = "/var/www/symfony/app/" />
+        <server
+            name  = "HTTP_HOST"
+            value = "localhost" />
+        <server
+            name  = "SCRIPT_NAME"
+            value = "/symfony/web/app_dev.php" />
+    </php>
+
+    <selenium>
+        <browser
+            name    = "Google Chrome"
+            browser = "*googlechrome"
+            host    = "127.0.0.1" />
+        <browser
+            name    = "Firefox"
+            browser = "*firefox"
+            host    = "127.0.0.1" />
+        <browser
+            name    = "Internet Explorer"
+            browser = "*iexplore"
+            host    = "127.0.0.1" />
+    </selenium>
+    -->
 
 </phpunit>
