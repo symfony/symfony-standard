@@ -8,17 +8,17 @@
 
     <testsuites>
         <testsuite name="Acme's Demo Bundle">
-            <directory>../src/Acme/DemoBundle/Tests/</directory>
+            <directory>../../src/Acme/DemoBundle/Tests/</directory>
         </testsuite>
     </testsuites>
 
     <logging>
         <log
             type   = "json"
-            target = "./logs/phpunit.json" />
+            target = "../logs/phpunit.json" />
         <log
             type   = "tap"
-            target = "./logs/phpunit.tap" />
+            target = "../logs/phpunit.tap" />
     </logging>
 
     <!--
