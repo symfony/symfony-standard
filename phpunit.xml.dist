@@ -3,22 +3,22 @@
 <!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
     backupGlobals = "false"
-    bootstrap     = "../bootstrap.php.cache"
+    bootstrap     = "app/bootstrap.php.cache"
     colors        = "true" >
 
     <testsuites>
         <testsuite name="Acme's Demo Bundle">
-            <directory>../../src/Acme/DemoBundle/Tests/</directory>
+            <directory>src/Acme/DemoBundle/Tests/</directory>
         </testsuite>
     </testsuites>
 
     <logging>
         <log
             type   = "json"
-            target = "../logs/phpunit.json" />
+            target = "app/logs/phpunit.json" />
         <log
             type   = "tap"
-            target = "../logs/phpunit.tap" />
+            target = "app/logs/phpunit.tap" />
     </logging>
 
     <!--
