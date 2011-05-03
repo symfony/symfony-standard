@@ -3,23 +3,34 @@
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
-    'Sensio'           => __DIR__.'/../vendor/bundles',
-    'JMS'              => __DIR__.'/../vendor/bundles',
-    'Doctrine\\Common' => __DIR__.'/../vendor/doctrine-common/lib',
-    'Doctrine\\DBAL'   => __DIR__.'/../vendor/doctrine-dbal/lib',
-    'Doctrine'         => __DIR__.'/../vendor/doctrine/lib',
-    'Monolog'          => __DIR__.'/../vendor/monolog/src',
-    'Assetic'          => __DIR__.'/../vendor/assetic/src',
-    'Acme'             => __DIR__.'/../src',
-));
-$loader->registerPrefixes(array(
-    'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
-    'Twig_'            => __DIR__.'/../vendor/twig/lib',
-    'Swift_'           => __DIR__.'/../vendor/swiftmailer/lib/classes',
-));
+
+$autoloadInfo = parse_ini_file(__DIR__.'/config/autoload.ini', true);
+
+if (isset($autoloadInfo['namespaces'])) {
+    foreach ($autoloadInfo['namespaces'] as $namespace => $location) {
+        $loader->registerNamespace($namespace, convertToAbsolutePath($location));
+    }
+}
+
+if (isset($autoloadInfo['prefixes'])) {
+    foreach ($autoloadInfo['prefixes'] as $prefix => $location) {
+        $loader->registerPrefix($prefix, convertToAbsolutePath($location));
+    }
+}
+
+if (isset($autoloadInfo['prefixfallbacks'])) {
+    foreach ($autoloadInfo['prefixfallbacks'] as $prefix => $location) {
+        $loader->registerPrefixFallback($prefix, convertToAbsolutePath($location));
+    }
+}
+
 $loader->register();
-$loader->registerPrefixFallback(array(
-    __DIR__.'/../vendor/symfony/src/Symfony/Component/Locale/Resources/stubs',
-));
+
+function convertToAbsolutePath($path)
+{
+    if (is_array($path)) {
+        return array_map('convertToAbsolutePath', $path);
+    }
+    
+    return __DIR__.'/../'.$path;
+}
