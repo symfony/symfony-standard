@@ -9,24 +9,27 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new Acme\DemoBundle\AcmeDemoBundle(),
-        );
-
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Symfony\Bundle\WebConfiguratorBundle\SymfonyWebConfiguratorBundle();
+        $bundleFile = file(__DIR__.'/config/bundles.ini', FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+        $bundles = array();        
+        $env = null;
+        
+        foreach ($bundleFile as $line) {
+            if ($line[0] == '#') {
+                continue;
+            }
+            
+            if (preg_match('/\[([a-z]+)\]/i', $line, $match)) {
+                $env = $match[1];
+                continue;
+            }
+            
+            if ($env != 'all' && $env != $this->getEnvironment()) {
+                continue;
+            }
+            
+            $bundles[] = new $line();
         }
-
+        
         return $bundles;
     }
 
