@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+    backupGlobals = "false"
+    bootstrap     = "app/bootstrap.php.cache"
+    colors        = "true" >
+
+    <testsuites>
+        <testsuite name="Acme's Demo Bundle">
+            <directory>src/Acme/DemoBundle/Tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log
+            type   = "json"
+            target = "app/logs/phpunit.json" />
+        <log
+            type   = "tap"
+            target = "app/logs/phpunit.tap" />
+    </logging>
+
+    <!--
+    <php>
+        <server
+            name  = "KERNEL_DIR"
+            value = "/var/www/symfony/app/" />
+        <server
+            name  = "HTTP_HOST"
+            value = "localhost" />
+        <server
+            name  = "SCRIPT_NAME"
+            value = "/symfony/web/app_dev.php" />
+    </php>
+
+    <selenium>
+        <browser
+            name    = "Google Chrome"
+            browser = "*googlechrome"
+            host    = "127.0.0.1" />
+        <browser
+            name    = "Firefox"
+            browser = "*firefox"
+            host    = "127.0.0.1" />
+        <browser
+            name    = "Internet Explorer"
+            browser = "*iexplore"
+            host    = "127.0.0.1" />
+    </selenium>
+    -->
+
+</phpunit>
