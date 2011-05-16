@@ -11,7 +11,6 @@ $loader->registerNamespaces(array(
     'Doctrine\\DBAL'   => __DIR__.'/../vendor/doctrine-dbal/lib',
     'Doctrine'         => __DIR__.'/../vendor/doctrine/lib',
     'Monolog'          => __DIR__.'/../vendor/monolog/src',
-    'Annotations'      => array(__DIR__.'/../vendor/annotations/src', __DIR__.'/../vendor/annotations/doctrine-compat-src'),
     'Assetic'          => __DIR__.'/../vendor/assetic/src',
     'Acme'             => __DIR__.'/../src',
 ));
