@@ -3,6 +3,7 @@ imports:
 
 framework:
     test: ~
+    csrf_protection: false
     session:
         storage_id: session.storage.filesystem
 
