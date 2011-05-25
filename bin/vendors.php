@@ -14,12 +14,6 @@ $rootDir = dirname(__DIR__);
 $vendorDir = $rootDir.'/vendor';
 $version = trim(file_get_contents($rootDir.'/VERSION'));
 
-// Initialization
-$cloneOptions = '';
-if (in_array('--min', $argv)) {
-    $cloneOptions = '--depth 1';
-}
-
 if (!is_dir($vendorDir)) {
     mkdir($vendorDir, 0777, true);
 }
@@ -56,7 +50,7 @@ foreach (file(__DIR__.'/deps') as $line) {
     echo "> Installing/Updating $name\n";
 
     if (!is_dir($installDir)) {
-        system(sprintf('git clone %s %s %s', $cloneOptions, $url, $installDir));
+        system(sprintf('git clone %s %s', $url, $installDir));
     }
 
     system(sprintf('cd %s && git fetch origin && git reset --hard %s', $installDir, $rev));
