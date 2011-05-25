@@ -30,16 +30,11 @@ available to install the vendors:
 
     php bin/vendors.php
 
-.. tip::
-
-    You can pass the `--min` option if you don't want all the history. This
-    also makes the installation much faster.
-
 Installation from Git
 ---------------------
 
 We highly recommend you that you download the packaged version of this
-distribution. If you still want to use Git, your are on your own.
+distribution. If you still want to use git, your are on your own.
 
 Run the following commands:
 
@@ -50,7 +45,7 @@ Run the following commands:
 
 .. note::
 
-    Symfony SE does/can not use git submodules as you should not keep the
+    Symfony SE does/can not use git-submodules as you should not keep the
     `.git` directory.
 
 Configuration
