@@ -12,7 +12,7 @@
 
 $rootDir = dirname(__DIR__);
 $vendorDir = $rootDir.'/vendor';
-$version = trim(file_get_contents($rootDir.'/VERSION'));
+$version = trim(file_get_contents($rootDir.'/SYMFONY'));
 
 $deps = array();
 foreach (file(__DIR__.'/deps') as $line) {

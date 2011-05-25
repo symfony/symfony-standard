@@ -9,7 +9,7 @@
 
 DIR=`php -r "echo realpath(dirname(\\$_SERVER['argv'][0]));"`
 cd $DIR
-VERSION=`cat VERSION`
+VERSION=`cat SYMFONY`
 
 if [ ! -d "$DIR/build" ]; then
     mkdir -p $DIR/build
