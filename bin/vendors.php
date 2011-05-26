@@ -49,8 +49,12 @@ foreach (file(__DIR__.'/deps') as $line) {
 
     $installDir = $vendorDir.'/'.$path.'/'.$name;
     if (in_array('--reinstall', $argv)) {
-		    system('rm -rf '.$installDir);
+		if (PHP_OS == 'WINNT') {
+			system('rmdir /S /Q '.realpath($installDir));
+		} else {
+			system('rm -rf '.$installDir);
 		}
+	}
     $rev = isset($versions[$name]) ? $versions[$name] : 'origin/HEAD';
 
     echo "> Installing/Updating $name\n";
@@ -62,11 +66,14 @@ foreach (file(__DIR__.'/deps') as $line) {
     system(sprintf('cd %s && git fetch origin && git reset --hard %s', $installDir, $rev));
 }
 
+// php on windows can't use the shebang line from system()
+$interpreter = PHP_OS == 'WINNT' ? 'php.exe' : '';
+
 // Update the bootstrap files
-system($rootDir.'/bin/build_bootstrap.php');
+system(sprintf('%s %s/bin/build_bootstrap.php', $interpreter, $rootDir));
 
 // Update assets
-system($rootDir.'/app/console assets:install '.$rootDir.'/web');
+system(sprintf('%s %s/app/console assets:install %s/web/', $interpreter, $rootDir, $rootDir));
 
 // Remove the cache
-system($rootDir.'/app/console cache:clear --no-warmup');
+system(sprintf('%s %s/app/console cache:clear --no-warmup', $interpreter, $rootDir));
