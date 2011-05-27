@@ -5,7 +5,18 @@
 {% block content %}
     <h1>Hello {{ name }}!</h1>
 
-    <a href="{{ path('_demo_secured_hello_admin', { 'name': name }) }}">Hello resource secured for <strong>admin</strong> only.</a>
+    <p>
+        This page requires the <i>ROLE_USER</i> role, which both the "user"
+        and "admin" users have. This is controlled in the "access_control"
+        section of <i>app/config/security.yml</i>.
+    </p>
+
+    <p>
+        The below page requires the <i>ROLE_ADMIN</i> role, which only the
+        "admin" user has. If you access the following page authenticated as
+        "user", you'll get an access denied exception.
+    </p>
+    <a href="{{ path('_demo_secured_hello_admin', { 'name': name }) }}">Hello "world" requiring <strong>ROLE_ADMIN</strong> only.</a>
 {% endblock %}
 
 {% set code = code(_self) %}

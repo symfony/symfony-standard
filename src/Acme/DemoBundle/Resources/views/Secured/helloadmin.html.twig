@@ -4,6 +4,13 @@
 
 {% block content %}
     <h1>Hello {{ name }} secured for Admins only!</h1>
+
+    <p>
+        This page requires the <i>ROLE_ADMIN</i> role, which only the "admin"
+        user has. This is enforced directly in the <i>SecuredController</i>
+        class using the "@Secure" annotation. In fact, you can see this code
+        printed out below.
+    </p>
 {% endblock %}
 
 {% set code = code(_self) %}

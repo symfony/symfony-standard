@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
+ * Adding the following annotation means that all routes defined in this
+ * controller will be prefixed by "/demo/secured" (e.g. "/demo/secured/login")
+ *
  * @Route("/demo/secured")
  */
 class SecuredController extends Controller
@@ -19,14 +22,17 @@ class SecuredController extends Controller
      */
     public function loginAction()
     {
-        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        $request = $this->get('request');
+
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } else {
-            $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+            $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+            $request->getSession()->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
         return array(
-            'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
+            'last_username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
         );
     }
@@ -48,6 +54,13 @@ class SecuredController extends Controller
     }
 
     /**
+     * The URL to this controller is "/demo/secured/hello/{name}", which is
+     * the route prefix ("/demo/secured") plus this route ("/hello/{name}").
+     *
+     * The URL "/demo/secured/hello/{name}" requires the ROLE_USER role to
+     * be accessed, which is defined inside app/config/security.yml under
+     * the "access_control" section.
+     *
      * @Route("/hello", defaults={"name"="World"}),
      * @Route("/hello/{name}", name="_demo_secured_hello")
      * @Template()
@@ -58,11 +71,14 @@ class SecuredController extends Controller
     }
 
     /**
+     * This controller requires the ROLE_ADMIN role, which is enforced using
+     * the "@Secure" annotation below and the SecurityExtraBundle
+     *
      * @Route("/hello/admin/{name}", name="_demo_secured_hello_admin")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function helloadminAction($name)
+    public function helloAdminAction($name)
     {
         return array('name' => $name);
     }
