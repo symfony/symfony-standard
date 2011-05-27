@@ -13,29 +13,24 @@ security:
                 admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
-        profiler:
-            pattern:  ^/_profiler
-            security: false
-
-        wdt:
-            pattern:  ^/_wdt
-            security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+        main_firewall:
+            pattern:    ^/
+            anonymous:  true
             form_login:
                 check_path: /demo/secured/login_check
                 login_path: /demo/secured/login
             logout:
                 path:   /demo/secured/logout
                 target: /demo/
-            #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
-        #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        # access controls define URL patterns that require a role to be accessed
+        # Individual controllers can also be secured to require a role. See:
+        #     src/Acme/DemoBundle/Controller/SecuredController::helloAdminAction()
+
+        # this entry ensures that anonymous users can see the login page
+        - { path: ^/demo/secured/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/demo/secured, roles: ROLE_USER }
+        #- { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }
