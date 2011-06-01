@@ -13,6 +13,7 @@ $loader->registerNamespaces(array(
     'Monolog'          => __DIR__.'/../vendor/monolog/src',
     'Assetic'          => __DIR__.'/../vendor/assetic/src',
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
+    'Proxies'          => array(__DIR__.'/cache/prod/doctrine/orm', __DIR__.'/cache/dev/doctrine/orm', __DIR__.'/cache/test/doctrine/orm'),
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
