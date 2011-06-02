@@ -14,7 +14,8 @@ security:
 
     firewalls:
         main_firewall:
-            pattern:    ^/
+            # activate the security system for any URL under /demo/secured
+            pattern:    ^/demo/secured
             anonymous:  true
             form_login:
                 check_path: /demo/secured/login_check
@@ -32,5 +33,6 @@ security:
 
         # this entry ensures that anonymous users can see the login page
         - { path: ^/demo/secured/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # an example of a URL pattern that could require ROLE_ADMIN and forces https
+        #- { path: ^/demo/secured/admin, roles: ROLE_ADMIN, requires_channel: https }
         - { path: ^/demo/secured, roles: ROLE_USER }
-        #- { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }
