@@ -22,13 +22,14 @@ Specify a command to run:
 
  install: install vendors as specified in deps or deps.lock (recommended)
  update:  update vendors to their latest versions (as specified in deps)
+ lock:    lock all vendors, keeping existing locks in deps.lock
 
 
 EOF
     );
 }
 
-if (!in_array($command = array_shift($argv), array('install', 'update'))) {
+if (!in_array($command = array_shift($argv), array('install', 'update', 'lock'))) {
     die(sprintf("Command \"%s\" does not exist.\n", $command));
 }
 
@@ -38,7 +39,7 @@ if (!is_dir($vendorDir)) {
 
 // versions
 $versions = array();
-if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
+if (('install' === $command || 'lock' === $command) && file_exists($rootDir.'/deps.lock')) {
     foreach (file($rootDir.'/deps.lock') as $line) {
         if (!trim($line)) {
             continue;
@@ -89,7 +90,7 @@ foreach (file($rootDir.'/deps') as $line) {
 }
 
 // update?
-if ('update' === $command) {
+if ('update' === $command || 'lock' === $command) {
     $deps = array();
     foreach (file($rootDir.'/deps') as $line) {
         if (!trim($line)) {
