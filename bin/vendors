@@ -56,14 +56,17 @@ foreach (file($rootDir.'/deps') as $line) {
         continue;
     }
     $parts = array_values(array_filter(explode(' ', trim($line))));
-    if (3 !== count($parts)) {
-        die(sprintf('The deps file is not valid (near "%s")', $line));
-    }
-    list($name, $path, $url) = $parts;
-
-    $rev = 'origin/HEAD';
-    if (false !== strpos($url, '@')) {
-        list($url, $rev) = explode('@', $url);
+    switch (count($parts)) {
+        case 3:
+            list($name, $path, $url) = $parts;
+            $rev = 'origin/HEAD';
+            break;
+        case 4:
+            list($name, $path, $url, $rev) = $parts;
+            break;
+        default:
+            die(sprintf('The deps file is not valid (near "%s")', $line));
+            break;
     }
 
     if (isset($versions[$name])) {
@@ -96,10 +99,17 @@ if ('update' === $command) {
             continue;
         }
         $parts = array_values(array_filter(explode(' ', trim($line))));
-        if (3 !== count($parts)) {
-            die(sprintf('The deps file is not valid (near "%s")', $line));
+        switch (count($parts)) {
+            case 3:
+                list($name, $path, $url) = $parts;
+                break;
+            case 4:
+                list($name, $path, $url, $rev) = $parts;
+                break;
+            default:
+                die(sprintf('The deps file is not valid (near "%s")', $line));
+                break;
         }
-        list($name, $path, $url) = $parts;
 
         ob_start();
         system(sprintf('cd %s; git log -n 1 --format=%%H', escapeshellarg($vendorDir.'/'.$path.'/'.$name)));
