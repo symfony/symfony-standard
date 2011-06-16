@@ -13,7 +13,7 @@
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
-    version=origin/2.0.5
+    version=2.0.5
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
