@@ -20,8 +20,8 @@ Symfony2 vendors script management.
 
 Specify a command to run:
 
- install: install vendors as specified in deps or deps.lock (recommended)
- update:  update vendors to their latest versions (as specified in deps)
+ install: install vendors as specified in deps.ini or deps.lock (recommended)
+ update:  update vendors to their latest versions (as specified in deps.ini)
 
 
 EOF
@@ -49,7 +49,7 @@ if ('install' === $command && file_exists($rootDir.'/bin/deps.lock')) {
 }
 
 $newversions = array();
-$deps = parse_ini_file($rootDir.'/bin/deps', true, INI_SCANNER_RAW);
+$deps = parse_ini_file($rootDir.'/bin/deps.ini', true, INI_SCANNER_RAW);
 foreach ($deps as $name => $dep) {
     // revision
     if (isset($versions[$name])) {
