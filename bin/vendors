@@ -20,8 +20,8 @@ Symfony2 vendors script management.
 
 Specify a command to run:
 
- install: install vendors as specified in deps or deps.lock (recommended)
- update:  update vendors to their latest versions (as specified in deps)
+ install: install vendors as specified in vendors_deps.ini or vendors_deps.lock (recommended)
+ update:  update vendors to their latest versions (as specified in vendors_deps.ini)
 
 
 EOF
@@ -38,8 +38,8 @@ if (!is_dir($vendorDir)) {
 
 // versions
 $versions = array();
-if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
-    foreach (file($rootDir.'/deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+if ('install' === $command && file_exists($rootDir.'/bin/vendors_deps.lock')) {
+    foreach (file($rootDir.'/bin/vendors_deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         $parts = array_values(array_filter(explode(' ', $line)));
         if (2 !== count($parts)) {
             exit(sprintf('The deps version file is not valid (near "%s")', $line));
@@ -49,7 +49,7 @@ if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
 }
 
 $newversions = array();
-$deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
+$deps = parse_ini_file($rootDir.'/bin/vendors_deps.ini', true, INI_SCANNER_RAW);
 foreach ($deps as $name => $dep) {
     // revision
     if (isset($versions[$name])) {
@@ -91,7 +91,7 @@ foreach ($deps as $name => $dep) {
 
 // update?
 if ('update' === $command) {
-    file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions));
+    file_put_contents($rootDir.'/bin/vendors_deps.lock', implode("\n", $newversions));
 }
 
 // php on windows can't use the shebang line from system()
