@@ -1,34 +1,44 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
+    remove=README.md phpunit.xml* tests *.sh vendor
 
 [twig]
     git=http://github.com/fabpot/Twig.git
+    remove=AUTHORS CHANGELOG README.markdown bin doc package.xml.tpl phpunit.xml* test
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
+    remove=README.markdown phpunit.xml* tests
 
 [doctrine-common]
     git=http://github.com/doctrine/common.git
     version=origin/3.0.x
+    remove=build* tests lib/vendor
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
+    remove=bin build* tests lib/vendor
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
+    remove=UPGRADE* build* bin tests tools lib/vendor
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
     version=origin/4.1
+    remove=CHANGES README* build* docs notes test-suite tests create_pear_package.php package*
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
+    remove=phpunit.xml* README* docs tests
 
 [twig-extensions]
     git=http://github.com/fabpot/Twig-extensions.git
+    remove=README doc phpunit.xml* test
 
 [metadata]
     git=http://github.com/schmittjoh/metadata.git
+    remove=README.rst phpunit.xml* tests
 
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
