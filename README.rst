@@ -28,7 +28,7 @@ directory and you're done.
 
 If you have downloaded an archive without the vendors, you must have ``git``
 available to install the vendors:
-
+::
     php bin/vendors install
 
 Installation from Git
@@ -38,7 +38,7 @@ We highly recommend you that you download the packaged version of this
 distribution. If you still want to use Git, you are on your own.
 
 Run the following commands:
-
+::
     git clone http://github.com/symfony/symfony-standard.git
     cd symfony-standard
     rm -rf .git
