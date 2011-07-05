@@ -15,7 +15,8 @@ Symfony Standard Edition comes pre-configured with the following bundles:
 * AsseticBundle
 * JMSSecurityExtraBundle
 * WebProfilerBundle (in dev/test env)
-* SymfonyWebConfiguratorBundle (in dev/test env)
+* SensioDistributionBundle (in dev/test env)
+* SensioGeneratorBundle (in dev/test env)
 * AcmeDemoBundle (in dev/test env)
 
 Installation from an Archive
@@ -28,25 +29,20 @@ directory and you're done.
 If you have downloaded an archive without the vendors, you must have ``git``
 available to install the vendors:
 
-    php bin/vendors.php
-
-.. tip::
-
-    You can pass the `--min` option if you don't want all the history. This
-    also makes the installation much faster.
+    php bin/vendors install
 
 Installation from Git
 ---------------------
 
 We highly recommend you that you download the packaged version of this
-distribution. If you still want to use Git, your are on your own.
+distribution. If you still want to use Git, you are on your own.
 
 Run the following commands:
 
     git clone http://github.com/symfony/symfony-standard.git
     cd symfony-standard
     rm -rf .git
-    php bin/vendors.php
+    php bin/vendors install
 
 .. note::
 

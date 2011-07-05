@@ -1,0 +1,54 @@
+[symfony]
+    git=http://github.com/symfony/symfony.git
+
+[twig]
+    git=http://github.com/fabpot/Twig.git
+    version=v1.1.0
+
+[monolog]
+    git=http://github.com/Seldaek/monolog.git
+
+[doctrine-common]
+    git=http://github.com/doctrine/common.git
+    version=2.1.0
+
+[doctrine-dbal]
+    git=http://github.com/doctrine/dbal.git
+    version=2.1.0
+
+[doctrine]
+    git=http://github.com/doctrine/doctrine2.git
+    version=2.1.0
+
+[swiftmailer]
+    git=http://github.com/swiftmailer/swiftmailer.git
+    version=v4.1.0
+
+[assetic]
+    git=http://github.com/kriswallsmith/assetic.git
+
+[twig-extensions]
+    git=http://github.com/fabpot/Twig-extensions.git
+
+[metadata]
+    git=http://github.com/schmittjoh/metadata.git
+
+[SensioFrameworkExtraBundle]
+    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
+    target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+
+[JMSSecurityExtraBundle]
+    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    target=/bundles/JMS/SecurityExtraBundle
+
+[SensioDistributionBundle]
+    git=http://github.com/sensio/SensioDistributionBundle.git
+    target=/bundles/Sensio/Bundle/DistributionBundle
+
+[SensioGeneratorBundle]
+    git=http://github.com/sensio/SensioGeneratorBundle.git
+    target=/bundles/Sensio/Bundle/GeneratorBundle
+
+[AsseticBundle]
+    git=http://github.com/symfony/AsseticBundle.git
+    target=/bundles/Symfony/Bundle/AsseticBundle

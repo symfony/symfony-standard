@@ -71,6 +71,25 @@ if (PHP_OS != 'WINNT' && !function_exists('posix_isatty')) {
 
 if (!class_exists('Locale')) {
     $minorProblems[] = 'Install and enable the <strong>intl</strong> extension.';
+} else {
+    $version = '';
+
+    if (defined('INTL_ICU_VERSION')) {
+        $version =  INTL_ICU_VERSION;
+    } else {
+        $reflector = new \ReflectionExtension('intl');
+
+        ob_start();
+        $reflector->info();
+        $output = strip_tags(ob_get_clean());
+
+        preg_match('/^ICU version (.*)$/m', $output, $matches);
+        $version = $matches[1];
+    }
+
+    if(!version_compare($matches[1], '4.0', '>=')) {
+        $minorProblems[] = 'Upgrade your <strong>intl</strong> extension with a newer ICU version (4+).';
+    }
 }
 
 if (!class_exists('SQLite3') && !in_array('sqlite', PDO::getAvailableDrivers())) {
@@ -111,7 +130,7 @@ if (ini_get('session.auto_start')) {
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="bundles/symfonywebconfigurator/css/install.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="bundles/sensiodistribution/webconfigurator/css/install.css" rel="stylesheet" type="text/css" media="all" />
         <title>Symfony Configuration</title>
     </head>
     <body>
@@ -119,7 +138,7 @@ if (ini_get('session.auto_start')) {
             <div id="symfony-content">
                 <div class="symfony-blocks-install">
                 <div class="symfony-block-logo">
-                    <img src="bundles/symfonywebconfigurator/images/logo-big.gif" alt="sf_symfony" />
+                    <img src="bundles/sensiodistribution/webconfigurator/images/logo-big.gif" alt="sf_symfony" />
                 </div>
 
                 <div class="symfony-block-content">
@@ -156,7 +175,7 @@ if (ini_get('session.auto_start')) {
                     <?php endif ?>
 
                     <?php if ($phpini): ?>
-                            <a name="phpini"></a>
+                            <a id="phpini"></a>
                                 <p>*
                                     <?php if (get_cfg_var('cfg_file_path')): ?>
                                         Changes to the <strong>php.ini</strong> file must be done in "<strong><?php echo get_cfg_var('cfg_file_path') ?></strong>".
@@ -177,6 +196,6 @@ if (ini_get('session.auto_start')) {
                 </div>
             </div>
         </div>
-        <div class="version">Symfony Standard Edition v.<?php echo file_get_contents(__DIR__.'/../VERSION') ?></div>
+        <div class="version">Symfony Standard Edition</div>
     </body>
 </html>
