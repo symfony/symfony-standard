@@ -1,6 +1,7 @@
-web/bundles/
 app/bootstrap*
 app/cache/*
 app/logs/*
 build/
 vendor/
+web/bundles/
+!.gitignore
