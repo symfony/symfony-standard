@@ -84,28 +84,37 @@ To see a real-live Symfony page in action, access the following page:
 This distribution is meant to be the starting point for your application,
 but it also contains some sample code that you can learn from and play with.
 
-A great way to start learning Symfony is via the Quick Tour (http://symfony.com/doc/current/quick_tour/the_big_picture.html),
+A great way to start learning Symfony is via the [Quick Tour](http://symfony.com/doc/current/quick_tour/the_big_picture.html),
 which will take you through all the basic features of Symfony2 and test pages
 that are available in the standard edition.
 
-Once you're feeling good, you can move onto reading the official
-Symfony2 book (http://symfony.com/doc/current/).
+Once you're feeling good, you can move onto reading the [official
+Symfony2 book](http://symfony.com/doc/current/).
 
 Using this Edition as the Base of your Application
 --------------------------------------------------
 
-Since the standard edition is fully-configured and comes with some examples,
-you'll need to make a few changes before using it to build your application.
+Since the standard edition is fully-configured, comes with some examples
+and also with some additional bundles like:
+
+* [AsseticBundle](https://github.com/symfony/AsseticBundle)
+* [SensioFrameworkExtraBundle](https://github.com/sensio/SensioFrameworkExtraBundle)
+* [JMSSecurityExtraBundle](https://github.com/schmittjoh/JMSSecurityExtraBundle)
+* [SensioDistributionBundle](https://github.com/sensio/SensioDistributionBundle) (in dev/test environment)
+* [SensioGeneratorBundle](https://github.com/sensio/SensioGeneratorBundle) (in dev/test environment)
+
+But you'll need to make a few changes before using it to build your application.
 
 The distribution is configured with the following defaults:
 
-* Twig is the only configured template engine;
-* Doctrine ORM/DBAL is configured;
-* Swiftmailer is configured;
-* Annotations for everything are enabled.
+* [Twig](http://www.twig-project.org/) is the only configured template engine (additional extensions are available);
+* [Doctrine ORM/DBAL](http://www.doctrine-project.org/) is configured;
+* [Swiftmailer](http://swiftmailer.org/) is configured;
+* Annotations for everything (routing, validation, security...) are enabled.
 
-A default bundle, ``AcmeDemoBundle``, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
+A default bundle, ``AcmeDemoBundle``, shows you Symfony2 in action (by default
+loaded only in dev/test environment). After playing with it, you can remove it by
+following these steps:
 
 * delete the ``src/Acme`` directory;
 * remove the routing entries referencing AcmeBundle in ``app/config/routing_dev.yml``;
