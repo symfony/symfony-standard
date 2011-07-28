@@ -100,7 +100,13 @@ foreach ($deps as $name => $dep) {
         system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
     }
 
-    system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+    if (isset($dep['git_command'])) {
+        $git_command = ' && git ' . $dep['git_command'] . ' ';
+    } else {
+        $git_command = '';
+    }
+
+    system(sprintf('cd %s && git fetch origin && git reset --hard %s' . $git_command, escapeshellarg($installDir), escapeshellarg($rev)));
 
     if ('update' === $command) {
         ob_start();
