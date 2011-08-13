@@ -6,11 +6,14 @@ require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
 $debug = !$input->hasParameterOption(array('--no-debug', ''));
 
 $kernel = new AppKernel($env, $debug);
+$kernel->boot();
+$kernel->getContainer()->get('security.context')->setToken(new AnonymousToken(uniqid(), 'anon.', array()));
 $application = new Application($kernel);
 $application->run();
