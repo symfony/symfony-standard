@@ -11,7 +11,8 @@
  */
 
 $rootDir = dirname(__DIR__);
-$vendorDir = $rootDir.'/vendor';
+$vendorDirName = 'vendor';
+$vendorDir = $rootDir.'/'.$vendorDirName;
 
 array_shift($argv);
 if (!isset($argv[0])) {
@@ -63,6 +64,26 @@ if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
     }
 }
 
+// submodules
+$is_submodule = in_array('--submodules', $argv);
+$submodules = array();
+if ($is_submodule) {
+    if (preg_match('/^'. \preg_quote($vendorDirName).'\/(\s*?)$/m', file_get_contents($rootDir.'/.gitignore'))) {
+        die('Comment out or remove the vendors/ entry in .gitignore file to use submodules.');
+    }
+
+    ob_start();
+    system('git submodule');
+    $lines = explode("\n", ob_get_clean());
+    
+    foreach ($lines as $line) {
+        $parts = explode(' ', ltrim($line, '- '));
+        if (2 <= count($parts)) {
+            $submodules[$parts[1]] = $parts[0];
+        }
+    }
+}
+
 $newversions = array();
 $deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
 if (false === $deps) {
@@ -80,7 +101,10 @@ foreach ($deps as $name => $dep) {
 
     // install dir
     $installDir = isset($dep['target']) ? $vendorDir.'/'.$dep['target'] : $vendorDir.'/'.$name;
-    if (in_array('--reinstall', $argv)) {
+    // submodule dir
+    $submoduleDir = isset($dep['target']) ? $vendorDirName.'/'.ltrim($dep['target'], '\\/') : $vendorDirName.'/'.$name;
+ 
+    if (in_array('--reinstall', $argv) || ($is_submodule && !isset($submodules[$submoduleDir]))) {
         if (PHP_OS == 'WINNT') {
             system(sprintf('rmdir /S /Q %s', escapeshellarg(realpath($installDir))));
         } else {
@@ -97,7 +121,15 @@ foreach ($deps as $name => $dep) {
     $url = $dep['git'];
 
     if (!is_dir($installDir)) {
-        system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
+        if ($is_submodule) {
+            if (!isset($submodules[$submoduleDir])) {
+                system(sprintf('git submodule add %s %s', escapeshellarg($url), escapeshellarg($submoduleDir)));
+            } else {
+                system(sprintf('git submodule update --init %s', escapeshellarg($submoduleDir)));
+            }
+        } else {
+            system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
+        }
     }
 
     system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
