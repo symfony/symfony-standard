@@ -48,7 +48,11 @@ EOF
 }
 
 if (!is_dir($vendorDir)) {
-    mkdir($vendorDir, 0777, true);
+    echo "> Create vendor dir\n";
+    if (!mkdir($vendorDir, 0777, true)) {
+        exit(sprintf("Failed to create vendor directory \"%s\"\n", $vendorDir));
+    }
+    echo "\n";
 }
 
 // versions
@@ -57,7 +61,7 @@ if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
     foreach (file($rootDir.'/deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         $parts = array_values(array_filter(explode(' ', $line)));
         if (2 !== count($parts)) {
-            exit(sprintf('The deps version file is not valid (near "%s")', $line));
+            exit(sprintf("The deps version file is not valid (near \"%s\")\n", $line));
         }
         $versions[$parts[0]] = $parts[1];
     }
@@ -68,6 +72,9 @@ $deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
 if (false === $deps) {
     exit("The deps file is not valid ini syntax. Perhaps missing a trailing newline?\n");
 }
+
+echo ">>> Process dependencies:\n\n";
+
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
 
@@ -77,51 +84,93 @@ foreach ($deps as $name => $dep) {
     } else {
         $rev = isset($dep['version']) ? $dep['version'] : 'origin/HEAD';
     }
+    
+    echo "> Installing/Updating $name\n";
 
     // install dir
     $installDir = isset($dep['target']) ? $vendorDir.'/'.$dep['target'] : $vendorDir.'/'.$name;
+    echo sprintf("> (%s)\n", $installDir);
+    
     if (in_array('--reinstall', $argv)) {
         if (PHP_OS == 'WINNT') {
-            system(sprintf('rmdir /S /Q %s', escapeshellarg(realpath($installDir))));
+            system(sprintf('rmdir /S /Q %s', escapeshellarg(realpath($installDir))), $exitCode);
         } else {
-            system(sprintf('rm -rf %s', escapeshellarg($installDir)));
+            system(sprintf('rm -rf %s', escapeshellarg($installDir)), $exitCode);
+        }
+        if ($exitCode !== 0) {
+            exit(sprintf("Could not reinstall \"%s\" dependency, directory \"%s\" could not be removed\n", $name, $installDir));
         }
     }
 
-    echo "> Installing/Updating $name\n";
-
     // url
     if (!isset($dep['git'])) {
-        exit(sprintf('The "git" value for the "%s" dependency must be set.', $name));
+        exit(sprintf("The \"git\" value for the \"%s\" dependency must be set.\n", $name));
     }
     $url = $dep['git'];
 
+    // clone if dependency repository doesn't exist yet
     if (!is_dir($installDir)) {
-        system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
+        echo sprintf("> \"%s\" is a new dependency, clone from git repository \"%s\"\n", $name, $url, $installDir);
+        system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)), $exitCode);
+        if ($exitCode !== 0) {
+            exit(sprintf("Could not clone \"%s\" dependency into \"%s\"\n", $name, $installDir));
+        }
     }
 
-    system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+    // check for valid git repository (we could check this somehow with a git call but a simple check for existence of
+    // .git subdirectory works for now)
+    if (!is_dir($installDir.'/.git')) {
+        exit(sprintf("Directory for \"%s\" dependency is not the root of a git repository (\".git\" directory missing in \"%s\")\n", $name, $installDir));
+    }
 
+    // set dependency repository to specified revision
+    system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)), $exitCode);
+    if ($exitCode !== 0) {
+        exit(sprintf("Could not set \"%s\" dependency to revision \"%s\"\n", $name, $rev));
+    }
+
+    // for update, fetch revision from dependency repository
     if ('update' === $command) {
         ob_start();
-        system(sprintf('cd %s && git log -n 1 --format=%%H', escapeshellarg($installDir)));
+        system(sprintf('cd %s && git log -n 1 --format=%%H', escapeshellarg($installDir)), $exitCode);
+        if ($exitCode !== 0) {
+            exit(sprintf("Could not get revision info for \"%s\" dependency\n", $name));
+        }
         $newversions[] = trim($name.' '.ob_get_clean());
     }
+
+    echo "\n";
 }
+
+echo ">>> Post-processing:\n\n";
 
 // update?
 if ('update' === $command) {
-    file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions));
+    echo "> Update deps.lock\n";
+    $depsLockFile = $rootDir.'/deps.lock';
+    if (file_put_contents($depsLockFile, implode("\n", $newversions)) === false) {
+        exit(sprintf("Could not write versions to \"%s\"\n", $depsLockFile));
+    }
+    echo "\n";
 }
 
 // php on windows can't use the shebang line from system()
 $interpreter = PHP_OS == 'WINNT' ? 'php.exe' : '';
 
 // Update the bootstrap files
+echo "> Update bootstrap files\n";
 system(sprintf('%s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php')));
+echo "\n";
 
 // Update assets
+echo "> Update assets\n";
 system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
+echo "\n";
 
 // Remove the cache
+echo "> Clear cache\n";
 system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
+echo "\n";
+
+echo ">>> Done.\n";
+
