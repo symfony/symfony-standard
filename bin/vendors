@@ -111,7 +111,7 @@ foreach ($deps as $name => $dep) {
         }
 
         if ('update' === $command) {
-            system(sprintf('cd %s && svn update && svnversion', escapeshellarg($installDir)));
+            system(sprintf('cd %s && svn update', escapeshellarg($installDir)));
             ob_start();
             system(sprintf('cd %s && svnversion', escapeshellarg($installDir)));
             $revisions = explode(':', ob_get_clean());
