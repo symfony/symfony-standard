@@ -70,13 +70,7 @@ if (false === $deps) {
 }
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
-
-    // revision
-    if (isset($versions[$name])) {
-        $rev = $versions[$name];
-    } else {
-        $rev = isset($dep['version']) ? $dep['version'] : 'origin/HEAD';
-    }
+    $rev = isset($versions[$name]) ? $versions[$name] : '';
 
     // install dir
     $installDir = isset($dep['target']) ? $vendorDir.'/'.$dep['target'] : $vendorDir.'/'.$name;
@@ -91,21 +85,42 @@ foreach ($deps as $name => $dep) {
     echo "> Installing/Updating $name\n";
 
     // url
-    if (!isset($dep['git'])) {
-        exit(sprintf('The "git" value for the "%s" dependency must be set.', $name));
-    }
-    $url = $dep['git'];
+    if (isset($dep['git'])) {
+        $url = $dep['git'];
+        // revision
+        $rev = isset($dep['version']) ? $dep['version'] : 'origin/HEAD';
 
-    if (!is_dir($installDir)) {
-        system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
-    }
+        if (!is_dir($installDir)) {
+            system(sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir)));
+        }
 
-    system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+        system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
 
-    if ('update' === $command) {
-        ob_start();
-        system(sprintf('cd %s && git log -n 1 --format=%%H', escapeshellarg($installDir)));
-        $newversions[] = trim($name.' '.ob_get_clean());
+        if ('update' === $command) {
+            ob_start();
+            system(sprintf('cd %s && git log -n 1 --format=%%H', escapeshellarg($installDir)));
+            $newversions[] = trim($name.' '.ob_get_clean());
+        }
+    } else if (isset($dep['svn'])) {
+        $url = $dep['svn'];
+        // revision
+        $rev = isset($dep['version']) ? $dep['version'] : 'HEAD';
+
+        if (!is_dir($installDir)) {
+            system(sprintf('svn checkout -r%s %s %s', escapeshellarg($rev), escapeshellarg($url), escapeshellarg($installDir)));
+        }
+
+        if ('update' === $command) {
+            system(sprintf('cd %s && svn update && svnversion', escapeshellarg($installDir)));
+            ob_start();
+            system(sprintf('cd %s && svnversion', escapeshellarg($installDir)));
+            $revisions = explode(':', ob_get_clean());
+            // svnversion can return rX:rY or just rX
+            $revision = (1 == count($revisions)) ? $revisions[0] : $revisions[1];
+            $newversions[] = trim($name.' '.$revision);
+        }
+    } else {
+        exit(sprintf('The "git" or "svn" value for the "%s" dependency must be set.', $name));
     }
 }
 
