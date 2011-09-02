@@ -143,6 +143,7 @@ if (ini_get('session.auto_start')) {
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="bundles/sensiodistribution/webconfigurator/css/install.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="apple-touch-icon.png" rel="apple-touch-icon" />
         <title>Symfony Configuration</title>
     </head>
     <body>
