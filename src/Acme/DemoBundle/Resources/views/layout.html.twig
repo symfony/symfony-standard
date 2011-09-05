@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" type="text/css" media="all" />
         <title>{% block title %}Demo Bundle{% endblock %}</title>
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        {% block before_head_end '' %}
     </head>
     <body>
         <div id="symfony-wrapper">
