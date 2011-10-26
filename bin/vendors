@@ -25,7 +25,10 @@ Specify a command to run:
  install: install vendors as specified in deps or deps.lock (recommended)
  update:  update vendors to their latest versions (as specified in deps)
  lock:  lock vendors to their current versions
-
+ 
+ Options: 
+     --reinstall: Reinstall vendors if project is based on Standard Edition including vendors.
+     --symlink: Install assets in the web folder using symlinks rather than copying them
 EOF
     );
 }
@@ -127,7 +130,7 @@ $interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
 system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), $rootDir));
 
 // Update assets
-system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
+system(sprintf('%s %s assets:install %s %s', $interpreter, escapeshellarg($rootDir.'/app/console'), in_array('--symlink', $argv) ? '--symlink' : '', escapeshellarg($rootDir.'/web/')));
 
 // Remove the cache
 system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
