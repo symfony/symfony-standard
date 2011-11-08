@@ -12,7 +12,7 @@
 
 set_time_limit(0);
 
-$rootDir = dirname(__DIR__);
+$rootDir = dirname(realpath(__DIR__));
 $vendorDir = $rootDir.'/vendor';
 
 array_shift($argv);
