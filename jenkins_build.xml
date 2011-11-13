@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="symfony" default="clean">
+
+    <!-- invokation
+        phing -f $WORKSPACE/source/jenkins_build.xml clean prepare phpcs phpcb phpcpd phpunit pdepend phpmd docblox jsdoc build build_delete -Dworkspace=$WORKSPACE -Djob_name=$JOB_NAME -Dbuild_number=$BUILD_NUMBER -Dbuild_tag=$BUILD_TAG -Dbuild_id=$BUILD_ID
+        # note phpcb must follow phpcs
+    -->
+
+    <!--
+        BUILD_NUMBER - The current build number, such as "153"
+        BUILD_ID - The current build id, (YYYY-MM-DD_hh-mm-ss)
+        JOB_NAME - Name of the project of this build, such as "foo"
+        BUILD_TAG - String of "jenkins-${JOBNAME}-${BUILD_NUMBER}".
+        WORKSPACE - The absolute path of the workspace.
+    -->
+
+    <property name="builddir" value="${workspace}/build" />
+    <property name="sourcedir" value="${workspace}/source" />
+    <property name="exportdir" value="${builddir}/export" />
+    <property name="archivedir" value="${builddir}/archive" />
+    <property name="packagepath" value="${exportdir}/${job_name}" />
+    <property name="checksumpath" value="${archivedir}/${package}-checksums" />
+    <property name="tmpdir" value="${builddir}/tmp" />
+    <property name="ignorepaths" value="foo" />
+
+    <target name="clean">
+        <echo msg="Clean..." />
+        <delete dir="${builddir}" includeemptydirs="true" />
+    </target>
+
+    <target name="prepare">
+        <echo msg="Prepare..." />
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${builddir}/archive" />
+        <mkdir dir="${builddir}/export" />
+        <mkdir dir="${builddir}/tmp" />
+        <exec command="rm -f ${workspace}/source/vendors/symfony" />
+        <exec command="php ${workspace}/source/bin/vendors install --transport=git" />
+        <exec command="php ${workspace}/source/bin/vendors update --transport=git" />
+    </target>
+
+    <!-- Build archives -->
+    <target name="build">
+        <echo msg="Exporting for build..." />
+        <!-- ATTN export urls require manual edit -->
+        <exec command="cp -a ${workspace}/source ${packagepath}" />
+        <exec command="rm -rf ${packagepath}/.git" />
+        <exec command="find ${packagepath}/. -type d | grep '\.git' |xargs rm -rf " />
+
+        <echo msg="Prepare permissions..." />
+        <chmod file="${packagepath}/app/cache" mode="0777" />
+        
+        <echo msg="Creating archive..." />
+        <property name="vendorpackage" value="${job_name}_vendor.build${build_number}" />
+        <zip destfile="${archivedir}/${vendorpackage}.zip">
+            <fileset dir="${exportdir}/${job_name}">
+                <include name="**/**" />
+            </fileset>
+        </zip>
+
+        <!-- Use tar at commandline because phing tarballs don't support file chmod -->
+        <exec escape="false" command="cd ${exportdir}; tar cp ${job_name} > ${archivedir}/${vendorpackage}.tar; gzip ${archivedir}/${vendorpackage}.tar" />
+       
+        <!-- remove vendors and repeat build with new names -->
+        <property name="package" value="${job_name}.build${build_number}" />
+        <exec escape="false" command="rm -rf ${packagepath}/vendor" />
+
+        <zip destfile="${archivedir}/${package}.zip">
+            <fileset dir="${exportdir}/${job_name}">
+                <include name="**/**" />
+            </fileset>
+        </zip>
+
+        <!-- Use tar at commandline because phing tarballs don't support file chmod -->
+        <exec escape="false" command="cd ${exportdir}; tar cp ${job_name} > ${archivedir}/${package}.tar; gzip ${archivedir}/${package}.tar" />
+        
+        <echo msg="Files copied and compressed in build directory OK!" />
+
+        <phingcall target="build_checksums" />
+    </target>
+
+    <target name="build_delete">
+        <!-- clean up export dir, this is not needed (unless we are debugging) -->
+        <!-- delete dir="${packagepath}" includeemptydirs="true" / -->
+    </target>
+
+    <target name="build_checksums">
+        <echo msg="Creating MD5 and SHA1 checksums..." />
+        <exec escape="false" command="echo -----------------md5sums----------------- > ${checksumpath}.tmp" />
+        <exec escape="false" command="md5sum ${archivedir}/*.tar.gz ${archivedir}/*.zip >> ${checksumpath}.tmp" />
+
+        <exec escape="false" command="echo -----------------sha1sums----------------- >> ${checksumpath}.tmp" />
+        <exec escape="false" command="sha1sum ${archivedir}/*.tar.gz ${archivedir}/*.zip >> ${checksumpath}.tmp" />
+
+        <exec escape="false" command="cat ${checksumpath}.tmp | sed 's!${archivedir}/!!g' > ${checksumpath}.txt" />
+        <delete file="${checksumpath}.tmp" />
+    </target>
+</project>
