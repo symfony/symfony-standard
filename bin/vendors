@@ -19,6 +19,8 @@ array_shift($argv);
 if (!isset($argv[0])) {
     exit(<<<EOF
 Symfony2 vendors script management.
+    
+ vendor [command] (--reinstall) (--transport=[http|https|git])
 
 Specify a command to run:
 
@@ -26,12 +28,29 @@ Specify a command to run:
  update:  update vendors to their latest versions (as specified in deps)
  lock:  lock vendors to their current versions
 
+Reinstall (optional):
+
+ Both 'install' and 'update' commands take an optional --reinstall option
+
+Specify transport (optional)
+
+ Valid values are: --transport=http, --transport=https or --transport=git
+ 
 EOF
     );
 }
 
 if (!in_array($command = array_shift($argv), array('install', 'update', 'lock'))) {
     exit(sprintf("Command \"%s\" does not exist.\n", $command));
+}
+
+// determine transport method for git
+$transport = false;
+foreach ($argv as $k => $v) {
+    if (in_array($v, array('--transport=http', '--transport=https', '--transport=git'))) {
+        $transport = preg_replace('/^--transport=(.*)$/', '$1', $v);
+        unset($argv[$k]);
+    }
 }
 
 /*
@@ -72,6 +91,9 @@ if (false === $deps) {
 }
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
+    if ($transport) {
+        $dep['git'] = preg_replace('/^(http:|https:|git:)(.*)/', $transport . ':$2', $dep['git']);
+    }
 
     // install dir
     $installDir = isset($dep['target']) ? $vendorDir.'/'.$dep['target'] : $vendorDir.'/'.$name;
