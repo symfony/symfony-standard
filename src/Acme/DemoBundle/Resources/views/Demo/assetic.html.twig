@@ -1,0 +1,34 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Assetic demonstration" %}
+
+{% block before_head_end %}
+    {% stylesheets output="css/demo_assetic.css"
+    "@AcmeDemoBundle/Resources/assets/css/assetic_text.css"
+    "@AcmeDemoBundle/Resources/assets/css/assetic_code.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <h1>Assetic demonstration</h1>
+    <p>
+        <span class="assetic-sample">Assetic is a tool for asset management</span>.
+        It provides possibility to merge CSS files, Javascript files and
+        apply filters on them : CoffeeScript, Compass, Less, Sass, Sprockets, Stylus, YUI Compressor and many more.</p>
+
+    <p>
+        <a href="http://symfony.com/doc/current/cookbook/assetic/asset_management.html" title="How to Use Assetic for Asset Management">Read the cookbook</a>
+        for more informations on integration.
+    </p>
+
+    <p>In development environment, the assets are dynamically generated via a controller.</p>
+
+    <p>In production environment, you have to generate the file before deploying :</p>
+
+    <pre class="assetic-code">$ php app/console assetic:dump --env=prod --no-debug</pre>
+
+{% endblock %}
+
+{% set code = code(_self) %}

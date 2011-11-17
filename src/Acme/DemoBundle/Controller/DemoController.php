@@ -54,4 +54,13 @@ class DemoController extends Controller
 
         return array('form' => $form->createView());
     }
+
+    /**
+     * @Route("/assetic", name="_demo_assetic")
+     * @Template()
+     */
+    public function asseticAction()
+    {
+        return array();
+    }
 }
