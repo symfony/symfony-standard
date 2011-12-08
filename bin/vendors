@@ -134,14 +134,16 @@ if ('update' === $command || 'lock' === $command) {
     file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions));
 }
 
-// php on windows can't use the shebang line from system()
-$interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
+if ('lock' !== $command) {
+    // php on windows can't use the shebang line from system()
+    $interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
 
-// Update the bootstrap files
-system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), escapeshellarg($rootDir)));
+    // Update the bootstrap files
+    system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), escapeshellarg($rootDir)));
 
-// Update assets
-system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
+    // Update assets
+    system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
 
-// Remove the cache
-system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
+    // Remove the cache
+    system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
+}
