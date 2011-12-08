@@ -112,7 +112,12 @@ foreach ($deps as $name => $dep) {
             continue;
         }
 
-        system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+        $git_command = '';
+        if (isset($dep['git_command'])) {
+            $git_command = ' && git ' . $dep['git_command'] . ' ';
+        }
+
+        system(sprintf('cd %s && git fetch origin && git reset --hard %s %s', escapeshellarg($installDir), escapeshellarg($rev), $git_command));
     }
 
     if ('update' === $command || 'lock' === $command) {
