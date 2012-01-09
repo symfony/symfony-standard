@@ -25,7 +25,7 @@ Specify a command to run:
  install: install vendors as specified in deps or deps.lock (recommended)
  update:  update vendors to their latest versions (as specified in deps)
  lock:  lock vendors to their current versions
- upgrade: upgrade Symfony Standard Edition with his defaults vendors
+ upgrade: upgrade Symfony Standard Edition to the latest vendor versions
 
 EOF
     );
@@ -72,7 +72,7 @@ if (false === $deps) {
     exit('The deps file is not valid ini syntax. Perhaps missing a trailing newline?'.PHP_EOL);
 }
 
-if ('upgrade' === $command && file_exists($rootDir.'/deps.lock')) {
+if ('upgrade' === $command) {
     $api = 'https://api.github.com';
     $request = '/repos/symfony/symfony-standard/tags';
 
@@ -105,8 +105,6 @@ if ('upgrade' === $command && file_exists($rootDir.'/deps.lock')) {
 
         $depfile->fwrite("\n");
     }
-
-    $command = 'update';
 }
 
 foreach ($deps as $name => $dep) {
@@ -122,7 +120,7 @@ foreach ($deps as $name => $dep) {
         }
     }
 
-    if ('install' === $command || 'update' === $command) {
+    if ('install' === $command || 'update' === $command || 'upgrade' === $command) {
         echo '> Installing/Updating '.$name.PHP_EOL;
 
         // url
