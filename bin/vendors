@@ -25,12 +25,13 @@ Specify a command to run:
  install: install vendors as specified in deps or deps.lock (recommended)
  update:  update vendors to their latest versions (as specified in deps)
  lock:  lock vendors to their current versions
+ upgrade: upgrade Symfony Standard Edition to the latest vendor versions
 
 EOF
     );
 }
 
-if (!in_array($command = array_shift($argv), array('install', 'update', 'lock'))) {
+if (!in_array($command = array_shift($argv), array('install', 'update', 'lock', 'upgrade'))) {
     exit(sprintf('Command "%s" does not exist.', $command).PHP_EOL);
 }
 
@@ -70,6 +71,42 @@ $deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
 if (false === $deps) {
     exit('The deps file is not valid ini syntax. Perhaps missing a trailing newline?'.PHP_EOL);
 }
+
+if ('upgrade' === $command) {
+    $api = 'https://api.github.com';
+    $request = '/repos/symfony/symfony-standard/tags';
+
+    $json = json_decode(file_get_contents($api.$request));
+    usort($json, function($tag1, $tag2) {
+        $version1 = $tag1->name;
+        return version_compare($tag2->name, $tag1->name);
+    });
+
+    $symfonydir = 'https://raw.github.com/symfony/symfony-standard/'.$json[0]->name;
+    $newdeps = parse_ini_file($symfonydir.'/deps', true, INI_SCANNER_RAW);
+    $deps = array_merge($deps, $newdeps);
+
+    foreach (file($symfonydir.'/deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $parts = array_values(array_filter(explode(' ', $line)));
+        if (2 !== count($parts)) {
+            exit(sprintf('The deps version file is not valid (near "%s")', $line));
+        }
+        $versions[$parts[0]] = $parts[1];
+    }
+
+    $depfile = new \SplFileObject($rootDir.'/deps', 'w');
+
+    foreach ($deps as $dep => $infos) {
+        $depfile->fwrite(sprintf("[%s]\n", $dep));
+
+        foreach ($infos as $key => $value) {
+            $depfile->fwrite(sprintf("    %s=%s\n", $key, $value));
+        }
+
+        $depfile->fwrite("\n");
+    }
+}
+
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
 
@@ -83,7 +120,7 @@ foreach ($deps as $name => $dep) {
         }
     }
 
-    if ('install' === $command || 'update' === $command) {
+    if ('install' === $command || 'update' === $command || 'upgrade' === $command) {
         echo '> Installing/Updating '.$name.PHP_EOL;
 
         // url
