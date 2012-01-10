@@ -1,4 +1,4 @@
-symfony 46b00b1001f12997d93afd6730c07185ac9aaa3f
+symfony 009e6d739e5d133848b61563de50a5fbc774ccfb
 twig fee85f2f1d9b5f3a9b2d6859c56d6229f79ae909
 monolog 1.0.2
 doctrine-common d68ebde1cdfd5717ae6ddb29f36aebf8a3a73156
@@ -8,8 +8,11 @@ swiftmailer v4.1.5
 assetic v1.0.2
 twig-extensions a05ab5ed18a51ae45f3dcc2d0c4ec9b3a6386987
 metadata 1.1.0
+cg-library 1.0.0
 SensioFrameworkExtraBundle 1f661752ff051aeeca048e0be8df896faa024184
-JMSSecurityExtraBundle 541a4c242328dc04b99540c75346cc74a7c0cfb5
+JMSSecurityExtraBundle 1.1.0
+JMSAopBundle 1.0.0
+JMSDiExtraBundle 1.0.0
 SensioDistributionBundle 64ae64795c794e34d964a67e76f0584444189fc2
 SensioGeneratorBundle 0d58617cbde570803c2f00dc03f3acffce0cf28f
 AsseticBundle v1.0.1
