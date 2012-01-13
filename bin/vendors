@@ -110,6 +110,10 @@ foreach ($deps as $name => $dep) {
 
         $current_rev = system(sprintf('cd %s && git rev-list --max-count=1 HEAD', escapeshellarg($installDir)));
         if ($current_rev === $rev) {
+            if (isset($dep['git_command'])) {
+                system(sprintf('cd %s && git %s', escapeshellarg($installDir), $dep['git_command']));
+            }
+
             continue;
         }
 
