@@ -57,10 +57,6 @@ if (!(!(function_exists('apc_store') && ini_get('apc.enabled')) || version_compa
     $majorProblems[] = 'Upgrade your <strong>APC</strong> extension (3.0.17+)';
 }
 
-if (!function_exists('token_get_all')) {
-    $minorProblems[] = 'Install and enable the <strong>Tokenizer</strong> extension.';
-}
-
 if (!function_exists('mb_strlen')) {
     $minorProblems[] = 'Install and enable the <strong>mbstring</strong> extension.';
 }
@@ -116,6 +112,10 @@ if (!function_exists('token_get_all')) {
     $majorProblems[] = 'Install and enable the <strong>Tokenizer</strong> extension.';
 }
 
+if (!function_exists('simplexml_import_dom')) {
+    $majorProblems[] = 'Install and enable the <strong>SimpleXML</strong> extension.';
+}
+
 // php.ini
 if (!ini_get('date.timezone')) {
     $phpini = true;
@@ -156,46 +156,42 @@ if (ini_get('session.auto_start')) {
         <div id="symfony-wrapper">
             <div id="symfony-content">
                 <div class="symfony-blocks-install">
-                <?php if (!$vendorsAreMissing): ?>
-                <div class="symfony-block-logo">
-                    <img src="bundles/sensiodistribution/webconfigurator/images/logo-big.gif" alt="sf_symfony" />
-                </div>
-                <?php endif; ?>
+                    <?php if (!$vendorsAreMissing): ?>
+                    <div class="symfony-block-logo">
+                        <img src="bundles/sensiodistribution/webconfigurator/images/logo-big.gif" alt="sf_symfony" />
+                    </div>
+                    <?php endif; ?>
 
-                <div class="symfony-block-content">
-                    <h1>Welcome!</h1>
-                    <p>Welcome to your new Symfony project.</p>
-                    <p>This script will guide you through the basic configuration of your project. You can also do the same by editing the ‘<strong>app/config/parameters.yml</strong>’ file directly.</p>
+                    <div class="symfony-block-content">
+                        <h1>Welcome!</h1>
+                        <p>Welcome to your new Symfony project.</p>
+                        <p>This script will guide you through the basic configuration of your project. You can also do the same by editing the ‘<strong>app/config/parameters.yml</strong>’ file directly.</p>
 
-                    <?php if (count($majorProblems)): ?>
-                        <h2>
-                            <span><?php echo count($majorProblems) ?> Major problems</span>
-                        </h2>
-                        <p>Major problems have been detected and <strong>must</strong> be fixed before continuing :</p>
-                        <ol>
-                            <?php foreach ($majorProblems as $problem): ?>
-                                <li><?php echo $problem; ?></li>
-                            <?php endforeach ?>
-                        </ol>
-                    <?php endif ?>
+                        <?php if (count($majorProblems)): ?>
+                            <h2>
+                                <span><?php echo count($majorProblems) ?> Major problems</span>
+                            </h2>
+                            <p>Major problems have been detected and <strong>must</strong> be fixed before continuing:</p>
+                            <ol>
+                                <?php foreach ($majorProblems as $problem): ?>
+                                    <li><?php echo $problem ?></li>
+                                <?php endforeach; ?>
+                            </ol>
+                        <?php endif; ?>
 
-                    <?php if (count($minorProblems)): ?>
-                        <h2>Recommendations</h2>
+                        <?php if (count($minorProblems)): ?>
+                            <h2>Recommendations</h2>
                         <p>
-                            <?php if ($majorProblems): ?>
-                                Additionally, to
-                            <?php else: ?>
-                                To<?php endif; ?>
-                            enhance your Symfony experience, it’s recommended that you fix the following :
+                            <?php if ($majorProblems): ?>Additionally, to<?php else: ?>To<?php endif; ?> enhance your Symfony experience, it’s recommended that you fix the following:
                         </p>
                         <ol>
                             <?php foreach ($minorProblems as $problem): ?>
-                            <li><?php echo $problem; ?></li>
+                                <li><?php echo $problem ?></li>
                             <?php endforeach; ?>
                         </ol>
-                    <?php endif ?>
+                        <?php endif; ?>
 
-                    <?php if ($phpini): ?>
+                        <?php if ($phpini): ?>
                             <a id="phpini"></a>
                             <p>*
                                 <?php if (get_cfg_var('cfg_file_path')): ?>
@@ -204,15 +200,16 @@ if (ini_get('session.auto_start')) {
                                     To change settings, create a "<strong>php.ini</strong>".
                                 <?php endif; ?>
                             </p>
-                    <?php endif; ?>
+                        <?php endif; ?>
 
-                    <ul class="symfony-install-continue">
-                        <?php if (!count($majorProblems)): ?>
-                            <li><a href="app_dev.php/_configurator/">Configure your Symfony Application online</a></li>
-                            <li><a href="app_dev.php/">Bypass configuration and go to the Welcome page</a></li>
-                        <?php endif ?>
-                        <li><a href="config.php">Re-check configuration</a></li>
-                    </ul>
+                        <ul class="symfony-install-continue">
+                            <?php if (!count($majorProblems)): ?>
+                                <li><a href="app_dev.php/_configurator/">Configure your Symfony Application online</a></li>
+                                <li><a href="app_dev.php/">Bypass configuration and go to the Welcome page</a></li>
+                            <?php endif; ?>
+                            <li><a href="config.php">Re-check configuration</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
