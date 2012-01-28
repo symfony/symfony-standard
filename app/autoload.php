@@ -3,6 +3,11 @@
 // This class is defined on ‘app/bootstrap.php.cache’ file, which is created
 // when running ‘php bin/vendors update’, and is also responsible for including
 // this script as global code (non-namespaced code).
+//
+// When looking for the code defining this class, better check out the file at
+// ‘vendor/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php’,
+// which is where the code comes from, and is properly documented.
+//
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
