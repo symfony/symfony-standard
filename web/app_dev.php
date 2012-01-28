@@ -14,7 +14,7 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-// The following file is supposed to be created when running ‘php bin/vendors update’ on the root directory.
+// The following file is created when running ‘php bin/vendors update’.
 require_once __DIR__.'/../app/bootstrap.php.cache';
 
 
