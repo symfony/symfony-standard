@@ -1,6 +1,10 @@
 <?php
 
+// This class is defined on ‘app/bootstrap.php.cache’ file, which is created
+// when running ‘php bin/vendors update’, and is also responsible for including
+// this script as global code (non-namespaced code).
 use Symfony\Component\ClassLoader\UniversalClassLoader;
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = new UniversalClassLoader();
