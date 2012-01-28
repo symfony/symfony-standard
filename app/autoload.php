@@ -30,7 +30,7 @@ $loader->registerPrefixes(array(
     'Twig_'            => __DIR__.'/../vendor/twig/lib',
 ));
 
-// intl
+// If intl PHP extension is not available, load stub functions instead.
 if (!function_exists('intl_get_error_code')) {
     require_once __DIR__.'/../vendor/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
