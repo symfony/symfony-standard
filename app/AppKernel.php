@@ -3,6 +3,15 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+/**
+ * Kernel for your web application.
+ *
+ * For information on what a ‘kernel’ is, read the documentation for its parent
+ * class, {@link Kernel}. It is defined on ‘app/bootstrap.php.cache’ file, which
+ * is created when running ‘php bin/vendors update’, but better check out the
+ * file at ‘vendor/symfony/src/Symfony/Component/HttpKernel/Kernel.php’, which
+ * is where the code comes from, and is properly documented.
+ */
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -19,6 +28,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         );
 
+        // Load the following bundles only on development and testing environments.
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();

@@ -17,7 +17,6 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 // The following file is created when running ‘php bin/vendors update’.
 require_once __DIR__.'/../app/bootstrap.php.cache';
 
-
 require_once __DIR__.'/../app/AppKernel.php';
 
 use Symfony\Component\HttpFoundation\Request;
