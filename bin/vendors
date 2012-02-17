@@ -112,7 +112,7 @@ foreach ($deps as $name => $dep) {
             continue;
         }
 
-        system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+        system(sprintf('cd %s && git remote set-url origin %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($url), escapeshellarg($rev)));
     }
 
     if ('update' === $command || 'lock' === $command) {
