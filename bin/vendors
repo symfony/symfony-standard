@@ -107,12 +107,22 @@ foreach ($deps as $name => $dep) {
         if (!empty($status)) {
             exit(sprintf('"%s" has local modifications. Please revert or commit/push them before running this command again.', $name).PHP_EOL);
         }
+
         $current_rev = system(sprintf('cd %s && git rev-list --max-count=1 HEAD', escapeshellarg($installDir)));
         if ($current_rev === $rev) {
+            if (isset($dep['git_command'])) {
+                system(sprintf('cd %s && git %s', escapeshellarg($installDir), $dep['git_command']));
+            }
+
             continue;
         }
 
-        system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+        $git_command = '';
+        if (isset($dep['git_command'])) {
+            $git_command = ' && git ' . $dep['git_command'] . ' ';
+        }
+
+        system(sprintf('cd %s && git fetch origin && git reset --hard %s %s', escapeshellarg($installDir), escapeshellarg($rev), $git_command));
     }
 
     if ('update' === $command || 'lock' === $command) {
@@ -141,14 +151,16 @@ if ('update' === $command || 'lock' === $command) {
     file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions));
 }
 
-// php on windows can't use the shebang line from system()
-$interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
+if ('lock' !== $command) {
+    // php on windows can't use the shebang line from system()
+    $interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
 
-// Update the bootstrap files
-system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), escapeshellarg($rootDir)));
+    // Update the bootstrap files
+    system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), escapeshellarg($rootDir)));
 
-// Update assets
-system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
+    // Update assets
+    system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
 
-// Remove the cache
-system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
+    // Remove the cache
+    system(sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console')));
+}
