@@ -145,7 +145,13 @@ if ('update' === $command || 'lock' === $command) {
 $interpreter = defined('PHP_WINDOWS_VERSION_BUILD') ? 'php.exe' : '';
 
 // Update the bootstrap files
-system(sprintf('%s %s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'), escapeshellarg($rootDir)));
+$bootstrapBuilder = $rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php';
+$customBootstrapBuilder = $rootDir.'/app/Resources/bin/build_bootstrap.php';
+if (file_exists($customBootstrapBuilder)) {
+    $bootstrapBuilder = $customBootstrapBuilder;
+}
+
+system(sprintf('%s %s %s', $interpreter, escapeshellarg($bootstrapBuilder), escapeshellarg($rootDir)));
 
 // Update assets
 system(sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/')));
