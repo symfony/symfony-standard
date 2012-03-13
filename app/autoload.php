@@ -27,6 +27,11 @@ if (!function_exists('intl_get_error_code')) {
     $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
 }
 
+// PHP 5.4 forward compatibility
+if (!interface_exists('SessionHandlerInterface')) {
+    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php';
+}
+
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 // Swiftmailer needs a special autoloader to allow
