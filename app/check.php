@@ -6,7 +6,7 @@ if (!$iniPath = get_cfg_var('cfg_file_path')) {
 
 echo "********************************\n";
 echo "*                              *\n";
-echo "*  Symfony requirements check  *\n";
+echo "*  Symfony2 requirements check *\n";
 echo "*                              *\n";
 echo "********************************\n\n";
 echo sprintf("php.ini used by PHP: %s\n\n", $iniPath);

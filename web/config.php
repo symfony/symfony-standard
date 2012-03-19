@@ -20,8 +20,8 @@ $phpini = false;
 if (!version_compare(phpversion(), '5.3.2', '>=')) {
     $version = phpversion();
     $majorProblems[] = <<<EOF
-        You are running PHP version "<strong>$version</strong>", but Symfony
-        needs at least PHP "<strong>5.3.2</strong>" to run. Before using Symfony, install
+        You are running PHP version "<strong>$version</strong>", but Symfony2
+        needs at least PHP "<strong>5.3.2</strong>" to run. Before using Symfony2, install
         PHP "<strong>5.3.2</strong>" or newer.
 EOF;
 }
@@ -161,7 +161,7 @@ if (ini_get('session.auto_start')) {
         <?php if (!$vendorsAreMissing): ?>
         <link rel="stylesheet" href="bundles/sensiodistribution/webconfigurator/css/install.css" />
         <?php endif; ?>
-        <title>Symfony Configuration</title>
+        <title>Symfony2 Configuration</title>
     </head>
     <body>
         <div id="symfony-wrapper">
@@ -169,13 +169,13 @@ if (ini_get('session.auto_start')) {
                 <div class="symfony-blocks-install">
                     <?php if (!$vendorsAreMissing): ?>
                     <div class="symfony-block-logo">
-                        <img src="bundles/sensiodistribution/webconfigurator/images/logo-big.gif" alt="Symfony logo" />
+                        <img src="bundles/sensiodistribution/webconfigurator/images/logo-big.gif" alt="Symfony2 logo" />
                     </div>
                     <?php endif; ?>
 
                     <div class="symfony-block-content">
                         <h1>Welcome!</h1>
-                        <p>Welcome to your new Symfony project.</p>
+                        <p>Welcome to your new Symfony2 project.</p>
                         <p>
                             This script will guide you through the basic configuration of your project. 
                             You can also do the same by editing the ‘<strong>app/config/parameters.yml</strong>’ file directly.
@@ -194,7 +194,7 @@ if (ini_get('session.auto_start')) {
                         <?php if (count($minorProblems)): ?>
                             <h2>Recommendations</h2>
                             <p>
-                                <?php if ($majorProblems): ?>Additionally, to<?php else: ?>To<?php endif; ?> enhance your Symfony experience, 
+                                <?php if ($majorProblems): ?>Additionally, to<?php else: ?>To<?php endif; ?> enhance your Symfony2 experience, 
                                 it’s recommended that you fix the following:
                             </p>
                             <ol>
@@ -216,7 +216,7 @@ if (ini_get('session.auto_start')) {
 
                         <ul class="symfony-install-continue">
                             <?php if (!count($majorProblems)): ?>
-                                <li><a href="app_dev.php/_configurator/">Configure your Symfony Application online</a></li>
+                                <li><a href="app_dev.php/_configurator/">Configure your Symfony2 Application online</a></li>
                                 <li><a href="app_dev.php/">Bypass configuration and go to the Welcome page</a></li>
                             <?php endif; ?>
                             <li><a href="config.php">Re-check configuration</a></li>
@@ -225,6 +225,6 @@ if (ini_get('session.auto_start')) {
                 </div>
             </div>
         </div>
-        <div class="version">Symfony Standard Edition</div>
+        <div class="version">Symfony2 Standard Edition</div>
     </body>
 </html>
