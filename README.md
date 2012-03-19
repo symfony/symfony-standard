@@ -1,7 +1,7 @@
-Symfony Standard Edition
+Symfony2 Standard Edition
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
+Welcome to the Symfony2 Standard Edition - a fully-functional Symfony2
 application that you can use as the skeleton for your new app. If you want
 to learn more about the features included, see the "What's Inside?" section.
 
@@ -73,7 +73,7 @@ If everything looks good, click the "Bypass configuration and go to the Welcome 
 link to load up your first Symfony2 page.
 
 You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the ``config.php`` page.
+Symfony2 Application online" link of the ``config.php`` page.
 
 To see a real-live Symfony2 page in action, access the following page:
 
@@ -116,7 +116,7 @@ playing with it, you can remove it by following these steps:
 
 What's inside?
 ---------------
-The Symfony Standard Edition comes pre-configured with the following bundles:
+The Symfony2 Standard Edition comes pre-configured with the following bundles:
 
 * **FrameworkBundle** - The core Symfony2 framework bundle
 * **SensioFrameworkExtraBundle** - Adds several enhancements, including template
