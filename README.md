@@ -5,10 +5,10 @@ Welcome to the Symfony Standard Edition - a fully-functional Symfony2
 application that you can use as the skeleton for your new app. If you want
 to learn more about the features included, see the "What's Inside?" section.
 
-This document contains information on how to download and start using Symfony.
+This document contains information on how to download and start using Symfony2.
 For a more detailed explanation, see the
 [Installation chapter](http://symfony.com/doc/current/book/installation.html)
-of the Symfony Documentation.
+of the Symfony2 Documentation.
 
 1) Download the Standard Edition
 --------------------------------
@@ -40,7 +40,7 @@ Run the following commands:
 ---------------
 
 Once you've downloaded the standard edition, installation is easy, and basically
-involves making sure your system is ready for Symfony.
+involves making sure your system is ready for Symfony2.
 
 ### a) Install the Vendor Libraries
 
@@ -55,7 +55,7 @@ instructions on http://getcomposer.org/ and then run the following:
 ### b) Check your System Configuration
 
 Now make sure that your local system is properly configured
-for Symfony. To do this, execute the following:
+for Symfony2. To do this, execute the following:
 
     php app/check.php
 
@@ -63,29 +63,30 @@ If you get any warnings or recommendations, fix these now before moving on.
 
 ### c) Access the Application via the Browser
 
-Congratulations! You're now ready to use Symfony. If you've unzipped Symfony
+Congratulations! You're now ready to use Symfony2. If you've unzipped Symfony2
 in the web root of your computer, then you should be able to access the
-web version of the Symfony requirements check via:
+web version of the Symfony2 requirements check via:
 
     http://localhost/Symfony/web/config.php
 
 If everything looks good, click the "Bypass configuration and go to the Welcome page"
-link to load up your first Symfony page.
+link to load up your first Symfony2 page.
 
 You can also use a web-based configurator by clicking on the "Configure your
 Symfony Application online" link of the ``config.php`` page.
 
-To see a real-live Symfony page in action, access the following page:
+To see a real-live Symfony2 page in action, access the following page:
 
     web/app_dev.php/demo/hello/Fabien
 
-3) Learn about Symfony!
+3) Learn about Symfony2
 -----------------------
 
 This distribution is meant to be the starting point for your application,
 but it also contains some sample code that you can learn from and play with.
 
-A great way to start learning Symfony is via the [Quick Tour](http://symfony.com/doc/current/quick_tour/the_big_picture.html),
+A great way to start learning Symfony2 is via the
+[Quick Tour](http://symfony.com/doc/current/quick_tour/the_big_picture.html),
 which will take you through all the basic features of Symfony2 and the test
 pages that are available in the standard edition.
 
@@ -117,14 +118,15 @@ What's inside?
 ---------------
 The Symfony Standard Edition comes pre-configured with the following bundles:
 
-* **FrameworkBundle** - The core Symfony framework bundle
+* **FrameworkBundle** - The core Symfony2 framework bundle
 * **SensioFrameworkExtraBundle** - Adds several enhancements, including template
-  and routing annotation capability ([documentation](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html))
+  and routing annotation capability
+  ([documentation](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html))
 * **DoctrineBundle** - Adds support for the Doctrine ORM
   ([documentation](http://symfony.com/doc/current/book/doctrine.html))
 * **TwigBundle** - Adds support for the Twig templating engine
   ([documentation](http://symfony.com/doc/current/book/templating.html))
-* **SecurityBundle** - Adds security by integrating Symfony's security component
+* **SecurityBundle** - Adds security by integrating Symfony2's security component
   ([documentation](http://symfony.com/doc/current/book/security.html))
 * **SwiftmailerBundle** - Adds support for Swiftmailer, a library for sending emails
   ([documentation](http://symfony.com/doc/2.0/cookbook/email.html))
@@ -137,7 +139,7 @@ The Symfony Standard Edition comes pre-configured with the following bundles:
 * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
   the web debug toolbar
 * **SensioDistributionBundle** (in dev/test env) - Adds functionality for configuring
-  and working with Symfony distributions
+  and working with Symfony2 distributions
 * **SensioGeneratorBundle** (in dev/test env) - Adds code generation capabilities
   ([documentation](http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html))
 * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example code
