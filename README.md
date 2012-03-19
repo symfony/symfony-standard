@@ -113,6 +113,22 @@ playing with it, you can remove it by following these steps:
 * remove the AcmeBundle from the registered bundles in ``app/AppKernel.php``;
 * remove the ``web/bundles/acmedemo`` directory.
 
+Personal data security
+----------------------
+
+If the standard edition is used as a starting point for developing a project on shared hosting
+it should be noted that you need to modify *nix file access permissions for some files so that it's
+not accessable to other users. This will only work if web server is launched under your group or your user,
+otherwise it can break your project.
+
+* `chmod o-x app/console` to prevent other users launching your console
+* `chmod o-r app/config/*.yml` to prevent other users reading your configuration data
+* `chmod o-r,o-x app/cache` to prevent other users to access data in your cache
+* `chmod o-r,o-x app/logs` to prevent other users to access your logs
+
+It's a good practice to also restrict access to the project root directory itself using `chmod o-r,o-x ./` 
+which itself may be enough.
+
 What's inside?
 ---------------
 The Symfony Standard Edition comes pre-configured with the following bundles:
