@@ -15,11 +15,20 @@ set_time_limit(0);
 $rootDir = dirname(__DIR__);
 $vendorDir = $rootDir.'/vendor';
 
+echo <<< EOF
+
+ +------------------------------------+
+ |                                    |
+ | Symfony2 vendors script management |
+ |                                    |
+ +------------------------------------+
+
+
+EOF;
+
 array_shift($argv);
 if (!isset($argv[0])) {
     exit(<<<EOF
-Symfony2 vendors script management.
-
 Specify a command to run:
 
     install: install vendors as specified in deps or deps.lock (recommended)
@@ -71,6 +80,10 @@ $deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
 if (false === $deps) {
     exit('The deps file is not valid ini syntax. Perhaps missing a trailing newline?'.PHP_EOL);
 }
+
+$i  = 1;
+$ii = count($deps);
+
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
 
@@ -85,7 +98,8 @@ foreach ($deps as $name => $dep) {
     }
 
     if ('install' === $command || 'update' === $command) {
-        echo PHP_EOL.'> Installing/Updating '.$name.PHP_EOL;
+        echo ($title = sprintf("[%2u/%u] %s", $i, $ii, $name)).PHP_EOL;
+        echo str_repeat('-', strlen($title)).PHP_EOL;
 
         // url
         if (!isset($dep['git'])) {
@@ -113,7 +127,13 @@ foreach ($deps as $name => $dep) {
             continue;
         }
 
-        system(sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+        system(sprintf(
+            'cd %s && git fetch origin && git reset --hard %s',
+            escapeshellarg($installDir),
+            escapeshellarg($rev)
+        ));
+
+        echo PHP_EOL;
     }
 
     if ('update' === $command || 'lock' === $command) {
@@ -133,6 +153,8 @@ foreach ($deps as $name => $dep) {
             $newversions[] = $name.' '.$newversion;
         }
     }
+
+    $i++;
 }
 
 // update?
@@ -140,6 +162,8 @@ if ('update' === $command || 'lock' === $command) {
     echo PHP_EOL.'> Updating deps.lock'.PHP_EOL;
 
     file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions)."\n");
+
+    echo PHP_EOL;
 }
 
 // php on windows can't use the shebang line from system()
