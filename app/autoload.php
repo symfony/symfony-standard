@@ -23,7 +23,7 @@ if (!$loader) {
         'php composer.phar install'.$nl);
 }
 
-// intl
+// Import own intl implementation if module disabled
 if (!function_exists('intl_get_error_code')) {
     require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
