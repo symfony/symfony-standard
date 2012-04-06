@@ -8,7 +8,7 @@ if (!$loader) {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
     echo "$nl$nl";
     $installer = @file_get_contents('http://getcomposer.org/installer');
-    $binPath = dirname(__DIR__).'/bin';
+    $binPath = __DIR__.'/../bin';
     if (is_writable($binPath) && false !== $installer) {
         echo 'You must set up the project dependencies.'.$nl;
         $installerPath = $binPath.'/install-composer.php';
