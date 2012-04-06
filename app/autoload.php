@@ -6,22 +6,24 @@ $loader = @include __DIR__.'/../vendor/.composer/autoload.php';
 
 if (!$loader) {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
-    echo "$nl$nl";
+    
+    $finalOutput = $nl.$nl.'You must set up the project dependencies.'.$nl.
+        '%s'.
+        'Run the following commands in '.$binPath.':'.$nl.$nl.
+        '%s'.$nl.
+        'php composer.phar install'.$nl;
+    $installOutput = '';
+    $commandOutput = 'curl -s http://getcomposer.org/installer | php';
+
     $installer = @file_get_contents('http://getcomposer.org/installer');
     $binPath = __DIR__.'/../bin';
     if (is_writable($binPath) && false !== $installer) {
-        echo 'You must set up the project dependencies.'.$nl;
         $installerPath = $binPath.'/install-composer.php';
         file_put_contents($installerPath, $installer);
-        echo 'The composer installer has been downloaded in '.$installerPath.$nl;
-        die('Run the following commands in '.$binPath.':'.$nl.$nl.
-            'php install-composer.php'.$nl.
-            'php composer.phar install'.$nl);
+        $installOutput = 'The composer installer has been downloaded in '.$installerPath.$nl;
+        $commandOutput = 'php install-composer.php';
     }
-    die('You must set up the project dependencies.'.$nl.
-        'Run the following commands in '.$binPath.':'.$nl.$nl.
-        'curl -s http://getcomposer.org/installer | php'.$nl.
-        'php composer.phar install'.$nl);
+    die(sprintf($finalOutput, $installOutput, $commandOutput));
 }
 
 // Import own intl implementation if module disabled
