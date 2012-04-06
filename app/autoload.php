@@ -7,7 +7,8 @@ $loader = @include __DIR__.'/../vendor/.composer/autoload.php';
 if (!$loader) {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
     echo "$nl$nl";
-    if (is_writable(dirname(__DIR__)) && $installer = @file_get_contents('http://getcomposer.org/installer')) {
+    $installer = @file_get_contents('http://getcomposer.org/installer');
+    if (is_writable(dirname(__DIR__)) && false !== $installer) {
         echo 'You must set up the project dependencies.'.$nl;
         $installerPath = dirname(__DIR__).'/install-composer.php';
         file_put_contents($installerPath, $installer);
