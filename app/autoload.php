@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
+
 if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
     echo "$nl$nl";
@@ -17,8 +19,6 @@ if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
         'curl -s http://getcomposer.org/installer | php'.$nl.
         'php composer.phar install'.$nl);
 }
-
-use Doctrine\Common\Annotations\AnnotationRegistry;
 
 // intl
 if (!function_exists('intl_get_error_code')) {
