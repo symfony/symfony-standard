@@ -8,17 +8,18 @@ if (!$loader) {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
     echo "$nl$nl";
     $installer = @file_get_contents('http://getcomposer.org/installer');
-    if (is_writable(dirname(__DIR__)) && false !== $installer) {
+    $binPath = dirname(__DIR__).'/bin';
+    if (is_writable($binPath) && false !== $installer) {
         echo 'You must set up the project dependencies.'.$nl;
-        $installerPath = dirname(__DIR__).'/install-composer.php';
+        $installerPath = $binPath.'/install-composer.php';
         file_put_contents($installerPath, $installer);
         echo 'The composer installer has been downloaded in '.$installerPath.$nl;
-        die('Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
+        die('Run the following commands in '.$binPath.':'.$nl.$nl.
             'php install-composer.php'.$nl.
             'php composer.phar install'.$nl);
     }
     die('You must set up the project dependencies.'.$nl.
-        'Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
+        'Run the following commands in '.$binPath.':'.$nl.$nl.
         'curl -s http://getcomposer.org/installer | php'.$nl.
         'php composer.phar install'.$nl);
 }
