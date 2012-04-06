@@ -32,8 +32,7 @@ if (!function_exists('intl_get_error_code')) {
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
-// Swiftmailer needs a special autoloader to allow
-// the lazy loading of the init file (which is expensive)
+// Swiftmailer special autoloader to allow lazy loading of exepensive init file
 require_once __DIR__.'/../vendor/swiftmailer/swiftmailer/lib/classes/Swift.php';
 
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/swiftmailer/lib/swift_init.php');
