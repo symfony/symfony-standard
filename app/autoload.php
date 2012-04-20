@@ -1,26 +1,32 @@
 <?php
 
-if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
-    $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
-    echo "$nl$nl";
-    if (is_writable(dirname(__DIR__)) && $installer = @file_get_contents('http://getcomposer.org/installer')) {
-        echo 'You must set up the project dependencies.'.$nl;
-        $installerPath = dirname(__DIR__).'/install-composer.php';
-        file_put_contents($installerPath, $installer);
-        echo 'The composer installer has been downloaded in '.$installerPath.$nl;
-        die('Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
-            'php install-composer.php'.$nl.
-            'php composer.phar install'.$nl);
-    }
-    die('You must set up the project dependencies.'.$nl.
-        'Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
-        'curl -s http://getcomposer.org/installer | php'.$nl.
-        'php composer.phar install'.$nl);
-}
-
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-// intl
+$loader = @include __DIR__.'/../vendor/.composer/autoload.php';
+
+if (!$loader) {
+    $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
+    
+    $finalOutput = $nl.$nl.'You must set up the project dependencies.'.$nl.
+        '%s'.
+        'Run the following commands in '.$binPath.':'.$nl.$nl.
+        '%s'.$nl.
+        'php composer.phar install'.$nl;
+    $installOutput = '';
+    $commandOutput = 'curl -s http://getcomposer.org/installer | php';
+
+    $installer = @file_get_contents('http://getcomposer.org/installer');
+    $binPath = __DIR__.'/../bin';
+    if (is_writable($binPath) && false !== $installer) {
+        $installerPath = $binPath.'/install-composer.php';
+        file_put_contents($installerPath, $installer);
+        $installOutput = 'The composer installer has been downloaded in '.$installerPath.$nl;
+        $commandOutput = 'php install-composer.php';
+    }
+    die(sprintf($finalOutput, $installOutput, $commandOutput));
+}
+
+// Import own intl implementation if module disabled
 if (!function_exists('intl_get_error_code')) {
     require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
@@ -29,7 +35,7 @@ if (!function_exists('intl_get_error_code')) {
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
-// Swiftmailer needs a special autoloader to allow
-// the lazy loading of the init file (which is expensive)
+// Swiftmailer special autoloader to allow lazy loading of exepensive init file
 require_once __DIR__.'/../vendor/swiftmailer/swiftmailer/lib/classes/Swift.php';
+
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/swiftmailer/lib/swift_init.php');
