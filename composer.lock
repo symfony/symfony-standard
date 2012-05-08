@@ -100,8 +100,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "037f86aa550737abf633e991f3606b9de5a69657",
-            "alias": "1.7.9999999.9999999-dev"
+            "source-reference": "078905ed9507808b260d34fd8928e79e3a600d1d",
+            "alias": "1.9.9999999.9999999-dev"
         }
     ],
     "packages-dev": null,
