@@ -5,3 +5,4 @@ app/logs/*
 build/
 vendor
 composer.phar
+composer.lock
