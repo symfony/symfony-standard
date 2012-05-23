@@ -17,12 +17,12 @@ $minorProblems = array();
 $phpini = false;
 
 // minimum
-if (!version_compare(phpversion(), '5.3.2', '>=')) {
+if (!version_compare(phpversion(), '5.3.3', '>=')) {
     $version = phpversion();
     $majorProblems[] = <<<EOF
         You are running PHP version "<strong>$version</strong>", but Symfony
-        needs at least PHP "<strong>5.3.2</strong>" to run. Before using Symfony, install
-        PHP "<strong>5.3.2</strong>" or newer.
+        needs at least PHP "<strong>5.3.3</strong>" to run. Before using Symfony, install
+        PHP "<strong>5.3.3</strong>" or newer.
 EOF;
 }
 
