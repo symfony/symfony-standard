@@ -9,6 +9,10 @@ if (!$loader = include __DIR__.'/../vendor/autoload.php') {
         'php composer.phar install'.$nl);
 }
 
+if (is_link(dirname(__DIR__) . '/vendor')) {
+    $loader->add('', dirname(__DIR__) . '/src/');
+}
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 // intl
