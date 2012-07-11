@@ -250,3 +250,9 @@ The default `web/app_dev.php` file now reads as follows:
     $response = $kernel->handle($request);
     $response->send();
     $kernel->terminate($request, $response);
+    
+### Requirements
+
+The required PHP version has been raised to 5.3.3. There is a new `app/SymfonyRequirements.php` file that specifies
+all requirements to run the Standard Edition. It can be reused to add specific requirements for your project. The
+`app/check.php` and `web/config.php` need to be updated for this.
