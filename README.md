@@ -161,7 +161,7 @@ Enjoy!
 [2]:  http://getcomposer.org/
 [3]:  http://symfony.com/download
 [4]:  http://symfony.com/doc/2.1/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.1/
+[5]:  http://symfony.com/doc/current/index.html
 [6]:  http://symfony.com/doc/2.1/bundles/SensioFrameworkExtraBundle/index.html
 [7]:  http://symfony.com/doc/2.1/book/doctrine.html
 [8]:  http://symfony.com/doc/2.1/book/templating.html
