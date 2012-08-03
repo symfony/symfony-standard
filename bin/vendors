@@ -22,8 +22,8 @@ Symfony2 vendors script management.
 
 Specify a command to run:
 
-    install: install vendors as specified in deps or deps.lock (recommended)
-    update:  update vendors to their latest versions (as specified in deps)
+    install [vendor]: install vendor(s) as specified in deps or deps.lock (recommended)
+    update [vendor]:  update vendor(s) to their latest versions (as specified in deps)
     lock:    lock vendors to their current versions
 
 
@@ -76,6 +76,16 @@ if (false === $deps) {
     echo('The deps file is not valid ini syntax. Perhaps missing a trailing newline?'.PHP_EOL);
     exit(1);
 }
+
+// need to update 1 vendor only
+if(isset($argv[0])) {
+    $vendor = $argv[0];
+    if(!isset($deps[$vendor])) {
+        exit(sprintf("The '%s' vendor not found in deps file.\n",$vendor));
+    }
+    $deps = array($deps[$vendor]);
+}
+
 foreach ($deps as $name => $dep) {
     $dep = array_map('trim', $dep);
 
