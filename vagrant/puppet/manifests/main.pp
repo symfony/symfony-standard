@@ -18,117 +18,80 @@ class apt_update {
 }
 
 class apache {
-    package { "apache2-mpm-worker":
+    package { "apache2-mpm-prefork":
         ensure => present,
         require => Exec["aptGetUpdate"]
     }
 
-   package { "libapache2-mod-fastcgi":
+   package { "libapache2-mod-php5":
         ensure => present,
-        require => Package["apache2-mpm-worker"]
+        require => Package["apache2-mpm-prefork"]
     }
 
     service { "apache2":
         ensure => running,
-        require => Package["apache2-mpm-worker"],
-        subscribe => File["main-vhost.conf", "httpd.conf", "mod_rewrite", "mod_actions", "mod_expires", "mod_fastcgi"]
+        require => Package["apache2-mpm-prefork"],
+        subscribe => File["main-vhost.conf", "httpd.conf", "mod_rewrite", "mod_actions"]
     }
 
-    service { "php5-fpm":
-        ensure => running,
-        require => Package["php5-fpm"],
-        subscribe => File["php-fpm.conf"]
-    }
 
 
     file { "main-vhost.conf":
         path => '/etc/apache2/conf.d/main-vhost.conf',
         ensure => file,
         content => template('default/main-vhost.conf'),
-        require => Package["apache2-mpm-worker"]
+        require => Package["apache2-mpm-prefork"]
     }
 
     file { "httpd.conf":
         path => "/etc/apache2/httpd.conf",
         ensure => file,
         content => template('default/httpd.conf'),
-        require => Package["apache2-mpm-worker"]
+        require => Package["apache2-mpm-prefork"]
     }
 
     file { "mod_rewrite":
         path => "/etc/apache2/mods-enabled/rewrite.load",
         ensure => "link",
         target => "/etc/apache2/mods-available/rewrite.load",
-        require => Package["apache2-mpm-worker"]
+        require => Package["apache2-mpm-prefork"]
     }
 
     file { "mod_actions":
         path => "/etc/apache2/mods-enabled/actions.load",
         ensure => "link",
         target => "/etc/apache2/mods-available/actions.load",
-        require => Package["libapache2-mod-fastcgi"]
+        require => Package["apache2-mpm-prefork"]
     }
 
     file { "mod_actions_conf":
         path => "/etc/apache2/mods-enabled/actions.conf",
         ensure => "link",
         target => "/etc/apache2/mods-available/actions.conf",
-        require => Package["libapache2-mod-fastcgi"]
-    }
-
-
-      file { "mod_fastcgi":
-        path => "/etc/apache2/mods-enabled/fastcgi.load",
-        ensure => "link",
-        target => "/etc/apache2/mods-available/fastcgi.load",
-        require => Package["libapache2-mod-fastcgi"]
-    }
-
-    file { "mod_fastcgi_conf":
-        path => "/etc/apache2/mods-enabled/fastcgi.conf",
-        ensure => "link",
-        target => "/etc/apache2/mods-available/fastcgi.conf",
-        require => Package["libapache2-mod-fastcgi"]
-    }
-     file { "mod_expires":
-        path => "/etc/apache2/mods-enabled/expires.load",
-        ensure => "link",
-        target => "/etc/apache2/mods-available/expires.load",
-        require => Package["apache2-mpm-worker"]
+        require => Package["apache2-mpm-prefork"]
     }
 }
 
-class php53 {
-    package { "php5-fpm":
-        ensure => present,
-        require => Package["apache2-mpm-worker"]
-    }
+class php54 {
+
 
     package { "php5-cli":
         ensure => present,
-        require => Package["php5-fpm"]
     }
 
     package { "php5-apc":
         ensure => present,
-        require => Package["php5-fpm"]
+        require => Package["libapache2-mod-php5"]
     }
 
     package { "php5-xdebug":
         ensure => present,
-        require => Package["php5-fpm"]
+        require => Package["libapache2-mod-php5"]
     }
 
     package { "php5-intl":
         ensure => present,
-        require => Package["php5-fpm"]
-    }
-
-    file { "php-fpm.conf":
-        path => "/etc/php5/fpm/php-fpm.conf",
-        ensure => file,
-        content => template('default/php-fpm.conf'),
-        require => Package["php5-fpm"]
+        require => Package["libapache2-mod-php5"]
     }
 
    file { "php-timezone.ini":
@@ -143,7 +106,7 @@ class php53 {
 
 }
 
-class terrific {
+class symfony {
 
     exec { "vendorsInstall":
         cwd => "/vagrant",
@@ -173,27 +136,24 @@ class groups {
     }
 }
 
-class git {
+class otherstuff {
      package { "git":
         ensure => present,
     }
      package { "curl":
         ensure => present,
     }
-}
-
-class nfs {
-   package {"nfs-common":
+    package {"nfs-common":
         ensure => present,
-   }
+    }
 }
 
-include nfs
+
 
 include apt_update
-include git
+include otherstuff
 include apache
-include php53
+include php54
 include groups
 include composer
-include terrific
+include symfony
