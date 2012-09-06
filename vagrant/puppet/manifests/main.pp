@@ -6,10 +6,8 @@ class apt_update {
         owner => "root",
         group => "root",
         content => "deb http://ftp.ch.debian.org/debian squeeze main contrib non-free\ndeb http://packages.dotdeb.org squeeze all\ndeb-src http://packages.dotdeb.org squeeze all\ndeb http://packages.dotdeb.org squeeze-php54 all\ndeb-src http://packages.dotdeb.org squeeze-php54 all",
-
         notify => Exec["aptGetUpdate"],
     }
-
 
     exec { "aptGetUpdate":
         command => "wget -q -O - http://www.dotdeb.org/dotdeb.gpg | sudo apt-key add - && sudo apt-get update",
@@ -23,7 +21,7 @@ class apache {
         require => Exec["aptGetUpdate"]
     }
 
-   package { "libapache2-mod-php5":
+    package { "libapache2-mod-php5":
         ensure => present,
         require => Package["apache2-mpm-prefork"]
     }
@@ -94,16 +92,12 @@ class php54 {
         require => Package["libapache2-mod-php5"]
     }
 
-   file { "php-timezone.ini":
+    file { "php-timezone.ini":
         path => "/etc/php5/cli/conf.d/30-timezone.ini",
         ensure => file,
         content => template('default/php-timezone.ini'),
         require => Package["php5-cli"]
     }
-
-
-
-
 }
 
 class symfony {
