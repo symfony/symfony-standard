@@ -92,6 +92,11 @@ class php54 {
         require => Package["libapache2-mod-php5"]
     }
 
+    package { "php5-sqlite":
+        ensure => present,
+        require => Package["libapache2-mod-php5"]
+    }
+
     file { "php-timezone.ini":
         path => "/etc/php5/cli/conf.d/30-timezone.ini",
         ensure => file,
@@ -107,9 +112,9 @@ class symfony {
         command => "php composer.phar install",
         path => ["/bin", "/usr/bin"],
         creates => "/vagrant/vendor",
+        logoutput => true,
         require => Exec["composerPhar"],
     }
-
 }
 
 class composer {
@@ -118,10 +123,8 @@ class composer {
         command => "curl -s http://getcomposer.org/installer | php",
         path => ["/bin", "/usr/bin"],
         creates => "/vagrant/composer.phar",
-        require => Package["php5-cli","curl"   ],
+        require => Package["php5-cli", "curl", "git"],
     }
-
-
 }
 
 class groups {
