@@ -110,6 +110,7 @@ class symfony {
     exec { "vendorsInstall":
         cwd => "/vagrant",
         command => "php composer.phar install",
+        timeout => 1200,
         path => ["/bin", "/usr/bin"],
         creates => "/vagrant/vendor",
         logoutput => true,
