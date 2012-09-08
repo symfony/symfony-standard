@@ -32,6 +32,12 @@ Finally, run Composer:
 
     $ composer.phar install
 
+### Requirements
+
+The required PHP version has been raised to 5.3.3. There is a new `app/SymfonyRequirements.php` file that specifies
+all requirements to run the Standard Edition. You could subclass the `SymfonyRequirements` class to add specific
+requirements for your project.
+
 ### `app/autoload.php`
 
 The default `autoload.php` reads as follows (it has been simplified a lot as
