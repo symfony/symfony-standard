@@ -484,13 +484,15 @@ class SymfonyRequirements extends RequirementCollection
 
         // the phpinfo check is necessary when Suhosin is compiled into PHP
         if (extension_loaded('suhosin') || false !== strpos($phpinfo, 'Suhosin')) {
-            $this->addPhpIniRequirement(
-                'suhosin.executor.include.whitelist',
-                create_function('$cfgValue', 'return false !== stripos($cfgValue, "phar");'),
-                false,
-                'suhosin.executor.include.whitelist must be configured correctly in php.ini',
-                'Add "<strong>phar</strong>" to <strong>suhosin.executor.include.whitelist</strong> in php.ini<a href="#phpini">*</a>.'
-            );
+            if (false !== ini_get('suhosin.executor.include.whitelist')) {
+                $this->addPhpIniRequirement(
+                    'suhosin.executor.include.whitelist',
+                    create_function('$cfgValue', 'return false !== stripos($cfgValue, "phar");'),
+                    false,
+                    'suhosin.executor.include.whitelist must be configured correctly in php.ini',
+                    'Add "<strong>phar</strong>" to <strong>suhosin.executor.include.whitelist</strong> in php.ini<a href="#phpini">*</a>.'
+                );
+            }
         }
 
         if (extension_loaded('xdebug')) {
