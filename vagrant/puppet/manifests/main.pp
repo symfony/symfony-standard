@@ -102,14 +102,18 @@ class php54dotdeb {
         owner => "root",
         group => "root",
         content => "deb http://ftp.ch.debian.org/debian squeeze main contrib non-free\ndeb http://packages.dotdeb.org squeeze all\ndeb-src http://packages.dotdeb.org squeeze all\ndeb http://packages.dotdeb.org squeeze-php54 all\ndeb-src http://packages.dotdeb.org squeeze-php54 all",
-        notify => Exec["dotDebKeys"],
+        notify => Exec["dotDebKeys"]
     }
 
 #there's a conflict when you upgrade from 5.3 to 5.4 in xdebug.ini.
- file { "xdebug.ini":
-        path => "//etc/php5/conf.d/20-xdebug.ini",
-        ensure => "link",
-        target => "/usr/share/php5/xdebug/xdebug.ini",
+# you don't need this, if you directly install 5.4
+    file { "xdebug.ini":
+        path => "/etc/php5/mods-available/xdebug.ini",
+        ensure => file,
+        owner => "root",
+        group => "root",
+        source => "/usr/share/php5/xdebug/xdebug.ini",
+        require => Package['php5-xdebug']
     }
 
     exec { "dotDebKeys":
