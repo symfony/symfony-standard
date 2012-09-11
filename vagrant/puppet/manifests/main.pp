@@ -63,6 +63,7 @@ class php5 {
 
     package { "php5-cli":
         ensure => latest,
+        require => Exec["aptGetUpdate"],
     }
 
     package { "php5-xdebug":
