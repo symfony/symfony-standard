@@ -20,7 +20,7 @@ class apache {
     service { "apache2":
         ensure => running,
         require => Package["apache2-mpm-prefork"],
-        subscribe => File["main-vhost.conf", "httpd.conf", "mod_rewrite", "mod_actions"]
+        subscribe => File["main-vhost.conf", "httpd.conf", "mod_rewrite"]
     }
 
     file { "main-vhost.conf":
@@ -41,20 +41,6 @@ class apache {
         path => "/etc/apache2/mods-enabled/rewrite.load",
         ensure => "link",
         target => "/etc/apache2/mods-available/rewrite.load",
-        require => Package["apache2-mpm-prefork"]
-    }
-
-    file { "mod_actions":
-        path => "/etc/apache2/mods-enabled/actions.load",
-        ensure => "link",
-        target => "/etc/apache2/mods-available/actions.load",
-        require => Package["apache2-mpm-prefork"]
-    }
-
-    file { "mod_actions_conf":
-        path => "/etc/apache2/mods-enabled/actions.conf",
-        ensure => "link",
-        target => "/etc/apache2/mods-available/actions.conf",
         require => Package["apache2-mpm-prefork"]
     }
 }
