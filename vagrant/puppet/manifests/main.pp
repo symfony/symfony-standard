@@ -1,16 +1,6 @@
 class apt_update {
-
- file { "dotdeb.list":
-        path => "/etc/apt/sources.list.d/dotdeb.list",
-        ensure => file,
-        owner => "root",
-        group => "root",
-        content => "deb http://ftp.ch.debian.org/debian squeeze main contrib non-free\ndeb http://packages.dotdeb.org squeeze all\ndeb-src http://packages.dotdeb.org squeeze all\ndeb http://packages.dotdeb.org squeeze-php54 all\ndeb-src http://packages.dotdeb.org squeeze-php54 all",
-        notify => Exec["aptGetUpdate"],
-    }
-
     exec { "aptGetUpdate":
-        command => "wget -q -O - http://www.dotdeb.org/dotdeb.gpg | sudo apt-key add - && sudo apt-get update",
+        command => "sudo apt-get update",
         path => ["/bin", "/usr/bin"]
     }
 }
@@ -22,8 +12,9 @@ class apache {
     }
 
     package { "libapache2-mod-php5":
-        ensure => present,
-        require => Package["apache2-mpm-prefork"]
+        ensure => latest,
+        require => Package["apache2-mpm-prefork"],
+        notify => Service["apache2"],
     }
 
     service { "apache2":
@@ -31,8 +22,6 @@ class apache {
         require => Package["apache2-mpm-prefork"],
         subscribe => File["main-vhost.conf", "httpd.conf", "mod_rewrite", "mod_actions"]
     }
-
-
 
     file { "main-vhost.conf":
         path => '/etc/apache2/conf.d/main-vhost.conf',
@@ -70,30 +59,36 @@ class apache {
     }
 }
 
-class php54 {
-
+class php5 {
 
     package { "php5-cli":
-        ensure => present,
-    }
-
-    package { "php5-apc":
-        ensure => present,
-        require => Package["libapache2-mod-php5"]
+        ensure => latest,
+        require => Exec["aptGetUpdate"],
     }
 
     package { "php5-xdebug":
-        ensure => present,
-        require => Package["libapache2-mod-php5"]
+        ensure => latest,
+        require => Package["libapache2-mod-php5"],
+        notify => Service["apache2"]
     }
 
     package { "php5-intl":
-        ensure => present,
+        ensure => latest,
+        require => Package["libapache2-mod-php5"]
+    }
+
+    package { "php5-suhosin":
+        ensure => purged,
+        notify => Service["apache2"]
+    }
+
+    package { "php5-xhprof":
+        ensure => latest,
         require => Package["libapache2-mod-php5"]
     }
 
     package { "php5-sqlite":
-        ensure => present,
+        ensure => latest,
         require => Package["libapache2-mod-php5"]
     }
 
@@ -102,6 +97,62 @@ class php54 {
         ensure => file,
         content => template('default/php-timezone.ini'),
         require => Package["php5-cli"]
+    }
+}
+
+class php54dotdeb {
+    file { "dotdeb.list":
+        path => "/etc/apt/sources.list.d/dotdeb.list",
+        ensure => file,
+        owner => "root",
+        group => "root",
+        content => "deb http://ftp.ch.debian.org/debian squeeze main contrib non-free\ndeb http://packages.dotdeb.org squeeze all\ndeb-src http://packages.dotdeb.org squeeze all\ndeb http://packages.dotdeb.org squeeze-php54 all\ndeb-src http://packages.dotdeb.org squeeze-php54 all",
+        notify => Exec["dotDebKeys"]
+    }
+
+#there's a conflict when you upgrade from 5.3 to 5.4 in xdebug.ini.
+# you don't need this, if you directly install 5.4
+    file { "xdebug.ini":
+        path => "/etc/php5/mods-available/xdebug.ini",
+        ensure => file,
+        owner => "root",
+        group => "root",
+        source => "/usr/share/php5/xdebug/xdebug.ini",
+        require => Package['php5-xdebug']
+    }
+
+    exec { "dotDebKeys":
+        command => "wget -q -O - http://www.dotdeb.org/dotdeb.gpg | sudo apt-key add -",
+        path => ["/bin", "/usr/bin"],
+        notify => Exec["aptGetUpdate"],
+        unless => "apt-key list | grep dotdeb"
+    }
+
+    package { "php5-apc":
+        ensure => latest,
+        require => Package["libapache2-mod-php5"],
+        notify => Service["apache2"],
+    }
+
+    package { "phpapi-20090626":
+        ensure => purged,
+    }
+
+    package { "php-apc":
+        ensure => purged,
+    }
+}
+
+class php53debian {
+    package { "php-apc":
+        ensure => latest,
+        require => Package["libapache2-mod-php5"]
+    }
+
+    file { "dotdeb.list":
+        path => "/etc/apt/sources.list.d/dotdeb.list",
+        ensure => absent,
+        notify => Exec["aptGetUpdate"],
     }
 }
 
@@ -136,7 +187,7 @@ class groups {
 
 class otherstuff {
      package { "git":
-        ensure => present,
+        ensure => latest,
     }
      package { "curl":
         ensure => present,
@@ -149,9 +200,15 @@ class otherstuff {
 
 
 include apt_update
+include php5
+# If you want PHP 5.4 uncomment the following line, and comment out the php53debian line
+#  then run "vagrant provision" and you should have php 5.4
+
+#include php54dotdeb
+include php53debian
+
 include otherstuff
 include apache
-include php54
 include groups
 include composer
 include symfony
