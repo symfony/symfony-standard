@@ -82,11 +82,6 @@ class php5 {
         notify => Service["apache2"]
     }
 
-    package { "php5-xhprof":
-        ensure => latest,
-        require => Package["libapache2-mod-php5"]
-    }
-
     package { "php5-sqlite":
         ensure => latest,
         require => Package["libapache2-mod-php5"]
@@ -128,7 +123,7 @@ class php54dotdeb {
         unless => "apt-key list | grep dotdeb"
     }
 
-    package { "php5-apc":
+    package { ["php5-apc", "php5-xhprof"]:
         ensure => latest,
         require => Package["libapache2-mod-php5"],
         notify => Service["apache2"],
