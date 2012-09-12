@@ -157,7 +157,36 @@ class otherstuff {
      package { ["git", "curl", "nfs-common"]:
         ensure => latest,
     }
+}
+
+class mysql {
+    service { "mysql":
+        ensure => running,
+        require => Package["mysql-server"],
     }
+
+    mysqldb { "symfony":
+        user => "symfony",
+        password => "Shub9aiJ"
+    }
+
+    package { ["mysql-client", "mysql-server"]:
+        ensure => latest,
+    }
+
+    package { ["php5-mysql"]:
+        ensure => latest,
+        require => Package["libapache2-mod-php5", "mysql-client"],
+        notify => Service["apache2"],
+    }
+
+}
+
+define mysqldb( $user, $password ) {
+    exec { "create-${name}-db":
+        unless => "/usr/bin/mysql -u${user} -p${password} ${name}",
+        command => "/usr/bin/mysql -uroot -p$mysql_password -e \"CREATE DATABASE ${name}; GRANT ALL ON ${name}.* TO ${user}@localhost IDENTIFIED BY '$password'; GRANT ALL ON ${name}.* TO ${user}@'%' IDENTIFIED BY '$password'; GRANT ALL ON ${name}.* TO root@'%'; FLUSH PRIVILEGES;\"",
+        require => Service["mysql"],
     }
 }
 
@@ -176,3 +205,7 @@ include apache
 include groups
 include composer
 include symfony
+
+# If you want the mysql package and server, uncomment the following line
+#  then run "vagrant provision"
+#include mysql
