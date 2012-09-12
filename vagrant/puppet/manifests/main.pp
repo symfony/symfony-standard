@@ -15,6 +15,7 @@ include symfony
 
 # If you want the mysql package and server, uncomment the following line
 #  then run "vagrant provision"
+# The database is named `symfony`, the user is `symfony` and the password `Shub9aiJ`
 
 #include mysql
 

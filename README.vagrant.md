@@ -34,3 +34,5 @@ If you want to use Mysql, open the file `vagrant/puppet/manifests/main.pp` and u
 include mysql
 ````
 
+The database is named `symfony`, the user is `symfony` and the password `Shub9aiJ`
+
