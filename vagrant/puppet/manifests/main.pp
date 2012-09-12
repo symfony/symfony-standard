@@ -1,13 +1,13 @@
 class apt_update {
     exec { "aptGetUpdate":
-        command => "sudo apt-get update",
+        command => "apt-get update",
         path => ["/bin", "/usr/bin"]
     }
 }
 
 class apache {
     package { "apache2-mpm-prefork":
-        ensure => present,
+        ensure => latest,
         require => Exec["aptGetUpdate"]
     }
 
@@ -52,25 +52,15 @@ class php5 {
         require => Exec["aptGetUpdate"],
     }
 
-    package { "php5-xdebug":
+    package { ["php5-xdebug", "php5-intl", "php5-sqlite"]:
         ensure => latest,
         require => Package["libapache2-mod-php5"],
         notify => Service["apache2"]
     }
 
-    package { "php5-intl":
-        ensure => latest,
-        require => Package["libapache2-mod-php5"]
-    }
-
     package { "php5-suhosin":
         ensure => purged,
         notify => Service["apache2"]
-    }
-
-    package { "php5-sqlite":
-        ensure => latest,
-        require => Package["libapache2-mod-php5"]
     }
 
     file { "php-timezone.ini":
@@ -115,13 +105,10 @@ class php54dotdeb {
         notify => Service["apache2"],
     }
 
-    package { "phpapi-20090626":
+    package { ["phpapi-20090626", "php-apc"]:
         ensure => purged,
     }
 
-    package { "php-apc":
-        ensure => purged,
-    }
 }
 
 class php53debian {
@@ -167,14 +154,10 @@ class groups {
 }
 
 class otherstuff {
-     package { "git":
+     package { ["git", "curl", "nfs-common"]:
         ensure => latest,
     }
-     package { "curl":
-        ensure => present,
     }
-    package {"nfs-common":
-        ensure => present,
     }
 }
 
