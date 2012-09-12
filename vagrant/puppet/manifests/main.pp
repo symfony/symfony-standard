@@ -1,3 +1,24 @@
+include apt_update
+include php5
+
+# If you want PHP 5.4 uncomment the following line, and comment out the php53debian line
+#  then run "vagrant provision" and you should have php 5.4
+
+#include php54dotdeb
+include php53debian
+
+include otherstuff
+include apache
+include groups
+include composer
+include symfony
+
+# If you want the mysql package and server, uncomment the following line
+#  then run "vagrant provision"
+
+#include mysql
+
+
 class apt_update {
     exec { "aptGetUpdate":
         command => "apt-get update",
@@ -190,22 +211,3 @@ define mysqldb( $user, $password ) {
     }
 }
 
-
-
-include apt_update
-include php5
-# If you want PHP 5.4 uncomment the following line, and comment out the php53debian line
-#  then run "vagrant provision" and you should have php 5.4
-
-#include php54dotdeb
-include php53debian
-
-include otherstuff
-include apache
-include groups
-include composer
-include symfony
-
-# If you want the mysql package and server, uncomment the following line
-#  then run "vagrant provision"
-#include mysql
