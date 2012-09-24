@@ -17,7 +17,8 @@
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*"
+        "jms/di-extra-bundle": "1.1.*",
+        "ericclemmons/vagrant-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
