@@ -275,12 +275,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/ericclemmons/ECVagrantBundle.git",
-                "reference": "bf24d39c310ab027a46704468ec7bb7e887fef41"
+                "reference": "f8089d5a02ad0a33e7064f9974fb0e7629abb676"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ericclemmons/ECVagrantBundle/zipball/bf24d39c310ab027a46704468ec7bb7e887fef41",
-                "reference": "bf24d39c310ab027a46704468ec7bb7e887fef41",
+                "url": "https://github.com/ericclemmons/ECVagrantBundle/zipball/f8089d5a02ad0a33e7064f9974fb0e7629abb676",
+                "reference": "f8089d5a02ad0a33e7064f9974fb0e7629abb676",
                 "shasum": ""
             },
             "require": {
@@ -288,7 +288,7 @@
                 "symfony/framework-bundle": "2.1.*",
                 "symfony/console": "2.1.*"
             },
-            "time": "1348501067",
+            "time": "1348508906",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -332,7 +332,7 @@
                 "symfony/framework-bundle": "2.*",
                 "jms/cg": "1.0.0"
             },
-            "time": "2012-01-02 17:50:26",
+            "time": "2012-01-02 14:50:26",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -374,7 +374,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 17:40:52",
+            "time": "2012-01-02 14:40:52",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -476,7 +476,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 18:32:49",
+            "time": "2012-01-02 15:32:49",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
