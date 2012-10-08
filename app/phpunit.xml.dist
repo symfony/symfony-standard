@@ -11,7 +11,7 @@
     processIsolation            = "false"
     stopOnFailure               = "false"
     syntaxCheck                 = "false"
-    bootstrap                   = "bootstrap.php.cache" >
+    bootstrap                   = "tests.bootstrap.php" >
 
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -23,6 +23,12 @@
     <!--
     <php>
         <server name="KERNEL_DIR" value="/path/to/your/app/" />
+    </php>
+    -->
+
+    <!--
+    <php>
+        <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
     </php>
     -->
 
