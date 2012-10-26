@@ -51,22 +51,8 @@ EOF
                 $confirm = false;
         }
 
-        // Get the Finder component
-        $finder = new Finder();
-
         // Get the path to our Vendor/Bundle directory
         $path = realpath(__DIR__ . '/../../../');
-
-        $results = array();
-
-        // Find all the files and directories in that path
-        $finder->in($path);
-        foreach ($finder as $result) {
-            $results[] = $result->getRealpath();
-        }
-
-        // We want to remove the files in a directory before removing it
-        $results = array_reverse($results);
 
         if ($confirm) {
             $message = 'Removing: ';
@@ -74,13 +60,13 @@ EOF
             $message = 'Dry-run: ';
         }
 
-        $output->writeln($message . "Removing AcmeDemoBundle directory");
+        $output->writeln(sprintf("%s Removing AcmeDemoBundle directory (%s)", $message, $path));
 
         if ($confirm) {
             $fs = new Filesystem();
 
             try {
-                $fs->remove($results);
+                $fs->remove($path);
             } catch (IOException $e) {
                 $output->writeln("<error>An error occured while removing the AcmeDemoBundle directory</error>");
             }
