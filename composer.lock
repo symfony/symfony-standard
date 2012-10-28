@@ -1,5 +1,5 @@
 {
-    "hash": "871ca732d39c832f0b78012cc83cec2e",
+    "hash": "28ae6886c35cc99edc92ddab388ecf18",
     "packages": [
         {
             "name": "doctrine/common",
@@ -18,7 +18,6 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1348120518",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -67,7 +66,8 @@
                 "eventmanager",
                 "annotations",
                 "persistence"
-            ]
+            ],
+            "time": "1348120518"
         },
         {
             "name": "doctrine/dbal",
@@ -87,7 +87,6 @@
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "1348120597",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -129,7 +128,8 @@
                 "persistence",
                 "dbal",
                 "queryobject"
-            ]
+            ],
+            "time": "1348120597"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -160,7 +160,6 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "1347289964",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -197,7 +196,8 @@
                 "orm",
                 "persistence",
                 "dbal"
-            ]
+            ],
+            "time": "1347289964"
         },
         {
             "name": "doctrine/orm",
@@ -222,7 +222,6 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "1348121015",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -266,6 +265,52 @@
             "keywords": [
                 "database",
                 "orm"
+            ],
+            "time": "1348121015"
+        },
+        {
+            "name": "ericclemmons/vagrant-bundle",
+            "version": "dev-master",
+            "target-dir": "EC/Bundle/VagrantBundle",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/ericclemmons/ECVagrantBundle.git",
+                "reference": "f8089d5a02ad0a33e7064f9974fb0e7629abb676"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ericclemmons/ECVagrantBundle/zipball/f8089d5a02ad0a33e7064f9974fb0e7629abb676",
+                "reference": "f8089d5a02ad0a33e7064f9974fb0e7629abb676",
+                "shasum": ""
+            },
+            "require": {
+                "sensio/generator-bundle": "2.1.*",
+                "symfony/framework-bundle": "2.1.*",
+                "symfony/console": "2.1.*"
+            },
+            "time": "1348508906",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "EC\\Bundle\\VagrantBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Clemmons",
+                    "email": "eric@smarterspam.com"
+                }
+            ],
+            "description": "Symfony2 bundle to generate a working Vagrant environment",
+            "homepage": "https://github.com/ericclemmons/ECVagrantBundle",
+            "keywords": [
+                "generator",
+                "vagrant",
+                "generate"
             ]
         },
         {
@@ -287,7 +332,7 @@
                 "symfony/framework-bundle": "2.*",
                 "jms/cg": "1.0.0"
             },
-            "time": "2012-01-02 20:50:26",
+            "time": "2012-01-02 14:50:26",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -329,7 +374,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 20:40:52",
+            "time": "2012-01-02 14:40:52",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -388,7 +433,6 @@
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/orm": "*"
             },
-            "time": "1347872946",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -412,7 +456,8 @@
             "keywords": [
                 "dependency injection",
                 "annotations"
-            ]
+            ],
+            "time": "1347872946"
         },
         {
             "name": "jms/metadata",
@@ -431,7 +476,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 21:32:49",
+            "time": "2012-01-02 15:32:49",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -494,7 +539,6 @@
                 "symfony/form": "*",
                 "symfony/validator": "*"
             },
-            "time": "1346947943",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -521,7 +565,8 @@
                 "security",
                 "secure",
                 "expression"
-            ]
+            ],
+            "time": "1346947943"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -555,7 +600,6 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "1347622188",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -587,7 +631,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "1347622188"
         },
         {
             "name": "monolog/monolog",
@@ -614,7 +659,6 @@
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server"
             },
-            "time": "1347983448",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -643,7 +687,8 @@
             "keywords": [
                 "log",
                 "logging"
-            ]
+            ],
+            "time": "1347983448"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -663,7 +708,6 @@
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "1347340208",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -689,7 +733,8 @@
             "keywords": [
                 "distribution",
                 "configuration"
-            ]
+            ],
+            "time": "1347340208"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -710,7 +755,6 @@
                 "symfony/framework-bundle": "2.1.*",
                 "doctrine/common": ">=2.1,<2.4-dev"
             },
-            "time": "1348064274",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -736,7 +780,8 @@
             "keywords": [
                 "annotations",
                 "controllers"
-            ]
+            ],
+            "time": "1348064274"
         },
         {
             "name": "sensio/generator-bundle",
@@ -762,7 +807,6 @@
                 "doctrine/orm": ">=2.1,<2.4-dev",
                 "twig/twig": ">=1.8,<2.0-dev"
             },
-            "time": "1348030981",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -784,7 +828,8 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "This bundle generates code for you"
+            "description": "This bundle generates code for you",
+            "time": "1348030981"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -867,7 +912,6 @@
             "suggest": {
                 "symfony/twig-bundle": "2.1.*"
             },
-            "time": "1347626244",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -896,7 +940,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "1347626244"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -924,7 +969,6 @@
                 "symfony/yaml": "2.1.*",
                 "symfony/config": "2.1.*"
             },
-            "time": "1347983520",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -951,7 +995,8 @@
                 }
             ],
             "description": "Symfony MonologBundle",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "1347983520"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -979,7 +1024,6 @@
                 "symfony/config": "2.1.*",
                 "symfony/yaml": "2.1.*"
             },
-            "time": "1346243146",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1006,7 +1050,8 @@
                 }
             ],
             "description": "Symfony SwiftmailerBundle",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "1346243146"
         },
         {
             "name": "symfony/symfony",
@@ -1068,7 +1113,6 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "dev-master"
             },
-            "time": "1348125180",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1099,7 +1143,8 @@
             "homepage": "http://symfony.com",
             "keywords": [
                 "framework"
-            ]
+            ],
+            "time": "1348125180"
         },
         {
             "name": "twig/extensions",
@@ -1118,7 +1163,6 @@
             "require": {
                 "twig/twig": "1.*"
             },
-            "time": "1346770278",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1146,7 +1190,8 @@
                 "debug",
                 "i18n",
                 "text"
-            ]
+            ],
+            "time": "1346770278"
         },
         {
             "name": "twig/twig",
@@ -1165,7 +1210,6 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1347961095",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1195,17 +1239,16 @@
             "homepage": "http://twig.sensiolabs.org",
             "keywords": [
                 "templating"
-            ]
+            ],
+            "time": "1347961095"
         }
     ],
-    "packages-dev": [
-
-    ],
+    "packages-dev": null,
     "aliases": [
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "ericclemmons/vagrant-bundle": 20
+    }
 }
