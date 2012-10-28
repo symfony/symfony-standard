@@ -7,7 +7,10 @@
 
 set_time_limit(0);
 
-require_once __DIR__.'/bootstrap.php.cache';
+// Before enabling this also add the following line to your composer.json post install/update cmd section:
+// "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+//require_once __DIR__.'/bootstrap.php.cache';
+require_once __DIR__.'/autoload.php';
 require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
