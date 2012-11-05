@@ -52,7 +52,7 @@ EOF
         }
 
         // Get the path to our Vendor/Bundle directory
-        $path = realpath(__DIR__ . '/../../../');
+        $path = realpath(__DIR__ . '/../../');
 
         if ($confirm) {
             $message = 'Removing: ';
@@ -125,7 +125,7 @@ EOF
 
         // Remove the AcmeDemoBundle
         $kernelContents = preg_replace(
-            '/\s+\\\$bundles\[\]\s+=\s+new Acme\\\\DemoBundle\\\\AcmeDemoBundle\(\);/m',
+            '/\s+\\$bundles\[\]\s+=\s+new Acme\\\\DemoBundle\\\\AcmeDemoBundle\(\);/m',
             '',
             $kernelContents
         );
