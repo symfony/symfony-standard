@@ -140,7 +140,8 @@ class PhpIniRequirement extends Requirement
             $fulfilled = call_user_func($evaluation, $cfgValue);
         } else {
             if (null === $testMessage) {
-                $testMessage = sprintf('%s %s be %s in php.ini',
+                $testMessage = sprintf(
+                    '%s %s be %s in php.ini',
                     $cfgName,
                     $optional ? 'should' : 'must',
                     $evaluation ? 'enabled' : 'disabled'
@@ -148,7 +149,8 @@ class PhpIniRequirement extends Requirement
             }
 
             if (null === $helpHtml) {
-                $helpHtml = sprintf('Set <strong>%s</strong> to <strong>%s</strong> in php.ini<a href="#phpini">*</a>.',
+                $helpHtml = sprintf(
+                    'Set <strong>%s</strong> to <strong>%s</strong> in php.ini<a href="#phpini">*</a>.',
                     $cfgName,
                     $evaluation ? 'on' : 'off'
                 );
@@ -390,9 +392,12 @@ class SymfonyRequirements extends RequirementCollection
         $this->addRequirement(
             version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>='),
             sprintf('PHP version must be at least %s (%s installed)', self::REQUIRED_PHP_VERSION, $installedPhpVersion),
-            sprintf('You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
+            sprintf(
+                'You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
                 Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
-                $installedPhpVersion, self::REQUIRED_PHP_VERSION),
+                $installedPhpVersion,
+                self::REQUIRED_PHP_VERSION
+            ),
             sprintf('Install PHP %s or newer (installed version is %s)', self::REQUIRED_PHP_VERSION, $installedPhpVersion)
         );
 
@@ -406,7 +411,7 @@ class SymfonyRequirements extends RequirementCollection
             is_dir(__DIR__.'/../vendor/composer'),
             'Vendor libraries must be installed',
             'Vendor libraries are missing. Install composer following instructions from <a href="http://getcomposer.org/">http://getcomposer.org/</a>. ' .
-                'Then run "<strong>php composer.phar install</strong>" to install them.'
+            'Then run "<strong>php composer.phar install</strong>" to install them.'
         );
 
         $baseDir = basename(__DIR__);
@@ -424,7 +429,9 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         $this->addPhpIniRequirement(
-            'date.timezone', true, false,
+            'date.timezone',
+            true,
+            false,
             'date.timezone setting must be set',
             'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Paris).'
         );
@@ -432,7 +439,10 @@ class SymfonyRequirements extends RequirementCollection
         if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
             $this->addRequirement(
                 (in_array(date_default_timezone_get(), DateTimeZone::listIdentifiers())),
-                sprintf('Configured default timezone "%s" must be supported by your installation of PHP', date_default_timezone_get()),
+                sprintf(
+                    'Configured default timezone "%s" must be supported by your installation of PHP',
+                    date_default_timezone_get()
+                ),
                 'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
             );
         }
@@ -488,20 +498,19 @@ class SymfonyRequirements extends RequirementCollection
         }
 
         if (extension_loaded('xdebug')) {
-            $this->addPhpIniRequirement(
-                'xdebug.show_exception_trace', false, true
-            );
+            $this->addPhpIniRequirement('xdebug.show_exception_trace', false, true);
 
-            $this->addPhpIniRequirement(
-                'xdebug.scream', false, true
-            );
+            $this->addPhpIniRequirement('xdebug.scream', false, true);
         }
 
         $pcreVersion = defined('PCRE_VERSION') ? (float) PCRE_VERSION : null;
 
         $this->addRequirement(
             null !== $pcreVersion && $pcreVersion > 8.0,
-            sprintf('PCRE extension must be available and at least 8.0 (%s installed)', $pcreVersion ? $pcreVersion : 'not'),
+            sprintf(
+                'PCRE extension must be available and at least 8.0 (%s installed)',
+                $pcreVersion ? $pcreVersion : 'not'
+            ),
             'Upgrade your <strong>PCRE</strong> extension (8.0+).'
         );
 
@@ -603,8 +612,7 @@ class SymfonyRequirements extends RequirementCollection
             ||
             function_exists('eaccelerator_put') && ini_get('eaccelerator.enable')
             ||
-            function_exists('xcache_set')
-        ;
+            function_exists('xcache_set');
 
         $this->addRecommendation(
             $accelerator,
