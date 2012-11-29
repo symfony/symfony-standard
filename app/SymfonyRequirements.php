@@ -439,10 +439,7 @@ class SymfonyRequirements extends RequirementCollection
         if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
             $this->addRequirement(
                 (in_array(date_default_timezone_get(), DateTimeZone::listIdentifiers())),
-                sprintf(
-                    'Configured default timezone "%s" must be supported by your installation of PHP',
-                    date_default_timezone_get()
-                ),
+                sprintf('Configured default timezone "%s" must be supported by your installation of PHP', date_default_timezone_get()),
                 'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
             );
         }
@@ -507,10 +504,7 @@ class SymfonyRequirements extends RequirementCollection
 
         $this->addRequirement(
             null !== $pcreVersion && $pcreVersion > 8.0,
-            sprintf(
-                'PCRE extension must be available and at least 8.0 (%s installed)',
-                $pcreVersion ? $pcreVersion : 'not'
-            ),
+            sprintf('PCRE extension must be available and at least 8.0 (%s installed)', $pcreVersion ? $pcreVersion : 'not'),
             'Upgrade your <strong>PCRE</strong> extension (8.0+).'
         );
 
