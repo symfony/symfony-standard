@@ -2,7 +2,6 @@
 
 namespace Acme\DemoBundle\Twig\Extension;
 
-use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
 use CG\Core\ClassUtils;
 
 class DemoExtension extends \Twig_Extension
