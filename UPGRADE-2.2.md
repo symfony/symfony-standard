@@ -14,6 +14,19 @@ UPGRADE FROM 2.1 to 2.2
        fragments: { path: /_proxy }
    ```
 
+ * You might want to add this to your [config_prod.yml](https://github.com/symfony/symfony-standard/blob/2.2/app/config/config_prod.yml)
+   for faster URL generation in production environment:
+
+   ```
+   # In production environment you should know that the parameters for URL generation
+   # always pass the requirements. Otherwise it would break your link (or even site with
+   # strict_requirements = true). So we can disable the requirements check completely for
+   # enhanced performance with strict_requirements = null.
+   framework:
+       router:
+           strict_requirements: null
+   ```
+
 Functional Tests
 ----------------
 
