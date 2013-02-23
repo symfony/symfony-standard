@@ -26,8 +26,8 @@ class RemoveDemoBundleCommand extends ContainerAwareCommand
         $route    = Yaml::parse(file_get_contents($rootDir.'/config/routing_dev.yml'));
         $security = Yaml::parse(file_get_contents($rootDir.'/config/security.yml'));
 
-        unset($route['_demo'], $route['_demo_secured'], $route['_welcome']);
-        unset($security['security']['firewalls']['login'], $security['security']['firewalls']['secured_area']);
+        unset($route['_demo'], $route['_demo_secured'], $route['_welcome'],
+              $security['security']['firewalls']['login'], $security['security']['firewalls']['secured_area']);
 
         file_put_contents($rootDir.'/config/routing_dev.yml', Yaml::dump($route, 6));
         file_put_contents($rootDir.'/config/security.yml', Yaml::dump($security, 6));
@@ -37,7 +37,7 @@ class RemoveDemoBundleCommand extends ContainerAwareCommand
         file_put_contents($rootDir.'/AppKernel.php', $appKernel);
 
         $fs = new Filesystem();
-        $fs->remove([$rootDir.'/../src/Acme/']);
+        $fs->remove(array($rootDir.'/../src/Acme/'));
 
         $output->writeln("<info>Acme Bundle removed successfully</info>");
     }
