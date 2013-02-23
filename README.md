@@ -102,6 +102,10 @@ playing with it, you can remove it by following these steps:
     `security.firewalls.secured_area` entries in the `security.yml` file or
     tweak the security configuration to fit your needs.
 
+Or use the following command :
+    ``` php app/console acme:bundle:remove ```
+
+
 What's inside?
 ---------------
 
