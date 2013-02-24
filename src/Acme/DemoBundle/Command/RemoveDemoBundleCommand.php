@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Yaml;
 
 class RemoveDemoBundleCommand extends ContainerAwareCommand
 {
@@ -23,22 +23,79 @@ class RemoveDemoBundleCommand extends ContainerAwareCommand
     {
         $rootDir = $this->getContainer()->get('kernel')->getRootDir();
 
-        $route    = Yaml::parse(file_get_contents($rootDir.'/config/routing_dev.yml'));
-        $security = Yaml::parse(file_get_contents($rootDir.'/config/security.yml'));
+        file_put_contents($rootDir.'/config/security.yml', $this->getBaseSecurityConfig());
+        file_put_contents($rootDir.'/config/routing_dev.yml', $this->getBaseRoutingDevConfig());
 
-        unset($route['_demo'], $route['_demo_secured'], $route['_welcome'],
-              $security['security']['firewalls']['login'], $security['security']['firewalls']['secured_area']);
-
-        file_put_contents($rootDir.'/config/routing_dev.yml', Yaml::dump($route, 6));
-        file_put_contents($rootDir.'/config/security.yml', Yaml::dump($security, 6));
-
-        $appKernel = file_get_contents($rootDir.'/AppKernel.php');
-        $appKernel = str_replace('$bundles[] = new Acme\DemoBundle\AcmeDemoBundle();', '', $appKernel);
-        file_put_contents($rootDir.'/AppKernel.php', $appKernel);
+        $appKernel = $rootDir.'/AppKernel.php';
+        file_put_contents($appKernel, str_replace('$bundles[] = new Acme\DemoBundle\AcmeDemoBundle();', '', file_get_contents($appKernel)));
 
         $fs = new Filesystem();
-        $fs->remove(array($rootDir.'/../src/Acme/'));
+        try {
+            $fs->remove(array($rootDir.'/../src/Acme/'));
+        } catch (IOException $e) {
+            $output->writeln("<error>An error occurred while removing the AcmeDemoBundle directory</error>");
+            return;
+        }
 
         $output->writeln("<info>Acme Bundle removed successfully</info>");
+    }
+
+    protected function getBaseSecurityConfig()
+    {
+        return
+<<<EOT
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern:  ^/$
+            anonymous: ~
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+EOT;
+    }
+
+    protected function getBaseRoutingDevConfig()
+    {
+        return
+<<<EOT
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+
+_configurator:
+    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
+    prefix:   /_configurator
+
+_main:
+    resource: routing.yml
+EOT;
     }
 }
