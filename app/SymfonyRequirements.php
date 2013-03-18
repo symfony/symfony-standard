@@ -403,7 +403,7 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
-            is_dir(__DIR__.'/../vendor/composer'),
+            is_dir(__DIR__ . '/../vendor/composer'),
             'Vendor libraries must be installed',
             'Vendor libraries are missing. Install composer following instructions from <a href="http://getcomposer.org/">http://getcomposer.org/</a>. ' .
                 'Then run "<strong>php composer.phar install</strong>" to install them.'
@@ -412,13 +412,13 @@ class SymfonyRequirements extends RequirementCollection
         $baseDir = basename(__DIR__);
 
         $this->addRequirement(
-            is_writable(__DIR__.'/cache'),
+            is_writable(__DIR__ . '/cache'),
             "$baseDir/cache/ directory must be writable",
             "Change the permissions of the \"<strong>$baseDir/cache/</strong>\" directory so that the web server can write into it."
         );
 
         $this->addRequirement(
-            is_writable(__DIR__.'/logs'),
+            is_writable(__DIR__ . '/logs'),
             "$baseDir/logs/ directory must be writable",
             "Change the permissions of the \"<strong>$baseDir/logs/</strong>\" directory so that the web server can write into it."
         );
@@ -516,7 +516,7 @@ class SymfonyRequirements extends RequirementCollection
         /* optional recommendations follow */
 
         $this->addRecommendation(
-            file_get_contents(__FILE__) === file_get_contents(__DIR__.'/../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/skeleton/app/SymfonyRequirements.php'),
+            file_get_contents(__FILE__) === file_get_contents(__DIR__ . '/../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/skeleton/app/SymfonyRequirements.php'),
             'Requirements file should be up-to-date',
             'Your requirements file is outdated. Run composer install and re-check your configuration.'
         );

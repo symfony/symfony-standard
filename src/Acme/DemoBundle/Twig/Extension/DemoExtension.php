@@ -62,7 +62,7 @@ EOF;
 
         $code = file($r->getFilename());
 
-        return '    '.$m->getDocComment()."\n".implode('', array_slice($code, $m->getStartline() - 1, $m->getEndLine() - $m->getStartline() + 1));
+        return '    ' . $m->getDocComment() . "\n" . implode('', array_slice($code, $m->getStartline() - 1, $m->getEndLine() - $m->getStartline() + 1));
     }
 
     protected function getTemplateCode($template)
