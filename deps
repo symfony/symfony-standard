@@ -1,6 +1,6 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=origin/2.0
+    version=v2.0.23
 
 [twig]
     git=http://github.com/fabpot/Twig.git
@@ -32,7 +32,7 @@
 
 [twig-extensions]
     git=http://github.com/fabpot/Twig-extensions.git
-    version=v1.0.0-alpha
+    version=v1.0.0
 
 [metadata]
     git=http://github.com/schmittjoh/metadata.git
@@ -41,7 +41,7 @@
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
-    version=origin/2.0
+    version=v2.0.23
 
 [JMSSecurityExtraBundle]
     git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
@@ -51,12 +51,12 @@
 [SensioDistributionBundle]
     git=http://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
-    version=origin/2.0
+    version=v2.0.23
 
 [SensioGeneratorBundle]
     git=http://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Sensio/Bundle/GeneratorBundle
-    version=origin/2.0
+    version=v2.0.23
 
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git

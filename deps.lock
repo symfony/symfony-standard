@@ -1,4 +1,4 @@
-symfony v2.0.22
+symfony v2.0.23
 twig v1.10.3
 monolog 1.2.1
 doctrine-common 2.1.4
@@ -6,7 +6,7 @@ doctrine-dbal 2.1.7
 doctrine 2.1.7
 swiftmailer v4.2.2
 assetic v1.0.4
-twig-extensions v1.0.0-alpha
+twig-extensions v1.0.0
 metadata 1.0.0
 SensioFrameworkExtraBundle v2.0.22
 JMSSecurityExtraBundle e752f888c51425f71382c056961f10f2be642102
