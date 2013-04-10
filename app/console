@@ -19,4 +19,6 @@ $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('-
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
+// uncomment this to show traces for caught exceptions before services are available.
+//$application->setCatchExceptions(false);
 $application->run($input);
