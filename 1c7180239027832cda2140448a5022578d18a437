@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by bamarni at 2013-04-07T17:25:36Z
+
+what about the console?
+
+---------------------------------------------------------------------------
+
+by stof at 2013-04-07T17:52:25Z
+
+@bamarni it was not enabled in the CLI
+
+---------------------------------------------------------------------------
+
+by bamarni at 2013-04-07T18:06:21Z
+
+@stof : are you sure? it looks enabled to me until this change, the kernel was auto-enabling this in debug mode, and the console uses the kernel.
+
+---------------------------------------------------------------------------
+
+by stof at 2013-04-07T18:27:54Z
+
+ah indeed, the ErrorHandler was registered. It is only the ExceptionHandler which was in the check of the sapi.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2013-04-11T12:46:46Z
+
+@bamarni The console has been fixed now.
