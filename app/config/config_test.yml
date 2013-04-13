@@ -7,6 +7,8 @@ framework:
         storage_id: session.storage.mock_file
     profiler:
         enabled: false
+    router:
+        strict_requirements: "%kernel.debug%"
 
 web_profiler:
     toolbar: false
