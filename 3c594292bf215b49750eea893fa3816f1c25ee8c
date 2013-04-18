@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-13T21:25:30Z
+
+@fabpot :+1:  ready
+also please cherry-pick these changes to 2.2 :) please
+
+:baby:
+
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-13T22:11:19Z
+
+@WouterJ  actually no, it is your fault :) :-1:
+
+it shouldn't be `~` as the default is `true`, and we want it to null
+
+https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/Configuration.php#L171
+
+:rage3:
+
+---------------------------------------------------------------------------
+
+by stof at 2013-04-14T02:26:24Z
+
+@cordoval ``~``does not mean "use the default value``. ``~`` in YAML means ``null``.
+
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-14T23:59:45Z
+
+oh forgot, thanks for reminding me @stof , will do the change
+
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-15T09:27:15Z
+
+@stof @fabpot :+1:
+
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-18T03:15:52Z
+
+all good now @Tobion :baby:
