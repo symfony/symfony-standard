@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------
+
+by RomainTweaks at 2013-04-17T07:35:39Z
+
+Hi Tobion. Thank you for your solution.
+
+It works if i pull an Url like this : "localhost:8080/path_of_my_project/app.php/demo/hello/blabla". I'm redirect on "localhost:8080/path_of_my_project/demo/hello/blabla"
+
+But it doesn't work if i test the URL whit just app.php : "loclahost:8080/path_of_my_project/app.php/"
+I have an error 404 : No route found for "GET /"...
+
+---------------------------------------------------------------------------
+
+by Tobion at 2013-04-17T07:54:57Z
+
+So when accessing `localhost:8080/path_of_my_project/app.php/` you are not redirected to `localhost:8080/path_of_my_project/`? It works for me. You sure you don't hit a cache or something?
+
+---------------------------------------------------------------------------
+
+by RomainTweaks at 2013-04-17T08:00:02Z
+
+When i use the Url : localhost:8080/path_of_my_project/app.php/ i'm redirect to localhost:8080/path_of_my_project/
+but i have a 404 error.
+But i think the Url for app.php has a default page. No?
+
+---------------------------------------------------------------------------
+
+by stof at 2013-04-17T08:03:16Z
+
+@RomainTweaks There is no default page in Symfony.
+
+If you still have the demo bundle, there is indeed a route for ``/`` but the demo bundle is not registered in the prod environment
+
+---------------------------------------------------------------------------
+
+by RomainTweaks at 2013-04-17T08:13:56Z
+
+Thanks a lot.
+This is true i forgot to place a routing in routing.yml for the default controller WelcomeController of Acme.
+
+Thank you!
+
+---------------------------------------------------------------------------
+
+by calamityjane at 2013-04-17T10:42:42Z
+
+Hi everybody and thank you for this discussion.
+Many thanks to fredpeaks and Tobion. I've just tested the new .htaccess file and I can confirm that redirecting is OK on my environment (Windows 7, Wamp 2.2, Apache 2.4.2 without vhost).
+Good work.
