@@ -1,0 +1,92 @@
+---------------------------------------------------------------------------
+
+by lsmith77 at 2013-04-26T08:26:03Z
+
++1
+
+---------------------------------------------------------------------------
+
+by Taluu at 2013-04-26T08:28:50Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by peterrehm at 2013-04-26T08:36:08Z
+
+:thumbsup: - But is there any comment from @schmittjoh?
+
+---------------------------------------------------------------------------
+
+by jrobeson at 2013-04-26T09:12:11Z
+
+adding back the bundles is easy, but shouldn't a note be left to mention why this was done? and to point people where to the bundles? Something like this:
+
+```
+NOTE: The Standard Edition previously contained bundles that were licensed under the Apache 2.0 license.
+LIST BUNDLES AND LINKS HERE
+ These bundles were removed due to incompatibility with the popular (L)GPL 2 licenses. If you do not require
+any libraries that are licensed under (L)GPL 2 then you are free to install them.
+```
+
+---------------------------------------------------------------------------
+
+by guillaumepotier at 2013-04-26T09:17:08Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by jrobeson at 2013-04-26T10:01:37Z
+
+If @jdorn chooses lgpl 3  for sql-formatter then we run into another gpl 2 incompatibility with the profilerbundle. If he chooses lgpl 2 it will be incompatible with swiftmailer
+
+---------------------------------------------------------------------------
+
+by fabpot at 2013-04-26T10:09:27Z
+
+What's the problem with the ProfilerBundle?
+
+---------------------------------------------------------------------------
+
+by jdorn at 2013-04-26T13:43:42Z
+
+I don't mind changing SqlFormatter to MIT.  Will that fix any issues?  I knew absolutely nothing about licenses when I first picked one to go with.
+
+Do I need to include a LICENSE.txt file or something in the project in addition to stating it in composer.json?
+
+---------------------------------------------------------------------------
+
+by Crell at 2013-04-26T15:50:51Z
+
+Generally it's wise to include a license.txt file as a lowest common denominator.
+
+I'm out of town at the moment but I'd be happy to chat with you next week in irc if you want. I used to be the Drupal Association director  of legal affairs so I have some experience groking and explaining license compatibility and documentation.
+
+Thank you @fabpot !
+
+---------------------------------------------------------------------------
+
+by jrobeson at 2013-04-26T18:36:24Z
+
+@jdorn: changing it to MIT would simplify things for many people.
+
+---------------------------------------------------------------------------
+
+by stof at 2013-04-27T11:36:42Z
+
+FYI, it has been changed
+
+@jdorn could you tag your release ?
+
+---------------------------------------------------------------------------
+
+by jdorn at 2013-04-27T15:03:21Z
+
+I just tagged it v1.2.9
+
+---------------------------------------------------------------------------
+
+by fabpot at 2013-04-30T17:48:33Z
+
+ok, we now have only MIT/BSD license deps for Symfony SE.
