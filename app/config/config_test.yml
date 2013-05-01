@@ -2,11 +2,10 @@ imports:
     - { resource: config_dev.yml }
 
 framework:
-    test: ~
-    session:
-        storage_id: session.storage.mock_file
-    profiler:
-        enabled: false
+    test:            ~
+    session:         { storage_id: session.storage.mock_file }
+    profiler:        { enabled: false }
+    csrf_protection: { enabled: false }
 
 web_profiler:
     toolbar: false
