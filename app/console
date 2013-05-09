@@ -24,4 +24,6 @@ if ($debug) {
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
+// uncomment this to show traces for caught exceptions before services are available.
+//$application->setCatchExceptions(false);
 $application->run($input);
