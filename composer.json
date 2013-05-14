@@ -20,6 +20,10 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0"
     },
+    "suggest": {
+        "jms/security-extra-bundle": "Enhances the Symfony2 Security Component with several new features.",
+        "jms/di-extra-bundle": "Provides Advanced Dependency Injection Features for Symfony2."
+    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
