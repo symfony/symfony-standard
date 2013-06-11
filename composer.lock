@@ -587,12 +587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "v1.1.1"
+                "reference": "dfcbf3d19bafa0f00549bc10dba0ca19c8b3185b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.1",
-                "reference": "v1.1.1",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/dfcbf3d19bafa0f00549bc10dba0ca19c8b3185b",
+                "reference": "dfcbf3d19bafa0f00549bc10dba0ca19c8b3185b",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-06-01 22:13:43"
+            "time": "2013-06-06 22:11:45"
         },
         {
             "name": "monolog/monolog",
@@ -710,17 +710,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v2.1.10",
+            "version": "v2.1.11",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sensio/SensioDistributionBundle.git",
-                "reference": "v2.1.10"
+                "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
+                "reference": "v2.1.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/v2.1.10",
-                "reference": "v2.1.10",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/v2.1.11",
+                "reference": "v2.1.11",
                 "shasum": ""
             },
             "require": {
@@ -756,17 +756,17 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v2.1.10",
+            "version": "v2.1.11",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sensio/SensioFrameworkExtraBundle.git",
-                "reference": "v2.1.10"
+                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+                "reference": "v2.1.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioFrameworkExtraBundle/zipball/v2.1.10",
-                "reference": "v2.1.10",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.1.11",
+                "reference": "v2.1.11",
                 "shasum": ""
             },
             "require": {
@@ -803,17 +803,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.1.10",
+            "version": "v2.1.11",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sensio/SensioGeneratorBundle.git",
-                "reference": "v2.1.10"
+                "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
+                "reference": "v2.1.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioGeneratorBundle/zipball/v2.1.10",
-                "reference": "v2.1.10",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/v2.1.11",
+                "reference": "v2.1.11",
                 "shasum": ""
             },
             "require": {
@@ -900,35 +900,35 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "target-dir": "Symfony/Bundle/AsseticBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle.git",
-                "reference": "v2.1.2"
+                "reference": "v2.1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/v2.1.2",
-                "reference": "v2.1.2",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/v2.1.3",
+                "reference": "v2.1.3",
                 "shasum": ""
             },
             "require": {
-                "kriswallsmith/assetic": "1.1.*",
+                "kriswallsmith/assetic": ">=1.1.0-alpha4,<1.2-dev",
                 "php": ">=5.3.0",
-                "symfony/framework-bundle": ">=2.1.0,<2.3-dev"
+                "symfony/framework-bundle": ">=2.1,<3.0"
             },
             "require-dev": {
-                "symfony/class-loader": ">=2.1.0,<2.3-dev",
-                "symfony/console": ">=2.1.0,<2.3-dev",
-                "symfony/css-selector": ">=2.1.0,<2.3-dev",
-                "symfony/dom-crawler": ">=2.1.0,<2.3-dev",
-                "symfony/form": ">=2.1.0,<2.3-dev",
-                "symfony/twig-bundle": ">=2.1.0,<2.3-dev",
-                "symfony/yaml": ">=2.1.0,<2.3-dev"
+                "symfony/class-loader": ">=2.1,<3.0",
+                "symfony/console": ">=2.1,<3.0",
+                "symfony/css-selector": ">=2.1,<3.0",
+                "symfony/dom-crawler": ">=2.1,<3.0",
+                "symfony/form": ">=2.1,<3.0",
+                "symfony/twig-bundle": ">=2.1,<3.0",
+                "symfony/yaml": ">=2.1,<3.0"
             },
             "suggest": {
-                "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
+                "symfony/twig-bundle": "~2.1"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -959,7 +959,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-02-23 22:29:21"
+            "time": "2013-03-25 20:16:21"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1169,16 +1169,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig-extensions.git",
-                "reference": "v1.0.0"
+                "reference": "4239a9b107c17547da91d76005c996f08e164ae8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/v1.0.0",
-                "reference": "v1.0.0",
+                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/4239a9b107c17547da91d76005c996f08e164ae8",
+                "reference": "4239a9b107c17547da91d76005c996f08e164ae8",
                 "shasum": ""
             },
             "require": {
-                "twig/twig": "1.*"
+                "twig/twig": ">=1.0,<2.0"
             },
             "type": "library",
             "extra": {
@@ -1208,20 +1208,20 @@
                 "i18n",
                 "text"
             ],
-            "time": "2013-02-28 14:21:30"
+            "time": "2013-06-07 09:36:35"
         },
         {
             "name": "twig/twig",
-            "version": "v1.13.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "v1.13.0"
+                "reference": "v1.13.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.0",
-                "reference": "v1.13.0",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.1",
+                "reference": "v1.13.1",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1257,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-05-10 15:12:43"
+            "time": "2013-06-06 06:06:01"
         }
     ],
     "packages-dev": [
