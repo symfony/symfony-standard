@@ -13,3 +13,9 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    environment: dev
+    umask_fix: false
+    http_cache: false
+    localhost_only_dev: true
+    apc_cache_id: false

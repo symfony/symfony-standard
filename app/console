@@ -14,8 +14,17 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
+$config_file = __DIR__ . '/cache/app_config.php';
+$environment = 'dev';
+if (file_exists($config_file)) {
+    require $config_file;
+    if (!empty($default_parameters['environment'])) {
+        $environment = $default_parameters['environment'];
+    }
+}
+
 $input = new ArgvInput();
-$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
+$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: $environment);
 $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
 
 if ($debug) {

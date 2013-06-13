@@ -1,7 +1,7 @@
 <?php
 
 $parameters = array(
-    'environment' => 'dev',
+    'environment' => 'test',
 );
 
 require __DIR__ . '/app.php';
