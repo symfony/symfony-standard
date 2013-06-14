@@ -31,6 +31,7 @@ $parameters         = Yaml::parse($parameters_file);
 $parameters         = $parameters['parameters'];
 $environment        = $parameters['environment'];
 $debug              = $environment != 'prod';
+$debug_str          = $debug ? 'true' : 'false';
 $localhost_only_dev = $parameters['environment'] != 'prod' && !empty($parameters['localhost_only_dev']);
 $apc_cache_id       = $parameters['environment'] == 'prod' && !empty($parameters['apc_cache_id']) ? $parameters['apc_cache_id'] : false;
 $http_cache         = $parameters['environment'] == 'prod' && !empty($parameters['http_cache']);
@@ -41,35 +42,50 @@ if (php_sapi_name() == 'cli') {
 
 $app_content = "<?php\n# This file was generated in " . __FILE__ . "\n";
 
-if ($localhost_only_dev) $app_content .= '
-    if (isset($_SERVER[\'HTTP_CLIENT_IP\'])
-        || isset($_SERVER[\'HTTP_X_FORWARDED_FOR\'])
-        || !in_array(@$_SERVER[\'REMOTE_ADDR\'], array(\'127.0.0.1\', \'fe80::1\', \'::1\'))
-    ) {
-        header(\'HTTP/1.0 403 Forbidden\');
-        exit(\'You are not allowed to access this file.\');
-    }'."\n";
+if ($localhost_only_dev) $app_content .= <<<PHP
 
-if ($debug) $app_content .= '
-    \Symfony\Component\Debug\Debug::enable();';
+    if (isset(\$_SERVER['HTTP_CLIENT_IP'])
+        || isset(\$_SERVER['HTTP_X_FORWARDED_FOR'])
+        || !in_array(@\$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1'))
+    ) {
+        header('HTTP/1.0 403 Forbidden');
+        exit('You are not allowed to access this file.');
+    }
+
+PHP;
+
+if ($debug) $app_content .= <<<PHP
+
+    \Symfony\Component\Debug\Debug::enable();
+
+PHP;
 
 // if $apc_cache_id is specified, use APC for autoloading to improve performance.
 // $apc_cache_id needs to be a unique prefix in order to prevent cache key conflicts with other applications also using APC.
-if ($apc_cache_id) $app_content .= '
+if ($apc_cache_id) $app_content .= <<<PHP
+
     use Symfony\Component\ClassLoader\ApcClassLoader;
 
-    $loader = new ApcClassLoader(\''.$apc_cache_id.'\', $loader);
-    $loader->register(true);';
+    \$loader = new ApcClassLoader('$apc_cache_id', \$loader);
+    \$loader->register(true);
+
+PHP;
 
 // Common code
-$app_content .= '
-    require_once __DIR__.\'/../AppKernel.php\';
-    $kernel = new AppKernel(\''.$environment.'\', '.($debug ? 'true' : 'false').');
-    $kernel->loadClassCache();';
+$app_content .= <<<PHP
 
-if ($http_cache) $app_content .= '
-    require_once __DIR__.\'/../AppCache.php\';
-    $kernel = new AppCache($kernel);';
+    require_once __DIR__ . '/../AppKernel.php';
+    \$kernel = new AppKernel('$environment', $debug_str);
+    \$kernel->loadClassCache();
+
+PHP;
+
+if ($http_cache) $app_content .= <<<PHP
+
+    require_once __DIR__ . '/../AppCache.php';
+    \$kernel = new AppCache(\$kernel);
+
+PHP;
 
 if (!is_dir(dirname($app_file)) && !mkdir(dirname($app_file), 0777, true)) {
     throw new RuntimeException("Unable to generate app/cache/app.php");
