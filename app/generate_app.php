@@ -35,6 +35,10 @@ $localhost_only_dev = $parameters['environment'] != 'prod' && !empty($parameters
 $apc_cache_id       = $parameters['environment'] == 'prod' && !empty($parameters['apc_cache_id']) ? $parameters['apc_cache_id'] : false;
 $http_cache         = $parameters['environment'] == 'prod' && !empty($parameters['http_cache']);
 
+if (php_sapi_name() == 'cli') {
+    echo "Generating app/cache/app.php for the {$parameters['environment']} environment\n";
+}
+
 $app_content = "<?php\n# This file was generated in " . __FILE__ . "\n";
 
 if ($localhost_only_dev) $app_content .= '
