@@ -1,10 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-// if you don't want to setup permissions the proper way, just uncomment the following PHP line
-// read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
-//umask(0000);
-
 set_time_limit(0);
 
 require_once __DIR__.'/bootstrap.php.cache';
@@ -14,12 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
-$config_file = __DIR__ . '/cache/app_config.php';
 $environment = 'dev';
+
+$config_file = __DIR__.'/config/app_loader.ini';
 if (file_exists($config_file)) {
-    require $config_file;
-    if (!empty($default_parameters['environment'])) {
-        $environment = $default_parameters['environment'];
+    $config = parse_ini_file($config_file);
+    if (!empty($config['environment'])) {
+        $environment = $config['environment'];
+    }
+    if (!empty($config['umask_fix'])) {
+        umask(0000);
     }
 }
 

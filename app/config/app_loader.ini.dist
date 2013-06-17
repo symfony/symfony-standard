@@ -1,0 +1,5 @@
+environment=prod
+umask_fix=false
+http_cache=false
+localhost_only=true
+apc_cache_id=false
