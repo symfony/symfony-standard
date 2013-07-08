@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by stof at 2013-07-03T13:03:58Z
+
+FirePHP should not break it as it uses a separate header for each log entry, so the header does not become too big. ChromePHP indeed makes the heade size grow as it uses a single header.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2013-07-03T13:05:46Z
+
+I think both handlers should __not__ be enabled by default because the feature should be opt-in and not opt-out.
+Even if FirePHP does not break header size.
+
+---------------------------------------------------------------------------
+
+by apfelbox at 2013-07-03T13:22:25Z
+
+See the referenced issue. Only ChromePHP breaks without tuning the configuration of nginx. But I'm fine disabling both.
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2013-07-06T07:46:00Z
+
++1 I got this issue so much time...
