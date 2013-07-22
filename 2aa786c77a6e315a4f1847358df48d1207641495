@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by fabpot at 2013-07-17T16:56:03Z
+
+I've no idea what the convention is, but I think it is `@var type`. So the correct fix would be to remove the `$loader` part.
+
+---------------------------------------------------------------------------
+
+by stof at 2013-07-17T16:57:38Z
+
+@fabpot For class properties, the property name should indeed be omitted. But when documenting variables, the name of the variable needs to be used so that tools can know what it is referring to.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2013-07-17T17:00:07Z
+
+@stof, right I read the diff too fast, and didn't realize it was not a class property.
