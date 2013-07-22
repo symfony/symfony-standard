@@ -1,0 +1,62 @@
+---------------------------------------------------------------------------
+
+by jrobeson at 2013-04-10T05:35:42Z
+
+is there a particular deficiency in the current workflow that justifies this change? I wonder what others think.
+
+NOTE: i'm not personally against it, just wondering.
+
+---------------------------------------------------------------------------
+
+by mcg-web at 2013-04-10T05:59:03Z
+
+The issue is when we use composer to install the symfony-standard, my git repository ignore the app/cache and app/logs when commiting. This make that at every git clone we most recreate dir. Adding exception to ignore gitkeep of these two dir in gitignore fix the issue easily.
+
+---------------------------------------------------------------------------
+
+by rybakit at 2013-04-10T08:32:19Z
+
+It's better to just remove  `/app/cache/*`, `/app/logs/*` rules from `/.gitignore` and replace `/(cache|logs)/.gitkeep` files with following `/(cache|logs)/.gitignore`:
+```
+*
+!.gitignore
+```
+
+---------------------------------------------------------------------------
+
+by mcg-web at 2013-04-10T09:00:41Z
+
+This could be the solution , but i think it's more explicit to have .gitkeep files to keep file than .gitignore file to keep files. But that's true, both solutions work's.
+
+---------------------------------------------------------------------------
+
+by cordoval at 2013-04-13T20:56:27Z
+
+I am not able to reproduce. I also think you are free to do more customizations onwards, SE is just the start repo.
+
+---------------------------------------------------------------------------
+
+by mcg-web at 2013-04-14T08:48:16Z
+
+@cordoval yes SE is just the start repo but if adding two lines in .gitignore could help win's some time on the workflow why not? If their is an easy way of doing so with DRY, help me please? thanks
+
+---------------------------------------------------------------------------
+
+by rchavik at 2013-05-30T08:35:41Z
+
+@mcg-web https://help.github.com/articles/ignoring-files#global-gitignore ?
+
+---------------------------------------------------------------------------
+
+by gnugat at 2013-05-30T09:46:32Z
+
+@rchavik Global gitignore is usefull to ignore files that your system might add in your project (for example when editing `README.md` with emacs, it will add a `README.md~` file).
+keeping the `app/cache` and `app/log` directory is specific to symfony projects, so ignore rules should be defined locally to the project.
+
+@cordoval to reproduce, follow these steps:
+
+    composer create-project symfony/framework-standard-edition test
+    cd test
+    git init
+    git add .
+    git status | grep cache # prints nothing
