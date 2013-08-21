@@ -1,0 +1,4 @@
+bin/phantomjs
+bin/pdftk
+src/config.php
+src/myrepo.php

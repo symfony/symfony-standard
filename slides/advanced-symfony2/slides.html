@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- To render these slides you need Slippy https://github.com/Seldaek/slippy -->
+
+        <title>Advanced Symfony2</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="author" content="Lukas Kahwe Smith, Tobias Schultze" />
+        <meta name="date" content="2013-09-05" />
+        <meta name="venue" content="Bol, Croatia" />
+
+        <!-- Slippy core file and dependencies -->
+        <script type="text/javascript" src="slippy/src/jquery.min.js"></script>
+        <script type="text/javascript" src="slippy/src/jquery.history.js"></script>
+        <script type="text/javascript" src="slippy/src/slippy.js"></script>
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="slippy/src/slippy.css"/>
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="slippy/src/slippy-pure.css"/>
+        <!-- Syntax highlighting core file  -->
+        <script type="text/javascript" src="slippy/src/highlighter/shCore.js"></script>
+        <!-- Syntax highlighting brushes, remove those you don't need -->
+        <script type="text/javascript" src="slippy/src/highlighter/shBrushPhp.js"></script>
+        <script type="text/javascript" src="slippy/src/shBrushPlain.js"></script>
+        <script type="text/javascript" src="slippy/src/highlighter/shBrushXml.js"></script>
+        <!-- Syntax highlighting styles-->
+        <link type="text/css" rel="stylesheet" href="slippy/src/highlighter/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="slippy/src/highlighter/shThemeEclipse.css"/>
+
+        <style type="text/css">
+            body > * {
+                font-size: 1.2em;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            div.syntaxhighlighter {
+                background: #aaa !important;
+            }
+
+            span.file {
+                font-size: 0.8em;
+                color: #f00;
+                float: right;
+                margin: -.2em .5em 0 0;
+            }
+
+            .smallcode {
+                font-size: 0.8em;
+            }
+
+            strong {
+                color: #662222;
+            }
+
+            li {
+                line-height: 1.2em;
+            }
+            .footer, h1 {
+                background: #eeeeee;
+                border: solid #cccccc 1px;
+                border-radius: 5px;
+                padding: 8px;
+            }
+            .section h1 {
+                background: #fff;
+                border: none;
+                font-size: 2em;
+            }
+            .footer {
+                background: #fff;
+                margin: 10px;
+                margin-top: 0;
+                width: 97%;
+            }
+        </style>
+        <!-- Slippy init code -->
+        <script type="text/javascript">
+            $(function() {
+                $(".slide").slippy({
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="slide section">
+            <h1>Advanced Symfony2</h1>
+            <h2>Workshop</h2>
+			<ul>
+				<li>kernel - step through a request with Xdebug</li>
+				<li>core events
+
+- example: leute einen listener schreiben lassen (z.B. kernel.request listener der HEAD requests nach der security schon direkt beantwortet)
+- custom events</li>
+				<li>routing</li>
+				<li>controller creation
+- ControllerResolver
+- kernel.controller</li>
+				<li>bundle bootstrapping
+- extension: service decorating
+- prepend extension
+- Configuration class
+- example: compiler pass irgendwas mit tagging</li>
+				<li>dependency injection container
+- scopes
+- synthetic services, private/public, lazy services
+- example: service inheritance base abstract controller</li>
+				<li>profiler
+- example data collector: displaying requests made to some (external) API</li>
+			</ul>
+        </div>
+
+        <div class="slide">
+            <h1>Routing</h1>
+            <ul>
+				<li>subdomain</li>
+				<li>optional and non optional placeholders</li>
+				<li>requirements (custom regex)</li>
+				<li>example: custom route loader (z.B. bildet eine filesystem struktur nach)</li>
+			</ul>
+        </div>
+
+        <div class="footer">
+            <span class="left"><a href="http://ezsummercamp.com/">eZ Publish Summer Camp 2013</a><br/><a href="http://ezsummercamp.com/program/advanced_symfony2">Advanced Symfony2</a></span>
+            <span class="right"><a href="http://pooteeweet.org/">Lukas Kahwe Smith</a><br/><a href="https://github.com/Tobion">Tobias Schultze</a></span>
+            <hr class="defloat" />
+        </div>
+    </body>
+</html>

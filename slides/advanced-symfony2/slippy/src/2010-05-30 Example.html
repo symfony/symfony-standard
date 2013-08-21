@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <!-- Slide meta data, remove/edit as you see fit -->
+        <title>Slippy Documentation</title>
+        <meta name="generator" content="Organic" />
+        <meta name="author" content="Jordi Boggiano" />
+        <meta name="company" content="Nelmio AG" />
+        <meta name="email" content="j.boggiano@seld.be" />
+        <meta name="date" content="2010-05-30" />
+        <meta name="venue" content="The Internets" />
+        <!-- Slippy core file and dependencies -->
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.history.js"></script>
+        <script type="text/javascript" src="slippy.js"></script>
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="slippy.css"/>
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="slippy-pure.css"/>
+        <!-- Syntax highlighting core file  -->
+        <script type="text/javascript" src="highlighter/shCore.js"></script>
+        <!-- Syntax highlighting brushes, remove those you don't need -->
+        <script type="text/javascript" src="highlighter/shBrushBash.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushCpp.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushCSharp.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushCss.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushDelphi.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushDiff.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushGroovy.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushJava.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushJScript.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPhp.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPlain.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPython.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushRuby.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushScala.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushSql.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushVb.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushXml.js"></script>
+        <!-- Syntax highlighting styles-->
+        <link type="text/css" rel="stylesheet" href="highlighter/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="highlighter/shThemeEclipse.css"/>
+        <!-- Slippy init code -->
+        <script type="text/javascript">
+            $(function() {
+                $(".slide").slippy({
+                    // settings go here
+                    // possible values are:
+                    //  - animLen, duration for default animations (0 = disabled)
+                    //  - animInForward, receives a slide and animates it
+                    //  - animInRewind, receives a slide and animates it
+                    //  - animOutForward, receives a slide and animates it
+                    //  - animOutRewind, receives a slide and animates it
+                    //  - baseWidth, defines the base for img resizing, if you don't want only
+                    //    full-width images, specify this as the pixel width of a slide so that
+                    //    images are scaled properly (default is 620px wide)
+                    //  - ratio, defines the width/height ratio of the slides, defaults to 1.3 (620x476)
+                    //  - margin, the fraction of screen to use as slide margin, defaults to 0.15
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+        <!-- Custom style for this deck -->
+        <style type="text/css">
+            .slide.nofooter {
+                border: 0;
+                background: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slide">
+            <h1>Welcome to Slippy</h1>
+            <h2>Usage</h2>
+            <ul>
+                <li>Navigation: [Left]/[Right] arrows to move, [Space] or [Double Click] to go to next slide</li>
+                <li>Overview: [ESC]/[Del]/[Tab] to view, [Click] to pick one slide</li>
+                <li>Jump: Press [0-9] keys followed by [Enter] to go straight to one slide</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>H1's are centered by default</h1>
+            <div class="vcenter">
+                <h2>The class "vcenter" on anything</h2>
+                <ul>
+                    <li>centers it</li>
+                    <li>vertically</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" data-layout="alt">
+            <h1>Layouts</h1>
+            <h2>This slide uses the "alt" layout</h2>
+            <p>It inherits the class "nofooter" of the layout, which allows you to style it differently, and it doesn't have the footer div that the default layout has for example</p>
+            <p>By default, all slides use the default layout if it's present</p>
+            <p>Layouts must have a &lt;content&gt;&lt;/content&gt; tag that will be replaced by each slide's content</p>
+            <pre class="brush: html">
+                <div class="slide" data-layout="alt">
+                    Foo
+                </div>
+
+                <div class="layout" data-name="default">
+                    <h1>Some title</h1>
+                    <content></content>
+                    <div class="footer">
+                        Footer content
+                    </div>
+                </div>
+
+                <div class="layout nofooter" data-name="alt">
+                    <content></content>
+                </div>
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Syntax Highlighting</h1>
+            <p>Code is just pre tags with class="brush: &lt;language&gt;"</p>
+            <p>The eval class combined with the js brush makes that Execute link appear on the right</p>
+            <pre class="brush: js eval">
+                // in eval'd block, slide is the current slide
+                $(slide).css('background', '#533');
+                // and node is the code block
+                $(node).css('opacity', '.1');
+            </pre>
+            <p>Nifty feature for JS devs doing presentations</p>
+            <br />
+            <p>Also if you use alert() in your code, it's piped into those nicer boxes</p>
+            <pre class="brush: js eval">
+                alert('test');
+            </pre>
+            <p>This is really great to provide interaction during a presentation</p>
+        </div>
+
+        <div class="slide">
+            <h1>Syntax Highlighting</h1>
+            <pre class="brush: php">
+                function foo($var) {
+                    // this is some php code as an example
+                    $foo = new Class("meh");
+                    $foo->bar();
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Incremental Slides</h1>
+            <p>Hit next</p>
+            <p class="incremental">Every "next slide" action builds up the slide</p>
+            <p class="incremental">element..</p>
+            <p class="incremental">by..</p>
+            <p class="incremental">element.</p>
+            <p class="incremental">For every element that has the incremental class on the slide.</p>
+            <p class="incremental">That's it for now, enjoy!</p>
+        </div>
+
+        <div class="layout" data-name="default">
+            <content></content>
+            <div class="footer">
+                <span class="left">Jordi Boggiano</span>
+                <span class="right">Slippy on <a href="http://github.com/Seldaek/slippy/">github</a></span>
+                <span class="left">Blog <a href="http://seld.be/">seld.be</a></span>
+                <span class="right">Twitter <a href="http://twitter.com/seldaek">@seldaek</a></span>
+                <hr class="defloat" />
+            </div>
+        </div>
+
+        <div class="layout nofooter" data-name="alt">
+            <content></content>
+        </div>
+    </body>
+</html>
