@@ -24,7 +24,7 @@
         <script type="text/javascript" src="slippy/src/highlighter/shCore.js"></script>
         <!-- Syntax highlighting brushes, remove those you don't need -->
         <script type="text/javascript" src="slippy/src/highlighter/shBrushPhp.js"></script>
-        <script type="text/javascript" src="slippy/src/shBrushPlain.js"></script>
+        <script type="text/javascript" src="slippy/src/highlighter/shBrushJScript.js"></script>
         <script type="text/javascript" src="slippy/src/highlighter/shBrushXml.js"></script>
         <!-- Syntax highlighting styles-->
         <link type="text/css" rel="stylesheet" href="slippy/src/highlighter/shCore.css"/>
@@ -93,38 +93,133 @@
         <div class="slide section">
             <h1>Advanced Symfony2</h1>
             <h2>Workshop</h2>
-			<ul>
-				<li>kernel - step through a request with Xdebug</li>
-				<li>core events
+            <ul>
+                <li>kernel - step through a request with Xdebug</li>
+                <li>core events
 
 - example: leute einen listener schreiben lassen (z.B. kernel.request listener der HEAD requests nach der security schon direkt beantwortet)
 - custom events</li>
-				<li>routing</li>
-				<li>controller creation
+                <li>routing</li>
+                <li>controller creation
 - ControllerResolver
 - kernel.controller</li>
-				<li>bundle bootstrapping
+                <li>bundle bootstrapping
 - extension: service decorating
 - prepend extension
 - Configuration class
 - example: compiler pass irgendwas mit tagging</li>
-				<li>dependency injection container
+                <li>dependency injection container
 - scopes
 - synthetic services, private/public, lazy services
 - example: service inheritance base abstract controller</li>
-				<li>profiler
+                <li>profiler
 - example data collector: displaying requests made to some (external) API</li>
-			</ul>
+            </ul>
         </div>
 
         <div class="slide">
             <h1>Routing</h1>
             <ul>
-				<li>subdomain</li>
-				<li>optional and non optional placeholders</li>
-				<li>requirements (custom regex)</li>
-				<li>example: custom route loader (z.B. bildet eine filesystem struktur nach)</li>
-			</ul>
+                <li>Required and optional placeholders</li>
+                <li>Route requirements</li>
+                <li>Host matching</li>
+                <li>example: custom route loader (z.B. bildet eine filesystem struktur nach)</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Required and optional placeholders</h2>
+
+            <p>Placeholders are only optional if they have a default and are at the end of the pattern.</p>
+            <p>For multiple optional placeholders each one must have a default and be separated by a single delimiter.</p>
+
+            <pre class="brush: js">
+                blog:
+                    path:      /blog/{page}
+                    defaults:  { _controller: AcmeDemoBundle:Blog:index, page: 1 }
+            </pre>
+
+            <p>Will match <code>/blog</code> (page=1) and <code>/blog/3</code> (page=3), but not <code>/blog/</code>.</p>
+
+            <pre class="brush: js">
+                blog_categories:
+                    path:      /blog/{category1}/{category2}/{category3}
+                    defaults:  { _controller: AcmeDemoBundle:Blog:byCategories, category2: "", category3: "" }
+            </pre>
+
+            <p>Will match <code>/blog/php</code> and <code>/blog/php/symfony</code> and<code>/blog/php/symfony/ezpublish</code>, but not <code>/blog</code>.</p>
+
+            <!-- <p>Sometimes it is necessary to create multiple routes for the same thing to achieve the desired result. For example for optional parts in the middle of the path.</p> -->
+            <p>Do you see a problem when using both these routes?</p>
+            <!-- <p><code>/blog/php</code> will match route "blog" (page=php) instead of "blog_categories".</p> -->
+        </div>
+
+        <div class="slide">
+            <h2>Route requirements</h2>
+
+            <p>Route order matters! Route matching happens the order you define them. So if you have routes that overlap, later routes might never match.</p>
+            <p>Solution: Careful crafting of route order, paths and requirements.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Default route requirements</h2>
+
+            <p>By default, a route matches any HTTP method, any scheme and any host/domain.</p>
+
+            <pre class="brush: js">
+                blog_article:
+                    path:      /blog/{slug}.{_format}
+                    defaults:  { _controller: AcmeDemoBundle:Blog:article, _format: html }
+            </pre>
+
+            <p>What is the default requirement (regex) for <code>slug</code> and <code>_format</code>?</p>
+            <p>app/console router:debug blog_article</p>
+            <p>Path-Regex: <code>#^/blog/(?P&lt;slug&gt;[^/\.]++)(?:\.(?P&lt;_format&gt;[^/]++))?$#s</code></p>
+            <p>slug: <code>[^/\.]++</code></p>
+            <p>_format: <code>[^/]++</code></p>
+        </div>
+
+        <div class="slide">
+            <h2>Custom route requirements</h2>
+
+            <pre class="brush: js">
+                blog_archive:
+                    path:      /blog/{date}
+                    defaults:  { _controller: AcmeDemoBundle:Blog:byDate }
+                    methods:   [GET, PUT] # HEAD implicit
+                    schemes:   https
+                    requirements:
+                        date:  \d{4}-\d{1,2}-\d{1,2}
+            </pre>
+
+            <p>By overriding the default requirement, you can also allow a "/" character in a placeholder.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Host matching</h2>
+
+            <pre class="brush: js">
+                user_profile:
+                    path:     /
+                    host:     {user}.%domain%
+                    defaults: { _controller: AcmeDemoBundle:User:profile }
+            </pre>
+
+            <pre class="brush: js">
+                parameters:
+                    domain: example.com
+            </pre>
+
+            <p>The host option uses the same pattern style like path. But it doesn't support optional placeholders yet.</p>
+            <p>It makes the domain configurable via service container parameters so you can change it depending on the environment.</p>
+
+            <pre class="brush: xml">
+                <a href="{{ path('user_profile', {'user': user.slug}) }}">Profile</a>
+            </pre>
+
+            <p>It will automatically generate an absolute URL when the resulting host is different from the current.</p>
+            <!-- <p>So you can change the route definition and for example put the user placeholder in the path without needing to change your code/template.
+            This abstraction is one of the main points of using the routing component.</p> -->
         </div>
 
         <div class="footer">
