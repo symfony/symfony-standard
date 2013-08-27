@@ -123,7 +123,7 @@
                 <li>Required and optional placeholders</li>
                 <li>Route requirements</li>
                 <li>Host matching</li>
-                <li>example: custom route loader (z.B. bildet eine filesystem struktur nach)</li>
+                <li>Custom route loader</li>
             </ul>
         </div>
 
@@ -151,12 +151,12 @@
 
             <!-- <p>Sometimes it is necessary to create multiple routes for the same thing to achieve the desired result. For example for optional parts in the middle of the path.</p> -->
             <p>Do you see a problem when using both these routes?</p>
-            <!-- <p><code>/blog/php</code> will match route "blog" (page=php) instead of "blog_categories".</p> -->
         </div>
 
         <div class="slide">
             <h2>Route requirements</h2>
 
+            <p><code>/blog/php</code> will match route "blog" (page=php) instead of "blog_categories".</p>
             <p>Route order matters! Route matching happens the order you define them. So if you have routes that overlap, later routes might never match.</p>
             <p>Solution: Careful crafting of route order, paths and requirements.</p>
         </div>
@@ -220,6 +220,30 @@
             <p>It will automatically generate an absolute URL when the resulting host is different from the current.</p>
             <!-- <p>So you can change the route definition and for example put the user placeholder in the path without needing to change your code/template.
             This abstraction is one of the main points of using the routing component.</p> -->
+        </div>
+
+        <div class="slide">
+            <h2>Custom route loader</h2>
+
+            <p>Task: Create a route loader that loads routes based on the file system structure. The directories and files represent the URL path segments.
+            The file itself contains the Controller class and a "getAction" method that is executed for a GET request on the corresponding route. The routes
+            are static because placeholders do not exist.
+            </p>
+
+            <p>Example: Given a directory structure of
+            <pre>
+├── routes
+│   ├── about
+│   │   ├── ezpublish.php
+│   │   └── symfony.php
+│   └── news.php
+            </pre>
+            it should create three routes (<code>/about/ezpublish</code>, <code>/about/symfony</code>, <code>/news</code>) when the directory <code>/routes</code>
+            is configured as base directory to load routes from.
+            </p>
+
+            <p>Documentation of how to implement a custom route loader:
+                <a href="http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html">http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html</a></p>
         </div>
 
         <div class="footer">
