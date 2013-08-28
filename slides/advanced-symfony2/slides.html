@@ -194,13 +194,13 @@
             </pre>
         </div>
 
-
         <div class="slide">
             <h1>Exercise: Write a custom listener</h1>
             <ul>
                 <li>Scenario: We are using a reverse proxy in front of a website with a complex authentication and permission scheme</li>
                 <li>Solution: Rewrite all GET Requests to HEAD Requests, check for a 200 Response before serving content from the cache</li>
                 <li>Implementation: Write a listener for the kernel.request event. Ensure this listener has a lower priority than the firewall listener (priority 8). Return a 200 Response for any HEAD Request.</li>
+                <li>Documentation: <a href="http://symfony.com/doc/current/book/internals.html#events">Internals: Events</a></li>
             </ul>
         </div>
 
