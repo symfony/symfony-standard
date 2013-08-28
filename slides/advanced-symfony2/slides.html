@@ -216,7 +216,7 @@
         </div>
 
         <div class="slide">
-            <h2>Required and optional placeholders</h2>
+            <h1>Required and optional placeholders</h1>
 
             <p>Placeholders are only optional if they have a default and are at the end of the pattern.</p>
             <p>For multiple optional placeholders each one must have a default and be separated by a single delimiter.</p>
@@ -242,15 +242,17 @@
         </div>
 
         <div class="slide">
-            <h2>Route requirements</h2>
+            <h1>Route requirements</h1>
 
-            <p><code>/blog/php</code> will match route "blog" (page=php) instead of "blog_categories".</p>
-            <p>Route order matters! Route matching happens the order you define them. So if you have routes that overlap, later routes might never match.</p>
-            <p>Solution: Careful crafting of route order, paths and requirements.</p>
+            <ul>
+                <li><code>/blog/php</code> will match route "blog" (page=php) instead of "blog_categories".</li>
+                <li>Route order matters! Route matching happens the order you define them. So if you have routes that overlap, later routes might never match.</li>
+                <li>Solution: Careful crafting of route order, paths and requirements.</li>
+            </ul>
         </div>
 
         <div class="slide">
-            <h2>Default route requirements</h2>
+            <h1>Default route requirements</h1>
 
             <p>By default, a route matches any HTTP method, any scheme and any host/domain.</p>
 
@@ -261,14 +263,18 @@
             </pre>
 
             <p>What is the default requirement (regex) for <code>slug</code> and <code>_format</code>?</p>
-            <p>app/console router:debug blog_article</p>
-            <p>Path-Regex: <code>#^/blog/(?P&lt;slug&gt;[^/\.]++)(?:\.(?P&lt;_format&gt;[^/]++))?$#s</code></p>
-            <p>slug: <code>[^/\.]++</code></p>
-            <p>_format: <code>[^/]++</code></p>
+
+            <ul>
+                <li>app/console router:debug blog_article</li>
+                <li>Path-Regex: <code>#^/blog/(?P&lt;slug&gt;[^/\.]++)(?:\.(?P&lt;_format&gt;[^/]++))?$#s</code></li>
+                <li>slug: <code>[^/\.]++</code></li>
+                <li>_format: <code>[^/]++</code></li>
+                <li><code>++</code> is a possessive quantifier</li>
+            </ul>
         </div>
 
         <div class="slide">
-            <h2>Custom route requirements</h2>
+            <h1>Custom route requirements</h1>
 
             <pre class="brush: js">
                 blog_archive:
@@ -284,7 +290,7 @@
         </div>
 
         <div class="slide">
-            <h2>Host matching</h2>
+            <h1>Host matching</h1>
 
             <pre class="brush: js">
                 user_profile:
@@ -311,27 +317,33 @@
         </div>
 
         <div class="slide">
-            <h2>Custom route loader</h2>
+            <h1>Exercise: Write a custom route loader</h1>
 
-            <p>Exercise: Create a route loader that loads routes based on the file system structure. The directories and files represent the URL path segments.
-            The file itself contains the Controller class and a "getAction" method that is executed for a GET request on the corresponding route. The routes
-            are static because placeholders do not exist.
-            </p>
-
-            <p>Example: Given a directory structure of
-            <pre>
-├── routes
+            <ul>
+                <li>Scenario: We have controllers in a filesystem like
+<pre style="margin: 10px 0">
+├── Controller
 │   ├── about
 │   │   ├── ezpublish.php
 │   │   └── symfony.php
 │   └── news.php
-            </pre>
-            it should create three routes (<code>/about/ezpublish</code>, <code>/about/symfony</code>, <code>/news</code>) when the directory <code>/routes</code>
-            is configured as base directory to load routes from.
-            </p>
+</pre>
+                (see FilesystemRoutingBundle) and want to make them accessible <em>automatically</em> via URL paths that represent this directory structure
+                (<code>/about/ezpublish</code>, <code>/about/symfony</code>, <code>/news</code>).
+                </li>
+            </ul>
+        </div>
 
-            <p>Documentation of how to implement a custom route loader:
-                <a href="http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html">http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html</a></p>
+        <div class="slide">
+            <h1>Exercise: Write a custom route loader</h1>
+
+            <ul>
+                <li>Solution: Create a route loader that loads routes based on the file system structure. The directories and files represent the URL path segments.
+                The file itself contains the Controller class and a "getAction" method that is executed for a GET request on the corresponding route. The routes
+                are static because placeholders do not exist.</li>
+                <li>Implemenation: The route loader accepts imports with "type: filesystem" and interates over all controller files in a directory and adds routes with the corresponding URL path for them.</li>
+                <li>Documentation: <a href="http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html">Custom route loader</a></li>
+            </ul>
         </div>
 
         <div class="footer">
