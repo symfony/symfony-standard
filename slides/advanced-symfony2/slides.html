@@ -131,6 +131,7 @@
         <div class="slide">
             <h1>Kernel request processing</h1>
             <ol>
+                <li>Bootstrap all registered Bundles and the application configuration</li>
                 <li>Trigger kernel.request event, if a Response was set jump to 8</li>
                 <li>Use the ControllerResolver to determine the controller to execute</li>
                 <li>Trigger the kernel.controller event</li>
@@ -338,5 +339,68 @@
             <span class="right"><a href="http://pooteeweet.org/">Lukas Kahwe Smith</a><br/><a href="https://github.com/Tobion">Tobias Schultze</a></span>
             <hr class="defloat" />
         </div>
+
+        <div class="slide">
+            <h1>Controller Resolver</h1>
+            <ul>
+                <li>Determines the controller to load and what action method to call by reading Request::get('_controller')</li>
+                <li>Creates the controller instance if necessary</li>
+                <li>Additionally determines the parameters to pass to the controller action method</li>
+                <li>Note the kernel.controller event is triggered between determining and creating the controller and determining the action method parameters</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle bootstrapping</h1>
+            <ul>
+                <li>Call the Bundles boot() method</li>
+                <li>Determine of the Container needs to be generated (missing or if in debug mode and any config file has changes)</li>
+                <li>If the Container needs to be generated call the prepend() method in any Bundle that implements the PrependExtensionInterface</li>
+                <li>If the Container needs to be generated call the load() method in any Bundle that has an Extension</li>
+                <li>Serialize the Container to PHP</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle extensions</h1>
+            <ul>
+                <li>Optional way to add Bundle specific services to the Container</li>
+                <li>load() method should use the Configuration class to validate and merge the configuration</li>
+                <li>Create services and parameters in the Container by loading configuration files or by code</li>
+                <li>PrependExtensionInterface::prepend() method can change the defaults from other Bundles</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle compiler passes</h1>
+            <ul>
+                <li>..</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>DIC</h1>
+            <ul>
+                <li>scopes</li>
+                <li>synthetic services</li>
+                <li>private/public</li>
+                <li>lazy services</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>DIC</h1>
+            <ul>
+                <li>Example: service inheritance base abstract controller</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Data Collector</h1>
+            <ul>
+                <li>..</li>
+            </ul>
+        </div>
+
     </body>
 </html>
