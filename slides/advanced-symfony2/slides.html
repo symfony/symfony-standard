@@ -118,6 +118,93 @@
         </div>
 
         <div class="slide">
+            <h1>Kernel</h1>
+            <ul>
+                <li>Responsible to turn a Request instance into a Response instance</li>
+                <li>Must implement the <a href="https://github.com/symfony/HttpKernel/blob/master/HttpKernelInterface.php#L24" target="_new">HttpKernelInterface</a></li>
+                <li>Custom logic is implemented in Bundles</li>
+                <li>Makes extensive use of events to allow for extensibility</li>
+                <li>Note: A Request might lead to any number of Sub-Requests</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Kernel request processing</h1>
+            <ol>
+                <li>Trigger kernel.request event, if a Response was set jump to 8</li>
+                <li>Use the ControllerResolver to determine the controller to execute</li>
+                <li>Trigger the kernel.controller event</li>
+                <li>Kernel calls the controller</li>
+                <li>Trigger kernel.view event, if the Controller does not return a Response</li>
+                <li>Trigger kernel.response event</li>
+                <li>Return the Response</li>
+            </ol>
+        </div>
+
+        <div class="slide">
+            <h1>Kernel Events</h1>
+            <ul>
+                <li>kernel.request</li>
+                <li>kernel.controller</li>
+                <li>kernel.view (*)</li>
+                <li>kernel.response</li>
+                <li>kernel.terminate (*)</li>
+                <li>kernel.exception (*)</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Configuring a Kernel Events</h1>
+
+            <pre class="brush: js">
+                acme.demo.request_head_listener:
+                    class: Acme\DemoBundle\EventListener\MyListener
+                    tags:
+                        - {
+                            name: kernel.event_listener,
+                            event: kernel.request,
+                            method: onKernelRequest,
+                            priority: -129
+                        }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Listener can subscribe to events themselves</h1>
+            <pre class="brush: php">
+                class MyListener implements EventSubscriberInterface
+                {
+                    public static function getSubscribedEvents()
+                    {
+                        return array(
+                            KernelEvents::REQUEST => array(
+                                'onKernelRequest', -129
+                            )
+                        );
+                    }
+                }
+            </pre>
+            <pre class="brush: js">
+                acme.demo.request_head_listener:
+                    class: Acme\DemoBundle\EventListener\MyListener
+                    tags:
+                        - {
+                            name: kernel.event_subscribe
+                        }
+            </pre>
+        </div>
+
+
+        <div class="slide">
+            <h1>Exercise: Write a custom listener</h1>
+            <ul>
+                <li>Scenario: We are using a reverse proxy in front of a website with a complex authentication and permission scheme</li>
+                <li>Solution: Rewrite all GET Requests to HEAD Requests, check for a 200 Response before serving content from the cache</li>
+                <li>Implementation: Write a listener for the kernel.request event. Ensure this listener has a lower priority than the firewall listener (priority 8). Return a 200 Response for any HEAD Request.</li>
+            </ul>
+        </div>
+
+        <div class="slide">
             <h1>Routing</h1>
             <ul>
                 <li>Required and optional placeholders</li>
@@ -225,7 +312,7 @@
         <div class="slide">
             <h2>Custom route loader</h2>
 
-            <p>Task: Create a route loader that loads routes based on the file system structure. The directories and files represent the URL path segments.
+            <p>Exercise: Create a route loader that loads routes based on the file system structure. The directories and files represent the URL path segments.
             The file itself contains the Controller class and a "getAction" method that is executed for a GET request on the corresponding route. The routes
             are static because placeholders do not exist.
             </p>
