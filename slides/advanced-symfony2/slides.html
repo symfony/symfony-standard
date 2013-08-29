@@ -90,6 +90,13 @@
     </head>
 
     <body>
+
+        <div class="footer">
+            <span class="left"><a href="http://ezsummercamp.com/">eZ Publish Summer Camp 2013</a><br/><a href="http://ezsummercamp.com/program/advanced_symfony2">Advanced Symfony2</a></span>
+            <span class="right"><a href="http://pooteeweet.org/">Lukas Kahwe Smith</a><br/><a href="https://github.com/Tobion">Tobias Schultze</a></span>
+            <hr class="defloat" />
+        </div>
+
         <div class="slide section">
             <h1>Advanced Symfony2</h1>
             <h2>Workshop</h2>
@@ -366,17 +373,12 @@
             </ul>
         </div>
 
-        <div class="footer">
-            <span class="left"><a href="http://ezsummercamp.com/">eZ Publish Summer Camp 2013</a><br/><a href="http://ezsummercamp.com/program/advanced_symfony2">Advanced Symfony2</a></span>
-            <span class="right"><a href="http://pooteeweet.org/">Lukas Kahwe Smith</a><br/><a href="https://github.com/Tobion">Tobias Schultze</a></span>
-            <hr class="defloat" />
-        </div>
-
         <div class="slide">
             <h1>Bundles</h1>
             <ul>
                 <li>Bootstrapping</li>
                 <li>Extensions</li>
+                <li>Configuration</li>
                 <li>Compiler passes</li>
             </ul>
         </div>
@@ -385,9 +387,11 @@
             <h1>Bundle bootstrapping</h1>
             <ul>
                 <li>Call the Bundles boot() method</li>
-                <li>Determine of the Container needs to be generated (missing or if in debug mode and any config file has changes)</li>
-                <li>If the Container needs to be generated call the prepend() method in any Bundle that implements the PrependExtensionInterface</li>
-                <li>If the Container needs to be generated call the load() method in any Bundle that has an Extension</li>
+                <li>Determine if the Container needs to be generated (missing or if in debug mode and any config file has changes)</li>
+                <ul>
+                    <li>call prepend() method on any Bundle that has an Extension that implements PrependExtensionInterface</li>
+                    <li>call load() method on any Bundle that has an Extension</li>
+                </ul>
                 <li>Serialize the Container to PHP</li>
             </ul>
         </div>
@@ -400,6 +404,33 @@
                 <li>Create services and parameters in the Container by loading configuration files or by code</li>
                 <li>PrependExtensionInterface::prepend() method can change the defaults from other Bundles</li>
             </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Configuration</h1>
+
+            <p>Handles applying default values, validation and merging of application configuration.</p>
+
+            <pre class="brush: php">
+              public function getConfigTreeBuilder()
+              {
+                $treeBuilder = new TreeBuilder();
+                $rootNode = $treeBuilder->root('acme_demo');
+
+                $rootNode
+                  ->children()
+                    ->scalarNode('hello')
+                        ->defaultValue('world')->end()
+                    ->fixXmlConfig('filter', 'filters')
+                    ->children()
+                      ->booleanNode('foo')->defaultFalse()->end()
+                      ->scalarNode('bar')->defaultNull()->end()
+                    ->end()
+                  ->end();
+
+                return $treeBuilder;
+              }
+            </pre>
         </div>
 
         <div class="slide">
@@ -420,9 +451,12 @@
         </div>
 
         <div class="slide">
-            <h1>DIC</h1>
+            <h1>Exercise: Define a template controller service</h1>
             <ul>
-                <li>Example: service inheritance base abstract controller</li>
+                <li>Scenario: We are defining controllers as services and always have a similar set of dependencies</li>
+                <li>Solution: We define an abstract service which gets our standard dependencies injected</li>
+                <li>Implementation: Define the service like you normally do and simply set "abstract" to "true", reuse the abstract service with the "parent" setting.</li>
+                <li>Documentation: <a href="http://symfony.com/doc/current/components/dependency_injection/parentservices.html">Managing Common Dependencies with Parent Services</a></li>
             </ul>
         </div>
 
@@ -430,6 +464,17 @@
             <h1>Data Collector</h1>
             <ul>
                 <li>..</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Exercise: Define a data collector that counts the calls to a custom service</h1>
+            <ul>
+                <li>Scenario: We have a service we use across the entire application and we want to get a better overview how often it is called.</li>
+                <li>Solution: We add a data collector that is notified inside the service to collect the information</li>
+                <li>Implementation: Define a data collector service, define a dummy service that allows registering loggers that get notified when the service is used. Inject that service into the data collector so that it can register itself as a logger.</li>
+                <li>Documentation: <a href="http://symfony.com/doc/current/cookbook/profiler/data_collector.html">How to create a custom Data Collector</a></li>
+                <li>Extra credit: Define profiler templates to display which class called the service how often.</li>
             </ul>
         </div>
 
