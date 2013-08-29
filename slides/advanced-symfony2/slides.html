@@ -120,6 +120,16 @@
         <div class="slide">
             <h1>Kernel</h1>
             <ul>
+                <li>Overview</li>
+                <li>Request processing</li>
+                <li>Events</li>
+                <li>Controller Resolver</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Kernel overview</h1>
+            <ul>
                 <li>Responsible to turn a Request instance into a Response instance</li>
                 <li>Must implement the <a href="https://github.com/symfony/HttpKernel/blob/master/HttpKernelInterface.php#L24" target="_new">HttpKernelInterface</a></li>
                 <li>Custom logic is implemented in Bundles</li>
@@ -202,6 +212,16 @@
                 <li>Solution: Rewrite all GET Requests to HEAD Requests, check for a 200 Response before serving content from the cache</li>
                 <li>Implementation: Write a listener for the kernel.request event. Ensure this listener has a lower priority than the firewall listener (priority 8). Return a 200 Response for any HEAD Request.</li>
                 <li>Documentation: <a href="http://symfony.com/doc/current/book/internals.html#events">Internals: Events</a></li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Kernel Controller Resolver</h1>
+            <ul>
+                <li>Determines the controller to load and what action method to call by reading Request::get('_controller')</li>
+                <li>Creates the controller instance if necessary</li>
+                <li>Additionally determines the parameters to pass to the controller action method</li>
+                <li>Note the kernel.controller event is triggered between determining and creating the controller and determining the action method parameters</li>
             </ul>
         </div>
 
@@ -353,12 +373,11 @@
         </div>
 
         <div class="slide">
-            <h1>Controller Resolver</h1>
+            <h1>Bundles</h1>
             <ul>
-                <li>Determines the controller to load and what action method to call by reading Request::get('_controller')</li>
-                <li>Creates the controller instance if necessary</li>
-                <li>Additionally determines the parameters to pass to the controller action method</li>
-                <li>Note the kernel.controller event is triggered between determining and creating the controller and determining the action method parameters</li>
+                <li>Bootstrapping</li>
+                <li>Extensions</li>
+                <li>Compiler passes</li>
             </ul>
         </div>
 
@@ -391,12 +410,12 @@
         </div>
 
         <div class="slide">
-            <h1>DIC</h1>
+            <h1>Dependency Injection Container</h1>
             <ul>
-                <li>scopes</li>
-                <li>synthetic services</li>
-                <li>private/public</li>
-                <li>lazy services</li>
+                <li>Scopes</li>
+                <li>Synthetic services</li>
+                <li>Private/public</li>
+                <li>Lazy services</li>
             </ul>
         </div>
 
