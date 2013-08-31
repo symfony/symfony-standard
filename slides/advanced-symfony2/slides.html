@@ -99,14 +99,14 @@
 
         <div class="slide section">
             <h1>Advanced Symfony2</h1>
-            <h2>Workshop</h2>
+            <h2>Advanced workshop topics about</h2>
             <ul>
                 <li>kernel - step through a request with Xdebug</li>
                 <li>core events
 
 - example: leute einen listener schreiben lassen (z.B. kernel.request listener der HEAD requests nach der security schon direkt beantwortet)
 - custom events</li>
-                <li>routing</li>
+                <li>Routing</li>
                 <li>controller creation
 - ControllerResolver
 - kernel.controller</li>
@@ -115,10 +115,7 @@
 - prepend extension
 - Configuration class
 - example: compiler pass irgendwas mit tagging</li>
-                <li>dependency injection container
-- scopes
-- synthetic services, private/public, lazy services
-- example: service inheritance base abstract controller</li>
+                <li>Dependency Injection Container</li>
                 <li>profiler
 - example data collector: displaying requests made to some (external) API</li>
             </ul>
@@ -470,11 +467,79 @@
             <h1>Dependency Injection Container</h1>
             <ul>
                 <li>Scopes</li>
+                <li>Synchronized services</li>
                 <li>Synthetic services</li>
-                <li>Private/public</li>
+                <li>Private/public services</li>
                 <li>Lazy services</li>
                 <li>Service inheritance</li>
             </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Scopes</h1>
+            <ul>
+                <li>Controls how long an instance of a service is used by the container.</li>
+                <li><strong>container</strong> (the default one): The same instance is used each time you request it from this container</li>
+                <li><strong>prototype</strong>: A new instance is created each time you request the service.</li>
+                <li><strong>request</strong>: A new instance is created for each subrequest and is unavailable outside the request (for instance in the CLI)</li>
+                <li>A service cannot depend on services from a narrower scope.</li>
+                <li>Why do scopes exist and how to work with them?</li>
+                <!-- Example: Mailer service in container scope that depends on the request.
+                When using the mailer service in a subrequest it would still have the old request instance of the master request.
+                Solutions:
+                  - Injecting the full container (bad practice)
+                  - Synchronized services -->
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Synchronized services</h1>
+            <ul>
+                <li>Whenever the request scope is entered or left, the service container will automatically call the setRequest() method with the current request instance (can be null!).</li>
+            </ul>
+
+            <pre class="brush: js">
+            services:
+                greeting_card_manager:
+                    class: Acme\HelloBundle\Mail\GreetingCardManager
+                    calls:
+                        - [setRequest, ['@?request=']]
+            </pre>
+
+            <pre class="brush: js">
+            services:
+                request:
+                    scope: request
+                    synchronized: true
+                    synthetic: true # see next topic
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Synthetic services</h1>
+            <ul>
+                <li>Synthetic services are services that are injected into the container instead of being created by the container.</li>
+                <li>For example, the <a href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php#L54">ContainerAwareHttpKernel::handle()</a> method injects the request when entering the request scope. The class does not exist when there is no request, so it can't be included in the container configuration.</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Private/public services</h1>
+            <ul>
+                <li>A service should be private when there is no need to access it directly from the container.</li>
+                <li>This is common when a service is only defined because it could be used as an argument for another service.</li>
+            </ul>
+
+            <pre class="brush: js">
+            services:
+                foo:
+                    class: Example\Foo
+                    public: false
+            </pre>
+
+            <pre class="brush: php">
+            $container->get('foo'); // will not work
+            </pre>
         </div>
 
         <div class="slide">
