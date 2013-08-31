@@ -239,6 +239,7 @@
                 <li>Route requirements</li>
                 <li>Host matching</li>
                 <li>Custom route loader</li>
+                <li>Dumped routes for performance</li>
             </ul>
         </div>
 
@@ -370,7 +371,32 @@
                 are static because placeholders do not exist.</li>
                 <li>Implemenation: The route loader accepts imports with "type: filesystem" and interates over all controller files in a directory and adds routes with the corresponding URL path for them.</li>
                 <li>Documentation: <a href="http://symfony.com/doc/current/cookbook/routing/custom_route_loader.html">Custom route loader</a></li>
+                <li>At the end you should be able to access <a href="http://advsf2.ezsc/app_dev.php/about/symfony">http://advsf2.ezsc/app_dev.php/about/symfony</a></li>
             </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Dumped routes</h1>
+
+            <ul>
+                <li>Symfony dumps routes to cache files which are used to increase performance of matching and generating.</li>
+                <li>For matching it arranges routes in a tree structure with common prefix.</li>
+                <li>Have a look at <code>app/cache/dev/appDevUrlMatcher.php</code></li>
+                <!-- <li>It's also possible to dump routes as Apache Rewrite Rules (currently has some limitations).</li> -->
+            </ul>
+
+<pre class="brush: php">
+    // simplified example
+    if (0 === strpos($pathinfo, '/about')) {
+        if ($pathinfo === '/about/symfony')) {
+            return array('_controller' => '...', '_route' => '...')
+        }
+
+        if (preg_match('#^/about/...$#', $pathinfo, $matches)) {
+            return $matches;
+        }
+    }
+</pre>
         </div>
 
         <div class="slide">
@@ -447,6 +473,7 @@
                 <li>Synthetic services</li>
                 <li>Private/public</li>
                 <li>Lazy services</li>
+                <li>Service inheritance</li>
             </ul>
         </div>
 
