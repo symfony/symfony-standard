@@ -235,7 +235,7 @@
                 <li>Required and optional placeholders</li>
                 <li>Route requirements</li>
                 <li>Host matching</li>
-                <li>Custom route loader</li>
+                <li>Exercise: Write a custom route loader</li>
                 <li>Dumped routes for performance</li>
             </ul>
         </div>
@@ -373,7 +373,7 @@
         </div>
 
         <div class="slide">
-            <h1>Dumped routes</h1>
+            <h1>Dumped routes for performance</h1>
 
             <ul>
                 <li>Symfony dumps routes to cache files which are used to increase performance of matching and generating.</li>
@@ -470,8 +470,7 @@
                 <li>Synchronized services</li>
                 <li>Synthetic services</li>
                 <li>Private/public services</li>
-                <li>Lazy services</li>
-                <li>Service inheritance</li>
+                <li>Exercise: Configure controllers as services, service inheritance, lazy services</li>
             </ul>
         </div>
 
@@ -543,12 +542,25 @@
         </div>
 
         <div class="slide">
-            <h1>Exercise: Define a template controller service</h1>
+            <h1>Exercise: Configure controllers as services, service inheritance, lazy services (1)</h1>
             <ul>
-                <li>Scenario: We are defining controllers as services and always have a similar set of dependencies</li>
+                <li>Scenario: We are defining controllers as services and always have a similar set of dependencies (see DependencyInjectionBundle)</li>
                 <li>Solution: We define an abstract service which gets our standard dependencies injected</li>
-                <li>Implementation: Define the service like you normally do and simply set "abstract" to "true", reuse the abstract service with the "parent" setting.</li>
-                <li>Documentation: <a href="http://symfony.com/doc/current/components/dependency_injection/parentservices.html">Managing Common Dependencies with Parent Services</a></li>
+                <li>Implementation: Configure the generic service like you normally do and set "abstract" to "true", reuse the abstract service with the "parent" setting. Since the "MyMailer" service is heavy to instantiate, it should be defined as lazy (you need to install ocramius/proxy-manager).</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Exercise: Configure controllers as services, service inheritance, lazy services (2)</h1>
+            <ul>
+                <li>Documentation:
+                    <ul>
+                        <li><a href="http://symfony.com/doc/current/cookbook/controller/service.html">How to define Controllers as Services</a></li>
+                        <li><a href="http://symfony.com/doc/current/components/dependency_injection/parentservices.html">Managing Common Dependencies with Parent Services</a></li>
+                        <li><a href="http://symfony.com/doc/current/components/dependency_injection/lazy_services.html">Lazy services</a></li>
+                    </ul></li>
+                <li>At the end, <a href="http://advsf2.ezsc/app_dev.php/newsletter/send/message">http://advsf2.ezsc/app_dev.php/newsletter/send/message</a> should be accessible,</li>
+                <li><a href="http://advsf2.ezsc/app_dev.php/newsletter/lazy">http://advsf2.ezsc/app_dev.php/newsletter/lazy</a> should show that a lazy proxy is used.</li>
             </ul>
         </div>
 
