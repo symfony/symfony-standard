@@ -1,0 +1,8 @@
+dic_newsletter_lazy:
+    path:     /newsletter/lazy
+
+dic_newsletter_send:
+    path:     /newsletter/send/{message}
+
+dic_greeting_card_send:
+    path:     /greetingcard/send/{recipient}/{message}
