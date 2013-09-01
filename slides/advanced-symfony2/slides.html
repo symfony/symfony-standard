@@ -459,8 +459,70 @@
         <div class="slide">
             <h1>Bundle compiler passes</h1>
             <ul>
-                <li>..</li>
+                <li>Compiler passes make it possible to manipulate the DIC after all Bundle load() methods have been processed.</li>
+                <li>Main use case is to deal with interdependent services of different Bundles, often leveraging service tags</li>
+                <li>Compiler passes must be registered in the given Bundles boot() method</li>
+                <li>Composer pass has access to the ContainerBuilder instance</li>
             </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle compiler passes</h1>
+
+            <pre class="brush: php">
+              class AcmeDemoBundle extends Bundle
+              {
+                public function build(ContainerBuilder $con)
+                {
+                  parent::build($con);
+
+                  $con->addCompilerPass(new CustomCompilerPass());
+                }
+              }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle compiler passes</h1>
+
+            <pre class="brush: js">
+                services:
+                    acme_demo.service:
+                        class: %acme.service_class%
+
+                    acme_demo.some_service:
+                        class: %acme_demo.some_service_class%
+                        arguments:
+                            - "@acme_demo.other_service"
+                        tags:
+                            -  { name: acme_demo.tag }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Bundle compiler passes</h1>
+
+            <pre class="brush: php">
+              class CustomCompilerPass implements CompilerPassInterface
+              {
+                public function process(ContainerBuilder $con)
+                {
+                  if (!$con->hasDefinition('acme_demo.service')) {
+                    return;
+                  }
+
+                  $def = $con->getDefinition('acme_demo.service');
+                  $ids =
+                    $con->findTaggedServiceIds('acme_demo.tag');
+                  foreach ($ids as $id => $attributes) {
+                    $def->addMethodCall(
+                      'addDependency',
+                      array(new Reference($id))
+                    );
+                  }
+                }
+              }
+            </pre>
         </div>
 
         <div class="slide">
@@ -499,18 +561,18 @@
 
             <pre class="brush: js">
             services:
-                greeting_card_manager:
-                    class: Acme\HelloBundle\Mail\GreetingCardManager
-                    calls:
-                        - [setRequest, ['@?request=']]
+              greeting_card_manager:
+                class: Acme\HelloBundle\Mail\GreetingCardManager
+                calls:
+                  - [setRequest, ['@?request=']]
             </pre>
 
             <pre class="brush: js">
             services:
-                request:
-                    scope: request
-                    synchronized: true
-                    synthetic: true # see next topic
+              request:
+                scope: request
+                synchronized: true
+                synthetic: true # see next topic
             </pre>
         </div>
 
