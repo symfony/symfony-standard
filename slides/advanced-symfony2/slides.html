@@ -99,26 +99,13 @@
         </div>
 
         <div class="slide section">
-            <h1>Advanced Symfony2</h1>
-            <h2>Advanced workshop topics about</h2>
+            <h1>Advanced Symfony2 Agenda</h1>
             <ul>
-                <li>kernel - step through a request with Xdebug</li>
-                <li>core events
-
-- example: leute einen listener schreiben lassen (z.B. kernel.request listener der HEAD requests nach der security schon direkt beantwortet)
-- custom events</li>
+                <li>Kernel</li>
                 <li>Routing</li>
-                <li>controller creation
-- ControllerResolver
-- kernel.controller</li>
-                <li>bundle bootstrapping
-- extension: service decorating
-- prepend extension
-- Configuration class
-- example: compiler pass irgendwas mit tagging</li>
+                <li>Bundles</li>
                 <li>Dependency Injection Container</li>
-                <li>profiler
-- example data collector: displaying requests made to some (external) API</li>
+                <li>Data Collector</li>
             </ul>
         </div>
 
@@ -244,7 +231,7 @@
         <div class="slide">
             <h1>Required and optional placeholders</h1>
 
-            <p>Placeholders are only optional if they have a default and are at the end of the pattern.</p>
+            <p>Only Placeholders at the end of the pattern with a default are optional.</p>
             <p>For multiple optional placeholders each one must have a default and be separated by a single delimiter.</p>
 
             <pre class="brush: js">
@@ -383,18 +370,18 @@
                 <!-- <li>It's also possible to dump routes as Apache Rewrite Rules (currently has some limitations).</li> -->
             </ul>
 
-<pre class="brush: php">
-    // simplified example
-    if (0 === strpos($pathinfo, '/about')) {
-        if ($pathinfo === '/about/symfony')) {
-            return array('_controller' => '...', '_route' => '...')
-        }
+            <pre class="brush: php">
+                // simplified example
+                if (0 === strpos($pathinfo, '/about')) {
+                    if ($pathinfo === '/about/symfony')) {
+                        return array('_controller' => '...', '_route' => '...')
+                    }
 
-        if (preg_match('#^/about/...$#', $pathinfo, $matches)) {
-            return $matches;
-        }
-    }
-</pre>
+                    if (preg_match('#^/about/...$#', $pathinfo, $matches)) {
+                        return $matches;
+                    }
+                }
+            </pre>
         </div>
 
         <div class="slide">
@@ -636,7 +623,7 @@
         </div>
 
         <div class="slide">
-            <h1>Data Collector</h1>
+            <h1>Implementing a data collector</h1>
 
             <pre class="brush: php">
             class SomeDataCollector extends DataCollector
@@ -655,10 +642,18 @@
                 }
             }
             </pre>
+
+            <pre class="brush: js">
+            services:
+              acme_demo.some_collector:
+              class: %acme_demo.some_collector_class%
+              tags:
+                - { name: data_collector }
+            </pre>
         </div>
 
         <div class="slide">
-            <h1>Data Collector</h1>
+            <h1>Implementing a UI for a data collector</h1>
 
             <pre class="brush: plain">
                 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
