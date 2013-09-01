@@ -16,5 +16,10 @@
         </service>
 
         <service id="acme.demo.some_service" class="Acme\DemoBundle\Services\SomeService" />
+
+        <service id="acme.demo.some_data_collector" class="Acme\DemoBundle\DataCollector\SomeDataCollector">
+            <tag name="data_collector" template="AcmeDemoBundle:Collector:messages" id="some_data_collector" />
+            <argument type="service" id="acme.demo.some_service" />
+        </service>
     </services>
 </container>
