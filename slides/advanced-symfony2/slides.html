@@ -24,6 +24,7 @@
         <script type="text/javascript" src="slippy/src/highlighter/shCore.js"></script>
         <!-- Syntax highlighting brushes, remove those you don't need -->
         <script type="text/javascript" src="slippy/src/highlighter/shBrushPhp.js"></script>
+        <script type="text/javascript" src="slippy/src/highlighter/shBrushPlain.js"></script>
         <script type="text/javascript" src="slippy/src/highlighter/shBrushJScript.js"></script>
         <script type="text/javascript" src="slippy/src/highlighter/shBrushXml.js"></script>
         <!-- Syntax highlighting styles-->
@@ -495,7 +496,7 @@
                         arguments:
                             - "@acme_demo.other_service"
                         tags:
-                            -  { name: acme_demo.tag }
+                            -  { name: acme_demo.tag, alias: foo }
             </pre>
         </div>
 
@@ -516,8 +517,8 @@
                     $con->findTaggedServiceIds('acme_demo.tag');
                   foreach ($ids as $id => $attributes) {
                     $def->addMethodCall(
-                      'addDependency',
-                      array(new Reference($id))
+                      'addSomeDependency',
+                      array(new Reference($id), $attributes['alias'])
                     );
                   }
                 }
@@ -629,8 +630,55 @@
         <div class="slide">
             <h1>Data Collector</h1>
             <ul>
-                <li>..</li>
+                <li>Allow collecting data into the profiler data base using a very simply Interface</li>
+                <li>Allow displaying collected data in the webdebug toolbar as well as inside the profiler UI</li>
             </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Data Collector</h1>
+
+            <pre class="brush: php">
+            class SomeDataCollector extends DataCollector
+            {
+                public function collect(
+                    Request $request,
+                    Response $response,
+                    \Exception $exception = null
+                ) {
+                    ..
+                }
+
+                public function getName()
+                {
+                    return 'some_data_collector';
+                }
+            }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Data Collector</h1>
+
+            <pre class="brush: plain">
+                {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+                {% block toolbar %}
+                    {# the web debug toolbar content #}
+                {% endblock %}
+
+                {% block head %}
+                    {# if the web profiler panel needs some specific JS or CSS files #}
+                {% endblock %}
+
+                {% block menu %}
+                    {# the menu content #}
+                {% endblock %}
+
+                {% block panel %}
+                    {# the panel content #}
+                {% endblock %}
+            </pre>
         </div>
 
         <div class="slide">
