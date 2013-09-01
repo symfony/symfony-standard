@@ -27,6 +27,7 @@ class DemoController extends Controller
      */
     public function helloAction($name)
     {
+        $this->get('acme.demo.some_service')->doSomeCoolStuff($name);
         return array('name' => $name);
     }
 

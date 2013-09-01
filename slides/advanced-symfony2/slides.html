@@ -626,7 +626,7 @@
             <h1>Implementing a data collector</h1>
 
             <pre class="brush: php">
-            class SomeDataCollector extends DataCollector
+            class SomeDataCollector extends DataCollectorInterface
             {
                 public function collect(
                     Request $request,
@@ -642,13 +642,21 @@
                 }
             }
             </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Defining a data collector service</h1>
 
             <pre class="brush: js">
             services:
               acme_demo.some_collector:
               class: %acme_demo.some_collector_class%
               tags:
-                - { name: data_collector }
+                - {
+                  name: data_collector,
+                  template: AcmeDemoBundle:Collector:some_service,
+                  id: some_service_collector
+                }
             </pre>
         </div>
 
@@ -656,23 +664,23 @@
             <h1>Implementing a UI for a data collector</h1>
 
             <pre class="brush: plain">
-                {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+              {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
-                {% block toolbar %}
-                    {# the web debug toolbar content #}
-                {% endblock %}
+              {% block toolbar %}
+                {% set icon %}..{% endset %}
+                {% set text %}..{% endset %}
+                {% include
+                  'WebProfilerBundle:Profiler:toolbar_item.html.twig'
+                  with { 'link': profiler_url } %}
+              {% endblock %}
 
-                {% block head %}
-                    {# if the web profiler panel needs some specific JS or CSS files #}
-                {% endblock %}
+              {% block head %}
+                {# should usually be omitted or use {{ parent() }}
+              {% endblock %}
 
-                {% block menu %}
-                    {# the menu content #}
-                {% endblock %}
-
-                {% block panel %}
-                    {# the panel content #}
-                {% endblock %}
+              {# only relevant if you also provide a profiler UI }}
+              {% block menu %}..{% endblock %}
+              {% block panel %}..{% endblock %}
             </pre>
         </div>
 
