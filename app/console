@@ -11,6 +11,7 @@ require_once __DIR__.'/bootstrap.php.cache';
 require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
@@ -24,4 +25,8 @@ if ($debug) {
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
+
+$dispatcher = new EventDispatcher();
+$application->setDispatcher($dispatcher);
+
 $application->run($input);
