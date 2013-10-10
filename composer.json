@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.1.*",
+        "symfony/symfony": "2.1.13",
         "doctrine/orm": ">=2.2.3,<2.5-dev",
         "doctrine/doctrine-bundle": "1.1.*",
         "twig/extensions": "1.0.*@dev",

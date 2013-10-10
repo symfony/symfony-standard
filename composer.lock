@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a18c1596e349a4d62471fb42ffb3a5c7",
+    "hash": "8c218175d048a83b8e9476ff7b8af72d",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1077,16 +1077,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.1.11",
+            "version": "v2.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "v2.1.11"
+                "reference": "v2.1.13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.1.11",
-                "reference": "v2.1.11",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/v2.1.13",
+                "reference": "v2.1.13",
                 "shasum": ""
             },
             "require": {
