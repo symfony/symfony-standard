@@ -1,0 +1,20 @@
+unrestricted_bundles:
+    - Symfony\Bundle\FrameworkBundle\FrameworkBundle
+    - Symfony\Bundle\SecurityBundle\SecurityBundle
+    - Symfony\Bundle\TwigBundle\TwigBundle
+    - Symfony\Bundle\MonologBundle\MonologBundle
+    - Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle
+    - Symfony\Bundle\AsseticBundle\AsseticBundle
+    - Doctrine\Bundle\DoctrineBundle\DoctrineBundle
+    - Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle
+
+restricted_bundles:
+    -
+        environments:
+            - dev
+            - test
+        bundles:
+            - Acme\DemoBundle\AcmeDemoBundle
+            - Symfony\Bundle\WebProfilerBundle\WebProfilerBundle
+            - Sensio\Bundle\DistributionBundle\SensioDistributionBundle
+            - Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle

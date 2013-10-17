@@ -3,26 +3,26 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+use Symfony\Component\Yaml\Parser;
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-        );
+        $bundles = array();
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+        $yaml = new Parser();
+        $bundlesConfig = $yaml->parse(file_get_contents(__DIR__.'/config/enabled_bundles.yml'));
+        foreach ($bundlesConfig['unrestricted_bundles'] as $bundle) {
+            $bundles[] = new $bundle();
+        }
+
+        foreach ($bundlesConfig['restricted_bundles'] as $restriction) {
+            if (in_array($this->getEnvironment(), $restriction['environments'])) {
+                foreach ($restriction['bundles'] as $bundle) {
+                    $bundles[] = new $bundle();
+                }
+            }
         }
 
         return $bundles;
