@@ -3,7 +3,7 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Yaml;
 
 class AppKernel extends Kernel
 {
@@ -19,20 +19,18 @@ class AppKernel extends Kernel
 
     protected function getConfiguredBundles($configurationPath)
     {
-        $bundles = array();
-
-        $yaml = new Parser();
         $configurationContent = file_get_contents($configurationPath);
-        $bundlesConfig = $yaml->parse($configurationContent);
-        foreach ($bundlesConfig['unrestricted_bundles'] as $bundle) {
-            $bundles[] = new $bundle();
-        }
+        $bundlesConfig = Yaml::parse($configurationContent);
 
+        $instanciator = function($fullyQualifiedClassname) {
+            return new $fullyQualifiedClassname();
+        };
+
+        $bundles = array_map($instanciator, $bundlesConfig['unrestricted_bundles']);
         foreach ($bundlesConfig['restricted_bundles'] as $restriction) {
             if (in_array($this->getEnvironment(), $restriction['environments'])) {
-                foreach ($restriction['bundles'] as $bundle) {
-                    $bundles[] = new $bundle();
-                }
+                $restrictedBundles = array_map($instanciator, $restriction['bundles']);
+                $bundles = array_merge($bundles, $restrictedBundles);
             }
         }
 
