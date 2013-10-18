@@ -9,10 +9,21 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
+        $bundles = $this->getConfiguredBundles(__DIR__.'/config/enabled_bundles.yml');
+
+        // Adding a bundle that has a dependency on the kernel:
+        // $bundles[] = new Acme\KernelDependentBundle\AcmeKernelDependentBundle($this);
+
+        return $bundles;
+    }
+
+    protected function getConfiguredBundles($configurationPath)
+    {
         $bundles = array();
 
         $yaml = new Parser();
-        $bundlesConfig = $yaml->parse(file_get_contents(__DIR__.'/config/enabled_bundles.yml'));
+        $configurationContent = file_get_contents($configurationPath);
+        $bundlesConfig = $yaml->parse($configurationContent);
         foreach ($bundlesConfig['unrestricted_bundles'] as $bundle) {
             $bundles[] = new $bundle();
         }
