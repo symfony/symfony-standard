@@ -30,7 +30,7 @@ monolog:
         #    level:  info
 
 assetic:
-    use_controller: true
+    use_controller: %use_assetic_controller%
 
 #swiftmailer:
 #    delivery_address: me@example.com
