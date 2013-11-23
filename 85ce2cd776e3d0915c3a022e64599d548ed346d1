@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by sstok at 2013-08-30T15:08:18Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2013-08-30T17:34:05Z
+
+As this is the default value, it does not add any value to specify it explicitly.
+
+---------------------------------------------------------------------------
+
+by pulzarraider at 2013-08-30T19:16:02Z
+
+@stof That`s same for other config options which are already there.
+
+This config option is very important for security so I think it should be there: prepared to be changed and properly configured.
+
+---------------------------------------------------------------------------
+
+by stof at 2013-08-30T21:49:48Z
+
+@pulzarraider No it is not. Omitting ``session: ~`` does not activate the Session system for instance.
