@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------
+
+by stof at 2013-11-12T19:45:04Z
+
+I would change it to ``path/to/project`` if youo think that ``path/to/symfony/app`` is confusing because of the ``app`` folder, because it is not the path to symfony (Symfony is in the ``vendor/symfony/symfony`` subfolder)
+
+---------------------------------------------------------------------------
+
+by jaspernbrouwer at 2013-11-12T19:51:49Z
+
+Good point! The fix was meant to remove confusion, not to replace it with other confusion ;)
+
+---------------------------------------------------------------------------
+
+by jaspernbrouwer at 2013-11-12T19:55:43Z
+
+I've used dashes (in stead of slashes) to better separate the part the user should replace from the location of the configuration script.
+
+---------------------------------------------------------------------------
+
+by jaspernbrouwer at 2013-11-12T20:18:30Z
+
+Maybe `http://localhost/path-to-project-web-folder/config.php` is even better, because the `web` folder is usually configured as document root.
+But it may also over-complicate the example.
+
+---------------------------------------------------------------------------
+
+by ramondelafuente at 2013-11-13T08:50:20Z
+
+Doesn't this also come back in point 3? That just points to "web/app_dev.php/demo/hello/Fabien"
+
+---------------------------------------------------------------------------
+
+by jaspernbrouwer at 2013-11-13T11:01:50Z
+
+Yes, another reason I think we should stick with `http://localhost/path-to-project/web/config.php`.
