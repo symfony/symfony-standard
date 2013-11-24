@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+
+by bamarni at 2013-11-13T16:04:41Z
+
+It is expected, Symfony recommends to set the session handler explicitly in its framework bundle configuration instead of relying on ini settings. This makes sure the application behaves the same no matter on which environment it is deployed to.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2013-11-14T07:55:35Z
+
+@bamarni Actually, that's the contrary ;)
+
+I tend to agree with @pulzarraider here.
+
+What do you think @drak?
+
+---------------------------------------------------------------------------
+
+by drak at 2013-11-14T08:29:58Z
+
+Looking at this the problem is because there is no explicit `handler_id` set, it can lead to confusion. Whether it is set to NativeFileSessionHanaer or null (in order to use the PHP default) is a matter of taste. I would probably have added the nativefile session hander service to the config line. The advantage is that you are not relying on php.ini values. This makes your application less portable because now you have to be concerned more about the environment as having the hander set explicitly show you can change the values and have a portable application across servers.
+
+But either way, a value should be set explicitly for `handler_id` (null or otherwise) and documented so it's clear. If you chose `~`  I would add a comment
+
+    handler_id: ~ # null for defaults set in php.ini
+
+I personally would have it as
+
+    handler_id: session.handler.native_file
+
+since it's not good to rely on global set default, that leads to more wtfs than anything else.
+
+But anyway +1 for having something set explicitly.
+
+---------------------------------------------------------------------------
+
+by pulzarraider at 2013-11-19T04:55:06Z
+
+@drak @fabpot @bamarni Thanks for your opinions
+
+I have added comment to make the configuration more clear.
+
+My opinion is that application should use default session handler set in php.ini. Session handler from php.ini is
+in many companies tunned to the maximum to bring more performance and make sessions available accross multiple servers.
