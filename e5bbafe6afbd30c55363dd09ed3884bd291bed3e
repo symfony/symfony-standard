@@ -1,0 +1,55 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2014-02-05T10:57:52Z
+
+As we know these htaccess are just fallbacks because these directories should not be accessible anyway per correct vhost config. But if the host is misconfigured it would only protect /app and /src. But the other dirs like /vendors or /bin or also /composer.lock would still be accessible.
+
+So maybe we should put htaccess in the root dir and would need to allow access in /web explicitly.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-02-05T11:01:33Z
+
+I'm wondering if we should keep those Apache specific configuration in the repo. More and more people are using web servers like Nginx, where those files do not make sense. What about moving this to a cookbook entry instead?
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-02-05T11:09:42Z
+
+Hm, the rewrite rules in web/.htaccess is also Apache specific. It would be pretty inconvenient if they have to be added manually each time.
+
+In regards to the other htacces in this PR, it might be sufficient to remove them and make it a cookbook because as I said above it does not protect all dirs at the moment.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-02-05T11:15:12Z
+
+My proposal was to remove **all** `.htaccess` files (including the one in `web`).
+
+Another option would be to add the configuration for nginx, but that would become messy pretty fast IMO.
+
+Or could we add a CLI tool that generates the correct configuration based on an argument?
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-02-05T11:16:42Z
+
+Thinking about it, removing the deny-htaccess for a cookbook does not make sense because it's for people as fallback who have unintentionally misconfigured something (or don't know better). So these people will not look/search for the cookbook. If they were aware of the problem, they would use the correct way to solve it directly (correct vhost root).
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-02-05T11:21:00Z
+
+Well I'm :-1:  on removing web/.htaccess because it means most people are forced into another setup step. And newcomers would wonder "Symfony doesn't even support nice URLs".
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-02-05T11:25:06Z
+
+What about people using NGinx? Do we need to also provide a configuration for it?
+
+---------------------------------------------------------------------------
+
+by stof at 2014-02-05T12:57:48Z
+
+@fabpot Providing it in the repo would not help IMO, as it would still require changing the NGinx config manually to import the file AFAIK. Putting it in the doc could be enough in such case (and we already have it there IIRC)
