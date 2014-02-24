@@ -19,21 +19,27 @@ security:
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/login$
             security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/
             form_login:
                 check_path: _security_check
                 login_path: _demo_login
             logout:
                 path:   _demo_logout
-                target: _demo
-            #anonymous: ~
+                target: index
+            anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/efconnect, role: ROLE_USER }
+        - { path: ^/elfinder, role: ROLE_USER }
+        - { path: ^/manager, roles: ROLE_USER}
+        - { path: ^/admin, roles: ROLE_ADMIN}
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+
+    acl:
+        connection: default
