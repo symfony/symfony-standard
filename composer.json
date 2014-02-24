@@ -4,7 +4,7 @@
     "type": "project",
     "description": "space pencil base",
     "autoload": {
-        "psr-0": { "sandello-alkr\\symfony": "src/" }
+        "psr-0": { "sandello-alkr\\symfony": "" }
     },
     "require": {
         "php": ">=5.3.3",
