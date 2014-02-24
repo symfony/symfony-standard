@@ -1,11 +1,12 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: globals.yml }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
-    secret:          "%secret%"
+    translator:      { fallback: %locale% }
+    secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
@@ -16,7 +17,6 @@ framework:
         engines: ['twig']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
-    trusted_hosts:   ~
     trusted_proxies: ~
     session:         ~
     fragments:       ~
@@ -24,44 +24,230 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - CMSBundle:Form:bootstrap.html.twig
+            - CMSBundle:Form:forms.html.twig
 
 # Assetic Configuration
 assetic:
-    debug:          "%kernel.debug%"
+    debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
+    bundles:        [FMElfinderBundle,CMSBundle,FOSCommentBundle]
+    # java: /usr/bin/java
+assetic:
     filters:
+        sass: ~
+        compass: 
+            bin: /usr/local/bin/compass
         cssrewrite: ~
+        uglifyjs2:
+            # the path to the uglifyjs executable
+            # bin: /usr/bin/uglifyjs
+            # compress: true
+            # beautify: false
+        uglifycss:
+            bin: /usr/bin/uglifycss
+        less:
+            node: /usr/bin/node
+            node_paths: [/usr/lib/node_modules]
+            apply_to: "\.less$"
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/sandello-alkr/cmsbundle/sandello-alkr/CMSBundle/Resources/less/bootstrap.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap.css
         #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
         #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
         charset:  UTF8
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
 
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
     spool:     { type: memory }
+
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        pages:
+            client: default
+            types:
+                page:
+                    mappings:
+                        title: {boost: 5}
+                        content: {boost: 10}
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model: CMSBundle\Entity\Page
+                        provider: ~
+                        finder: ~
+        # prompages:
+        #     client: default
+        #     types:
+        #         company:
+        #             mappings:
+        #                 id: {boost: 1}
+        #                 name: { boost: 5 }
+        #                 descrip: { boost: 50 }
+        #                 # more mappings...
+        #             persistence:
+        #                 driver: orm # orm, mongodb, propel are available
+        #                 model: wideweb\ElasticaBundle\Entity\Company
+        #                 provider: ~
+
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['html_purifier']
+    toolbar: ['document', 'clipboard', 'editing', '/', 'basicstyles', 'paragraph', 'links', '/', 'insert', 'styles', 'tools']
+    toolbar_groups:
+        document: ['Source','-','Save','-','Templates']
+        clipboard: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
+        editing: ['Find','Replace','-','SelectAll']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat']
+        paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
+        links: ['Link','Unlink','Anchor']
+        insert: ['Image','Flash','Table','HorizontalRule']
+        styles: ['Styles','Format']
+        tools: ['Maximize', 'ShowBlocks']
+    ui_color: '#000000'
+    startup_outline_blocks: true
+    width: 100% #Integer or %
+    height: 300 #Integer or %
+    language: 'ru-ru'
+    # filebrowser_upload_url:
+    #     url: relative-url.php?type=file
+    filebrowser_image_browse_url:
+        route: elfinder
+    #     route_parameters:
+    #         type: image
+    # custom_config: %kernel.root_dir%/../src/alkr/CMSBundle/Resources/config/ckeditor.js
+
+fm_elfinder:
+    locale: %locale%
+    editor: ckeditor # other choices are tinymce or simple
+    showhidden: false # defaults to false
+    fullscreen: true # defaults true, applies to simple and ckeditor editors
+    connector:
+        debug: false # defaults to false
+        roots:       # at least one root must be defined
+            uploads:
+                driver: LocalFileSystem
+                path: uploads
+                upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                upload_deny: ['all']
+                upload_max_size: 2M
+
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: knp_menu.html.twig
+    twig:
+        template: CMSBundle:Menu:bootstrap.html.twig
+    templating: false # if true, enables the helper for PHP templates
+    default_renderer: twig # The renderer to use, list is also available by default
+
+braincrafted_bootstrap:
+    output_dir:
+    assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+    less_filter: less # "less", "lessphp" or "none"
+    auto_configure:
+        assetic: true
+        twig: false
+        knp_menu: true
+        knp_paginator: true
+    customize:
+        variables_file: %kernel.root_dir%/../vendor/sandello-alkr/cmsbundle/sandello-alkr/CMSBundle/Resources/less/variables.less
+        bootstrap_output: %kernel.root_dir%/../vendor/sandello-alkr/cmsbundle/sandello-alkr/CMSBundle/Resources/less/bootstrap.less
+    #     bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
+
+avalanche_imagine:
+    filters:
+        my_thumb:
+            type:    thumbnail
+            options: { size: [1170, 400], mode: outbound }
+        sidebar_thumb:
+            type:    thumbnail
+            options: { size: [300, 200], mode: outbound }
+        gallery_thumb:
+            type:    thumbnail
+            options: { size: [200, 150], mode: outbound }
+        sidebar_post_thumb:
+            type:    thumbnail
+            options: { size: [200, 150], mode: outbound }
+        item_gallery_thumb:
+            type:    thumbnail
+            options: { size: [300, 200], mode: outbound }
+        item_news_thumb:
+            type:    thumbnail
+            options: { size: [300, 200], mode: outbound }
+        item_content_thumb:
+            type:    thumbnail
+            options: { size: [200, 150], mode: inset }
+
+services:
+    cms_bundle.image_type_extension:
+        class: alkr\CMSBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, alias: file }
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: alkr\CMSBundle\Entity\Comment
+            thread: alkr\CMSBundle\Entity\Thread
+            # vote: alkr\CMSBundle\Entity\Vote
+    acl: true
+    service:
+        acl:
+            thread:  fos_comment.acl.thread.roles
+            comment: fos_comment.acl.comment.roles
+            # vote:    fos_comment.acl.vote.roles
+        manager:
+            thread:  fos_comment.manager.thread.acl
+            comment: fos_comment.manager.comment.acl
+            # vote:    fos_comment.manager.vote.acl
+    acl_roles:
+        comment:
+            create: IS_AUTHENTICATED_ANONYMOUSLY
+            view: IS_AUTHENTICATED_ANONYMOUSLY
+            edit: ROLE_ADMIN
+            delete: ROLE_ADMIN
+        thread:
+            create: IS_AUTHENTICATED_ANONYMOUSLY
+            view: IS_AUTHENTICATED_ANONYMOUSLY
+            edit: ROLE_ADMIN
+            delete: ROLE_ADMIN
+        # vote:
+        #     create: ROLE_USER
+        #     view: IS_AUTHENTICATED_ANONYMOUSLY
+        #     edit: ROLE_ADMIN
+        #     delete: ROLE_ADMIN
