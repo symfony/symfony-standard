@@ -1,0 +1,35 @@
+---
+twig:
+  globals:
+    sidebar:
+      menu: true
+      right: false
+      search: false
+      posts: false
+      banner: false
+      gallery: false
+    sidebar2:
+      menu: false
+      search: false
+      posts: false
+      banner: true
+      gallery: false
+    header:
+      menu: false
+      slider: false
+      search: false
+      navbar:
+        main: true
+        reviews: true
+        enabled: true
+        inverse: false
+        narrow: false
+        fixed: false
+    footer:
+      menu: false
+      sitemap: false
+      faq: false
+      reviews: false
+    main:
+      comments: false
+...
