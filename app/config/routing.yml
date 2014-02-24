@@ -1,0 +1,30 @@
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+cms:
+    resource: "@CMSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+elastica:
+    resource: "@ElasticaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+_imagine:
+    resource: .
+    type:     imagine
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+
+post_show:
+    path:      /новости/{url}
+    defaults:  { _controller: CMSBundle:Default:showPost }
+
+page_show:
+    path:      /{url}
+    defaults:  { _controller: CMSBundle:Default:showPage }
