@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new wideweb\ElasticaBundle\ElasticaBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
-            new alkr\CMSBundle\CMSBundle(),
             new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
@@ -28,6 +27,8 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new alkr\CMSBundle\CMSBundle(),
+            new alkr\ExtendCMSBundle\ExtendCMSBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -6,6 +6,11 @@ cms:
     type:     annotation
     prefix:   /
 
+extendcms:
+    resource: "@ExtendCMSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 elastica:
     resource: "@ElasticaBundle/Controller/"
     type:     annotation
