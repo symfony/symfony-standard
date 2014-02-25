@@ -1,6 +1,6 @@
 <?php
 
-namespace wideweb\CustomExceptionsBundle;
+namespace alkr\CustomExceptionsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
