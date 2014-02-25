@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new alkr\CMSBundle\CMSBundle(),
             new alkr\ExtendCMSBundle\ExtendCMSBundle(),
+	    new alkr\CustomExceptionsBundle\ExceptionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
