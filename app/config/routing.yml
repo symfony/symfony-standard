@@ -16,11 +16,6 @@ extendcms:
     type:     annotation
     prefix:   /
 
-elastica:
-    resource: "@ElasticaBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 _imagine:
     resource: .
     type:     imagine

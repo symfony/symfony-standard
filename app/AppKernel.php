@@ -16,7 +16,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new wideweb\ElasticaBundle\ElasticaBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
@@ -29,7 +28,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new alkr\CMSBundle\CMSBundle(),
             new alkr\ExtendCMSBundle\ExtendCMSBundle(),
-	    new alkr\CustomExceptionsBundle\ExceptionsBundle(),
+            new alkr\CustomExceptionsBundle\ExceptionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
