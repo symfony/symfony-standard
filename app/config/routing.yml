@@ -6,8 +6,63 @@ exceptions:
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
-cms:
-    resource: "@CMSBundle/Controller/"
+cmsSecurity:
+    resource: "@CMSBundle/Controller/SecurityController.php"
+    type:     annotation
+    prefix:   /
+
+cmsAdmin:
+    resource: "@CMSBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /
+
+cmsBanner:
+    resource: "@CMSBundle/Controller/BannerController.php"
+    type:     annotation
+    prefix:   /
+
+cmsBlock:
+    resource: "@CMSBundle/Controller/BlockController.php"
+    type:     annotation
+    prefix:   /
+
+cmsCategory:
+    resource: "@CMSBundle/Controller/CategoryController.php"
+    type:     annotation
+    prefix:   /
+
+cmsDefault:
+    resource: "@CMSBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+
+cmsFAQ:
+    resource: "@CMSBundle/Controller/FAQController.php"
+    type:     annotation
+    prefix:   /
+
+cmsPage:
+    resource: "@CMSBundle/Controller/PageController.php"
+    type:     annotation
+    prefix:   /
+
+cmsPost:
+    resource: "@CMSBundle/Controller/PostController.php"
+    type:     annotation
+    prefix:   /
+
+cmsReview:
+    resource: "@CMSBundle/Controller/ReviewController.php"
+    type:     annotation
+    prefix:   /
+
+cmsSettings:
+    resource: "@CMSBundle/Controller/SettingsController.php"
+    type:     annotation
+    prefix:   /
+
+cmsSlide:
+    resource: "@CMSBundle/Controller/SlideController.php"
     type:     annotation
     prefix:   /
 
