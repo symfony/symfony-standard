@@ -6,6 +6,19 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
@@ -26,7 +39,7 @@
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "twbs/bootstrap": "3.0.*",
-        "components/jquery":  "1.10.*",
+        "jquery/jquery":  "1.10.*",
         "avalanche123/imagine-bundle": "v2.1",
         "friendsofsymfony/elastica-bundle": "3.0.*@dev",
         "friendsofsymfony/comment-bundle": "2.0.*@dev",
