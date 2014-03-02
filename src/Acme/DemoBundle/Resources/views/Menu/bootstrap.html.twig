@@ -1,0 +1,17 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% macro attributes(attributes) %}
+{% for name, value in attributes %}
+    {%- if value is not none and value is not sameas(false) -%}
+        {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% block list %}
+{% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+    <ul{{ _self.attributes(listAttributes) }} class="nav  navbar-nav">
+        {{ block('children') }}
+    </ul>
+{% endif %}
+{% endblock %}

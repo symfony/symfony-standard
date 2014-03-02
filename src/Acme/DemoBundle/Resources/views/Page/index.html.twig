@@ -1,5 +1,6 @@
-{{ knp_menu_render('simple') }}
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
 
+{% block main %}
 <h1>{{ cmfMainContent.title }}</h1>
-
 <p>{{ cmfMainContent.body }}</p>
+{% endblock %}

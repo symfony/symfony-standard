@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Demo Bundle{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link href="{{ asset('bundles/acmedemo/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/acmedemo/css/demo.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body class="container  page">
+    <nav class="navbar  navbar-inverse  page__nav" role="navigation">
+        <div class="container-fluid">
+            {{ knp_menu_render('simple', {'template': 'AcmeDemoBundle:Menu:bootstrap.html.twig', 'currentClass': 'active'}) }}
+
+            <ul class="nav  navbar-nav  navbar-right  navbar--external">
+                <li><a href="http://cmf.symfony.com/">Website</a></li>
+                <li><a href="http://symfony.com/doc/current/cmf/">Documentation</a></li>
+                <li><a href="http://github.com/symfony-cmf">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron  page__hero-unit">
+        {% block hero_unit %}
+            <h1>Welcome!</h1>
+            <h2>Symfony2 Content Management Framework</h2>
+        {% endblock %}
+    </div>
+
+    <div class="page__main">
+        {% block main %}
+        {% endblock %}
+    </div>
+</body>
+</html>
