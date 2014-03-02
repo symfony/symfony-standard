@@ -75,6 +75,11 @@ cmf_core:
         # basepath: /custom/basepath
     publish_workflow: false
 
+cmf_simple_cms:
+    routing:
+        templates_by_class:
+            Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: AcmeDemoBundle:Page:index.html.twig
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
