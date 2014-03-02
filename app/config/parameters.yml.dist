@@ -1,10 +1,14 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_path:     "%kernel.root_dir%/app.sqlite"
+
+    phpcr_backend:
+        # use Jackalope Doctrine DBAL
+        type: doctrinedbal
+        connection: default
+    phpcr_workspace:   default
+    phpcr_user:        admin
+    phpcr_password:    admin
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

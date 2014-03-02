@@ -42,23 +42,38 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
-# Doctrine Configuration
+# Doctrine Configuration (needed for Jackalope Doctrine DBAL)
 doctrine:
     dbal:
         driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        path:     "%database_path%"
+        # if using something else than pdo_sqlite as driver, add the
+        # parameters in parameters.yml.dist and uncomment the lines below
+        #host:     "%database_host%"
+        #port:     "%database_port%"
+        #dbname:   "%database_name%"
+        #user:     "%database_user%"
+        #password: "%database_password%"
 
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
+# Doctrine PHPCR-ODM configuration
+doctrine_phpcr:
+    session:
+        backend: "%phpcr_backend%"
+        workspace: "%phpcr_workspace%"
+        username: "%phpcr_user%"
+        password: "%phpcr_password%"
+    odm:
         auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
+
+# Cmf Configuration
+cmf_core:
+    persistence:
+        phpcr: true
+        # if you want another basepath
+        # basepath: /custom/basepath
+    publish_workflow: false
 
 # Swiftmailer Configuration
 swiftmailer:
