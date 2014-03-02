@@ -80,6 +80,9 @@ cmf_simple_cms:
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: AcmeDemoBundle:Page:index.html.twig
 
+knp_menu:
+    twig: true
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
