@@ -1,5 +1,5 @@
 parameters:
-    database_driver:   pdo_mysql
+    database_driver:   pdo_sqlite
     database_path:     "%kernel.root_dir%/app.sqlite"
 
     phpcr_backend:
