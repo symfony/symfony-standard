@@ -72,7 +72,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "1.0"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
