@@ -43,7 +43,7 @@
         "avalanche123/imagine-bundle": "v2.1",
         "friendsofsymfony/elastica-bundle": "3.0.*@dev",
         "friendsofsymfony/comment-bundle": "2.0.*@dev",
-        "sandello-alkr/cmsbundle": "1.0@dev"
+        "sandello-alkr/cmsbundle": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
