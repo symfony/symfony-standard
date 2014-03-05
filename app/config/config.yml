@@ -85,7 +85,7 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+        # auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -253,3 +253,79 @@ fos_comment:
         #     view: IS_AUTHENTICATED_ANONYMOUSLY
         #     edit: ROLE_ADMIN
         #     delete: ROLE_ADMIN
+
+stof_doctrine_extensions:
+    default_locale: ru
+    translation_fallback: true
+    persist_default_translation: false
+    orm:
+        default:
+            translatable: true
+
+a2lix_translation_form:
+    locales: [ru, en, de]
+    default_required: false
+    manager_registry: doctrine
+    templating: "A2lixTranslationFormBundle::default.html.twig"
+
+doctine:
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        # auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    gedmo_translatable:
+                        type: annotation
+                        prefix: Gedmo\Translatable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_translator:
+                        type: annotation
+                        prefix: Gedmo\Translator\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                        alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_loggable:
+                        type: annotation
+                        prefix: Gedmo\Loggable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                        alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_tree:
+                        type: annotation
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+
+jms_i18n_routing:
+    default_locale: ru
+    locales: [ru, en, de]
+    strategy: prefix
+
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles: [ParseyBundle]
+        directories: ["%kernel.root_dir%/../src/wideweb"]
+
+jms_translation:
+    configs:
+        dev:
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/../src/wideweb/ParseyBundle/Resources/translations
+            ignored_domains: [routes]
+            # excluded_names: [*TestCase.php, *Test.php]
+            # excluded_dirs: [cache, data, logs]
+            extractors: ["jms_i18n_routing"]
+            output_format: yml
+        app:
+            dirs: [%kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/../src/wideweb/ParseyBundle/Resources/translations
+            # ignored_domains: [routes]
+            # excluded_names: [*TestCase.php, *Test.php]
+            # excluded_dirs: [cache, data, logs]
+            extractors: ["jms_i18n_routing"]
