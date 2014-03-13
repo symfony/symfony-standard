@@ -2,6 +2,7 @@
 
 namespace Acme\DemoBundle\Controller;
 
+use Acme\DemoBundle\Form\ParentFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class WelcomeController extends Controller
@@ -13,6 +14,10 @@ class WelcomeController extends Controller
          * or @Template annotation as demonstrated in DemoController.
          *
          */
-        return $this->render('AcmeDemoBundle:Welcome:index.html.twig');
+        $form = $this->createForm(new ParentFormType());
+
+        return $this->render('AcmeDemoBundle:Welcome:index.html.twig',
+            array('files' => $form->createView())
+        );
     }
 }
