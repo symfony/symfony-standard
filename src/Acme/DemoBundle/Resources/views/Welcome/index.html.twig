@@ -7,6 +7,7 @@
 {% block content %}
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
+    {{ form(files) }}
     <h1 class="title">Welcome!</h1>
 
     <p>Congratulations! You have successfully installed a new Symfony application.</p>
