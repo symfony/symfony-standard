@@ -3,26 +3,35 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+use Symfony\Component\Yaml\Yaml;
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-        );
+        $bundles = $this->getConfiguredBundles(__DIR__.'/config/enabled_bundles.yml');
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+        // Adding a bundle that has a dependency on the kernel:
+        // $bundles[] = new Acme\KernelDependentBundle\AcmeKernelDependentBundle($this);
+
+        return $bundles;
+    }
+
+    protected function getConfiguredBundles($configurationPath)
+    {
+        $configurationContent = file_get_contents($configurationPath);
+        $bundlesConfig = Yaml::parse($configurationContent);
+
+        $instanciator = function($fullyQualifiedClassname) {
+            return new $fullyQualifiedClassname();
+        };
+
+        $bundles = array_map($instanciator, $bundlesConfig['unrestricted_bundles']);
+        foreach ($bundlesConfig['restricted_bundles'] as $restriction) {
+            if (in_array($this->getEnvironment(), $restriction['environments'])) {
+                $restrictedBundles = array_map($instanciator, $restriction['bundles']);
+                $bundles = array_merge($bundles, $restrictedBundles);
+            }
         }
 
         return $bundles;
