@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2013-11-10T17:29:14Z
+
+Are there enough cases where it needs to be adjusted per dev? I haven't had the requirement yet. So I don't see the need to include it by default.
+
+---------------------------------------------------------------------------
+
+by kriswallsmith at 2013-11-10T17:32:52Z
+
+Frontend developers always disable both of these things.
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2013-11-12T08:34:44Z
+
+:+1: with the feature.
+
+---------------------------------------------------------------------------
+
+by toaotc at 2013-11-27T10:31:22Z
+
+:+1:
+@kriswallsmith i think the naming `assetic_use_controller` would be better than `use_assetic_controller` - like `{section}_{option}`.
+
+so we get:
+```
+    debug_toolbar:          true
+    debug_redirects:        false
+    assetic_use_controller: true
+```
+
+---------------------------------------------------------------------------
+
+by hacfi at 2013-11-27T11:06:53Z
+
+I’m doing this manually on my projects so would be great to see this in symfony-standard. :+1:
