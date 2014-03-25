@@ -1,0 +1,8 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+<div class="col-md-4  col-sm-4">
+    <img class="center-block" src="{{ asset(block.image) }}"><br>
+    <a class="btn  btn-default  btn-block" href="{{ block.url is defined ?  block.url : path(block.route) }}">{{ block.text }}</a>
+</div>
+{% endblock %}

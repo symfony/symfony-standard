@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @AcmeDemoBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -82,6 +83,14 @@ cmf_simple_cms:
 
 knp_menu:
     twig: true
+
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/blocks
+
+sonata_block:
+    default_contexts: [cms]
 
 # Swiftmailer Configuration
 swiftmailer:
