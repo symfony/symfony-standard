@@ -12,6 +12,7 @@
         "jackalope/jackalope-doctrine-dbal": "1.1.*",
         "doctrine/doctrine-bundle": "1.2.*",
         "doctrine/data-fixtures": "1.0.*",
+        "doctrine/doctrine-cache-bundle": "1.0.*",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.3.*",

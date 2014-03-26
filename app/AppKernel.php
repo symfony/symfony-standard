@@ -20,6 +20,7 @@ class AppKernel extends Kernel
 
             // Symfony CMF Standard Edition Bundles
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
@@ -27,6 +28,7 @@ class AppKernel extends Kernel
 
             new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
 
             new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),

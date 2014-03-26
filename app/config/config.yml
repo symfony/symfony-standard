@@ -68,6 +68,14 @@ doctrine_phpcr:
         auto_mapping: true
         auto_generate_proxy_classes: "%kernel.debug%"
 
+# Jackalope Metadata and Node Cache services
+doctrine_cache:
+    providers:
+        phpcr_meta:
+            type: file_system
+        phpcr_nodes:
+            type: file_system
+
 # Cmf Configuration
 cmf_core:
     persistence:
