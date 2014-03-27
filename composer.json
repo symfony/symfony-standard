@@ -26,6 +26,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "nelmio/alice": "1.*"
     },
+    "require-dev": {
+        "liip/functional-test-bundle": "1.0.*"
+    },
     "minimum-stability": "dev",
     "scripts": {
         "post-install-cmd": [
