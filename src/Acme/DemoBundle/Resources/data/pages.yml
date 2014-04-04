@@ -1,0 +1,6 @@
+Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page:
+    demo:
+        id: /cms/simple/demo
+        label: Demo
+        title: CMF Demo
+        body: Hello! This page is created by the Symfony CMF.

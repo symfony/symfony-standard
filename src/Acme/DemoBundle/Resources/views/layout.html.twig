@@ -1,37 +1,34 @@
-{% extends "TwigBundle::layout.html.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-{% block head %}
-    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
-{% endblock %}
+    <title>{% block title %}Demo Bundle{% endblock %}</title>
 
-{% block title 'Demo Bundle' %}
-
-{% block body %}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            <em>Notice</em>: {{ flashMessage }}
-        </div>
-    {% endfor %}
-
-    {% block content_header %}
-        <ul id="menu">
-            {% block content_header_more %}
-                <li><a href="{{ path('_demo') }}">Demo Home</a></li>
-            {% endblock %}
-        </ul>
-
-        <div style="clear: both"></div>
+    {% block stylesheets %}
+    <link href="{{ asset('bundles/acmedemo/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/acmedemo/css/demo.css') }}" rel="stylesheet">
     {% endblock %}
+</head>
+<body class="container  page">
+    <nav class="navbar  navbar-inverse  page__nav" role="navigation">
+        <div class="container-fluid">
+            {{ knp_menu_render('simple', {'template': 'AcmeDemoBundle:Menu:bootstrap.html.twig', 'currentClass': 'active'}) }}
 
-    <div class="block">
-        {% block content %}{% endblock %}
+            <ul class="nav  navbar-nav  navbar-right  navbar--external">
+                <li><a href="http://cmf.symfony.com/">Website</a></li>
+                <li><a href="http://symfony.com/doc/current/cmf/">Documentation</a></li>
+                <li><a href="http://github.com/symfony-cmf">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron  page__hero-unit">
+        {% block hero_unit %}{% endblock %}
     </div>
 
-    {% if code is defined %}
-        <h2>Code behind this page</h2>
-        <div class="block">
-            <div class="symfony-content">{{ code|raw }}</div>
-        </div>
-    {% endif %}
-{% endblock %}
+    <div class="page__main">
+        {% block main %}{% endblock %}
+    </div>
+</body>
+</html>

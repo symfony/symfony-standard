@@ -1,0 +1,12 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block hero_unit %}
+    <h1>Welcome!</h1>
+    <h2>Symfony2 Content Management Framework</h2>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+    {{ sonata_block_render({'name': '/cms/blocks/hero_unit'}) }}
+    </div>
+{% endblock %}
