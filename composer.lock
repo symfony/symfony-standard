@@ -2663,17 +2663,17 @@
         },
         {
             "name": "symfony-cmf/media-bundle",
-            "version": "1.0.x-dev",
+            "version": "dev-master",
             "target-dir": "Symfony/Cmf/Bundle/MediaBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/MediaBundle.git",
-                "reference": "fd2f47dda54a350d98afb2d85f15ba938dfaf4ad"
+                "reference": "635d6cce4a6230b3b79654c6bb2c5eb5deebdde1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/MediaBundle/zipball/fd2f47dda54a350d98afb2d85f15ba938dfaf4ad",
-                "reference": "fd2f47dda54a350d98afb2d85f15ba938dfaf4ad",
+                "url": "https://api.github.com/repos/symfony-cmf/MediaBundle/zipball/635d6cce4a6230b3b79654c6bb2c5eb5deebdde1",
+                "reference": "635d6cce4a6230b3b79654c6bb2c5eb5deebdde1",
                 "shasum": ""
             },
             "require": {
@@ -2684,7 +2684,7 @@
                 "jms/serializer-bundle": "0.12.*",
                 "liip/imagine-bundle": "~0.12",
                 "mikey179/vfsstream": "~1.2",
-                "symfony-cmf/testing": "1.0.*"
+                "symfony-cmf/testing": "1.1.*"
             },
             "suggest": {
                 "helios-ag/fm-elfinder-bundle": "When using the elFinder media browser",
@@ -2697,7 +2697,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -2722,7 +2722,7 @@
                 "image",
                 "media"
             ],
-            "time": "2014-01-02 12:10:43"
+            "time": "2014-04-07 17:17:40"
         },
         {
             "name": "symfony-cmf/menu-bundle",
@@ -2980,12 +2980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/symfony-cmf.git",
-                "reference": "c05ce884b0006ee46d5d4345b3766c3b5eb8964c"
+                "reference": "0c9f93cbb2d6e1d94395db57f5cabe17f5631550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/symfony-cmf/zipball/c05ce884b0006ee46d5d4345b3766c3b5eb8964c",
-                "reference": "c05ce884b0006ee46d5d4345b3766c3b5eb8964c",
+                "url": "https://api.github.com/repos/symfony-cmf/symfony-cmf/zipball/0c9f93cbb2d6e1d94395db57f5cabe17f5631550",
+                "reference": "0c9f93cbb2d6e1d94395db57f5cabe17f5631550",
                 "shasum": ""
             },
             "require": {
@@ -2995,7 +2995,7 @@
                 "symfony-cmf/block-bundle": "1.1.*",
                 "symfony-cmf/content-bundle": "1.1.*",
                 "symfony-cmf/core-bundle": "1.1.*",
-                "symfony-cmf/media-bundle": "1.0.*",
+                "symfony-cmf/media-bundle": "1.1.*",
                 "symfony-cmf/menu-bundle": "1.1.*",
                 "symfony-cmf/routing-bundle": "1.2.*",
                 "symfony/framework-bundle": "~2.2"
@@ -3031,7 +3031,7 @@
             ],
             "description": "Symfony Content Management Framework",
             "homepage": "http://cmf.symfony.com",
-            "time": "2014-04-07 19:17:10"
+            "time": "2014-04-07 21:03:48"
         },
         {
             "name": "symfony/assetic-bundle",
