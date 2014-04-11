@@ -463,6 +463,12 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
+            function_exists('filter_var'),
+            'filter_var() must be available',
+            'Install and enable the <strong>filter</strong> extension.'
+        );
+
+        $this->addRequirement(
             function_exists('token_get_all'),
             'token_get_all() must be available',
             'Install and enable the <strong>Tokenizer</strong> extension.'
