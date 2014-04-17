@@ -30,6 +30,7 @@
         "liip/functional-test-bundle": "1.0.*"
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
