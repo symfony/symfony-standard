@@ -8,5 +8,5 @@
 /build/
 /vendor/
 /bin/
-composer.phar
+/composer.phar
 *.sqlite
