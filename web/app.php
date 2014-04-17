@@ -3,6 +3,10 @@
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 
+// Default all requests to HTTP 500. If a fatal error is raised, this will report the correct status code to the client.
+// Subsequent code is responsible for overriding the status code with the desired valued.
+header("HTTP/1.1 500 Internal Server Error", true, 500);
+
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
 // Use APC for autoloading to improve performance.

@@ -3,6 +3,10 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
+// Default all requests to HTTP 500. If a fatal error is raised, this will report the correct status code to the client.
+// Subsequent code is responsible for overriding the status code with the desired valued.
+header("HTTP/1.1 500 Internal Server Error", true, 500);
+
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
 //umask(0000);
