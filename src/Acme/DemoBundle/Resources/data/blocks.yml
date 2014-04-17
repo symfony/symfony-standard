@@ -18,5 +18,5 @@ Acme\DemoBundle\Document\UnitBlock:
     demo:
         id: /cms/blocks/hero_unit/demo
         text: View the demo
-        route: _demo
+        route: /cms/simple/demo
         image: bundles/acmedemo/images/welcome-demo.gif
