@@ -1,6 +1,6 @@
 # Symfony CMF Standard Edition
 
-[![Build Status](https://secure.travis-ci.org/symfony-cmf/symfony-standard.png)](http://travis-ci.org/symfony-cmf/symfony-standard)
+[![Build Status](https://secure.travis-ci.org/symfony-cmf/standard-edition.png)](http://travis-ci.org/symfony-cmf/standard-edition)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/standard-edition/version.png)](https://packagist.org/packages/symfony-cmf/standard-edition)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/standard-edition/d/total.png)](https://packagist.org/packages/symfony-cmf/standard-edition)
 
@@ -22,7 +22,7 @@ use cases, and can be used to create a new Symfony/CMF project from scratch.
 
 For the install guide and reference, see:
 
-* [symfony-standard documentation](http://symfony.com/doc/master/cmf/book/installation.html)
+* [Symfony CMF standard edition documentation](http://symfony.com/doc/master/cmf/book/installation.html)
 
 See also:
 
@@ -39,4 +39,4 @@ Unit and/or functional tests exist for this bundle. See the
 for a guide to running the tests.
 
 Thanks to
-[everyone who has contributed](https://github.com/symfony-cmf/symfony-standard/contributors) already.
+[everyone who has contributed](https://github.com/symfony-cmf/standard-edition/contributors) already.

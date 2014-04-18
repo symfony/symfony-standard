@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Symfony CMF Community",
-            "homepage": "https://github.com/symfony-cmf/symfony-standard/contributors"
+            "homepage": "https://github.com/symfony-cmf/standard-edition/contributors"
         }
     ],
     "autoload": {
