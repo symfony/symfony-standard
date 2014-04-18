@@ -1,8 +1,15 @@
 {
     "name": "symfony-cmf/standard-edition",
+    "homepage": "http://cmf.symfony.com",
     "license": "MIT",
     "type": "project",
     "description": "The \"Symfony CMF Standard Edition\" distribution",
+    "authors": [
+        {
+            "name": "Symfony CMF Community",
+            "homepage": "https://github.com/symfony-cmf/symfony-standard/contributors"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "src/" }
     },
