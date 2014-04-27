@@ -6,7 +6,7 @@ $symfonyRequirements = new SymfonyRequirements();
 
 $iniPath = $symfonyRequirements->getPhpIniConfigPath();
 
-if (is_callable('exec') && $columns = (int)exec('tput cols')) {
+if (is_callable('exec') && $columns = (int) exec('tput cols')) {
     define('CLI_COLUMNS', $columns);
 } else {
     define('CLI_COLUMNS', 80);
