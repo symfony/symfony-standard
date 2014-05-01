@@ -2,10 +2,11 @@
 
 namespace Acme\DemoBundle\DataFixtures\PHPCR;
 
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Nelmio\Alice\Fixtures;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
+use PHPCR\Util\NodeHelper;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 
 /**
@@ -16,7 +17,7 @@ class LoadDemoData implements FixtureInterface
     /**
      * Load data fixtures with the passed DocumentManager
      *
-     * @param ObjectManager $manager
+     * @param DocumentManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -38,6 +39,7 @@ class LoadDemoData implements FixtureInterface
         Fixtures::load(array(__DIR__.'/../../Resources/data/pages.yml'), $manager);
 
         // load the blocks
+        NodeHelper::createPath($manager->getPhpcrSession(), '/cms/content/blocks');
         Fixtures::load(array(__DIR__.'/../../Resources/data/blocks.yml'), $manager);
 
         // save the changes
