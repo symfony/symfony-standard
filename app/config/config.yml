@@ -92,11 +92,6 @@ cmf_routing:
 knp_menu:
     twig: true
 
-cmf_block:
-    persistence:
-        phpcr:
-            block_basepath: /cms/blocks
-
 sonata_block:
     default_contexts: [cms]
 
