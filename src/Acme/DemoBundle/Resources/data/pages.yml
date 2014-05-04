@@ -3,4 +3,4 @@ Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page:
         id: /cms/simple/demo
         label: Demo
         title: CMF Demo
-        body: Hello! This page is created by the Symfony CMF.
+        body: Hello! This page is created by the Symfony CMF. You can edit this page if you are logged in as admin.

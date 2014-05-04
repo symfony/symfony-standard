@@ -12,3 +12,8 @@ _configurator:
 
 _main:
     resource: routing.yml
+
+# AcmeDemoBundle routes (to be removed)
+_demo:
+    resource: "@AcmeDemoBundle/Resources/config/routing.yml"
+    prefix: /demo

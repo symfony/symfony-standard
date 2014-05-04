@@ -35,8 +35,16 @@ class LoadDemoData implements FixtureInterface
 
         $manager->persist($homeMenuNode);
 
-        // load the yaml file in src/Acme/DemoBundle/Resources/data/pages.yml
+        // load the pages
         Fixtures::load(array(__DIR__.'/../../Resources/data/pages.yml'), $manager);
+
+        // add menu item for login
+        $loginMenuNode = new MenuNode('login');
+        $loginMenuNode->setLabel('Admin Login');
+        $loginMenuNode->setParent($menuRoot);
+        $loginMenuNode->setRoute('_demo_login');
+
+        $manager->persist($loginMenuNode);
 
         // load the blocks
         NodeHelper::createPath($manager->getPhpcrSession(), '/cms/content/blocks');

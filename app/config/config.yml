@@ -34,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [CmfCreateBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -84,16 +84,24 @@ cmf_core:
         # basepath: /custom/basepath
     publish_workflow: false
 
+# Cmf Routing Configuration
 cmf_routing:
     dynamic:
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: AcmeDemoBundle:Page:index.html.twig
 
+# Menu Configuration
 knp_menu:
     twig: true
 
 sonata_block:
     default_contexts: [cms]
+
+# Cmf Create Configuration
+fos_rest:
+    view:
+        formats:
+            json: true
 
 # Swiftmailer Configuration
 swiftmailer:
