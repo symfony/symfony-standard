@@ -9,9 +9,14 @@
     <link href="{{ asset('bundles/acmedemo/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/acmedemo/css/demo.css') }}" rel="stylesheet">
     {% endblock %}
+
+    {# CreateJS is only available for admins by default #}
+    {% if app.security is not null and is_granted('ROLE_ADMIN') %}
+        {% include "CmfCreateBundle::includecssfiles.html.twig" %}
+    {% endif %}
 </head>
-<body class="container  page">
-    <nav class="navbar  navbar-inverse  page__nav" role="navigation">
+<body class="container page">
+    <nav class="navbar navbar-inverse page__nav" role="navigation">
         <div class="container-fluid">
             {{ knp_menu_render('simple', {'template': 'AcmeDemoBundle:Menu:bootstrap.html.twig', 'currentClass': 'active'}) }}
 
@@ -23,12 +28,12 @@
         </div>
     </nav>
 
-    <div class="jumbotron  page__hero-unit">
-        {% block hero_unit %}{% endblock %}
-    </div>
+    {% block hero_unit %}{% endblock %}
 
     <div class="page__main">
         {% block main %}{% endblock %}
     </div>
+
+    {% render(controller("cmf_create.jsloader.controller:includeJSFilesAction")) %}
 </body>
 </html>
