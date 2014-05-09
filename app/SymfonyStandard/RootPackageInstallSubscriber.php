@@ -16,7 +16,7 @@ use Composer\Script\ScriptEvents;
 use Composer\Script\CommandEvent;
 use Sensio\Bundle\DistributionBundle\Composer\ScriptHandler;
 
-class InstallAcmeDemoBundleSubscriber implements EventSubscriberInterface
+class RootPackageInstallSubscriber implements EventSubscriberInterface
 {
     public static function installAcmeDemoBundle(CommandEvent $event)
     {
