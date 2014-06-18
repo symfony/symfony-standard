@@ -412,15 +412,15 @@ class SymfonyRequirements extends RequirementCollection
         $baseDir = basename(__DIR__);
 
         $this->addRequirement(
-            is_writable(__DIR__.'/cache'),
-            "$baseDir/cache/ directory must be writable",
-            "Change the permissions of the \"<strong>$baseDir/cache/</strong>\" directory so that the web server can write into it."
+            is_writable(__DIR__.'/cache') OR is_writable(__DIR__.'/../var/cache'),
+            "$baseDir/cache/ or var/cache directory must be writable",
+            "Change the permissions of the \"<strong>$baseDir/cache/</strong>\"  ( or \"<strong>var/cache/</strong>\" if you are using Symfony 3 directory structure ) directory so that the web server can write into it."
         );
 
         $this->addRequirement(
-            is_writable(__DIR__.'/logs'),
-            "$baseDir/logs/ directory must be writable",
-            "Change the permissions of the \"<strong>$baseDir/logs/</strong>\" directory so that the web server can write into it."
+            is_writable(__DIR__.'/logs') OR is_writable(__DIR__.'/../var/logs'),
+            "$baseDir/logs/ or var/logs directory must be writable",
+            "Change the permissions of the \"<strong>$baseDir/logs/</strong>\" ( or \"<strong>var/logs/</strong>\" if you are using Symfony 3 directory structure ) directory so that the web server can write into it."
         );
 
         $this->addPhpIniRequirement(
