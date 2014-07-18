@@ -49,14 +49,19 @@ function echo_requirement(Requirement $requirement)
 {
     $result = $requirement->isFulfilled() ? 'OK' : ($requirement->isOptional() ? 'WARNING' : 'ERROR');
     echo ' ' . str_pad($result, 9);
-    echo $requirement->getTestMessage() . "\n";
+    echo wrap_line($requirement->getTestMessage()) . "\n";
 
     if (!$requirement->isFulfilled()) {
-        echo sprintf("          %s\n\n", $requirement->getHelpText());
+        echo sprintf("          %s\n\n", wrap_line($requirement->getHelpText()));
     }
 }
 
 function echo_title($title)
 {
     echo "\n** $title **\n\n";
+}
+
+function wrap_line($text, $size=70)
+{
+    return wordwrap($text, $size, "\n          ");
 }
