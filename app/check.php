@@ -6,6 +6,12 @@ $symfonyRequirements = new SymfonyRequirements();
 
 $iniPath = $symfonyRequirements->getPhpIniConfigPath();
 
+if (is_callable('exec') && $columns = (int) exec('tput cols')) {
+    define('CLI_COLUMNS', $columns);
+} else {
+    define('CLI_COLUMNS', 80);
+}
+
 echo "********************************\n";
 echo "*                              *\n";
 echo "*  Symfony requirements check  *\n";
@@ -49,11 +55,13 @@ function echo_requirement(Requirement $requirement)
 {
     $result = $requirement->isFulfilled() ? 'OK' : ($requirement->isOptional() ? 'WARNING' : 'ERROR');
     echo ' ' . str_pad($result, 9);
-    echo $requirement->getTestMessage() . "\n";
+    echo wordwrap($requirement->getTestMessage(), CLI_COLUMNS - 10, "\n          ") . "\n";
 
     if (!$requirement->isFulfilled()) {
-        echo sprintf("          %s\n\n", $requirement->getHelpText());
+        echo sprintf("          | %s\n", wordwrap($requirement->getHelpText(), CLI_COLUMNS - 12, "\n          | "));
     }
+
+    echo "\n";
 }
 
 function echo_title($title)
