@@ -683,6 +683,8 @@ class SymfonyRequirements extends RequirementCollection
 
         $this->addPhpIniRecommendation('session.auto_start', false);
 
+        $this->addPhpIniRecommendation('display_errors', false, false, 'It is strongly recommended turn off displaying errors in production env. Do not use ini_set() for that, because it does not apply for  fatal errors');
+
         $this->addRecommendation(
             class_exists('PDO'),
             'PDO should be installed',
