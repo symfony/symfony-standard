@@ -580,8 +580,8 @@ class SymfonyRequirements extends RequirementCollection
 
         $this->addRecommendation(
             class_exists('DomDocument'),
-            'PHP-XML module should be installed',
-            'Install and enable the <strong>PHP-XML</strong> module.'
+            'PHP-DOM module should be installed',
+            'Install and enable the <strong>PHP-DOM</strong> module.'
         );
 
         $this->addRecommendation(
