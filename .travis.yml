@@ -4,14 +4,19 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
 
 before_script:
   - composer self-update
   - composer install --prefer-source
-  - php app/console doctrine:database:create -e=test
-  - php app/console doctrine:phpcr:init:dbal -e=test
-  - php app/console doctrine:phpcr:workspace:create standard_test -e=test
-  - php app/console doctrine:phpcr:repository:init -e=test
+  - app/console doctrine:database:create -e=test
+  - app/console doctrine:phpcr:init:dbal -e=test
+  - app/console doctrine:phpcr:workspace:create standard_test -e=test
+  - app/console doctrine:phpcr:repository:init -e=test
 
 script: phpunit -c app
 
