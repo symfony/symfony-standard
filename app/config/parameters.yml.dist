@@ -1,4 +1,4 @@
-# This file is a "template" or what your parameters.yml file should look like
+# This file is a "template" of what your parameters.yml file should look like
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
