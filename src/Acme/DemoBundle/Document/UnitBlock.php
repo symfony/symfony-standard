@@ -2,10 +2,7 @@
 
 namespace Acme\DemoBundle\Document;
 
-use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
