@@ -4,7 +4,8 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": { "SymfonyStandard": "app/" },
+        "psr-4": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
