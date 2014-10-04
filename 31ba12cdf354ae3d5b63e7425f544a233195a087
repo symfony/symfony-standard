@@ -1,0 +1,74 @@
+---------------------------------------------------------------------------
+
+by stof at 2014-09-29T13:57:45Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-09-29T15:27:32Z
+
+Absolute symlinks are worse than copying the files. I would set it to "relative" instead.
+
+---------------------------------------------------------------------------
+
+by stof at 2014-09-30T10:45:44Z
+
+well, the advantage of using symlinks is that you don't need to run ``asset:install`` each time you change an asset file before seeing the change.
+
+However, does Windows support relative symlinks ?
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-10-01T07:05:29Z
+
+But non-relative symlinks will probably not work when deploying a website by "copying" the local files (if you are using rsync for instance.)
+
+So, we either keep copying by default (always safe, but not always up to date), or we switch to relative symlinks (always up to date, but does it work on Windows?)
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-02T18:49:11Z
+
+Relative symlinks don't work on windows (probably this feature does not exist).
+So I would propose:
+ - Change to "relative" by default.
+ - Change the assets:install so that when relative does not work, it will try absolute symlinks, and then try hard copies.
+
+This way, Windows will use absolute symlinks by default, if supported (admin rights). And unix will use relative symlinks by default.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-10-02T18:57:48Z
+
+sounds good to me.
+
+---------------------------------------------------------------------------
+
+by aferrandini at 2014-10-02T21:43:40Z
+
+:+1: for me
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-10-04T06:30:45Z
+
+@Tobion Can you update this PR? It looks like the assets:install command already work the way you describe. So, I don't see any other changes to do. Can you test it just to be sure (I don't have any windows machine?) Thanks.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-04T08:01:28Z
+
+@fabpot the command falls back to hard copies when relative symlinks do not work (instead of absolute symlinks) AFAIK.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2014-10-04T08:18:58Z
+
+see symfony/symfony#12123
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-04T08:29:15Z
+
+Updated
