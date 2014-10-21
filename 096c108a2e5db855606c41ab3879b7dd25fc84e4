@@ -1,0 +1,75 @@
+---------------------------------------------------------------------------
+
+by stof at 2014-10-20T07:53:11Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-20T08:30:49Z
+
+@Tobion thanks for reporting this error! You are absolutely right and I've just updated the file.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-20T08:40:48Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-10-20T08:43:04Z
+
+You should then also include ``@other_service_name`` with double quotes.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-20T08:44:46Z
+
+@xabbuh Why? It's not necessary.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-20T08:46:41Z
+
+@Tobion I added the quotes suggested by @xabbuh before reading your comment. Even if they are not mandatory, do you think it would be a good idea to add them for consistency reaons? Or do you think it's better to not include them?
+
+By the way, I switched "other_service_name" by "another_service_name". It sounds better than me, but please tell me what you think. Thanks!
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-10-20T08:56:32Z
+
+@Tobion The ``@`` is reserved in YAML for future uses. Of course, it's not necessary here, to be parsed properly. But that also applies to the percent sign. So, let's be consistent here.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-20T08:56:42Z
+
+Then you would also need to put `class: AppBundle\Directory\ClassName` in quotes which makes everything harder to read.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-20T09:02:24Z
+
+@xabbuh true http://yaml.org/spec/1.2/spec.html#c-directive
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-10-20T09:08:41Z
+
+> Then you would also need to put class: `AppBundle\Directory\ClassName` in quotes which makes everything harder to read.
+
+The backslash has no special meaning outside double quoted strings. Even worse, "\D" and "\C" are no valid escape sequences, so the backslash would need to be escaped.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-20T11:16:34Z
+
+I was referring to the "consistency" javier was talking about. `"plain_value"` vs `AppBundle\Directory\ClassName`
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-10-20T11:26:44Z
+
+Then I misunderstood you.
