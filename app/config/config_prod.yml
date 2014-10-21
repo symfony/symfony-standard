@@ -23,6 +23,3 @@ monolog:
             level: debug
         console:
             type:  console
-
-assetic:
-    use_controller: false
