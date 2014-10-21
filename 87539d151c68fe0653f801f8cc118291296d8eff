@@ -1,0 +1,74 @@
+---------------------------------------------------------------------------
+
+by hacfi at 2014-10-06T15:40:10Z
+
+There were added not that long ago and very welcomed by some developers (including myself).
+
+I don’t think it hurts to leave them. Especially `debug_toolbar`.
+
+---------------------------------------------------------------------------
+
+by stof at 2014-10-06T15:58:40Z
+
+@hacfi when you use the ParameterHandler to ask you for the parameters when running a ``composer install`` (which is quite handy when you add a new feature requiring a new parameter, to avoid having all devs of your team complaining about their setup being broken because of a missing parameter for instance), having parameters which are not related to the infrastructure (and so that you don't need to define yourselves) is annoying.
+
+I would even say that ``%database_driver%`` would be a good candidate for the simplification too. Your database platform is very unlikely to change depending on the place where you deploy, as it would make things much harder.
+IIRC, the reason it is there was because of the web configurator shipped in SensioDistributionBundle, which was the main way to start using Symfony in the 2.0 era, allowing to configure parameters through a form rather than writing YAML (and failing half of the time because of ``app/config/parameters.yml`` not being writable by the webserver...)
+
+---------------------------------------------------------------------------
+
+by stof at 2014-10-06T15:59:18Z
+
+@hacfi note that nothing prevents you to keep these parameters in your own project if you find them handy
+
+---------------------------------------------------------------------------
+
+by hacfi at 2014-10-06T16:00:54Z
+
+Ok..I’m fine with the removal then. I just thought it’s a feature (enable/disable debug_toolbar) even beginners might want to use early on.
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2014-10-06T16:40:56Z
+
+In few projects I maintained, I do the following tricks:
+
+* I create a `app/config/parameters_static.yml` will all default values, like email_from, support_email_to, use_real_payment_gateway, assets_on_cdn, toolbar, etc etc.
+* I try to keep `app/config/parameters.yml.dist` as small as possible (as explained by @javiereguiluz in the PR description).
+* In `app/config/config.yml` I do
+```
+imports:
+    - { resource: parameters_static.yml }
+    - { resource: parameters.yml }
+```
+
+Like that:
+
+* all parameters are override-able in `parameter.yml`
+* specific parameter are override-able in `config_test.yml`
+* the project installation for new comers is simple
+* it's easy to override some param with ParameterHandler for production deployment
+
+---------------------------------------------------------------------------
+
+by hacfi at 2014-10-06T17:41:38Z
+
+That's a great solution..thanks @lyrixx
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T10:35:19Z
+
+Now that the "Best Practices" book has been published, another reason for merging this proposal is that it's better aligned with those recommendations.
+
+---------------------------------------------------------------------------
+
+by hacfi at 2014-10-21T10:36:11Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2014-10-21T11:39:55Z
+
+:+1:
