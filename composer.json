@@ -13,7 +13,7 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.5",
