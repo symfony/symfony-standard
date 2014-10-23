@@ -17,10 +17,9 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.5",
-        "jackalope/jackalope-doctrine-dbal": "1.1.*",
         "doctrine/doctrine-bundle": "~1.2",
-        "doctrine/data-fixtures": "1.0.*",
-        "doctrine/doctrine-cache-bundle": "1.0.*",
+        "doctrine/data-fixtures": "~1.0",
+        "doctrine/doctrine-cache-bundle": "~1.0",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -28,13 +27,14 @@
         "symfony-cmf/symfony-cmf": "1.2.*",
         "symfony-cmf/simple-cms-bundle": "1.2.*",
         "symfony-cmf/create-bundle": "1.2.*",
+        "jackalope/jackalope-doctrine-dbal": "1.1.*",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "nelmio/alice": "1.*"
+        "nelmio/alice": "~1.0"
     },
     "require-dev": {
-        "liip/functional-test-bundle": "1.0.*",
+        "liip/functional-test-bundle": "~1.0",
         "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
