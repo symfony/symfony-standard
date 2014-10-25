@@ -1,5 +1,10 @@
 parameters:
     database_driver:   pdo_sqlite
+    database_host:     ~
+    database_port:     ~
+    database_name:     ~
+    database_user:     ~
+    database_password: ~
     database_path:     "%kernel.root_dir%/app.sqlite"
 
     phpcr_backend:
