@@ -21,6 +21,11 @@ class LoadDemoData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        if (!$manager instanceof DocumentManager) {
+            $class = get_class($manager);
+            throw new \RuntimeException("Fixture requires a PHPCR ODM DocumentManager instance, instance of '$class' given.");
+        }
+
         // tweak homepage
         $page = $manager->find(null, '/cms/simple');
         $page->setBody('Hello');
@@ -30,7 +35,7 @@ class LoadDemoData implements FixtureInterface
         $menuRoot = $manager->find(null, '/cms/simple');
         $homeMenuNode = new MenuNode('home');
         $homeMenuNode->setLabel('Home');
-        $homeMenuNode->setParent($menuRoot);
+        $homeMenuNode->setParentDocument($menuRoot);
         $homeMenuNode->setContent($page);
 
         $manager->persist($homeMenuNode);
@@ -41,7 +46,7 @@ class LoadDemoData implements FixtureInterface
         // add menu item for login
         $loginMenuNode = new MenuNode('login');
         $loginMenuNode->setLabel('Admin Login');
-        $loginMenuNode->setParent($menuRoot);
+        $loginMenuNode->setParentDocument($menuRoot);
         $loginMenuNode->setRoute('_demo_login');
 
         $manager->persist($loginMenuNode);
