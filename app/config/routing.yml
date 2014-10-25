@@ -1,2 +1,7 @@
-cmf_create:
+# AcmeDemoBundle routes (to be removed)
+_demo:
+    resource: "@AcmeDemoBundle/Resources/config/routing.yml"
+    prefix: /demo
+
+_cmf_create:
     resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
