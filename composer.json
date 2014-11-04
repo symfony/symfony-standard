@@ -8,12 +8,6 @@
             "": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/davdi1982/symfony-extended.git"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "davdi1982/symfony-extended": "~2.3",
