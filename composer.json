@@ -1,5 +1,5 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "symfony/framework-extended-edition",
     "license": "MIT",
     "type": "project",
     "description": "The \"Symfony Extended Edition\" distribution",
