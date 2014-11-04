@@ -12,7 +12,6 @@
         {
             "type": "vcs",
             "url": "git@github.com:=davdi1982=/symfony-extended.git",
-            "minimum-stability": "dev"
         }
     ],
     "require": {
