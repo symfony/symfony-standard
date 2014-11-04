@@ -1,17 +1,17 @@
-Symfony Standard Edition
+Symfony Extended Edition
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
+Welcome to the Symfony Extended Edition - a fully-functional Symfony2
 application that you can use as the skeleton for your new applications.
 
 This document contains information on how to download, install, and start
 using Symfony. For a more detailed explanation, see the [Installation][1]
 chapter of the Symfony Documentation.
 
-1) Installing the Standard Edition
+1) Installing the Extended Edition
 ----------------------------------
 
-When it comes to installing the Symfony Standard Edition, you have the
+When it comes to installing the Symfony Extended Edition, you have the
 following options.
 
 ### Use Composer (*recommended*)
@@ -26,14 +26,14 @@ http://getcomposer.org/ or just run the following command:
 
 Then, use the `create-project` command to generate a new Symfony application:
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+   ## php composer.phar create-project symfony/framework-standard-edition path/to/install
 
 Composer will install Symfony and all its dependencies under the
 `path/to/install` directory.
 
 ### Download an Archive File
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
+To quickly test Symfony, you can also download an [archive][3] of the Extended
 Edition and unpack it somewhere under your web server root directory.
 
 If you downloaded an archive "without vendors", you also need to install all
@@ -106,7 +106,7 @@ playing with it, you can remove it by following these steps:
 What's inside?
 ---------------
 
-The Symfony Standard Edition is configured with the following defaults:
+The Symfony Extended Edition is configured with the following defaults:
 
   * Twig is the only configured template engine;
 
@@ -150,7 +150,7 @@ It comes pre-configured with the following bundles:
   * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
     code
 
-All libraries and bundles included in the Symfony Standard Edition are
+All libraries and bundles included in the Symfony Extended Edition are
 released under the MIT or BSD license.
 
 Enjoy!
