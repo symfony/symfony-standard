@@ -1,11 +1,19 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "symfony/framework-extended-edition",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "The \"Symfony Extended Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": {
+            "": "src/"
+        }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:=davdi1982=/symfony-extended.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
