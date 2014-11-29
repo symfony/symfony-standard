@@ -1,0 +1,98 @@
+---------------------------------------------------------------------------
+
+by gnugat at 2014-10-21T14:23:29Z
+
+Fixes issue #671
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T14:24:25Z
+
+@gnugat updated PR description. Thanks!
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T14:28:03Z
+
+fabbot says that the name of the test class is wrong:
+
+![fabbot_error](https://cloud.githubusercontent.com/assets/73419/4720062/6d9382e6-592e-11e4-9b5a-551515dc2adb.png)
+
+I don't know what to do in this case.
+
+---------------------------------------------------------------------------
+
+by stof at 2014-10-21T14:36:27Z
+
+@javiereguiluz fix the filename actually
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T14:40:16Z
+
+@stof thanks! I feel really stupid right now for having made this mistake :(
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-21T15:43:45Z
+
+So the standard edition is going into the direction of RAD? Pretty unusable for medium to large projects.
+
+---------------------------------------------------------------------------
+
+by gnugat at 2014-10-21T15:52:19Z
+
+@Tobion what would you suggest?
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T15:54:35Z
+
+@Tobion this will be the last significant PR related to best practices for the standard edition. The only changes that we've made are:
+
+  * Creating a `app/config/services.yml` and importing it from `config.yml`
+  * Creating an almost empty `AppBundle` and configure its routing via annotations.
+  * Providing one sample template in the `app/Resources/views/default/` directory.
+  * Remove some parameters from `app/config/parameters.yml.dist`
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-21T15:58:50Z
+
+I thought that's what the "editions" are for. So why not introduce a RAD edition? If the RAD version is the standard-edition then, most advanced people will just be busy deleting the AppBundle again. Just as it was for the DemoBundle.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2014-10-21T16:01:12Z
+
+This PR also conflicts with #723
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2014-10-21T16:17:11Z
+
+@Tobion I think we have different opinions about what is a RAD edition: you think that this PR may turn the standard edition into a RAD edition. I think that a RAD edition should be much more heavily modified, like the one developed by KnpLabs ([rad.knplabs.com](http://rad.knplabs.com/)).
+
+The other point where we don't agree is where you say that this AppBundle is unusable for medium to large projects.
+
+And finally, I think that there is a big difference between AcmeDemoBundle and AppBundle. The demo bundle is useful to almost nobody (only some newcomers) and the AppBundle can be useful for lots of people (newcomers, small projects, medium projects, people following the best practices, etc.)
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2014-11-07T18:58:23Z
+
+I would propose to merge this into 2.3 actually. The best practices are for everyone, not people living on the edge. We'll also have a problem in the documentation when only 2.6+ has the AppBundle. We should assume one consistent state of new projects, currently we can't do that. That'll result in either confusing docs or many extra doc maintaining hours.
+
+---------------------------------------------------------------------------
+
+by stof at 2014-11-21T01:01:21Z
+
+:+1:
+
+and I agree with @WouterJ about providing best-practices-ready projects for people creating a new project based on the LTS too. what do you think @fabpot ?
+
+---------------------------------------------------------------------------
+
+by samsonasik at 2014-11-28T23:01:59Z
+
+symfony 2.6 just released, I think it need to be merge then to support symfony best practice that said : "If you are using Symfony 2.6 or a newer version, the AppBundle bundle is already generated for you".
