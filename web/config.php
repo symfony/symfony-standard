@@ -4,12 +4,16 @@ if (!isset($_SERVER['HTTP_HOST'])) {
     exit('This script cannot be run from the CLI. Run it from a browser.');
 }
 
-if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
-    '127.0.0.1',
-    '::1',
-))) {
-    header('HTTP/1.0 403 Forbidden');
-    exit('This script is only accessible from localhost.');
+$ip_sources= array('HTTP_CLIENT_IP', 'HTTP_FORWARDED','HTTP_FORWARDED_FOR','HTTP_X_FORWARDED', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_CLUSTER_CLIENT_IP','REMOTE_ADDR');
+foreach($ip_sources as $ip) {
+    if (array_key_exists($key, $_SERVER) === true) {
+        foreach (explode(',', $_SERVER[$key]) as $sub_ip) {
+            if(filter_var($sub_ip,FILTER_VALIDATE_IP,FILTER_FLAG_NO_PRIV_RANGE|FILTER_FLAG_NO_RES_RANGE)) {
+                header('HTTP/1.0 403 Forbidden');
+                exit('This script is only accessible from localhost.');
+            }
+        }
+   }
 }
 
 require_once dirname(__FILE__).'/../app/SymfonyRequirements.php';
