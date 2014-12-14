@@ -1,0 +1,114 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [CmfCreateBundle]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
+        #yui_css:
+        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+
+# Doctrine Configuration (needed for Jackalope Doctrine DBAL)
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        path:     "%database_path%"
+
+# Doctrine PHPCR-ODM configuration
+doctrine_phpcr:
+    session:
+        backend: "%phpcr_backend%"
+        workspace: "%phpcr_workspace%"
+        username: "%phpcr_user%"
+        password: "%phpcr_password%"
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
+
+# Jackalope Metadata and Node Cache services
+doctrine_cache:
+    providers:
+        phpcr_meta:
+            type: file_system
+        phpcr_nodes:
+            type: file_system
+
+# Cmf Configuration
+cmf_core:
+    persistence:
+        phpcr: true
+        # if you want another basepath
+        # basepath: /custom/basepath
+    publish_workflow: false
+
+cmf_menu:
+    persistence:
+        phpcr:
+            menu_basepath: /cms
+
+# Cmf Routing Configuration
+cmf_routing:
+    dynamic:
+        templates_by_class:
+            Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: AcmeDemoBundle:Page:index.html.twig
+
+# Menu Configuration
+knp_menu:
+    twig: true
+
+sonata_block:
+    default_contexts: [cms]
+
+# Cmf Create Configuration
+fos_rest:
+    view:
+        formats:
+            json: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
