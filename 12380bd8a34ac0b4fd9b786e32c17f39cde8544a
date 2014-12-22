@@ -1,0 +1,5 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2014-12-22T13:55:20Z
+
+:thumbsup: At least for now, the docs are written to expect the AcmeDemoBundle functionality to be there (I.e. The pretty homepage). This fixes that disappearing.
