@@ -4,6 +4,8 @@ imports:
 #framework:
 #    validation:
 #        cache: apc
+#    serializer:
+#        cache: apc
 
 #doctrine:
 #    orm:
