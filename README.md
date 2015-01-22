@@ -32,7 +32,7 @@ See also:
 
 ## Contributing
 
-Pull requests are welcome. Please see our [CONTRIBUTING](CONTRIBUTING.md) guide.
+Pull requests are welcome. Please see our [CONTRIBUTING](https://github.com/symfony-cmf/symfony-cmf-docs/blob/master/CONTRIBUTING.md) guide.
 
 Unit and/or functional tests exist for this bundle. See the
 [Testing documentation](http://symfony.com/doc/master/cmf/components/testing.html)
