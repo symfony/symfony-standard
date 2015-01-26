@@ -7,9 +7,15 @@ php:
   - 5.6
   - hhvm
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 before_script:
   - composer self-update
-  - composer install --prefer-source
+  - composer install --prefer-dist
   - app/console doctrine:database:create -e=test
   - app/console doctrine:phpcr:init:dbal -e=test
   - app/console doctrine:phpcr:workspace:create standard_test -e=test
