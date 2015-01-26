@@ -1,4 +1,6 @@
 # This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
