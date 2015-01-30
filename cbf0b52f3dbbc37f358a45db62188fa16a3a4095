@@ -1,0 +1,64 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2015-01-20T10:22:06Z
+
+If there is an incompatibility it must be correctly described in the composer.json of doctrine/orm, not here.
+
+---------------------------------------------------------------------------
+
+by stof at 2015-01-20T13:10:04Z
+
+there is no incompatibility between ORM 2.4 and DBAL 2.5. The only issue we have is that symfony-standard does not specify a server version in its DoctrineBundle config, meaning that DBAL 2.5 will try to connect to the DB to guess the version.
+So the issue is in symfony-standard, not in the ORM. and we should rather fix it (by configuring a server version explicitly) rather than forbidding using the uptodate DBAL
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-01-20T13:20:29Z
+
+which server version do you want to configure? you cannot know which is used by users. so you could only put a random one in there.
+
+---------------------------------------------------------------------------
+
+by stof at 2015-01-20T13:24:48Z
+
+@Tobion given that we configure it for MySQL in the config by default, I would suggest using ``5.6`` as server version. For MySQL, DBAL only has 2 platforms: 5.6 and below, and 5.7+. and the 5.6- platform can work for 5.7 too (it will just generate less efficient index renaming by dropping the index entirely and recreating it, because renaming index directly is supported only in 5.7+). This would give a working default config (and people not using MySQL already have to change the config)
+
+---------------------------------------------------------------------------
+
+by dzuelke at 2015-01-20T18:55:37Z
+
+Sorry, this was phrased wrong. It's not an incompatibility, it's merely that DBAL 2.5 wich needs the platform configured has already been released, and the version selector in ORM 2.4 installs it.
+
+Also see #775 which would have prevented this sudden breakage in the first place :)
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-23T18:32:46Z
+
+Hi guys!
+
+I thought about adding `server_version` to the `config.yml` (and probably `parameters.yml`), but I think it's not quite right, because this setting *should* not be necessary. It should be auto-detected and, at best, added manually by the user to increase performance (if it's not being guessed properly).
+
+But I've opened up a PR to fix the root issue: doctrine/dbal#783
+
+Thanks!
+
+---------------------------------------------------------------------------
+
+by stof at 2015-01-26T14:42:11Z
+
+@weaverryan the issue is that auto-detecting it requires being able to connect to the DB, and the ORM currently triggers the guessing too early
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-01-30T14:16:19Z
+
+We need a solution now as I'm going to release Symfony 2.3.25 today, with a composer.lock file. Avoiding the usage of DBAL 2.5 looks like the "best" thing to do for now as the "proper" fix is till under discussion on Doctrine/DBAL and Doctrine/ORM.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-30T14:23:27Z
+
+I completely agree. I think the fix will come somewhat soon (I have a PR), but no reason to wait - I'll create a PR here later when the issue is resolved to go back to DBAL 2.5.
+
+Thanks!
