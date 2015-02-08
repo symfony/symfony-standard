@@ -94,7 +94,7 @@ knp_menu:
 sonata_block:
     default_contexts: [cms]
 
-# Cmf Create Configuration
+# The FOSRestBundle is used by the CreateBundle
 fos_rest:
     view:
         formats:
