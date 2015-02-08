@@ -1,4 +1,6 @@
 /web/bundles/
+/web/js/
+/web/css/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -11,6 +13,5 @@
 /bin/
 /composer.phar
 *.sqlite
-composer.lock
 app/check.php
 app/SymfonyRequirements.php
