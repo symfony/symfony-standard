@@ -11,12 +11,10 @@ and licensed under the [MIT License](LICENSE).
 This distribution is based on all the main CMF components needed for most common
 use cases, and can be used to create a new Symfony/CMF project from scratch.
 
-
 ## Requirements
 
 * Symfony 2.3.x
 * See also the `require` section of [composer.json](composer.json)
-
 
 ## Documentation
 
@@ -28,7 +26,6 @@ See also:
 
 * [All Symfony CMF documentation](http://symfony.com/doc/master/cmf/index.html) - complete Symfony CMF reference
 * [Symfony CMF Website](http://cmf.symfony.com/) - introduction, live demo, support and community links
-
 
 ## Contributing
 

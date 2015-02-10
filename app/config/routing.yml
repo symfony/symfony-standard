@@ -5,3 +5,7 @@ _demo:
 
 _cmf_create:
     resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation
