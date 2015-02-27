@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by dzuelke at 2015-02-27T14:05:17Z
+
+Beautiful:
+
+```
+remote:        Heroku deploy detected; creating default Procfile for "web" dyno
+```
+
+Thanks @fabpot !
