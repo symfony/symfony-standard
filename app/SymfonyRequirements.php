@@ -77,7 +77,7 @@ class Requirement
     }
 
     /**
-     * Returns the help text for resolving the problem
+     * Returns the help text for resolving the problem.
      *
      * @return string The help text
      */

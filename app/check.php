@@ -21,7 +21,7 @@ echo '> Checking Symfony requirements:'.PHP_EOL.'  ';
 
 $messages = array();
 foreach ($symfonyRequirements->getRequirements() as $req) {
-    /** @var $req Requirement */
+    /* @var $req Requirement */
     if ($helpText = get_error_message($req, $lineSize)) {
         echo_style('red', 'E');
         $messages['error'][] = $helpText;
