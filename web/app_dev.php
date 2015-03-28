@@ -26,5 +26,10 @@ $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
-$response->send();
+
+if ($request->getMethod() == 'HEAD') {
+    $response->sendHeaders();
+} else {
+    $response->send();
+}
 $kernel->terminate($request, $response);
