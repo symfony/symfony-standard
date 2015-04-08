@@ -29,6 +29,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    ide: "%ide%"
 
 # Twig Configuration
 twig:

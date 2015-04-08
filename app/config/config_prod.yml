@@ -1,7 +1,8 @@
 imports:
     - { resource: config.yml }
 
-#framework:
+framework:
+    ide: ~
 #    validation:
 #        cache: apc
 
