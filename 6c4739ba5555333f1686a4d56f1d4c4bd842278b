@@ -1,0 +1,270 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-23T17:02:27Z
+
+This makes sense to me. Was there an original reason/use-case where the locale would be changed on a machine-by-machine basis?
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-01-23T17:07:30Z
+
+It was added in what I believe was the first commit of this repo: https://github.com/symfony/symfony-standard/commit/db5b6be990bdd7aa9dd3744c02052271af0c6cc4 So I don't think there is any original reason that we can find.
+
+I'm not sure if I like it to have a parameters definition in `config.yml`. I think it might confuse people that we are configuring some sort of `parameters` bundle in there.
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-01-23T17:17:10Z
+
+Is the locale parameter used anywhere else? If not we can directly set `translator.fallback` and `default_locale` to "en"...
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-23T17:32:22Z
+
+Also, isn't this strange that the `translator` parameter has a `fallback` parameter ? Shouldn't be set automatically to the `default_locale` parameter ? Wouldn't this be better in removing the `locale` parameter in `parameters.yml` ?
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-23T19:06:26Z
+
+@Pierstoval You may have a point, but we should talk about that elsewhere - in the core :).
+
+@WouterJ for me, I actually like having `parameters` in config.yml, because I can say "see, parameters.yml isn't special - any file can have parameters. This file just isn't committed to the repo". But since you also talk to a lot of people who are learning, you can tell me if you disagree.
+
+@gnugat Yes, we could just remove the parameter altogether, but these probably are usually set to the same value (?). So if I want to use `fr`, I would now need to change it in both spots - I don't love that.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-23T19:08:46Z
+
+Also, I'm thinking about BC. Many bundles use the default `%locale%` parameter as a pivot point to set up translations, for instance, and modifying so drastically this feature would break some BC on many projects.
+
+As @weaverryan said, maybe it'd be better to discuss about this point in symfony core repository, especially on the master repo which will break many MANY BCs :D
+
+---------------------------------------------------------------------------
+
+by iltar at 2015-01-24T18:15:49Z
+
+@Pierstoval If `%locale%` doesn't exist, it could always be set in the parameter container, based on the chosen default language in the config
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-24T18:47:57Z
+
+In fact, that's what I wanted to suggest at first, but I don't know if it was explicit enough
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-24T21:25:22Z
+
+Yea, I'd prefer not to have any magic setting of parameters, and I don't see the advantage. The change as proposed now is tiny, and reflect where (I think) parameters should live.
+
+But I could propose 2 additional changes:
+
+1) Add a comment to the top of `parameters.yml.dist` saying:
+
+```yml
+# Set parameters here that may be different on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+...
+```
+
+2) Add a comment above the new `parameters` key in `config.yml` that says:
+
+```yml
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+# ...
+```
+
+@gerryvdm Could you make that change?
+
+I haven't heard any actual reasons agains this, so I'm :+1:!
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-24T21:38:19Z
+
+@weaverryan Great ! :+1: :+1:
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-01-24T22:38:47Z
+
+Let me say something shocking: what about putting it in `services.yml` ?
+
+I think adding `parameters` to `config.yml` will make people add services to it as well. That's not very great: `config*.yml` should only configure extensions, `services.yml` should load parameters/services, `parameters.yml(.dist)` should only contain infastructure-related parameters.
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-01-25T11:44:38Z
+
+I agree with @WouterJ
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-25T11:46:23Z
+
+I don't know, when you say "`config*.yml` should only configure extensions". In fact, if it configured only extensions, maybe it'd need to be renamed as `extensions.yml` ?
+"Config" is a word dedicated to configuration, and the locale is part of the configuration
+
+---------------------------------------------------------------------------
+
+by iltar at 2015-01-25T12:14:04Z
+
+@Pierstoval Interesting suggestion, but I don't think people know the concept of extensions in symfony, even though bundles are extensions on the container.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-01-25T12:15:19Z
+
+You're right, that's why I think setting up the locale at the beginning of the `config.yml` file might be a better idea than putting it in `services.yml` where you set up... services, which are basically classes.
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-01-25T13:14:41Z
+
+@Pierstoval the only "Config" thing in Symfony is configuring DI extensions. The extensions can then do anything with the config they want (only load services depending on some settings, saving some settings as parameters in the container, etc). That's why it is very logical to use `config.yml`, there is no other config concept except from configuring extensions.
+
+Then about "*the locale is part of the configuration*". It is indeed, it is part of the FrameworkBundle (as that's the bundle integrating i18n things): `framework.default_locale`. You can set this to `"en"` and you have configured the locale as part of the extension configuration.
+
+However, since you need it multiple times and don't want duplication, Symfony has a feature that allows you to pass container parameters as values of the extension settings (using the `%xxx%` notation).
+
+Now, the locale *configuration* part is still done in the `config.yml` file: `framework.default_locale` is still set in the `config.yml` file.
+
+However, the value of it depends on a parameter and this parameter has to exist in the container. In order to do this, you need to load it in the container, thus: `services.yml`.
+
+Loading this parameter on its own would not configure anything (as you don't have to use this parameters as value of `framework.default_locale`). The choice in the SE is to *configure* `framework.default_locale` in such a way that it is using a `locale` parameter that was *loaded* in the container. Configure: `config.yml`, loaded: `services.yml`
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-25T20:30:29Z
+
+Hi guys!
+
+I don't have much preference of config.yml or services.yml - they're all building the same container.
+
+But practically speaking, locale is used out of the box in config.yml, so the user can see how it's used all in one place. And parameters are also likely to be used under DI extension config as well as services, so having parameters in the "main" config file (config.yml) feels natural to me. Slight +1 from me for config.yml. I actually agree with you points Wouter - but config.yml feels more practical.
+
+Thanks!
+
+---------------------------------------------------------------------------
+
+by gerryvdm at 2015-01-26T09:21:31Z
+
+I added the comments, let me know if everything is ok now.
+
+If I may chime in on the location, I do prefer config.yml over services.yml, as I think and feel the latter was added for adding your own proprietary service definitions, while %locale% is mainly used in the framework extension's configuration (which happens in config.yml).
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-01-27T00:33:44Z
+
+:+1: !
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-03-24T01:15:14Z
+
+This still has a :+1: from me as-is! But I'm also :+1: for removing `database_driver` as a parameter altogether.
+
+---------------------------------------------------------------------------
+
+by gerryvdm at 2015-03-28T20:15:22Z
+
+Will look into the feedback on Monday!
+
+---------------------------------------------------------------------------
+
+by gerryvdm at 2015-04-01T08:53:34Z
+
+I changed the comment and removed the %database_driver% parameter.
+
+---------------------------------------------------------------------------
+
+by kristofvc at 2015-04-01T09:18:27Z
+
++1
+
+---------------------------------------------------------------------------
+
+by aitboudad at 2015-04-05T12:33:44Z
+
+:+1:
+
+Although each one has his prefered IDE/Text editor so what do you think about adding new params ```ide``` ?
+```yml
+# app/config/config.yml
+framework:
+    ide: "%ide%"
+```
+```yml
+# app/config/parameters.yml.dist
+parameters:
+    ide: ~
+```
+
+---------------------------------------------------------------------------
+
+by iltar at 2015-04-05T12:43:24Z
+
+@aitboudad what would be the point of defining an IDE in your parameters? That's unrelated to anything of symfony.
+
+If my colleague is using Eclipse, a designer is using Sublime and I'm using PHPStorm, this would clash already (not working with .dist).
+
+---------------------------------------------------------------------------
+
+by aitboudad at 2015-04-05T12:48:57Z
+
+@iltar I didn't understand what you mean by ```this would clash already (not working with .dist).``` ?
+
+---------------------------------------------------------------------------
+
+by aitboudad at 2015-04-05T12:59:36Z
+
+@iltar it's related to symfony http://symfony.com/doc/current/reference/configuration/framework.html#ide
+
+---------------------------------------------------------------------------
+
+by iltar at 2015-04-05T13:03:02Z
+
+@aitboudad I was not aware of that option. But 3 different people with 3 different editors will not be able to use the default configuration and will put development configuration (ide link) in production.
+
+---------------------------------------------------------------------------
+
+by aitboudad at 2015-04-05T13:50:27Z
+
+@iltar I just learned in doc
+>This can be done by setting the xdebug.file_link_format in the php.ini configuration to the url string. If this configuration value is set, then the ide option will be ignored.
+
+so this can be useless :)
+
+---------------------------------------------------------------------------
+
+by iltar at 2015-04-05T15:48:36Z
+
+This option is nice for people that don't have xdebug still, but a responsibility of the framework? I'd expect this kind of config under that debug bundle in the future
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-05T17:30:57Z
+
+It's clearly indicated in the docs that this parameter should be kept as system-relative.
+
+I'd totally disagree with adding this `ide` parameter as it would confuse newcomers.
+Plus, as said above, it is a problem for teams that have different IDEs. At , work I am using PhpStorm, my colleagues use Sublime, and the front-end devs use brackets and notepad++.
+This option would be totally useless for us.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-04-08T15:50:58Z
+
+Let's discuss the `ide` thing elsewhere. As is, this PR is ready to go - it's got a :+1: from me :)
+
+---------------------------------------------------------------------------
+
+by stof at 2015-04-08T15:58:55Z
+
+:+1:
