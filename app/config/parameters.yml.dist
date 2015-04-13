@@ -9,12 +9,22 @@ parameters:
     database_path:     "%kernel.root_dir%/app.sqlite"
 
     phpcr_backend:
-        # use Jackalope Doctrine DBAL
+        # if you're using Jackalope Doctrine DBAL
         type: doctrinedbal
         connection: default
         caches:
             meta: doctrine_cache.providers.phpcr_meta
             nodes: doctrine_cache.providers.phpcr_nodes
+        
+        # if you're using Jackalope Jackrabbit, comment the lines above
+        # and uncomment the lines after this comment
+        # type: jackrabbit
+        # url: http://localhost:8080/server/
+
+        # You can enable logging and profiling with the Symfony Toolbar by
+        # uncommenting the respective lines below
+        # logging: true
+        # profiling: true
     phpcr_workspace:   default
     phpcr_user:        admin
     phpcr_password:    admin
