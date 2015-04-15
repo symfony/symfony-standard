@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Soullivaneuh at 2015-04-15T07:56:27Z
+
+Just did the same thing on my Symfony project, seems to works well now. :+1:
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-04-15T08:32:50Z
+
+Is it only a problem with 2.7? Don't we need to do the same on older branches?
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-15T08:33:36Z
+
+I personnally have this problem only with 2.7. Tested with 2 other apps, one on 2.6 and one on 2.5. Don't know about 2.3 :confused:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-04-15T08:44:32Z
+
+At least, I couldn't reproduce the issue on the other branches.
