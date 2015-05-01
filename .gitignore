@@ -10,5 +10,4 @@
 /vendor/
 /bin/
 /composer.phar
-.idea
 .mysql
