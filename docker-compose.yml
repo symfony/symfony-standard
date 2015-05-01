@@ -1,0 +1,31 @@
+phpfpm:
+  command: php-fpm --allow-to-run-as-root
+  image: php:5.6.8-fpm
+  volumes:
+    - fpm.conf:/usr/local/etc/php-fpm.conf
+    - .:/var/www/symfony2
+  links:
+   - mysql
+mysql:
+  command: mysqld --user=root --verbose
+  image: mysql
+  volumes:
+    - .mysql:/var/lib/mysql
+    - mysql.cnf:/etc/mysql/my.cnf
+  environment:
+    MYSQL_DATABASE: symfony
+    MYSQL_USER: symfony
+    MYSQL_PASSWORD: symfony
+    MYSQL_ALLOW_EMPTY_PASSWORD: yes
+nginx:
+  image: nginx:1.9.0
+  volumes:
+    - nginx.conf:/etc/nginx/conf.d/default.conf
+    - .:/var/www/symfony2
+    - server.crt:/etc/ssl/certs/server.crt
+    - server.key:/etc/ssl/private/server.key
+  ports:
+   - "80:80"
+   - "443:443"
+  links:
+   - phpfpm
