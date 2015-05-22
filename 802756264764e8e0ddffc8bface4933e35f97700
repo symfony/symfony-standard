@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-05-22T13:30:12Z
+
+I think that this can be very useful :+1:
+
+---------------------------------------------------------------------------
+
+by hacfi at 2015-05-22T13:38:12Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2015-05-22T14:06:51Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-05-22T14:17:14Z
+
+:+1: The default value cannot be changed in DoctrineBundle because it would be a BC break for existing projects, but the underscore is a much saner choice than the default naming strategy keeping camel-cased names. It has much less compatibility issues across platforms.
