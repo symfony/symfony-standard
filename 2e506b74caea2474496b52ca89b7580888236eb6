@@ -1,0 +1,109 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-02T14:15:07Z
+
+Why don't we inject the request directly in the `indexAction` in addition to your proposal ?
+
+This would really show how to typehint the request
+
+---------------------------------------------------------------------------
+
+by calinpristavu at 2015-04-02T15:26:34Z
+
+-1 on this, as it does several unnecesary things IMO:
+  - misleads you into thinking that every controller must use the request
+  - generates a codesniffer warning(Class not used)
+  - extra line of code which is nevertheless automaticaly imported by most IDEs
+
+Unfortunately I have seen enough cases of people that do not use phpcs, where they use the request object in every action, without ever needing it.
+
+---------------------------------------------------------------------------
+
+by cordoval at 2015-04-02T15:50:07Z
+
+Maybe the exit here @weaverryan would be to tap into composer scripts to bring in a DefaultBundle of your choosing from a specific training package. I think the standard ditribution already supports this customization?
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-02T15:57:28Z
+
+@cordoval The standard edition installation has changed since the Symfony official installer has been released. The composer scripts are no longer run when you install Symfony this way.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-04-02T21:33:03Z
+
+@calinpristavu Thanks for the comments! I have some rebuttals below, but I genuinely appreciate the opinions. For me, I want to make things easier for beginners, but not *so* easy that they never learn what's going on :)
+
+a) I don't think it misguides into thinking that each controller function needs a request. After all, the one method in this class is *not* actually using it.
+
+b) I'm ok with introducing one code-sniffer warning on a new project. If you are someone who uses this, you'll quickly go into that class and remove it.
+
+c) It is an extra line of code, but it doesn't hurt anything (and you can't assume people use IDE's, especially beginners in my experience). And actually, as soon as you *do* need the request (e.g. form processing), having this extra line just saved you some work.
+
+If someone *does* blindly copy and paste existing actions so that all of their actions include `Request $request`, that *is* unfortunate, though not that big of a deal). But, this `use` statement won't make that better or worse, since I'm not actually adding `Request $request` to the method.
+
+Cheers!
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-03T06:04:00Z
+
+What about adding this kind of comment:
+
+```php
+/**
+ * If you need to use request datas such as $_GET or $_POST, just
+ * inject the Request object directly in your controller method like this:
+ * public function indexAction(Request $request)
+ * @link http://symfony.com/doc/current/book/controller.html#the-request-as-a-controller-argument
+ */
+```
+
+---------------------------------------------------------------------------
+
+by cordoval at 2015-04-03T06:04:40Z
+
+:+1: for the comment
+
+---------------------------------------------------------------------------
+
+by calinpristavu at 2015-04-03T07:02:31Z
+
+also +1 for the comment instead of the use statement. I find it less invasive and on point with what the user needs to know about the request object.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-04-03T07:20:42Z
+
+If the comment is added, I think that the `use` statement should be kept in the code, and to avoid the CS issues, we can add some more PhpDoc to propose the use of the Request object, like a `@see Request`
+
+The final solution might look like this:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+class DefaultController extends Controller
+{
+    /**
+     * If you need to use request datas such as $_GET or $_POST, just
+     * inject the Request object directly in your controller method like this:
+     * public function indexAction(Request $request)
+     * @link http://symfony.com/doc/current/book/controller.html#the-request-as-a-controller-argument
+     * @see Request
+     * @Route("/app/example", name="homepage")
+     */
+    public function indexAction()
+    {
+        return $this->render('default/index.html.twig');
+    }
+}
+```
+
+My only question is: what is the "real" coding standard about combining annotations + doc description + phpdoc annotations? :confused:
