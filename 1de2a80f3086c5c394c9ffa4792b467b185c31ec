@@ -1,0 +1,43 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-06-05T14:21:36Z
+
+:+1: What about 2.7 also?
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-05T14:56:55Z
+
+@Pierstoval 2.7 is included too. This PR is for any Symfony version higher than 2.6.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2015-06-05T14:57:52Z
+
+This is not a bug fix, so surely it's not allowed into 2.6, and must go into 2.7+.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-06-05T16:25:43Z
+
+@GrahamCampbell Symfony SE works in a different way than Symfony. The versions reflect the Symfony version for which SE is tied with. Nobody upgrades its Symfony SE, it's just a starting point for new projects.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-06-11T10:34:01Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-06-11T11:00:11Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-06-11T13:44:53Z
+
+We're ready on the docs (a few spots still mention AcmeDemoBundle, but I don't think it's an issue). Can anyone think of any other side effects we haven't covered yet?
+
+Regardless, :+1:
