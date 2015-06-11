@@ -1,0 +1,154 @@
+---------------------------------------------------------------------------
+
+by stof at 2015-06-11T08:20:58Z
+
+Is the security config still working now that we don't have any firewall anymore except the one disabling security for the toolbar and assetic ?
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-11T08:51:06Z
+
+Thanks for your review. As you cleverly guessed, this security config file doesn't work:
+
+![security_problem](https://cloud.githubusercontent.com/assets/73419/8103299/aa73fdfc-1027-11e5-970b-d2cdc64fda48.png)
+
+I've tried several configurations, but I cannot create "the minimal empty security configuration file". Any suggestion will be considered and appreciated.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-06-11T08:55:32Z
+
+Using this should work:
+
+```yml
+security:
+
+    providers:
+        in_memory:
+            memory: ~
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        default:
+            anonymous: ~
+```
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-11T08:58:25Z
+
+@Pierstoval indeed it works. Thanks!
+
+However, that file contents look strange. I'd like to either provide an empty security configuration (it looks impossible due to the limitations of the security component and/or bundle) or provide a useful and complete sample file. I don't know what to do.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-11T08:59:00Z
+
+Maybe @weaverryan can also share his opinion about what would be best for newcomers.
+
+---------------------------------------------------------------------------
+
+by stof at 2015-06-11T08:59:19Z
+
+looks good to me (except I would name the main firewall ``main`` rather than ``default``, as it is not a default one)
+
+---------------------------------------------------------------------------
+
+by stof at 2015-06-11T09:01:49Z
+
+and providing an empty configuration is indeed not possible. The SecurityBundle considers that you made a mistake if you enable it but don't configure the security layer (a firewall defined with ``security: false`` is not considered as having the security layer configured, which is true as it means that you don't want the security layer to be applied on this pattern).
+And in any case, changing this behavior of SecurityBundle in patch releases looks wrong to me, so we need to live with it when configuring the SE for 2.3.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-06-11T09:04:12Z
+
+Same as @stof . I only made a copy/paste of the `security.yml` from a blank SF2.7 installation :smile:
+
+@javiereguiluz you may then add multiple comments explaining how the security works, with a link to the different parts of the docs. I remember an old version of the `security.yml` file with many comments, like this:
+
+```yml
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: ~
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/book/security.html#security-book-access-control-matching-options
+    access_control:
+        # - { path: ^/admin, roles: [ROLE_ADMIN] }
+```
+
+Then you can remove anything "not useful" or "too complex" for newcomers, but IMO, we should keep everything in this example.
+The `access_control` part is almost mandatory in creating a secured backend, and the encoders need to be overriden when using `FOSUserBundle`. Even though I think this part can be removed, it can also be useful.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-11T09:15:55Z
+
+@Pierstoval I think we are mistaking some things. We cannot put a lot of help notes in the `security.yml` because this is not the Symfony Demo application. This is a blank Symfony application that people use to start coding their Symfony applications. That's why we should provide the application as "clean" and "untouched" as possible.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-06-11T09:19:35Z
+
+Then the first sample of code I posted above might be the best solution then :wink:
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-11T09:40:18Z
+
+OK, I've updated the `securit.yml` file as follows:
+
+```yaml
+security:
+
+    providers:
+        in_memory:
+            memory: ~
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+
+```
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-06-11T10:23:35Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-06-11T16:32:06Z
+
+:+1:
