@@ -53,7 +53,7 @@ It comes pre-configured with the following bundles:
   * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
     capabilities
 
-  * **DebugBundle** (in dev/test env) - Adds debug and VarDumper component
+  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
     integration
 
 All libraries and bundles included in the Symfony Standard Edition are
