@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-06-19T13:59:41Z
+
+@weaverryan yes it makes sense to me. In a previous issue, @Pierstoval asked if we could add help notes in this file and I suggested to not do that. But I guess there is a sweet spot between adding nothing and adding a lot of documentation. I think your pull request is exactly that sweet spot. Thanks!
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-06-19T14:20:26Z
+
+@javiereguiluz I agree - we don't want to maintain documentation on here. Thanks!
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-06-19T14:21:21Z
+
+:+1:
