@@ -1,7 +1,10 @@
 security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
     providers:
         in_memory:
-            memory: ~
+            memory:
+              users: %users%
 
     firewalls:
         dev:
