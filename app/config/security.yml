@@ -13,3 +13,9 @@ security:
 
         default:
             anonymous: ~
+            logout:
+                path:   /demo/logout
+                target: /
+            form_login:
+                login_path: /demo/login
+                check_path: /demo/login_check
