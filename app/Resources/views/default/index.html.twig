@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% set symfony_version = constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') %}
+
     <div id="wrapper">
-        <div id="container" class="fade-in">
+        <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> Symfony {{ constant('\\Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
+                <h1><span>Welcome to</span> Symfony {{ symfony_version }}</h1>
             </div>
 
             {% if requirements.failedRequirements|length > 0 %}
@@ -28,8 +30,6 @@
                         <code>{{ base_dir }}/</code>
                     </p>
                 </div>
-
-                {% set symfony_version = constant('\\Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('\\Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION') %}
 
                 <div id="next">
                     <h2>What's next?</h2>
@@ -85,10 +85,8 @@
         @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-        .fade-in {
-            -webkit-animation: fade-in 1.5s .2s;
-            animation: fade-in 1.5s .2s;
-        }
+        body { -webkit-animation: fade-in 1.5s .1s; animation: fade-in 1.5s .1s;}
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in .7s .5s forwards; animation: fade-in .7s .5s forwards;}
     }
 </style>
 {% endblock %}
