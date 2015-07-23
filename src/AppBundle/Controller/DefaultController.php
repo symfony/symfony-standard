@@ -13,11 +13,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         // replace this example code with whatever you need
-        require_once __DIR__.'/../../../app/SymfonyRequirements.php';
-
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'requirements' => new \SymfonyRequirements(),
         ));
     }
 }
