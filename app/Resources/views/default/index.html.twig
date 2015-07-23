@@ -1,18 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set symfony_version = constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') %}
-
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> Symfony {{ symfony_version }}</h1>
+                <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
             </div>
 
             <div id="status">
                 <p>
-                    <svg id="icon-status" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z" fill="#759E1A"/></svg>
+                    <svg id="icon-status" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z" fill="#759E1A"/></svg>
 
                     Your application is ready to start working on it at:
                     <code>{{ base_dir }}/</code>
@@ -39,7 +36,7 @@
                     </svg>
 
                     Read Symfony documentation to learn
-                    <a href="http://symfony.com/doc/{{ symfony_version[:3] }}/book/page_creation.html">
+                    <a href="http://symfony.com/doc/{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION')[:3] }}/book/page_creation.html">
                         How to create your first page in Symfony
                     </a>
                 </p>
@@ -73,9 +70,7 @@
 
         @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-
-        body { -webkit-animation: fade-in 1.2s .1s; animation: fade-in 1.2s .1s;}
-        .sf-toolbar { opacity: 0; -webkit-animation: fade-in .7s .5s forwards; animation: fade-in .7s .5s forwards;}
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
     }
 </style>
 {% endblock %}
