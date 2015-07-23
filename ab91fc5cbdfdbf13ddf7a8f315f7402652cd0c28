@@ -1,0 +1,233 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-07-22T07:51:04Z
+
+I don't think that writing the whole logic of the welcome page directly in the `DefaultController` is a good idea... Isn't it possible to add this behavior in another controller from the framework and do a simple `forward`?
+
+We removed the entire `AcmeDemoBundle` a little because of the fact that installing a new Symfony app implied removing this bundle manually, so adding a lot of code again that would have to be removed by the devs seems quite a "rewind back"...?
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-07-22T13:00:28Z
+
+@Pierstoval The logic is just a couple of lines of code - that's quite easy to remove.
+
+:+1:
+
+@javiereguiluz is already aware of this, but we'll need a docs PR when this is merged - it requires some screenshots, so there's no use doing it before a merge.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-07-22T13:14:00Z
+
+I've done the suggested changes.
+
+Given that the current situation is dreadful (the first thing you see about Symfony is an error page) I ask you to please make a decision about this PR as quickly as possible. Thanks!
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2015-07-22T16:56:49Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by pgodel at 2015-07-22T18:00:13Z
+
+Great improvement!
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by ogizanagi at 2015-07-22T18:02:57Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2015-07-22T18:56:34Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by hason at 2015-07-22T19:41:53Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by romqin at 2015-07-22T20:19:33Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by trq at 2015-07-22T22:50:24Z
+
+This is a simple but very effective improvement in my opinion. Great idea @javiereguiluz
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-07-23T12:45:07Z
+
+I think we're trying to mix two different concepts here:
+
+* providing a skeleton allowing developers to start writing their application right away
+* checking if the environment is correctly set up
+
+When I use the standard edition, I don't directly open a page in the browser: I first start writing my app and then I'll check it later.
+AcmeDemoBundle was removed because its purpose was to showcase the code of a Symfony application, and having it in the standard edition just slowed down developers who actually want to just start coding.
+
+On the other hand, I do think we're missing a good tool to check if the environment is set up correctly. But I'd rather see it as a standalone script you could run everywhere.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-07-23T12:48:55Z
+
+For people using the Symfony Installer, all technical requirements are checked during the installation and you can see the list of things to fix. In case you ignore this list, the first thing you'll see in the browser is the message telling you that some requirements aren't met.
+
+For people still using Composer to install Symfony, they don't get the nice requirements checker of the installer, so it's nice to see the welcome page reminding them about these errors.
+
+For Symfony experts, the new welcome page is just a 3 lines controller and 1 Twig template. They will clean everything very easily.
+
+---------------------------------------------------------------------------
+
+by cordoval at 2015-07-23T12:50:21Z
+
+Contrary to the common denominator I am :-1: because this creates confusion, maybe even documented confusion. I would have initially thought that a default route on / is more than enough.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-07-23T12:52:23Z
+
+@cordoval I don't understand your comment :confused: This PR is precisely to provide a default route to `/`, which currently is missing.
+
+---------------------------------------------------------------------------
+
+by cordoval at 2015-07-23T12:53:20Z
+
+Instead of the demo doing a /examples/page, it could just be /. The demo in the first place missed the point completely.
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-07-23T13:05:23Z
+
+I have a bit the same feeling as @cordoval and @gnugat. I would love to keep these things simple, as it now contains quite a bit of very confusing things (e.g. require_once in the controller, data urls, lots of logic).
+
+What about removing the requirement check and just link to `/web/check.php`?
+
+---------------------------------------------------------------------------
+
+by cordoval at 2015-07-23T13:10:30Z
+
+My feeling is broader actually, I remember those days in which symfony was simple :blush: and that we were happy escaping the magic of sf14 and give freedom to users. I know it is a hard critic, I did one project in sf14 for an old client recently and it felt to me simpler than working with symfony2. That feeling sank in me heavily.
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-07-23T13:12:38Z
+
+I have the feeling that your comments are completely not related to this PR, @cordoval. Can you maybe create a new issue for your thoughts on this (as it can lead to interesting results, when thinking about what can be made easier?) in the symfony repository and avoid the noise here? Thanks! :smiley:
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-07-23T13:24:30Z
+
+@WouterJ I like your last proposal. I've simplified everything in 3196523. Thanks.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-07-23T13:27:24Z
+
+@cordoval I don't understand why things are "more complicated" with this PR, even if I'm :-1: for the way it was implemented.
+
+For the rest, I still think that, even if its "only 3 lines of code and a template", it's still much more than "one single line of code" for me...
+
+---------------------------------------------------------------------------
+
+by WouterJ at 2015-07-23T13:34:30Z
+
+:+1: for the current state and merging this one quickly
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-07-23T14:48:04Z
+
+@javiereguiluz Can you update the screenshot in the description to avoid comments about the previous version?
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-07-23T14:49:56Z
+
+Done.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-07-23T14:51:43Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-07-23T14:55:06Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by sstok at 2015-07-23T15:00:39Z
+
+It's not magical or anything (like that it's part of the FrameworkBundle defining a default route), its a sensible default with a single page (not a complete bundle). And you are going to change (rather then delete - aka more work) these files anyway, so :+1: for me.
+
+@cordoval
+
+> My feeling is broader actually, I remember those days in which symfony was simple :blush: and that we were happy escaping the magic of sf14 and give freedom to users. I know it is a hard critic, I did one project in sf14 for an old client recently and it felt to me simpler than working with symfony2. That feeling sank in me heavily.
+
+Never used Symfony 1.4 :) so can't really tell, *what is simple is not automatically easy*.
+I understand your point, simple implies (simplistic or minimalistic) while easy describes (easy to use and change). I agree on the 'its starts directly from the box' vs 'clean from the box', that it's better (simpler) to get started directly without having to remove allot of demo code. But we also want to keep the experience to be easy and pleasant for newcomers.
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-07-23T15:03:50Z
+
+> @javiereguiluz
+> For people using the Symfony Installer, all technical requirements are checked during the installation and you can see the list of things to fix. In case you ignore this list, the first thing you'll see in the browser is the message telling you that some requirements aren't met.
+>
+> For people still using Composer to install Symfony, they don't get the nice requirements checker of the installer, so it's nice to see the welcome page reminding them about these errors.
+>
+> For Symfony experts, the new welcome page is just a 3 lines controller and 1 Twig template. They will clean everything very easily.
+
+I wouldn't use the installer nor composer bootstrap when creating a new server for an existing sf app. I'm actually longing for a standalone script that could be used anywhere, but that's another topic, sorry for bringing it here.
+
+Now back to the actual PR: I don't get the point of having a default page when all I want is an empty skeleton.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-07-23T15:09:39Z
+
+@gnugat I helped a user on Twitter just last week - they got the 404 page and thought that *tons* of things must be broken with their setup because they got an error page when first loading things up. That's the point.
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-07-23T15:36:05Z
+
+@weaverryan in the case of developers trying out Symfony for the first time, doesn't it make sense to provide them a different application (let's say the AcmeDemo show case application)? To me it sounds more like a lack of explanation / choice on the [download page](http://symfony.com/download).
+
+---------------------------------------------------------------------------
+
+by pgodel at 2015-07-23T15:38:35Z
+
+Guys, we are trying to help the newcomers, if you already know Symfony, you will know that you need to delete 3 lines of code and one twig template, and that won't take much time even if you have to do it multiple times.
+
+For a newcomer this change can make a big difference.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-07-23T15:40:10Z
+
+@gnugat It depends of what kind of "newcomer" you are. In my case, when I want to discover new frameworks/languages, I won't look at the code at first. I'll create an app. So in the case of Symfony, if I had to discover it today, I'd create an app and start to code right now by following the docs/books.
+
+Even if the Symfony Demo app is great in many points, it depends on each person, and IMO is more for presentations and learnings.
+
+And many other developers will give you different answers. That's why providing a very small **working** skeleton is absolutely important.
