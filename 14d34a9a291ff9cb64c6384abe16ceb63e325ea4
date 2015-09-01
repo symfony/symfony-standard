@@ -1,0 +1,119 @@
+---------------------------------------------------------------------------
+
+by Ocramius at 2015-04-17T14:56:22Z
+
+@Tobion ORM 2.4.7 works with DBAL 2.5.x
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-04-17T15:01:50Z
+
+@Ocramius what do you mean with "works"? Does it not cause #748? How did you fix it for these version?
+
+---------------------------------------------------------------------------
+
+by Ocramius at 2015-04-17T15:02:46Z
+
+It's not fixed in ORM 2.5 either.
+
+Marco Pivetta
+
+http://twitter.com/Ocramius
+
+http://ocramius.github.com/
+
+On 17 April 2015 at 16:01, Tobias Schultze <notifications@github.com> wrote:
+
+> @Ocramius <https://github.com/Ocramius> what do you mean with "works"?
+> Does it not cause #748
+> <https://github.com/symfony/symfony-standard/issues/748>? How did you fix
+> it for these version?
+>
+> —
+> Reply to this email directly or view it on GitHub
+> <https://github.com/symfony/symfony-standard/pull/800#issuecomment-94003519>
+> .
+>
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-04-17T15:03:39Z
+
+Then why does the error not appear anymore in ORM 2.5 if it's not fixed?
+
+---------------------------------------------------------------------------
+
+by Ocramius at 2015-04-17T15:05:55Z
+
+Luck? I see no explicit fix happening.
+
+That said, ORM 2.5 is DBAL 2.5 compatible, just platform auto-detection in DBAL is broken.
+
+---------------------------------------------------------------------------
+
+by Ocramius at 2015-04-17T15:08:06Z
+
+/cc @deeky666
+
+---------------------------------------------------------------------------
+
+by stof at 2015-04-17T15:24:42Z
+
+@Ocramius the auto-detection implementation in DBAL is fine: it is delayed until you retrieve the Platform from the connection (at which point the result of the detection is needed). As I explained several times already (including in http://www.doctrine-project.org/jira/browse/DBAL-1057 which tracks this officially), the issue is that the ORM was retrieving the platform in many places in the constructor instead of doing it only when it actually needs it. This means that just instantiating the ORM was asking for the platform at the right version.
+The commit referenced above fixed this issue in 1 place in the ORM, and other places getting the platform in their constructor are the persisters, the hydrators and the DQL function parsers. None of them is instantiated until they are used IIRC, meaning that the requirement to be connected seems legitimate.
+So I think it might be fixed by the commit referenced above.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-05-05T18:46:45Z
+
+Can we merge this one?
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-05-05T18:59:36Z
+
+Not yet. Doctrine needs to tag a new release which seems very hard to do. See https://github.com/doctrine/DoctrineBundle/issues/351#issuecomment-98545563
+
+---------------------------------------------------------------------------
+
+by Ocramius at 2015-05-05T19:44:01Z
+
+s/hard/time-consuming-during-my-evening-that-is-already-fully-booked-for-these-weeks
+:-)
+
+Marco Pivetta
+
+http://twitter.com/Ocramius
+
+http://ocramius.github.com/
+
+On 5 May 2015 at 19:59, Tobias Schultze <notifications@github.com> wrote:
+
+> Not yet. Doctrine needs to tag a new release which seems very hard to do.
+> See doctrine/DoctrineBundle#351 (comment)
+> <https://github.com/doctrine/DoctrineBundle/issues/351#issuecomment-98545563>
+>
+> —
+> Reply to this email directly or view it on GitHub
+> <https://github.com/symfony/symfony-standard/pull/800#issuecomment-99182279>
+> .
+>
+
+---------------------------------------------------------------------------
+
+by dbu at 2015-08-10T12:23:14Z
+
+ping @beberlei can you tag doctrine orm 2.4.8 maybe?
+
+---------------------------------------------------------------------------
+
+by stof at 2015-08-19T11:28:21Z
+
+and also doctrine orm 2.5.1
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-08-31T20:55:55Z
+
+Doctrine 2.4.8 has been released. So this can be merged.
