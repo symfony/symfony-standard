@@ -1,0 +1,41 @@
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-11-27T15:45:16Z
+
+Can you please explain why you think that this is necessary? `getEnvironment()` returns a string and the array elements are strings too.
+
+---------------------------------------------------------------------------
+
+by gerryvdm at 2014-11-27T15:53:07Z
+
+There's nothing preventing me to initialize the kernel with the integer 0 for example, and I will enter the condition in that case.
+
+Also I do believe that as far as strict checking is concerned, you should come up with a use-case to loosely check or do a strict check by default :)
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2014-11-27T15:57:55Z
+
+Yeah, you can do that though the `Kernel` class expects the environment to be a string.
+
+---------------------------------------------------------------------------
+
+by jrobeson at 2014-12-18T04:48:46Z
+
+i don't see why we shouldn't do it.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2014-12-18T05:37:13Z
+
+I don't see why we whould prevent users from initializing the kernel with integers, as I think you can also have integer environments (app_1.php, app_2.php, etc.).
+If one day someone tries to initialize the kernel with an integer instead of a numeric string, he'll probably be stuck on this error for a while, whereas a non-strict check is useful for that.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-04-17T14:14:10Z
+
+This change doesn't add anything useful but also doesn't hurt. Maybe strict checking is even faster.
+So lets just merge it. But should be done in 2.3.
+
+@Pierstoval I think you are missing the point. It's only about `array('dev', 'test')`, so intergets will not match anyway.
