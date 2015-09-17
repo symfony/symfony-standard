@@ -12,6 +12,4 @@ $loader = require __DIR__.'/../vendor/autoload.php';
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
-include_once __DIR__.'/bootstrap.php.cache';
-
 return $loader;
