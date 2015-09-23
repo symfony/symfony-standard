@@ -1,0 +1,78 @@
+---------------------------------------------------------------------------
+
+by gnugat at 2015-09-16T08:55:34Z
+
+Test classes could be autoloaded only in a development environment by moving them from `src/AppBundle/Tests` to `tests` and adding a `autoload-dev` section in composer.
+What do you think about this suggestion?
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-16T09:38:39Z
+
+I agree with @gnugat here. Separating tests from the runtime source is a good idea IMO
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-16T09:41:23Z
+
+this also requires an update of the HttpKernel component to change the location of the cache and logs
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-09-17T03:16:02Z
+
+@gnugat @stof @fabpot is just making the structure match what was decided in #584 - so we should focus only on that (and open a new issue about tests for discussion).
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-09-17T12:45:50Z
+
+Created #855 for tests
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-09-22T15:10:59Z
+
+Needs more work
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-09-22T22:14:42Z
+
+I'd recommend to merge #854 first.
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-09-23T08:04:33Z
+
+Besides the new directory structure, I've made another change that should help: sessions are now stored outside of the `cache/` directory, and directly into the `var/` dir.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-09-23T08:06:30Z
+
+@fabpot Why is it better to store the sessions in `var` instead of `cache` ?
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-09-23T08:10:21Z
+
+@Pierstoval Because clearing the session store should be decoupled from clearing the Symfony cache, the two are not related. And when using `cache:clear`, all the cache is flushed. Also, storing sessions in the cache has some problems with Windows (see symfony/symfony#15862 -- not confirmed though)
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-09-23T08:11:49Z
+
+This one is ready for a last review before merge.
+
+---------------------------------------------------------------------------
+
+by michaelcullum at 2015-09-23T09:21:58Z
+
+Should `var/sessions/` not also have a `.gitkeep` and be added to the `.gitignore`?
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-09-23T09:26:15Z
+
+@michaelcullum right, fixed
