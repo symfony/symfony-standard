@@ -9,7 +9,7 @@
 >
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests/*</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
