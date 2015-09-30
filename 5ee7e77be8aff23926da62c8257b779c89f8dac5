@@ -1,0 +1,373 @@
+---------------------------------------------------------------------------
+
+by Mandragora2 at 2015-09-28T15:51:45Z
+
++1
+
+---------------------------------------------------------------------------
+
+by cedvan at 2015-09-28T15:51:49Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Shine-neko at 2015-09-28T15:51:55Z
+
++1
+
+---------------------------------------------------------------------------
+
+by rpg600 at 2015-09-28T15:52:15Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by ProPheT777 at 2015-09-28T15:52:32Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by soukiii at 2015-09-28T15:53:15Z
+
+What about linking of images in template? It seems like everybody reacted just on postprocessing of CSS/JS.
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-28T15:54:11Z
+
+@soukiii AsseticBundle is not needed to reference assets. Don't confuse Assetic and the Symfony Asset component
+
+---------------------------------------------------------------------------
+
+by Mandragora2 at 2015-09-28T15:54:57Z
+
+@soukiii twig asset function is not linked to asseticBundle ;)
+
+---------------------------------------------------------------------------
+
+by soukiii at 2015-09-28T15:55:54Z
+
+Oh, sorry. My bad.
+
+---------------------------------------------------------------------------
+
+by welcoMattic at 2015-09-28T15:57:21Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by AlexandreKilian at 2015-09-28T15:57:48Z
+
++1
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-09-28T15:58:06Z
+
+I'm sure that most people will say `+1` but please remember that `symfony-standard` != `symfony`. The standard edition is about being useful. If we remove something without providing an alternative, we are providing less value to the end user.
+
+---------------------------------------------------------------------------
+
+by bastnic at 2015-09-28T15:59:52Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-28T16:01:29Z
+
+@javiereguiluz you don't always need to use Assetic. There are several alternatives:
+
+- not using any build system for your JS and CSS (unlikely in real projects, but it is good for a start, and might even continue like this. Packagist is an example)
+- use gulp/grunt/whatever and then reference the asset. This will give you the flexibility to use any frontend tool you want btw
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-09-28T16:06:27Z
+
+@stof I'll explain my concern with an example:
+
+  * If you ask 10 people which CSS framework to use, 8 will tell you Bootstrap, 1 will tell you Foundation and the other 1 will tell you to not use a framework.
+  * If you ask 10 people which workflow/technologies to use for JavaScript Asset management, you'll get 15 different answers.
+
+---------------------------------------------------------------------------
+
+by TomasVotruba at 2015-09-28T16:09:55Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-28T16:11:09Z
+
+@javiereguiluz and this is precisely why letting the user choose may be better. Assetic is probably the worse of the 15 answers you get (it depends on the actual tools, and generally does not give access to latest features of these tools because the Assetic integration is not provided by authors of these tools).
+
+---------------------------------------------------------------------------
+
+by Koc at 2015-09-28T16:11:46Z
+
+If you removing assetic bundle, so please provide clean recipe hot to combine+minify assets without it and add migration guide first.
+
+---------------------------------------------------------------------------
+
+by AlexDpy at 2015-09-28T16:12:31Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by rande at 2015-09-28T16:12:50Z
+
+@Koc a starting point: https://github.com/ekino/webpack-cheatsheet/blob/master/webpack.config.js
+
+---------------------------------------------------------------------------
+
+by zilongqiu at 2015-09-28T16:15:38Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-09-28T16:15:52Z
+
+@Koc this is the official article for using JavaScript to do this: http://symfony.com/doc/current/cookbook/assetic/uglifyjs.html
+
+And this is the alternative article using pure PHP libraries: http://symfony.com/doc/current/cookbook/assetic/php.html
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-28T16:16:18Z
+
+@Koc Assetic will still be an option. But other options are OK too.
+
+There is https://github.com/symfony/symfony-docs/issues/5725 about writing a cookbook showing how to use Gulp in a Symfony project (@weaverryan already produced http://knpuniversity.com/screencast/gulp about the topic btw). And cookbooks for other tools are also possible.
+
+---------------------------------------------------------------------------
+
+by theofidry at 2015-09-28T16:19:36Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by robmorgan at 2015-09-28T16:25:17Z
+
++1
+
+---------------------------------------------------------------------------
+
+by retkal at 2015-09-28T16:27:05Z
+
++1
+
+---------------------------------------------------------------------------
+
+by thadbryson at 2015-09-28T16:36:48Z
+
+I'm for getting rid of Assetic. There are better options now. Maybe even integrate Yeoman into it? Then we'd have code generators that could be imported, Bower for adding assets, and Gulp for managing the assets.
+
+---------------------------------------------------------------------------
+
+by theofidry at 2015-09-28T17:07:55Z
+
+@thadbryson IMO front-end stuff are moving way too much and there is no consensus whatsoever regarding the techno that should be used so it wouldn't be very wise to take a strong position here.
+
+For example Bower is getting deprecated as has no value added compared to npm and is actually less advanced now. As for Gulp there is around the same amount of user of Grunt... The only thing Symfony may do here is to provide a good cookbook entry at most (or at least that's what I think it should do).
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-09-28T17:36:03Z
+
+I'm :+1: for removing Assetic. I've been using it for years on a project, and the best relief I had during the last weeks was the moment when I removed it from this big project.
+
+We can also salute (self-promoting haha) initiatives like [Gryp.js](https://github.com/Orbitale/Gryp.js) which powers assets using Gulp and a single configuration file to avoid re-developing a Gulpfile or Gruntfile everytime we recreate a project.
+
+But IMO, all javascript frameworks/libraries/technologies will continue to change during the next years, disappearing each one after another.
+
+Removing Assetic is also great to generate some "statistics" about which solutions are the most used.
+
+Haven't Sensio thought about a tool to analyze composer, npm and bower dependencies to generate stats about usage? It could be good to propose this to everyone having created a working project with the Symfony-standard app.
+
+---------------------------------------------------------------------------
+
+by rodrigm at 2015-09-28T18:15:24Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Swader at 2015-09-28T18:29:11Z
+
+If the alternative is pushing for Node-based tools like Grunt, Gulp and other npm-dependent stuff that, by default, [isn't cross-platform](https://github.com/joyent/node/issues/6960) or [vm-friendly](https://samuelstenton.com/fix-npm-install-issues-within-a-vagrant-box-on-windows/), I would always vote for keeping the old solution, or going with something [totally new](http://www.sitepoint.com/look-ma-no-nodejs-a-php-front-end-workflow-without-node).
+
+---------------------------------------------------------------------------
+
+by dunglas at 2015-09-28T19:23:58Z
+
+Most (almost all) projects I wrote with Symfony since 1 year follow the same architecture:
+
+* one app and one Git repo for the backend in PHP/Symfony (without Assetic nor Twig except for mail templating and often without form views)
+* one app and one Git repo for the frontend in JavaScript (Grunt/Gulp + Angular/Backbone/React/whatever)
+* (only when SEO matter) a PHP (Guzzle + Twig) app and another Git repo generating raw HTML pages for search engines and serving the JS webapp
+
+So I'm :+1: to remove Assetic. We should encourage splitting the business logic (PHP) and the presentation layer (JS and/or mobile apps and/or desktop app...) in separate applications.
+
+---------------------------------------------------------------------------
+
+by InFog at 2015-09-28T19:31:28Z
+
+Looks ok. People who use it (myself included) can just add it when needed. :+1:
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-09-28T23:18:53Z
+
+:+1: for removing it from the standard edition. But, I hear a lot of people lamenting the complications and fast-pace of the JS solutions, and I agree: a backend developer should not be required to learn frontend solutions if their requirements can be met in an way that's easier for them.
+
+So, I would accompany this by a slight update of the docs, i.e. a big "How do I minify and combine assets?" cookbook article. There, we can give the user a few well-documented options, including Assetic, Gulp and (why not) other things like what @Swader mentioned. It should not be much different than the current situation, except that if you want Assetic, you'll need to `composer require`.
+
+---------------------------------------------------------------------------
+
+by dominikzogg at 2015-09-29T05:04:46Z
+
+-1
+
+---------------------------------------------------------------------------
+
+by tvlooy at 2015-09-29T07:17:18Z
+
+@fabpot what will come in place to support the demo application?
+
+---------------------------------------------------------------------------
+
+by ogizanagi at 2015-09-29T07:27:33Z
+
+@tvlooy : The assetic bundle will still be usable, just not provided in the standard edition by default. So there is no problem for the demo application. Also, in the demo application, the assets are dumped and versionned, so assetic is used only during development.
+
+---------------------------------------------------------------------------
+
+by tvlooy at 2015-09-29T07:33:30Z
+
+Shouldn't it be replaced with something more commonly used?
+
+---------------------------------------------------------------------------
+
+by cedvan at 2015-09-29T07:35:47Z
+
+@tvlooy by Gulp ? Problem, require node :/...
+
+---------------------------------------------------------------------------
+
+by mikaelBrosset at 2015-09-29T08:42:25Z
+
+I'm not a huge fan of Assetic.
+
+---------------------------------------------------------------------------
+
+by dunglas at 2015-09-29T08:49:51Z
+
+It should not be replaced. It's not the responsibility of Symfony to promote front tools. The front app come with its own set of tools (Grunt, Gulp...) and the backend with its own (Symfony...).
+
+---------------------------------------------------------------------------
+
+by theofidry at 2015-09-29T09:01:18Z
+
+> It's not the responsibility of Symfony to promote front tools.
+
+Can't say any better, let the front-end war to the front-end stack, don't bring it into Symfony.
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2015-09-29T09:02:23Z
+
+@dunglas I strongly disagree with you. Here we are talking about the full-stack Symfony **web framework**.
+
+If this web framework already provides things that most of us will never use (such as [LDAP security](https://github.com/symfony/symfony/pull/14602/files), [validators for ISSN numbers](https://github.com/symfony/validator/blob/master/Constraints/Issn.php) and the [list of countries in Tamil language](https://github.com/symfony/intl/blob/master/Resources/data/regions/ta.json)) I don't know why shouldn't we provide a simple but useful way of managing web assets, which is something that most web apps need.
+
+---------------------------------------------------------------------------
+
+by dunglas at 2015-09-29T09:15:44Z
+
+@javiereguiluz because the web is changing. Symfony is a very good tool to build server-side apps (API, forms, server-side generators...) but it is not adapted to build webapps, mobile apps nor desktop apps.
+
+We don't include helpers to build Swift, Java Android nor Swing apps in Symfony, however it's a very common use case to power such apps with Symfony as backend technology. It's becoming very similar in the field of websites. Advocating a frontend technology instead of another misses the point:
+
+* Symfony is 100% independent of the frontend stack
+* Supporting (installing in the standard edition) a specific frontend stack such as Grunt+Angular or Gulp+Flux+React will introduce a lof of complexity (including the Node dependency) for almost no benefit (it's easy to install such stacks without the help of Symfony)
+* Other projects such as Yeoman already handle this problematic well and are supported by a strong community
+
+We should focus on what we do well: a server-side framework.
+
+---------------------------------------------------------------------------
+
+by dunglas at 2015-09-29T09:16:41Z
+
+LDAP security and ISSN validator are perfectly valid features of a server-side framework.
+
+---------------------------------------------------------------------------
+
+by cedvan at 2015-09-29T09:20:42Z
+
+@dunglas totally agree, big :+1:
+
+---------------------------------------------------------------------------
+
+by catchamonkey at 2015-09-29T09:26:57Z
+
+> So, I would accompany this by a slight update of the docs, i.e. a big "How do I minify and combine assets?" cookbook article. There, we can give the user a few well-documented options, including Assetic, Gulp and (why not) other things like what @Swader mentioned. It should not be much different than the current situation, except that if you want Assetic, you'll need to composer require
+
+I think this sums up my thoughts on it nicely.
+No possibility is being taken away, it's just no longer the default in the standard edition.
+
+---------------------------------------------------------------------------
+
+by sroze at 2015-09-29T11:04:32Z
+
+@fabpot In the full stack framework, I totally disagree with this idea. A lot of people are using Symfony for API-only applications, but we need to keep in mind that's not the case for everybody. Especially for beginners it's far better to have Assetic already installed **in the standard framework** than having to manually setup an option to manage _complex_ assets (whatever that option is). I've run the DX initiative and that PR is not going at all in that direction IMO.
+
+@dunglas if "Symfony is 100% independent of the frontend stack" we should also remove Twig in that case, `JsonResponse` is enough :wink:
+
+---------------------------------------------------------------------------
+
+by dunglas at 2015-09-29T11:12:10Z
+
+@sroze Twig is useful for forms, mails and when doing apps not relying on Javascript at all. But I hope one day the `JsonResponse` way will be the norm :-)
+
+---------------------------------------------------------------------------
+
+by tvlooy at 2015-09-29T13:11:25Z
+
+@fabpot Anyhow. I think the question whether Symfony should change it's vision about frontend is an important one. Do you want to be a full stack framework or do you want to deliver components to Drupal, Laravel, ...
+Components like Assetic, Twig, form builder, all have valid use cases, but for a lot of projects things like GraphQL in particular and component based frontend frameworks will become much more important in the future. These are the things that should have better integration, get easier to start with in future releases, ...
+
+---------------------------------------------------------------------------
+
+by stof at 2015-09-29T13:21:26Z
+
+> we should also remove Twig in that case
+
+Twig is not part of the frontend. It is a server-side technology.
+
+---------------------------------------------------------------------------
+
+by theofidry at 2015-09-29T13:55:49Z
+
+>@fabpot Anyhow. I think the question whether Symfony should change it's vision about frontend is an important one. Do you want to be a full stack framework or do you want to deliver components to Drupal, Laravel, ...
+
+IMO there is nothing wrong with moving away from the "full stack framework" that Symfony claimed once to be. It's an old approach that becomes less and less relevant given how the front-end stack evolves. We're not talking about prohibit the Assetic, we removing as it as a pre-installed one. AFAIK, **it's always easier to add a bundle rather than removing one**. Moreover keeping it as pre-installed is pretty much *promoting* it as if it's one of the best solution existing. It's a good one, but that's it. As of now, there is nothing to justify placing it before another solution anymore.
+
+---------------------------------------------------------------------------
+
+by andreia at 2015-09-29T16:20:46Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by hacfi at 2015-09-29T16:33:46Z
+
+:+1: Was always removing it manually
