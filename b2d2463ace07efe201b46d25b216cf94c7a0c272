@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-10-09T15:22:34Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-10-09T15:40:59Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-10-09T15:41:55Z
+
+Please change the order of the directories to be the same as in 2.7 to ease merging: https://github.com/symfony/symfony-standard/blob/2.7/app/phpunit.xml.dist
+
+---------------------------------------------------------------------------
+
+by stof at 2015-10-09T15:42:38Z
+
+and please update the code coverage whitelist too (take it from the 2.7 branch too)
+
+---------------------------------------------------------------------------
+
+by amansilla at 2015-10-09T15:45:40Z
+
+@stof the code coverage whitelist is already up to date I guess, isn't?
+
+---------------------------------------------------------------------------
+
+by amansilla at 2015-10-13T12:18:38Z
+
+Is there still any code changes needed or everything is fine?
