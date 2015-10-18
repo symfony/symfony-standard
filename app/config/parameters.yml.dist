@@ -44,5 +44,5 @@ parameters:
     use_assetic_controller: true
     users:
         admin:
-            password: 111111
+            password: admin
             roles: ROLE_SUPER_ADMIN
