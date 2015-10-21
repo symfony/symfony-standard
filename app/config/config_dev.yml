@@ -9,6 +9,7 @@ framework:
 
 security:
     encoders:
+        # Don't use it in production
         Symfony\Component\Security\Core\User\User: plaintext
     providers:
         in_memory:
