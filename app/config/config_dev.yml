@@ -7,6 +7,15 @@ framework:
         strict_requirements: true
     profiler: { only_exceptions: false }
 
+security:
+    encoders:
+        # Don't use it in production
+        Symfony\Component\Security\Core\User\User: plaintext
+    providers:
+        in_memory:
+            memory:
+              users: %users%
+
 web_profiler:
     toolbar: "%debug_toolbar%"
     intercept_redirects: "%debug_redirects%"
