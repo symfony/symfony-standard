@@ -376,7 +376,7 @@ class RequirementCollection implements IteratorAggregate
  */
 class SymfonyRequirements extends RequirementCollection
 {
-    const REQUIRED_PHP_VERSION = '5.3.3';
+    const REQUIRED_PHP_VERSION = '5.3.9';
 
     /**
      * Constructor that initializes the requirements.
@@ -564,18 +564,6 @@ class SymfonyRequirements extends RequirementCollection
                 'Your requirements file is outdated. Run composer install and re-check your configuration.'
             );
         }
-
-        $this->addRecommendation(
-            version_compare($installedPhpVersion, '5.3.4', '>='),
-            'You should use at least PHP 5.3.4 due to PHP bug #52083 in earlier versions',
-            'Your project might malfunction randomly due to PHP bug #52083 ("Notice: Trying to get property of non-object"). Install PHP 5.3.4 or newer.'
-        );
-
-        $this->addRecommendation(
-            version_compare($installedPhpVersion, '5.3.8', '>='),
-            'When using annotations you should have at least PHP 5.3.8 due to PHP bug #55156',
-            'Install PHP 5.3.8 or newer if your project uses annotations.'
-        );
 
         $this->addRecommendation(
             version_compare($installedPhpVersion, '5.4.0', '!='),
