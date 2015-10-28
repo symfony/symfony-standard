@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by gnugat at 2015-09-16T11:28:17Z
+
+You could push it a little bit further: `^2.8.0@dev`
+
+---------------------------------------------------------------------------
+
+by mickaelandrieu at 2015-09-16T11:44:06Z
+
+humm, should be also done for Symfony3
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2015-09-16T12:21:03Z
+
+> You could push it a little bit further: ^2.8.0@dev
+
+:-1: because all other branches are like `2.7.*`.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2015-09-16T12:21:43Z
+
+`^2.8.0@dev` - that's wrong anyway, because it would include 2.9+ too. Yes, I know 2.8 is the last 2.x minor release, but that version constraint would be wrong, semantically.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2015-10-28T17:17:59Z
+
+Ping @fabpot. :)
