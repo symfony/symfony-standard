@@ -11,22 +11,22 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 class UnitBlock extends AbstractBlock
 {
     /**
-     * @PHPCR\String
+     * @PHPCR\Field(type="string")
      */
     protected $text = 'Read more!';
 
     /**
-     * @PHPCR\String(nullable=true)
+     * @PHPCR\Field(type="string", nullable=true)
      */
     protected $url;
 
     /**
-     * @PHPCR\String(nullable=true)
+     * @PHPCR\Field(type="string", nullable=true)
      */
     protected $route;
 
     /**
-     * @PHPCR\String
+     * @PHPCR\Field(type="string")
      */
     protected $image;
 
