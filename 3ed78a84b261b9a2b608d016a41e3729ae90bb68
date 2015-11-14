@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2015-10-28T16:58:03Z
+
+@nicolas-grekas what do you think?
+
+---------------------------------------------------------------------------
+
+by fabpot at 2015-10-28T18:40:32Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-10-28T18:52:11Z
+
+I wonder how this interacts with https://github.com/symfony/symfony-standard/blob/2.8/app/autoload.php#L6 that is part of the bootstrapping?
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-10-28T19:26:57Z
+
+@Tobion I think this line should be specific to entry points (`app.php`, `app_dev.php` and `console`) and not the autoloader :confused:
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-11-13T22:54:33Z
+
+@nicolas-grekas do you agree with this PR? And shouldn't we add symfony/phpunit-bridge to the require-dev section as well?
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-11-13T23:04:33Z
+
+LGTM Yes. Adjoint the bridge is a good idea although not strictly required since it looks like that no deprecations are triggered for now
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-11-13T23:58:54Z
+
+I just tested it with phpunit and the php config is executed before AND after the `bootstrap` file. So the error_reporting is -1 when calling autoload and is reset to -1 after it by phpunit. But it is not set for each test. This is strange behavior by phpunit. But at the end it doesn't really matter to us. There is no difference if error reporting is `-1` or `-1 & ~E_USER_DEPRECATED` if you use the phpunit bridge.
+
+So this is good to be merged.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-11-14T00:11:41Z
+
+For the phpunit-bridge I created #884
