@@ -1,0 +1,65 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-10-07T20:52:19Z
+
+What about this:
+
+```diff
+-/var/*
+-!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+-!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+-!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
++/var/*
+!var/SymfonyRequirements.php
+```
+
+Could it work by moving `/var/*` at the end of the file? I don't know if Git takes the order in account :confused: It could be a bit better-looking..
+
+---------------------------------------------------------------------------
+
+by ogizanagi at 2015-10-07T20:58:20Z
+
+I tried your example just to be sure...but it doesn't work and exclude the whole `/var/` dir.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-10-07T21:01:07Z
+
+It's strange that simply removing the `!/var/sessions` and alikes does not work :confused:
+Indeed it's ugly, but it makes me wonder of how `.gitignore` *really* works...
+
+---------------------------------------------------------------------------
+
+by DavidBadura at 2015-10-13T09:34:56Z
+
+why do you need to keep specific files or folders? these are generated automatically if they are missing. I have some projects for a long time with this config. it work's without problems.
+
+---------------------------------------------------------------------------
+
+by hacfi at 2015-10-13T09:59:59Z
+
+I think it’s good idea to check in the directories to avoid permission issues. Will check the PR later today.
+
+---------------------------------------------------------------------------
+
+by DavidBadura at 2015-10-13T10:03:30Z
+
+the whole var folder should be writable by the web server. it should be no problem to create the missing files and folders.
+
+---------------------------------------------------------------------------
+
+by jvasseur at 2015-10-13T10:10:51Z
+
+@DavidBadura The var/bootstrap.php.cache should probably not be writable by the web server.
+
+---------------------------------------------------------------------------
+
+by DavidBadura at 2015-10-13T10:30:11Z
+
+We save the thumbnails, uploads etc. in that folder, which in turn is stored by the webserver. Instead of inserting all folders and files into the gitignore-file, we should consider removing the files that shouldn't be ignored from the var folder. This is only about 'var/bootstrap.php.cache' - right?
