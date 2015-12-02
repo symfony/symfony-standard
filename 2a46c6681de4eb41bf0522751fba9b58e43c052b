@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-01T09:43:46Z
+
+Very :+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-12-01T09:44:59Z
+
+sorry to have missed it before the release. I noticed files was used instead of classmap while looking at the KnpUniversity screencast about upgrading a project.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-01T10:29:00Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-01T11:32:06Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-01T22:03:56Z
+
+Makes sense to me. @stof is this just a "nice" thing, or are there some real consequences related to autoloading (related to your conversation on symfony/symfony-installer#213)?
+
+---------------------------------------------------------------------------
+
+by stof at 2015-12-02T08:18:31Z
+
+There is a consequence: the AppKernel class is not loaded as soon as you load the composer ClassLoader, but only on first usage, allowing to keep its parent classes in the bootstrap.php.cache file as done previously.
+
+the nice side-effect is also making it simpler to use AppCache as it is now autoloaded
