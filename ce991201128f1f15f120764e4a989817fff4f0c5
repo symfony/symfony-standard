@@ -1,0 +1,106 @@
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-10T14:09:48Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2015-12-10T14:26:12Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T16:27:16Z
+
+IMO its still better to keep it as some libraries do not use silencing with `@tigger_error` like Elastica.
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T16:29:45Z
+
+We added this in 2.8, elastica runs on 2.7, thus it already works without silencing
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T17:31:46Z
+
+The problem is E_USER_DEPRECATED is not excluded by default and thus if you don't use Symfony Debug ErrorHandler, user deprecations are taken action on, e.g. in production mode.
+This might be not wanted (since E_DEPRECATED and E_STRICT is excluded by default).
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T17:35:54Z
+
+Nobody reported any issue with 2.7, thus I'd say this is theoretical.
+But if we keep this on the long run, people *will* ignore things that they cant ignore right now.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T17:38:56Z
+
+> But if we keep this on the long run, people will ignore things that they cant ignore right now.
+
+I don't understand.
+
+Btw, how would it be possible currently to log symfonys deprecations in production mode? I guess one has to use the Debug ErrorHandler somehow in production mode?
+It's unfortunate that the silencing makes it impossible to use php internal `log_errors` directive, doesn't it?
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T17:44:45Z
+
+2.8.0 is the only released version where deprecations are silenced, this is new behavior, but bad imho.
+Apps running on non-2.8.0 already fixed/handled deprecations, since they have no choice but deal with them (when unsilenced)
+Making it impossible to log deprecations in prod with the internal error handler is not an issue at all for me (and not related to this PR btw).
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T18:41:33Z
+
+I don't see why you think this is new behavior. You added this silencing in https://github.com/sensiolabs/SensioDistributionBundle/pull/201 and thus is it part even of the newer 2.3 releases of symfony-standard. This is not new to 2.8.0 at all. I just extracted it from bootstrap to autoload.
+
+I'm ok to remove that again. I'm just pointing out there will be a different behavior for deprecations triggered via `@trigger_error` and `trigger_error` in production mode.
+
+---------------------------------------------------------------------------
+
+by stof at 2015-12-10T18:50:33Z
+
+@Tobion non-silenced deprecations would then go to error_log in prod, which will not break your app
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T18:51:55Z
+
+> is it part even of the newer 2.3 releases
+
+Oh really? Then I somehow messed up :-)
+Still, to me, this is just accounting for the fact that we silence
+deprecations now...
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T19:17:33Z
+
+@stof unless people use an error handler in prod that transforms deprecations to exceptions. This to my knowledge exactly the reason why we silenced deprecations in the first place. As workaround for all those error handlers that treated deprecations like any other error.
+
+In the hope that those error handlers are fixed by now, I'm :+1: to merge this.
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T19:45:26Z
+
+On 2.3 isn't it?
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-10T20:28:05Z
+
+This can only be merged in 2.8. The 2.3 I was referring to was about the sensio distrubution bundle bootstrap generation (which is used in 2.3). Nicolas, you need to take a break :) You are getting confused.
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2015-12-10T20:36:53Z
+
+For sure! Christmas time will help :-)
