@@ -1,6 +1,7 @@
 # Symfony CMF Standard Edition
 
 [![Build Status](https://secure.travis-ci.org/symfony-cmf/standard-edition.png?branch=master)](http://travis-ci.org/symfony-cmf/standard-edition)
+[![StyleCI](https://styleci.io/repos/17054439/shield)](https://styleci.io/repos/17054439)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/standard-edition/version.png)](https://packagist.org/packages/symfony-cmf/standard-edition)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/standard-edition/d/total.png)](https://packagist.org/packages/symfony-cmf/standard-edition)
 
