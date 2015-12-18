@@ -1,0 +1,79 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-03T09:03:27Z
+
+I don't know, I like it like it is, I don't like the new syntax (reminds me of Javascript too much, and is a pain to write on Mac rather than the classic syntax).
+
+---------------------------------------------------------------------------
+
+by calinpristavu at 2015-12-03T09:13:12Z
+
+It's true that the old syntax is "prettier", however IMO it's just a matter of habit.
+PHPCS also sniffs it and throws a warning.
+so I'm +1
+
+---------------------------------------------------------------------------
+
+by bocharsky-bw at 2015-12-03T09:13:30Z
+
+@Pierstoval Why does it pain for you to write new array syntax on Mac?
+
+Almost any application is written with PHP and JS, so to have the same syntax is more readable IMHO.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-03T09:16:53Z
+
+It's a matter of taste, I won't blame anyone for using it, but I personally don't like it because on mac I always confound `{` and `[` (and reversely `}` and `]` ) when I write code...
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-03T09:29:17Z
+
+We don't use the new sytax in symfony/symfony just to ease merging. But we can easily use it in symfony-standard. :+1:
+
+---------------------------------------------------------------------------
+
+by gnugat at 2015-12-03T11:59:31Z
+
+> @calinpristavu
+>
+> PHPCS also sniffs it and throws a warning.
+
+But there's no reason to throw a warning: the "old" syntax hasn't been deprecated or anything. The only issue would be mixing both syntaxes.
+
+> @bocharsky-bw
+>
+> Almost any application is written with PHP and JS
+
+Symfony can be used as a full stack framework with PHP and javascript mixed, but that's not the only usage. It can also be used to create APIs where you wouldn't have any javascript. It could be used in many ways where you wouldn't have javascript. Also there's no way to know which usage is the most prevalent.
+
+> @Pierstoval
+>
+> It's a matter of taste
+
+I agree. It doesn't matter which one we use as long as we're consistent everywhere.
+
+---------------------------------------------------------------------------
+
+by bocharsky-bw at 2015-12-03T12:07:36Z
+
+> I agree. It doesn't matter which one we use as long as we're consistent everywhere.
+
+@gnugat It means that I need to use old syntax in my project if I want to be consistent with Symfony SE for now. But why I should do it? The main benefit of new array syntax is that it's shorter than old syntax. So why don't use it if we can.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-03T13:38:11Z
+
+> @gnugat It means that I need to use old syntax in my project if I want to be consistent with Symfony SE for now. But why I should do it? The main benefit of new array syntax is that it's shorter than old syntax. So why don't use it if we can.
+
+It's all about standards. Php-fig and PSRs were created in order to simplify writing "beautiful" (rather than "good") PHP applications, and having standards for coding is better to avoid one developer to use tabs instead of spaces, or a developer wanting to put opening brackets in the same line as the declaration, or in the following line.
+
+For 20 years (exaggerating ? :p ) we wrote `array()`, so everyone know this syntax, this why it's "standard". The short-syntax was implemented in 5.4 and many users don't even know about traits...
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-04T22:35:10Z
+
+I don't care about this as it dos not really matter whether or not we use the short syntax (people could also change these few occurrences on their own if they feel disturbed by it).
