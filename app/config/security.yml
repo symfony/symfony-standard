@@ -5,7 +5,7 @@ security:
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory:
-            memory: ~
+            memory:
               users:
                 # Only for demo purposes. Of course, use a more
                 # secure password on production.
