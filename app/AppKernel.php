@@ -35,7 +35,6 @@ class AppKernel extends Kernel
 
             new Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
 
             // Application bundles
             new AppBundle\AppBundle(),
