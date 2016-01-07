@@ -3,28 +3,19 @@ imports:
 
 framework:
     router:
-        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        resource: '%kernel.root_dir%/config/routing_dev.yml'
         strict_requirements: true
     profiler: { only_exceptions: false }
 
-security:
-    encoders:
-        # Don't use it in production
-        Symfony\Component\Security\Core\User\User: plaintext
-    providers:
-        in_memory:
-            memory:
-              users: %users%
-
 web_profiler:
-    toolbar: "%debug_toolbar%"
-    intercept_redirects: "%debug_redirects%"
+    toolbar: '%debug_toolbar%'
+    intercept_redirects: '%debug_redirects%'
 
 monolog:
     handlers:
         main:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
             level: debug
             channels: [!event]
         console:
@@ -41,7 +32,7 @@ monolog:
         #    level:  info
 
 assetic:
-    use_controller: "%use_assetic_controller%"
+    use_controller: '%use_assetic_controller%'
 
 #swiftmailer:
 #    delivery_address: me@example.com

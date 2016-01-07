@@ -6,6 +6,18 @@ security:
     providers:
         in_memory:
             memory: ~
+              users:
+                # Only for demo purposes. Of course, use a more
+                # secure password on production.
+                admin:
+                    password: admin
+                    roles: ROLE_SUPER_ADMIN
+
+    # *NEVER* store passwords as plaintext in production, this is purely for
+    # demo purposes.
+    # http://symfony.com/doc/current/book/security#c-encoding-the-user-s-password
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,7 +27,7 @@ security:
 
         main:
             # activate different ways to authenticate
-            #
+
             anonymous: ~
 
             logout:
