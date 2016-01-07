@@ -14,10 +14,10 @@
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^5.3.9|^7.0",
         "symfony/symfony": "~2.6",
-        "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",
         "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.2",
