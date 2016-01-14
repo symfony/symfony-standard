@@ -1,0 +1,124 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-08T13:47:57Z
+
+@Tobion remind me, was this something that changed in Symfony 3? I always have a hard time wrapping me head around this, because I know (at least previously), that setting this setting to `null` and *not* setting it meant two different things.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-08T14:21:00Z
+
+Not defining `handler_id` is the same as `handler_id:  session.handler.native_file` (as now) because its the default value in the config. But IMO specifiying it explicitly is better DX because save_path and handler_id depend on each other.
+`handler_id: ~` means use handler from php.ini.
+
+---------------------------------------------------------------------------
+
+by ogizanagi at 2015-12-08T14:26:44Z
+
+What about merging this in 2.3 then ?
+
+*EDIT:* I've just seen `save_path` is only present in `standard-edition` 3.0+ actually, and is part of https://github.com/fabpot/symfony-standard/commit/dcf4eadc767246546729813d88a3d1592e954363, which was merged in 3.0. So it makes sense actually :+1:
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-08T14:35:24Z
+
+@Tobion I agree with your point on DX. So, we *used* to default to `~`, meaning "use php.ini" default. NOW this would default people to file storage. I'm just pointing out that we'll be changing the recommended default setting for projects, agree?
+
+But I think I like it: though what about keeping the comment that setting this to `null` will cause the `php.ini` default to be used?
+
+And yes, `save_path` was added in SE 3.0 only, but it always existed. So if we're going to keep it in `3.0`, perhaps we should backport it to 2.3: it *is* nice to explicitly see why sessions are being stored in a specific location.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-08T16:19:06Z
+
+@ogizanagi the bug is ony in 3.0
+
+Ok to sum up: In #606 the session handler was changed to use php.ini values. If you use the php.ini session handler, then the `framework.session.save_path` is irrelevant because it's not used at all.
+- So since symfony-standard 2.4 sessions are saved in php.ini save_path (sys_get_temp_dir by default) using the php.ini handler (files by default).
+- In symfony-standard 2.3 session are saved in `app/cache/dev/sessions` using `session.handler.native_file` as the default config of https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/Configuration.php#L252-L263 is used.
+- Since symfony-standard 3.0 @fabpot wanted to save sessions in `var/sessions/dev` via https://github.com/symfony/symfony-standard/commit/dcf4eadc767246546729813d88a3d1592e954363
+But that does not work because the `framework.session.save_path` is not used at all and sessions are still saved in php.ini save_path. This is want is symfony/symfony#16898 is about.
+
+So either we keep using php.ini settings by default (which means we do not know where sessions are saved and thus the var/session directory makes no sense). Or we want to use `var/sessions` but then we have to fix the session handler to a file based one as well (because it does not make sense to configure the save_path to var/sessions if you use a redis handler in your php.ini.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-08T16:29:50Z
+
+`var/sessions` seems to be the best to me, and it was intended by @fabpot to use this directory, so I don't see why we should propose php.ini default to be used.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-08T16:41:09Z
+
+In fact, the final solution added by Fabien in 3.0, was suggested by drak (ghost, unfortunately, on the PR) on the linked #606 PR: https://github.com/symfony/symfony-standard/pull/606#issuecomment-29839961... but that was never the right solution (for the exact reasons this issue was opened).
+
+I think we should *keep* the native, php.ini handler, but with more comments than we have now:
+
+```yml
+session:
+    # handler_id set to null will use the default session handler from php.ini
+    handler_id: ~
+
+    # or, you can specify some specific handler and options
+    # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+    # handler_id: session.handler.native_file
+    # save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+```
+
+---------------------------------------------------------------------------
+
+by Tobion at 2015-12-08T17:24:14Z
+
+But then it does not make sense to preconfigure the directory https://github.com/symfony/symfony-standard/tree/master/var/sessions if it is not used.
+And I think it is easier to just reference the documenation: http://symfony.com/doc/current/cookbook/session/sessions_directory.html
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-08T17:36:57Z
+
+@Tobion you're right, so I would vote to remove the `var/session` directory if we used my proposal.
+
+If we *do* use my proposal and you think the code is a little to wordy (i.e. too many comments), then yea: we could just link to the docs for how to configure session handlers in general. We should link to the reference docs - the link you posted (unfortunately) *only* shows you how to do file storage: it doesn't help anyone looking to configure something else, like Redis.
+
+So we're back to what you mentioned @Tobion: do we default to using the php.ini default (as was done in 2.4-3.0 in the SE) or do we default to `/var/session` file storage? Based on the decision in #606, we previously decided to use the php.ini default.
+
+---------------------------------------------------------------------------
+
+by ogizanagi at 2015-12-09T01:36:50Z
+
+As I understand it, @fabpot proposal was only about avoiding to have the `session.save_path` inside the application cache (which is the default), in order to prevent flushing it on a `cache:clear`.
+Not especially about promoting the use of `session.handler.native_file` (but if used, suggest to store sessions into `/var/session`)
+
+But then, as @weaverryan expressed, it makes no sense to have the `var/session` directory in SE if it is not used by default, as well as having the `session.save_path` path option configured. It should rather be commented.
+
+I would opt for @weaverryan suggestion. Or even remove back the `save_path` option. Then, simply link the cookbook entry, which already mention why you should use another `save_path` than the default `%kernel.cache_dir%/sessions`.
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-09T11:22:01Z
+
+Imo having sessions stored in `var/sessions` is less confusing for users as the Symfony applications would not interfer with other PHP applications on the same server which could lead to hard to debug issues.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2015-12-18T15:29:35Z
+
+The more I think about this, the more I agree with @xabbuh: put things in `/var/sessions` by default (as this PR does). But, I think at least a link to the docs is useful: this would be a common setting to need to change (and the docs could use some work too....)
+
+```yml
+session:
+    # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+    handler_id: session.handler.native_file
+    save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+```
+
+:+1: as-is, but even more with the docs link comment
+
+---------------------------------------------------------------------------
+
+by JHGitty at 2015-12-28T16:07:28Z
+
+I've got the same issue (https://github.com/symfony/symfony/issues/17157). Please merge this!
