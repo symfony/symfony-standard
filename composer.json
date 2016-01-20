@@ -20,10 +20,10 @@
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/generator-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^2.7"
     },
     "scripts": {
