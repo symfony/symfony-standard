@@ -11,7 +11,7 @@ class StaticPageTest extends WebTestCase
         $client = $this->createClient();
 
         $crawler = $client->request('GET', '/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), $crawler->html());
 
         $title = 'Welcome!';
         $this->assertCount(1, $crawler->filter(sprintf('h1:contains("%s")', $title)), 'Page does not contain an h1 tag with: '.$title);
