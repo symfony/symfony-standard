@@ -13,6 +13,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+  global:
+    - SYMFONY_DEPRECATIONS_HELPER=34
+
 matrix:
   finish_fast: true
   include:
