@@ -6,4 +6,4 @@ parameters:
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+#        arguments: ['@another_service_name', 'plain_value', '%parameter_name%']

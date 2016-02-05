@@ -11,7 +11,7 @@
     {% endblock %}
 
     {# CreateJS is only available for admins by default #}
-    {% if app.security is not null and is_granted('ROLE_ADMIN') %}
+    {% if app.user and is_granted('ROLE_ADMIN') %}
         {% include "CmfCreateBundle::includecssfiles.html.twig" %}
     {% endif %}
 </head>
@@ -34,6 +34,6 @@
         {% block main %}{% endblock %}
     </div>
 
-    {% render(controller("cmf_create.jsloader.controller:includeJSFilesAction")) %}
+    {{ render(controller("cmf_create.jsloader.controller:includeJSFilesAction")) }}
 </body>
 </html>

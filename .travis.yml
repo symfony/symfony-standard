@@ -13,6 +13,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+  global:
+    - SYMFONY_DEPRECATIONS_HELPER=34
+
 matrix:
   finish_fast: true
   include:
@@ -28,7 +32,6 @@ install: if [ "$COMPOSER_CMD" = "install" ]; then composer install --prefer-dist
 
 before_script:
   - app/console doctrine:phpcr:init:dbal --force -e=test
-  - app/console doctrine:phpcr:workspace:create standard_test -e=test
   - app/console doctrine:phpcr:repository:init -e=test
 
 script: phpunit -c app

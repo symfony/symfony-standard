@@ -1,11 +1,11 @@
 # AcmeDemoBundle routes (to be removed)
 _demo:
-    resource: "@AcmeDemoBundle/Resources/config/routing.yml"
+    resource: '@AcmeDemoBundle/Resources/config/routing.yml'
     prefix: /demo
 
 _cmf_create:
-    resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
+    resource: '@CmfCreateBundle/Resources/config/routing/rest.xml'
 
 app:
-    resource: "@AppBundle/Controller/"
+    resource: '@AppBundle/Controller/'
     type:     annotation

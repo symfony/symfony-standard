@@ -9,12 +9,6 @@ Acme\DemoBundle\Document\UnitBlock:
         url: http://symfony.com/doc/current/cmf/quick_tour/the_big_picture.html
         image: bundles/acmedemo/images/welcome-quick-tour.gif
 
-    configure:
-        id: /cms/content/blocks/hero_unit/configure
-        text: Configure
-        route: _configurator_home
-        image: bundles/acmedemo/images/welcome-configure.gif
-
     demo:
         id: /cms/content/blocks/hero_unit/demo
         text: View the demo
