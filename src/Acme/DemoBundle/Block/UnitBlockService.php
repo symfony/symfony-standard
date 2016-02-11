@@ -27,22 +27,6 @@ class UnitBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $form, BlockInterface $block)
-    {
-        throw new \RuntimeException('Not used at the moment, editing using a frontend or backend UI could be changed here');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
-    {
-        throw new \RuntimeException('Not used at the moment, validation for editing using a frontend or backend UI could be changed here');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         if (!$response) {
