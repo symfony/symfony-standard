@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------
+
+by jakzal at 2016-02-04T14:55:29Z
+
+Which tools do you want to comply with?
+
+---------------------------------------------------------------------------
+
+by taylankasap at 2016-02-04T15:17:26Z
+
+Sorry about that, I added a description.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-02-04T16:07:12Z
+
+With the explanation, I find this legit and I'd say :+1:
+
+---------------------------------------------------------------------------
+
+by jakzal at 2016-02-04T17:11:01Z
+
+> I think commit message should be changed to something like "Added empty disallow field to robots.txt comply with Robot Exclusion Standard"
+
+@taylankasap you can change the commit message with `git commit --amend -m 'New message'` and push your changes with `--force`. I noticed you commited your changes to the master branch. Next time it might be worth to create a new branch so that you don't pollute your master.
+
+---------------------------------------------------------------------------
+
+by taylankasap at 2016-02-04T17:49:03Z
+
+Okay, I've updated the commit message.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2016-02-04T23:21:39Z
+
+:+1: Should be merged in 2.3
+
+---------------------------------------------------------------------------
+
+by taylankasap at 2016-02-05T07:17:41Z
+
+Should I send a new pull request from 2.3 to 2.3? I'm not familiar with the pull request flow.
+
+---------------------------------------------------------------------------
+
+by jakzal at 2016-02-05T08:19:29Z
+
+@taylankasap this is just a suggestion to the person who'll be doing the merge. You don't have to do anything at this point.
