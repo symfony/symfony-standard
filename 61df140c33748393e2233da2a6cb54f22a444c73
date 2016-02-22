@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------
+
+by kachkaev at 2015-12-28T15:12:47Z
+
+Docs need updating too as they still refer to the old ``assets_version``:
+http://symfony.com/doc/current/reference/configuration/framework.html#ref-framework-assets-version
+
+Perhaps, mentioning [assets version bundle](https://github.com/kachkaev/KachkaevAssetsVersionBundle) there will be useful too.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2016-02-02T16:52:45Z
+
+:+1:
+
+Status: Reviewed
+
+---------------------------------------------------------------------------
+
+by Tobion at 2016-02-02T16:56:56Z
+
+Should be merged in 2.7 as that is where this config has been deprecated. But this will conflict currently as `assets` config in SE has not been added there yet.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2016-02-21T21:44:42Z
+
+:+1:
