@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by Jean85 at 2016-02-24T14:16:28Z
+
+Since we are on master and with SF3.x, I updated this PR to request phpunit-bridge `^3.0`. `^2.7` is needed when backporting to older branches
+
+---------------------------------------------------------------------------
+
+by Tobion at 2016-02-25T17:31:56Z
+
+:+1: Could be merged in 3.0
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-02-25T22:02:03Z
+
+:+1:
