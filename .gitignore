@@ -14,5 +14,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-
+/build/*
 \.idea

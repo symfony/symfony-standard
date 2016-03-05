@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="php-project" basedir="." default="build:main">
+    <!-- Properties -->
+    <property name="dir.app" value="${project.basedir}/app" />
+    <property name="dir.src" value="${project.basedir}/src" />
+    <property name="dir.build" value="${project.basedir}/build" />
+    <property name="dir.docs" value="${dir.build}/docs" />
+
+    <property name="dir.docs.phpdoc" value="${dir.docs}/phpdoc" />
+    <property name="dir.docs.docblox" value="${dir.docs}/docblox" />
+    <property name="dir.reports" value="${dir.build}/logs" />
+    <property name="dir.reports.coverage" value="${dir.reports}/coverage" />
+    <property name="php.interpreter" value="php56" />
+
+
+    <property name="php_cs.bin" value="${project.basedir}/vendor/bin/phpcs" />
+    <property name="php_cs.standards" value="${project.basedir}/standards/Symfony2/ruleset.xml" />
+    <property name="php_md.bin" value="${project.basedir}/vendor/bin/phpmd" />
+    <property name="php_md.standards" value="${project.basedir}/standards/PHPMessDetector/ruleset.xml" />
+
+    <!-- Filesets -->
+    <fileset id="sourcecode" dir="${dir.src}">
+        <include name="**/*.php" />
+    </fileset>
+
+    <!-- Default target -->
+    <target name="build:main"
+            depends="lint, php-cs-threshold-check, php-md-threshold-check"
+            description="Run all test and build everything" />
+
+
+    <!-- LINT -->
+    <target name="lint" description="Run PHP lint on all *.php files in code directory.">
+        <echo message="Check for syntax errors" />
+        <phplint haltonfailure="true" interpreter="${php.interpreter}">
+            <fileset refid="sourcecode" />
+        </phplint>
+    </target>
+
+    <!-- PHP CODE SNIFFER -->
+    <target name="php-cs" description="Find coding standard violations using PHP_CodeSniffer and create a log file for the CI server.">
+        <echo message="PHP_CodeSniffer" />
+        <exec command="${php_cs.bin} --extensions=php --report=checkstyle --report-file=${project.basedir}/build/logs/symfony2_cs.xml --standard=${php_cs.standards} ${dir.src}" logoutput="true" />
+    </target>
+
+    <target name="php-cs-threshold-check">
+        <exec command="${php_cs.bin} --extensions=php --report=csv --standard=${php_cs.standards} ${dir.src} | tail -n +2 | wc -l" logoutput="true" outputProperty="checkstyle_violations" />
+        <exec command="test ${checkstyle_violations} -lt 1" logoutput="true" checkreturn="true" />
+    </target>
+
+    <!-- PHP MESS DETECTOR -->
+
+    <target name="phpmd" description="Perform project mess detection using PHPMD and create a log file for the CI server.">
+        <exec command="${php_md.bin} ${dir.src} xml ${php_md.standards} --reportfile ${dir.build}/logs/phpmd.xml" logoutput="true" />
+    </target>
+
+    <target name="php-md-threshold-check">
+        <exec command="${php_md.bin} ${dir.src} xml ${php_md.standards} | xmllint --xpath 'count(//violation)' -" logoutput="true" outputProperty="mess_violations" />
+        <exec command="test ${mess_violations} -lt 1" logoutput="true" checkreturn="true" />
+    </target>
+
+
+    <!-- Symfony2 code sniffer -->
+    <!--<target name="check:cs" description="Checks coding standard.">-->
+        <!--<echo msg="Checking coding standard ..." />-->
+        <!--<exec command=""-->
+    <!--</target>-->
+
+</project>

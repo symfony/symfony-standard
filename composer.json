@@ -28,7 +28,8 @@
         "phing/phing": "2.*",
         "sebastian/phpcpd": "2.0.*",
         "phpmd/phpmd": "2.3.*",
-        "phpunit/phpunit": "5.2.*"
+        "phpunit/phpunit": "5.2.*",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "scripts": {
         "post-install-cmd": [
