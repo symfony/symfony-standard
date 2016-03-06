@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="php-project" basedir="." default="build:main">
+<project name="symfony3-project" basedir="." default="build">
     <!-- Properties -->
+
+    <!-- DIRS -->
     <property name="dir.app" value="${project.basedir}/app" />
     <property name="dir.src" value="${project.basedir}/src" />
     <property name="dir.build" value="${project.basedir}/build" />
-    <property name="dir.docs" value="${dir.build}/docs" />
+    <property name="dir.build.logs" value="${dir.build}/logs" />
 
-    <property name="dir.docs.phpdoc" value="${dir.docs}/phpdoc" />
-    <property name="dir.docs.docblox" value="${dir.docs}/docblox" />
-    <property name="dir.reports" value="${dir.build}/logs" />
-    <property name="dir.reports.coverage" value="${dir.reports}/coverage" />
+    <!-- PHP CONFIG -->
     <property name="php.interpreter" value="php56" />
 
-
+    <!-- OTHER -->
     <property name="php_cs.bin" value="${project.basedir}/vendor/bin/phpcs" />
     <property name="php_cs.standards" value="${project.basedir}/standards/Symfony2/ruleset.xml" />
     <property name="php_md.bin" value="${project.basedir}/vendor/bin/phpmd" />
     <property name="php_md.standards" value="${project.basedir}/standards/PHPMessDetector/ruleset.xml" />
+    <property name="php_cpd.bin" value="${project.basedir}/vendor/bin/phpcpd" />
+
+    <!-- DIRTY CODE LIMITS -->
+    <property name="code_sniffer.limit" value="5" />
+    <property name="mess_detector.limit" value="5" />
+    <property name="copy_paste.limit" value="5" />
 
     <!-- Filesets -->
     <fileset id="sourcecode" dir="${dir.src}">
@@ -24,10 +29,15 @@
     </fileset>
 
     <!-- Default target -->
-    <target name="build:main"
-            depends="lint, php-cs-threshold-check, php-md-threshold-check"
+    <target name="build"
+            depends="prepare, lint, php-cs-threshold-check, php-md-threshold-check, php-cpd-threshold-check"
             description="Run all test and build everything" />
 
+    <!-- PREPARE BUILD -->
+    <target name="prepare" description="Prepare build folders">
+        <delete dir="${dir.build.logs}" />
+        <mkdir dir="${dir.build.logs}" />
+    </target>
 
     <!-- LINT -->
     <target name="lint" description="Run PHP lint on all *.php files in code directory.">
@@ -45,7 +55,7 @@
 
     <target name="php-cs-threshold-check">
         <exec command="${php_cs.bin} --extensions=php --report=csv --standard=${php_cs.standards} ${dir.src} | tail -n +2 | wc -l" logoutput="true" outputProperty="checkstyle_violations" />
-        <exec command="test ${checkstyle_violations} -lt 1" logoutput="true" checkreturn="true" />
+        <exec command="test ${checkstyle_violations} -lt ${code_sniffer.limit}" logoutput="true" checkreturn="true" />
     </target>
 
     <!-- PHP MESS DETECTOR -->
@@ -56,7 +66,17 @@
 
     <target name="php-md-threshold-check">
         <exec command="${php_md.bin} ${dir.src} xml ${php_md.standards} | xmllint --xpath 'count(//violation)' -" logoutput="true" outputProperty="mess_violations" />
-        <exec command="test ${mess_violations} -lt 1" logoutput="true" checkreturn="true" />
+        <exec command="test ${mess_violations} -lt ${mess_detector.limit}" logoutput="true" checkreturn="true" />
+    </target>
+
+    <!-- PHP COPY PASTE DETECTOR -->
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec command="${php_cpd.bin} --log-pmd ${dir.build.logs}/pmd-cpd.xml ${dir.src} --exclude Tests" logoutput="true"/>
+    </target>
+
+    <target name="php-cpd-threshold-check" description="Find duplicate code using PHPCPD">
+        <exec command="${php_cpd.bin} ${dir.src} --exclude Tests | egrep 'Found [0-9]+ exact clones' -o  | egrep [0-9]+ -o || echo 0" logoutput="true" outputProperty="copy_paste_violations" />
+        <exec command="test ${copy_paste_violations} -lt ${copy_paste.limit}" logoutput="true" checkreturn="true" />
     </target>
 
 
