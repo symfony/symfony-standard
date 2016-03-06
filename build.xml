@@ -10,6 +10,7 @@
 
     <!-- PHP CONFIG -->
     <property name="php.interpreter" value="php56" />
+    <property name="composer.name" value="composer.phar" />
 
     <!-- OTHER -->
     <property name="php_cs.bin" value="${project.basedir}/vendor/bin/phpcs" />
@@ -30,13 +31,18 @@
 
     <!-- Default target -->
     <target name="build"
-            depends="prepare, lint, php-cs-threshold-check, php-md-threshold-check, php-cpd-threshold-check"
+            depends="prepare, composer, lint, php-cs-threshold-check, php-md-threshold-check, php-cpd-threshold-check"
             description="Run all test and build everything" />
 
     <!-- PREPARE BUILD -->
     <target name="prepare" description="Prepare build folders">
         <delete dir="${dir.build.logs}" />
         <mkdir dir="${dir.build.logs}" />
+    </target>
+
+    <!-- COMPOSER -->
+    <target name="composer" description="Prepare build folders">
+        <exec command="${composer.name} install" />
     </target>
 
     <!-- LINT -->
