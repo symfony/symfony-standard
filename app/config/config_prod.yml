@@ -1,9 +1,9 @@
 imports:
     - { resource: config.yml }
 
-#framework:
-#    validation:
-#        cache: apc
+framework:
+    esi: true
+    fragments: {path: /_proxy}
 
 #doctrine:
 #    orm:
