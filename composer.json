@@ -34,7 +34,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "bin/console security:check -q || app/console security:check --ansi || true"
+            "CHECK_OUTPUT=`bin/console security:check --ansi` && echo 'No known vulnerabilities found in vendors' || echo \"$CHECK_OUTPUT\""
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -43,7 +43,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "bin/console security:check -q || app/console security:check --ansi || true"
+            "CHECK_OUTPUT=`bin/console security:check --ansi` && echo 'No known vulnerabilities found in vendors' || echo \"$CHECK_OUTPUT\""
         ]
     },
     "config": {
