@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by fabpot at 2016-03-17T13:17:10Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2016-03-17T13:42:20Z
+
+:+1:
+
+@hhamon IMO, we should ask people to run at least 4.8
+
+---------------------------------------------------------------------------
+
+by hhamon at 2016-03-17T14:39:29Z
+
+@stof where should we advertize for it? README file?
+
+---------------------------------------------------------------------------
+
+by stof at 2016-03-17T16:24:29Z
+
+hmm, given this is the standard edition, i.e. the bootstrap for new projects, not sure we need to advocate it in the readme (which gets removed anyway during the project creation). Advocating to use a maintained version is PHPUnit's job after all.
+
+We may add a note in the symfony-doc chapter about testing, but I'm not sure it is worth it.
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-03-17T16:43:42Z
+
+We could update the version number in the docs. Somewhere we tell people to use 4.2 or higher.
