@@ -67,11 +67,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# This config will be removed when https://github.com/dunglas/DunglasActionBundle/issues/18 will be fixed
-dunglas_action:
-    autodiscover:
-        enabled:   true
-        directories:
-            action:  [ Action ]
-            command: []
