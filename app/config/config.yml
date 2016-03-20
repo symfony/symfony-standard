@@ -18,6 +18,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -66,3 +67,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# This config will be removed when https://github.com/dunglas/DunglasActionBundle/issues/18 will be fixed
+dunglas_action:
+    autodiscover:
+        enabled:   true
+        directories:
+            action:  [ Action ]
+            command: []

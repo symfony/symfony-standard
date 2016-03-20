@@ -1,17 +1,20 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Action;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultAction extends Controller
 {
+    use ControllerTrait;
+
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function __invoke(Request $request)
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
