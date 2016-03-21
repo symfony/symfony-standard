@@ -66,3 +66,15 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Can be changed directly in the bundle is we found an agreement
+dunglas_action:
+    autodiscover:
+        enabled:   true
+        directories:
+            action: [ ]
+            console: [ Command ]
+    directories:         # List of directories relative to the kernel root directory containing classes to auto-register.
+        action: [ '../src/AppBundle/Controller' ] # Still an autowiring_type definition to add in Symfony to avoid this
+
+
