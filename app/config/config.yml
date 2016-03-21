@@ -82,7 +82,7 @@ doctrine_cache:
         phpcr_nodes:
             type: file_system
 
-# Cmf Configuration
+# Main Cmf Configuration
 cmf_core:
     persistence:
         phpcr: true
@@ -91,23 +91,19 @@ cmf_core:
     publish_workflow: false
 
 # Cmf Routing Configuration
-cmf_routing:
-    dynamic:
-        templates_by_class:
-            Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: 'AcmeDemoBundle:Page:index.html.twig'
+#cmf_routing:
+#    dynamic:
+#        templates_by_class:
+#            Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: 'page/index.html.twig'
+#            Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent: 'page/index.html.twig'
 
 # Menu Configuration
-knp_menu:
-    twig: true
+#knp_menu:
+#    twig: true
 
+# Block Configuration
 sonata_block:
     default_contexts: [cms]
-
-# The FOSRestBundle is used by the CreateBundle
-fos_rest:
-    view:
-        formats:
-            json: true
 
 # Swiftmailer Configuration
 swiftmailer:
