@@ -4,16 +4,21 @@ namespace AppBundle\Controller;
 
 use AppBundle\MyService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController
 {
-    private $myService;
+    use ControllerTrait;
 
-    public function __construct(MyService $myService) // to be removed, just to show advantages of this system
+    private $myService;
+    private $container;
+
+    public function __construct(MyService $myService, ContainerInterface $container) // to be removed, just to show advantages of this system
     {
         $this->myService = $myService;
+        $this->container = $container;
     }
 
     /**
@@ -25,7 +30,7 @@ class DefaultController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ]);
     }
 }

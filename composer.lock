@@ -779,12 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dunglas/DunglasActionBundle.git",
-                "reference": "db0039f330216d7cd3186c0359b8b2903a8347d8"
+                "reference": "a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dunglas/DunglasActionBundle/zipball/db0039f330216d7cd3186c0359b8b2903a8347d8",
-                "reference": "db0039f330216d7cd3186c0359b8b2903a8347d8",
+                "url": "https://api.github.com/repos/dunglas/DunglasActionBundle/zipball/a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f",
+                "reference": "a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f",
                 "shasum": ""
             },
             "require": {
@@ -804,6 +804,11 @@
                 "symfony/routing": "To use the @Route annotation provided by the bundle."
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dunglas\\ActionBundle\\": ""
@@ -832,7 +837,7 @@
                 "routing",
                 "symfony"
             ],
-            "time": "2016-03-20 21:53:21"
+            "time": "2016-03-21 19:09:55"
         },
         {
             "name": "incenteev/composer-parameter-handler",
