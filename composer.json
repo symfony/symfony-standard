@@ -11,8 +11,8 @@
         "psr-4": { "Tests\\": "tests/" }
     },
     "require": {
-        "php": ">=5.5.9",
-        "symfony/symfony": "3.0.*",
+        "php": ">=5.6.9",
+        "symfony/symfony": "3.0.3",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -24,7 +24,12 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "phing/phing": "2.*",
+        "sebastian/phpcpd": "2.0.*",
+        "phpmd/phpmd": "2.3.*",
+        "phpunit/phpunit": "5.2.*",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -46,7 +51,7 @@
     },
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "5.6.9"
         }
     },
     "extra": {
