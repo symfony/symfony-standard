@@ -27,7 +27,7 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "dunglas/action-bundle": "dev-master"
+        "dunglas/action-bundle": "~1.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a69358f967b59cf771e6bdbd2a10f102",
-    "content-hash": "4925bc72010ead28d50f372a0cb1f28f",
+    "hash": "c8ec970699bfc2ef57302b8815534257",
+    "content-hash": "b54028e2924240d3ef774026608551d5",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -779,18 +779,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dunglas/DunglasActionBundle.git",
-                "reference": "a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f"
+                "reference": "83034c14b2b5cf09683f3ae66041867c176ae67d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dunglas/DunglasActionBundle/zipball/a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f",
-                "reference": "a8cc6f073c8ce78e8661f4ed0d039bc34bf4d00f",
+                "url": "https://api.github.com/repos/dunglas/DunglasActionBundle/zipball/83034c14b2b5cf09683f3ae66041867c176ae67d",
+                "reference": "83034c14b2b5cf09683f3ae66041867c176ae67d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
                 "symfony/config": "~2.8|~3.0",
                 "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/finder": "~2.8|~3.0",
                 "symfony/http-kernel": "~2.8|~3.0"
             },
             "require-dev": {
@@ -837,7 +838,7 @@
                 "routing",
                 "symfony"
             ],
-            "time": "2016-03-21 19:09:55"
+            "time": "2016-03-25 16:19:42"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1204,16 +1205,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.14",
+            "version": "v3.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "cccf975c565ccd835bddc30a8fea5cdfe3357bf1"
+                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/cccf975c565ccd835bddc30a8fea5cdfe3357bf1",
-                "reference": "cccf975c565ccd835bddc30a8fea5cdfe3357bf1",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
+                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
                 "shasum": ""
             },
             "require": {
@@ -1262,7 +1263,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2016-03-01 10:50:07"
+            "time": "2016-03-22 12:39:08"
         },
         {
             "name": "sensiolabs/security-checker",
