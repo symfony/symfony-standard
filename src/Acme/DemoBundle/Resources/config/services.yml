@@ -1,6 +1,0 @@
-services:
-    acme_demo.block.unit:
-        class: Acme\DemoBundle\Block\UnitBlockService
-        arguments: [acme_demo.block.unit, "@templating"]
-        tags:
-            - { name: sonata.block }

@@ -1,9 +1,0 @@
-_demo_security:
-    resource: "@AcmeDemoBundle/Controller/SecurityController.php"
-    type: annotation
-
-_demo_login_check:
-    path: /login_check
-
-_demo_logout:
-    path: /logout
