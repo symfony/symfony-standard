@@ -1,0 +1,3 @@
+preset: symfony
+
+disabled: [phpdoc_to_comment]
