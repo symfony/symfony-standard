@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2016-04-12T10:12:52Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-04-12T10:14:43Z
+
+Still needed for php < 5.6 actually, shouldn't this PR be made over 2.8 instead of 2.3 ?
+
+---------------------------------------------------------------------------
+
+by Seldaek at 2016-04-12T10:16:22Z
+
+IMO if you care about this level of performance you are on PHP5.6 or even 7 by now.. Upgrading PHP is the biggest win, not nitpicking with autoloaders :)
+
+Also this file is only used by new projects, older projects stuck on 5.4/5.5 will keep their file with the APC instructions, and new projects are more likely to be setup on new servers with up to date PHP. So all in all I'd say :+1: for just removing it.
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-04-12T14:22:44Z
+
+:+1:
+
+---------------------------------------------------------------------------
+
+by stof at 2016-04-12T15:13:58Z
+
+:+1:
