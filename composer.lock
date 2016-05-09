@@ -1216,16 +1216,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.1",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
+                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
-                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
+                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
                 "shasum": ""
             },
             "require": {
@@ -1265,7 +1265,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2015-06-06 14:19:39"
+            "time": "2016-05-01 08:45:47"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -1568,16 +1568,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.40",
+            "version": "v2.3.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "7bcb5deb31d2ba005dcf97f731fac64e46922f95"
+                "reference": "f3f87ce00d90261a7d31673632f11e9149863bbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/7bcb5deb31d2ba005dcf97f731fac64e46922f95",
-                "reference": "7bcb5deb31d2ba005dcf97f731fac64e46922f95",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f3f87ce00d90261a7d31673632f11e9149863bbb",
+                "reference": "f3f87ce00d90261a7d31673632f11e9149863bbb",
                 "shasum": ""
             },
             "require": {
@@ -1680,7 +1680,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-04-29 05:45:37"
+            "time": "2016-05-09 19:45:40"
         },
         {
             "name": "twig/extensions",
