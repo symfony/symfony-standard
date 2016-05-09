@@ -1,0 +1,12 @@
+---------------------------------------------------------------------------
+
+by Ener-Getick at 2016-05-04T17:07:38Z
+
+Rebased and updated to use the new option ``framework.cache.system`` introduced in https://github.com/symfony/symfony/pull/18667.
+This is ready now.
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-05-06T07:26:47Z
+
+👍
