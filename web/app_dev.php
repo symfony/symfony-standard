@@ -18,6 +18,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
+if (php_sapi_name() === 'cli-server') {
+    $_SERVER = array_merge($_ENV, $_SERVER);
+}
+
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */
