@@ -11,11 +11,18 @@
         }
     ],
     "autoload": {
-        "psr-4": { "": "src/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "require": {
         "php": "^5.5.9|^7.0",
@@ -31,8 +38,8 @@
         "symfony/monolog-bundle": "^2.8",
         "symfony/polyfill-apcu": "^1.0",
         "symfony-cmf/symfony-cmf": "2.0.*",
-        "jackalope/jackalope-doctrine-dbal": "~1.1",
-        "nelmio/alice": "~1.0"
+        "symfony-cmf/create-bundle": "2.0.*",
+        "jackalope/jackalope-doctrine-dbal": "~1.1"
     },
     "require-dev": {
         "liip/functional-test-bundle": "~1.0",
@@ -41,6 +48,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "symfony/phpunit-bridge": "~3.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -60,11 +69,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        }
     },
     "extra": {
         "symfony-app-dir": "app",
