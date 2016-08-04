@@ -7,7 +7,7 @@ parameters:
     database_name:     ~
     database_user:     ~
     database_password: ~
-    database_path:     '%kernel.root_dir%/app.sqlite'
+    database_path:     '%kernel.root_dir%/../var/app.sqlite'
 
     phpcr_backend:
         # if you're using Jackalope Doctrine DBAL
@@ -36,7 +36,7 @@ parameters:
     mailer_password:   ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNotSecretChangeIt
 
     debug_toolbar:          true
     debug_redirects:        false

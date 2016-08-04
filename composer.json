@@ -19,31 +19,37 @@
             "app/AppCache.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
-        "php": "^5.3.9|^7.0",
-        "symfony/symfony": "~2.8",
-        "doctrine/orm": "^2.4.8",
-        "doctrine/doctrine-bundle": "~1.4",
-        "doctrine/data-fixtures": "~1.0",
-        "doctrine/doctrine-cache-bundle": "~1.0",
-        "twig/extensions": "~1.0",
+        "php": "^5.5.9|^7.0",
+        "symfony/symfony": "^3.1",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/data-fixtures": "^1.0",
+        "doctrine/doctrine-cache-bundle": "^1.2",
+        "twig/extensions": "^1.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "symfony-cmf/symfony-cmf": "1.3.*",
-        "symfony-cmf/simple-cms-bundle": "1.3.*",
-        "symfony-cmf/create-bundle": "1.2.*",
-        "jackalope/jackalope-doctrine-dbal": "~1.1",
-        "nelmio/alice": "~1.0"
+        "symfony/assetic-bundle": "^2.3",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "symfony/polyfill-apcu": "^1.0",
+        "symfony-cmf/symfony-cmf": "2.0.*",
+        "symfony-cmf/create-bundle": "2.0.*",
+        "jackalope/jackalope-doctrine-dbal": "~1.1"
     },
     "require-dev": {
         "liip/functional-test-bundle": "~1.0",
         "sensio/generator-bundle": "~3.0",
-        "sensio/distribution-bundle": "~5.0",
+        "sensio/distribution-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "symfony/phpunit-bridge": "~2.7"
+        "symfony/phpunit-bridge": "~3.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -64,18 +70,18 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "1.3-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }
