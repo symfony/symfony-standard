@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-02-04T20:17:16Z
+
+Isn't `fe80::1` the equivalent of `127.0.0.1` in IPV6?
+
+---------------------------------------------------------------------------
+
+by phihag at 2016-02-04T21:48:19Z
+
+@Pierstoval No, see the text in the commit and pull request description. The closest equivalent to `127.0.0.1` (which is just one out of many [loopback addresses](https://en.wikipedia.org/wiki/Localhost) in IPv4) would be `::1`, [the only loopback address in IPv6](https://tools.ietf.org/html/rfc4291#section-2.5.3). `fe80::1` is a [link-local](https://tools.ietf.org/html/rfc4291#section-2.5.6) - [that is to say interface-specific](https://en.wikipedia.org/wiki/Link-local_address) - address with no special properties. If you think Wikipedia, the IETF, and I are all mistaken about `fe80::1`, try it yourself - nobody will answer `ping fe80::1%eth0` until you configure the address.
+
+---------------------------------------------------------------------------
+
+by Tobion at 2016-02-04T23:19:20Z
+
+:+1:  Should be merged in 2.3
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-02-28T09:27:33Z
+
+:+1:
