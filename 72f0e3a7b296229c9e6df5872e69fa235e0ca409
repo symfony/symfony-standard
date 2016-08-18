@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2015-12-23T11:03:13Z
+
+It forces users to update their composer installation, and even if composer itself sends warnings, I don't know if it's a best practice.
+But anyway I really like this feature :+1:
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-23T19:12:57Z
+
+Given that it's included in a tagged release and that release is even more than a month old I am :+1: on this.
+
+---------------------------------------------------------------------------
+
+by wouterj at 2015-12-23T20:11:48Z
+
+Please note that the Composer update warnings are no shown after 60 days instead of 30, maybe it's better to wait another month?
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2015-12-23T20:34:03Z
+
+Oh did they exceed that value?
+
+---------------------------------------------------------------------------
+
+by 1ed at 2016-01-28T21:58:31Z
+
+We already use `config.platform` from the same release as of https://github.com/symfony/symfony-standard/commit/d0e9308e807aae02c332897d610ad5eb49d81c1e.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-01-29T15:03:40Z
+
+I think we can merge this now :+1:
+
+---------------------------------------------------------------------------
+
+by fabpot at 2016-01-29T15:05:53Z
+
+That's very different. If config.platform is not taken into account, that's no big deal. Here, if script references are not supported, hooks do not work anymore.
