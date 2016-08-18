@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2016-03-11T11:35:43Z
+
+The circle of the new icon looks a bit jagged. How does it look when displayed in a browser tab? Thanks!
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-03-11T11:47:05Z
+
+Actually there *is* a slight difference but I don't know if it's a problem.
+
+![capture d ecran 2016-03-11 a 12 46 24](https://cloud.githubusercontent.com/assets/3369266/13701304/52b1bd9c-e787-11e5-9911-9aef24c7e6f5.png)
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2016-03-11T11:55:43Z
+
+@Pierstoval thanks, but I wanted to see the icon in the browser tab at the mini-size the user will see. Here it is the comparison (top, current icon; bottom, new proposal):
+
+![favicon_comparison](https://cloud.githubusercontent.com/assets/73419/13701478/797852f0-e788-11e5-9f30-22f82afbce69.png)
+
+I'd say that the new proposal is noticeable worse at small sizes :disappointed:
+
+---------------------------------------------------------------------------
+
+by rjmunro at 2016-03-12T16:50:49Z
+
+I've made a 32 color version - it's about 80% bigger, but still about 1/5 of the size of the original image (which has 600 colors in it)
