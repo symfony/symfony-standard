@@ -1,0 +1,23 @@
+version: '2'
+
+volumes:
+    cache:
+        driver: local
+    logs:
+        driver: local
+    sessions:
+        driver: local
+
+services:
+    symfony:
+        image: php:7-alpine
+        working_dir: /var/www
+        command: php bin/console server:run 0.0.0.0:8080
+        tty: true # Needed for server:run ...
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/var/www
+            - cache:/var/www/var/cache
+            - logs:/var/www/var/logs
+            - sessions:/var/www/var/sessions
