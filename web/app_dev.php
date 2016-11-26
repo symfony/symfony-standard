@@ -23,7 +23,10 @@ $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
+//This check tries to detect a XDebug session to prevent the load of class cache
+if (!extension_loaded('xdebug') || (!isset($_REQUEST['XDEBUG_SESSION_START']) && !isset($_COOKIE['XDEBUG_SESSION']) && ini_get('xdebug.remote_autostart') == false)) {
+    $kernel->loadClassCache();
+}
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
