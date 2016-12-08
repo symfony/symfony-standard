@@ -3,6 +3,12 @@
     "license": "MIT",
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dunglas/symfony"
+        }
+    ],
     "autoload": {
         "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
@@ -12,7 +18,7 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.3.x-dev",
+        "symfony/symfony": "dev-autowirable_controller as 3.3.0",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
