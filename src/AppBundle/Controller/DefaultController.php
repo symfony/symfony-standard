@@ -13,8 +13,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => str_replace('/', DIRECTORY_SEPARATOR, realpath($this->getParameter('kernel.root_dir').'/../').'/'),
-        ));
+        return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        ]);
     }
 }
