@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by stof at 2017-01-04T10:57:42Z
+
+``~2.11.3`` is indeed a bad constraint as it forbids getting the latest releases.
+
+I would even migrate to 3.0.2+ to have the new features.
+
+---------------------------------------------------------------------------
+
+by pierredup at 2017-01-04T11:01:03Z
+
+The same issue happens when using 3.0.1+ (I haven't tested on 3.0.2 yet, will do so shortly).
+So if you want to migrate to 3.x, it needs to be locked on 3.0.0 for the time being
+
+---------------------------------------------------------------------------
+
+by jordisala1991 at 2017-01-04T11:02:27Z
+
+It should work, atleast for the changelog.. is reverting the change that was causing the issue
+
+---------------------------------------------------------------------------
+
+by pierredup at 2017-01-04T11:10:37Z
+
+I've tested with 3.0.2 and it works fine, I have updated the PR to use 3.0.2+
