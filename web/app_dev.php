@@ -1,5 +1,6 @@
 <?php
 
+use App\AppKernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
@@ -19,13 +20,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 }
 
 /** @var \Composer\Autoload\ClassLoader $loader */
-$loader = require __DIR__.'/../app/autoload.php';
+$loader = require __DIR__.'/../conf/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-if (PHP_VERSION_ID < 70000) {
-    $kernel->loadClassCache();
-}
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

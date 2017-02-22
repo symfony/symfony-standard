@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7620213af8197665d87a5b909dc19c1",
+    "content-hash": "111da1c701a220fb5647993c0d698ded",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1315,16 +1315,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "116027b57b568ed61b7b1c80eeb4f6ee9e8c599c"
+                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/116027b57b568ed61b7b1c80eeb4f6ee9e8c599c",
-                "reference": "116027b57b568ed61b7b1c80eeb4f6ee9e8c599c",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/f2ce0035fc512287978510ca1740cd111d60f89f",
+                "reference": "f2ce0035fc512287978510ca1740cd111d60f89f",
                 "shasum": ""
             },
             "require": {
@@ -1355,7 +1355,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2016-09-23T18:09:57+00:00"
+            "time": "2017-02-18T17:53:25+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1869,16 +1869,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "dev-master",
+            "version": "dev-autowirable_controller",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/symfony.git",
-                "reference": "8f65fc7ec1418593d433e39abb71d3959eb10a0b"
+                "url": "https://github.com/dunglas/symfony.git",
+                "reference": "e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8f65fc7ec1418593d433e39abb71d3959eb10a0b",
-                "reference": "8f65fc7ec1418593d433e39abb71d3959eb10a0b",
+                "url": "https://api.github.com/repos/dunglas/symfony/zipball/e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56",
+                "reference": "e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56",
                 "shasum": ""
             },
             "require": {
@@ -1897,7 +1897,8 @@
             },
             "conflict": {
                 "phpdocumentor/reflection-docblock": "<3.0",
-                "phpdocumentor/type-resolver": "<0.2.0"
+                "phpdocumentor/type-resolver": "<0.2.0",
+                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
             },
             "provide": {
                 "psr/cache-implementation": "1.0",
@@ -1995,7 +1996,11 @@
                     "**/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "files": [
+                    "src/Symfony/Component/VarDumper/Resources/functions/dump.php"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2014,7 +2019,10 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-02-16 21:52:43"
+            "support": {
+                "source": "https://github.com/dunglas/symfony/tree/autowirable_controller"
+            },
+            "time": "2017-02-22 10:16:55"
         },
         {
             "name": "twig/twig",
@@ -2133,7 +2141,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.2.3",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
@@ -2191,7 +2199,14 @@
             "time": "2017-01-21T17:06:35+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "3.3.0",
+            "alias_normalized": "3.3.0.0",
+            "version": "dev-autowirable_controller",
+            "package": "symfony/symfony"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "symfony/symfony": 20

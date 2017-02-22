@@ -1,7 +1,7 @@
 imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: services.yml }
+    - { resource: 'parameters.yml' }
+    - { resource: 'security.yml' }
+    - { resource: 'services.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -13,7 +13,7 @@ framework:
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: "%kernel.root_dir%/../conf/routing.yml"
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    paths:
+        - '%kernel.root_dir%/../templates'
 
 # Doctrine Configuration
 doctrine:
@@ -60,6 +62,13 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            App:
+                type:      annotation
+                is_bundle: false
+                dir:       '%kernel.root_dir%/../src/Entity'
+                prefix:    'Entity'
+                alias:     App
 
 # Swiftmailer Configuration
 swiftmailer:
