@@ -4,5 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+    _defaults:
+        public: false # Making services private improve performances
+
 #    'My\ClassName':
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

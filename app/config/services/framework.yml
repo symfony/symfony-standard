@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        # Enable constructor and getter autowiring for all services defined in this file
+        autowire: ['__construct', 'get*']
+
+    _instanceof:
+        # Add the console.command tag to all services defined in this file having this type
+        Symfony\Component\Console\Command\Command:
+            tags: ['console.command']
+
+        Twig_ExtensionInterface:
+            tags: ['twig.extension']
+            public: false
+
+        Symfony\Component\EventDispatcher\EventSubscriberInterface:
+            tags: ['kernel.event_subscriber']
+            public: false
+
+    # Register all classes in these directories as services
+    App\:
+        resource: '../../../src/{Controller,Command,EventSubscriber,Twig}'

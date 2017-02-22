@@ -1873,12 +1873,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dunglas/symfony.git",
-                "reference": "4f3d68b9caca02d44a81e076f145cbc9e7848f62"
+                "reference": "e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dunglas/symfony/zipball/4f3d68b9caca02d44a81e076f145cbc9e7848f62",
-                "reference": "4f3d68b9caca02d44a81e076f145cbc9e7848f62",
+                "url": "https://api.github.com/repos/dunglas/symfony/zipball/e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56",
+                "reference": "e5fbe6d0c94b17bcc3f7d681a21e4708d54f8b56",
                 "shasum": ""
             },
             "require": {
@@ -2022,7 +2022,7 @@
             "support": {
                 "source": "https://github.com/dunglas/symfony/tree/autowirable_controller"
             },
-            "time": "2017-02-21 19:18:01"
+            "time": "2017-02-22 10:16:55"
         },
         {
             "name": "twig/twig",
