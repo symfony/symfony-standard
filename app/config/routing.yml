@@ -1,3 +1,0 @@
-action:
-    resource: "../../src/Controller/"
-    type:     annotation

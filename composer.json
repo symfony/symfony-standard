@@ -10,14 +10,13 @@
         }
     ],
     "autoload": {
-        "psr-4": { "App\\": "src/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "psr-4": { "App\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0.0",
         "symfony/symfony": "dev-autowirable_controller as 3.3.0",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -52,18 +51,18 @@
     },
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "7.0.0"
         }
     },
     "extra": {
-        "symfony-app-dir": "app",
+        "symfony-app-dir": "conf",
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "conf/parameters.yml"
         },
         "branch-alias": {
             "dev-master": "3.3-dev"

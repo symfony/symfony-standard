@@ -1,0 +1,40 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    'My\ClassName': ~
+
+# Auto-register common directories
+    _defaults:
+        # Enable constructor and getter autowiring for all services defined in this file
+        autowire: ['__construct', 'get*']
+        public: false
+
+    _instanceof:
+        # Add some common tags to enable feature auto-registration
+        Symfony\Component\Console\Command\Command:
+            tags: ['console.command']
+            public: true  # Mandatory
+
+        Twig_ExtensionInterface:
+            tags: ['twig.extension']
+
+        Symfony\Component\EventDispatcher\EventSubscriberInterface:
+            tags: ['kernel.event_subscriber']
+
+        Symfony\Component\Form\FormTypeInterface:
+            tags: ['form.type']
+            public: true  # Mandatory
+
+        Symfony\Component\Security\Core\Authorization\VoterInterface:
+            tags: ['security.voter']
+
+    # Register all classes in these directories as services
+    App\:
+        resource: '../src/{Command,EventSubscriber,Twig,Form,Voter}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        public: true # Mandatory
