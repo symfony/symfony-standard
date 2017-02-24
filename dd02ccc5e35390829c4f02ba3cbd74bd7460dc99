@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by stof at 2017-02-22T10:49:05Z
+
+I would use single quotes. Single-quoted YAML scalars are simpler, because there are no special chars inside them (except the single quote itself)
+
+---------------------------------------------------------------------------
+
+by dunglas at 2017-02-23T08:11:34Z
+
+@stof done (I've also replaced all existing double quotes by single quotes for the sake of consistency).
+
+---------------------------------------------------------------------------
+
+by fabpot at 2017-02-24T14:10:44Z
+
+Shouldn't this be done in 2.7 instead?
+
+---------------------------------------------------------------------------
+
+by dunglas at 2017-02-24T14:33:19Z
+
+Why not, but the deprecation is triggered only since 3.3.
+
+---------------------------------------------------------------------------
+
+by stof at 2017-02-24T14:38:19Z
+
+Replacing existing quotes should indeed be done in 2.7, to make merging branches easier
+
+---------------------------------------------------------------------------
+
+by dunglas at 2017-02-24T15:12:44Z
+
+* Switched to 2.7
+* Uniformized indentation (no align)
+* Unifomized comments
