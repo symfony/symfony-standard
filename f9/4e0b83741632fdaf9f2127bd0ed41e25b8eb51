@@ -1,0 +1,60 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-11-21T19:05:35Z
+
+I'm not sure I agree with this. Having both `symfony/symfony` **and** `symfony/var-dumper` should be something supported, as the first one contains the second one...
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2016-11-23T09:11:09Z
+
+@Pierstoval having `symfony/symfony` *and* `symfony/var-dumper` as standalone vendor is not possible because `symfony/symfony` *replaces* `symfony/var-dumper` in composer.json. Note also that this PR isn't making this new so I don't get why you expressed a :-1: here.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2016-11-23T09:23:01Z
+
+I just don't get the *real* point of this, it seems to express an issue for users wanting to use `dump` *before* enabling `DebugBundle`, so in this case, it brings the feature "out of symfony", which can also be done by using `auto_prepend_file`'s php.ini config option, or by enabling the dumper manually in the Symfony's autoloader.
+
+I think having this in symfony standard adds more complexity to the composer.json file for too specific cases, that's why I put a 👎 , but still it's just an opinion 😉
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2016-11-25T19:46:38Z
+
+👍
+
+---------------------------------------------------------------------------
+
+by javiereguiluz at 2017-01-17T16:43:41Z
+
+@Pierstoval the `Scenario #1` explained in https://github.com/symfony/symfony/issues/20201 could be enough reason to enable this: it will allow to use `dump()` anywhere in your app. Besides, the "performance impact" is minimal because it's just one file.
+
+I'm 👍
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2017-01-17T20:59:58Z
+
+I don't really like this approach.
+I prefer to install the var dumper globally. then I can **really** use it anywhere.
+see: https://github.com/lyrixx/dotfiles/blob/master/php/90-my.ini#L10
+
+---------------------------------------------------------------------------
+
+by jrobeson at 2017-03-10T04:49:00Z
+
+some people still use symfony on shared hosting, so this would be nice for them.  Perhaps flex will solve it somehow? perhaps some generator for helpful bits on shared hosting?
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2017-03-10T06:41:03Z
+
+Can't we merge this one ? I thought it was already.
+There no down side. Use a global install if you prefer @lyrixx, but asking everyone to know how to do it is asking for too much. The DX should be great by default without requiring people to learn yet another concept/option before they have the full setup.
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2017-03-10T07:23:54Z
+
+:+1:
