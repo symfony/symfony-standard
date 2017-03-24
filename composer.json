@@ -32,7 +32,8 @@
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "@php bin/console cache:clear --ansi",
+            "@php bin/console cache:clear --no-warmup --ansi",
+            "@php bin/console cache:warmup --ansi",
             "@php bin/console assets:install web --symlink --relative --ansi",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
