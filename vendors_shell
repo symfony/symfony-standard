@@ -1,0 +1,128 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the Symfony Standard Edition.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+$rootDir = dirname(__DIR__);
+$vendorDir = $rootDir.'/vendor';
+
+array_shift($argv);
+if (!isset($argv[0])) {
+    exit(<<<EOF
+Symfony2 vendors script management.
+
+Specify a command to run:
+
+ install: install vendors as specified in deps or deps.lock (recommended)
+ update:  update vendors to their latest versions (as specified in deps)
+
+
+EOF
+    );
+}
+
+if (!in_array($command = array_shift($argv), array('install', 'update'))) {
+    exit(sprintf("Command \"%s\" does not exist.\n", $command));
+}
+
+/*
+ * Check wether this project is based on the Standard Edition that was
+ * shipped with vendors or not.
+ */
+if (is_dir($vendorDir.'/symfony') && !is_dir($vendorDir.'/symfony/.git') && !in_array('--reinstall', $argv)) {
+    exit(<<<EOF
+Your project seems to be based on a Standard Edition that includes vendors.
+
+Try to run ./bin/vendors install --reinstall
+
+
+EOF
+    );
+}
+
+if (!is_dir($vendorDir)) {
+    mkdir($vendorDir, 0777, true);
+}
+
+// versions
+$versions = array();
+if ('install' === $command && file_exists($rootDir.'/deps.lock')) {
+    foreach (file($rootDir.'/deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $parts = array_values(array_filter(explode(' ', $line)));
+        if (2 !== count($parts)) {
+            exit(sprintf('The deps version file is not valid (near "%s")', $line));
+        }
+        $versions[$parts[0]] = $parts[1];
+    }
+}
+
+$newversions = array();
+$deps = parse_ini_file($rootDir.'/deps', true, INI_SCANNER_RAW);
+if (false === $deps) {
+    exit("The deps file is not valid ini syntax. Perhaps missing a trailing newline?\n");
+}
+foreach ($deps as $name => $dep) {
+    $dep = array_map('trim', $dep);
+
+    // revision
+    if (isset($versions[$name])) {
+        $rev = $versions[$name];
+    } else {
+        $rev = isset($dep['version']) ? $dep['version'] : 'origin/HEAD';
+    }
+
+    // install dir
+    $installDir = isset($dep['target']) ? $vendorDir.'/'.$dep['target'] : $vendorDir.'/'.$name;
+    if (in_array('--reinstall', $argv)) {
+        if (PHP_OS == 'WINNT') {
+            echo sprintf('rmdir /S /Q %s', escapeshellarg(realpath($installDir)))."\n";
+        } else {
+            echo sprintf('rm -rf %s', escapeshellarg($installDir))."\n";
+        }
+    }
+
+    echo "\n# > Installing/Updating $name\n";
+
+    // url
+    if (!isset($dep['git'])) {
+        exit(sprintf('The "git" value for the "%s" dependency must be set.', $name));
+    }
+    $url = $dep['git'];
+
+    if (!is_dir($installDir)) {
+        echo sprintf('git clone %s %s', escapeshellarg($url), escapeshellarg($installDir))."\n";
+    }
+
+    echo sprintf('cd %s && git fetch origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev))."\n";
+    echo sprintf('cd %s', escapeshellarg(dirname(__FILE__).'/..'))."\n";
+
+    if ('update' === $command) {
+        ob_start();
+        echo sprintf('cd %s && git log -n 1 --format=%%H', escapeshellarg($installDir))."\n";
+        $newversions[] = trim($name.' '.ob_get_clean());
+    }
+}
+
+// update?
+if ('update' === $command) {
+    file_put_contents($rootDir.'/deps.lock', implode("\n", $newversions));
+}
+
+// php on windows can't use the shebang line from system()
+$interpreter = PHP_OS == 'WINNT' ? 'php.exe' : '';
+
+// Update the bootstrap files
+echo sprintf('%s %s', $interpreter, escapeshellarg($rootDir.'/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php'))."\n";
+
+// Update assets
+echo sprintf('%s %s assets:install %s', $interpreter, escapeshellarg($rootDir.'/app/console'), escapeshellarg($rootDir.'/web/'))."\n";
+
+// Remove the cache
+echo sprintf('%s %s cache:clear --no-warmup', $interpreter, escapeshellarg($rootDir.'/app/console'))."\n";
