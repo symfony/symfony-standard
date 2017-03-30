@@ -3,9 +3,10 @@ imports:
 
 #doctrine:
 #    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+#        auto_generate_proxy_classes: false
+#        metadata_cache_driver:       apc
+#        result_cache_driver:         apc
+#        query_cache_driver:          apc
 
 monolog:
     handlers:
