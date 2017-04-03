@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by Seldaek at 2017-03-26T11:57:36Z
+
+monologbundle 3.1.0 is out
+
+---------------------------------------------------------------------------
+
+by lyrixx at 2017-04-03T14:15:56Z
+
+I rebased the PR. Now it required the new symfony/monolog-bundle package.
