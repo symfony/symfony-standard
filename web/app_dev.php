@@ -29,4 +29,11 @@ if (PHP_VERSION_ID < 70000) {
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
-$kernel->terminate($request, $response);
+
+if (function_exists('register_postsend_function')) {
+    register_postsend_function(function () use ($kernel, $request, $response) {
+        $kernel->terminate($request, $response);
+    });
+} else {
+    $kernel->terminate($request, $response);
+}
