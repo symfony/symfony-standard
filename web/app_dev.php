@@ -28,5 +28,10 @@ if (PHP_VERSION_ID < 70000) {
 }
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
-$response->send();
+
+if ($request->getMethod() == 'HEAD') {
+    $response->sendHeaders();
+} else {
+    $response->send();
+}
 $kernel->terminate($request, $response);
