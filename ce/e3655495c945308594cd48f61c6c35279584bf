@@ -1,0 +1,5 @@
+---------------------------------------------------------------------------
+
+by bocharsky-bw at 2017-04-21T08:39:45Z
+
+I think you have to regenerate `composer.lock` file. Actually, `composer remove symfony/assetic-bundle` should do the trick.
