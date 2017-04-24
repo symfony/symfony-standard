@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-03-16T19:49:16Z
+
+I'm 👍 with these changes, but why don't we also recommend a custom PHPUnit bootstrap file? On **every** project on which I have to write PHPUnit tests, I have to create a custom booststrap file to reset the database or to change some stuff before testing.
+
+What do you think?
+
+---------------------------------------------------------------------------
+
+by BPScott at 2017-03-16T22:48:09Z
+
+I'm a newcomer so may be misinterpreting but everything I've saw recently seemed to have been about moving Symfony towards a more minimal, lean structure by default while allowing expansion if required (see [slight glimpses of Flex](https://github.com/symfony/skeleton) and [the reimagining of symfony-standard](https://github.com/symfony/symfony-standard/pull/1034). Adding a file whose sole contents will be something like `<?php require_once '../vendor/autoload.php';` seems like the sort of overhead Symfony is now seeking to avoid.
+
+Anecdotally I haven't needed to create a PHPUnit bootstrap for any of the Symfony projects I've worked on recently - [LiipFunctionalTestBundle](https://github.com/liip/LiipFunctionalTestBundle) has taken care of all my DB resetting needs.
+
+---------------------------------------------------------------------------
+
+by flug at 2017-03-17T09:38:05Z
+
+If I'm not mistaken 'app/autoload.php' is used to load classes or file functions no composerify for the project
+http://symfony.com/doc/current/components/class_loader/class_loader.html
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-03-17T14:10:13Z
+
+@flug The goal of this PR is just to remove Symfony Standard's autoload file that becomes useless thanks to symfony/symfony#21837, not to get rid of the ClassLoader component (which will be removed in Symfony 4.0 only)
+
+---------------------------------------------------------------------------
+
+by BPScott at 2017-04-24T15:18:21Z
+
+sensiolabs/SensioDistributionBundle#313 is merged, and this PR has been updated to use the latest version of SensioDistributionBundle. This is now good to go.
+
+The fabbot check failure is unrelated to this change.
