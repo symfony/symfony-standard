@@ -1,0 +1,87 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2017-04-29T00:03:33Z
+
+Awesome! This was on my list!
+
+We need this for the docs: we need to be able to assume that new users (at least) have a certain set of config.
+
+This config is subjective, let's try to find a really "good" first attempt :). The only part I'm not sure about is public: false - I feel like we should spend some time training users to not use the container as a locator, then begins taking this ability away a bit later.
+
+Oh, maybe add a few comments. Like for the main service loader, comment that it adds a service for each class and that you can add whatever directories you need.
+
+Thanks!
+
+---------------------------------------------------------------------------
+
+by GuilhemN at 2017-04-29T12:17:33Z
+
+I added some comments.
+
+> The only part I'm not sure about is public: false - I feel like we should spend some time training users to not use the container as a locator, then begins taking this ability away a bit later.
+
+As autowiring is also enabled by default, I think we can make this move.
+Wdyt @fabpot as you changed this in the first place?
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2017-05-01T15:15:45Z
+
+Other than the open question about `public: true` under `_defaults`, 👍
+
+Awesome job @GuilhemN with the comments - these are SO clear. Seriously - <3 them.
+
+---------------------------------------------------------------------------
+
+by GuilhemN at 2017-05-01T16:38:39Z
+
+You and @fabpot did a big part of the job so a big thank to you too ☺
+
+I hope this will be merged soon it makes symfony much more accessible and is a great step forward imo.
+
+About `public`, it's not the most important part of the PR so I removed it for now, we can discuss it later ☺
+
+---------------------------------------------------------------------------
+
+by fabpot at 2017-05-01T16:40:44Z
+
+I would indeed keep `public: false`. Or we keep it as `true` here in Symfony SE and switch it to `true` for Flex. WDTY?
+
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2017-05-01T16:44:23Z
+
+`public: false` is a good practice, it allows auto-removal of unused service loaded by PSR-4 discovery, and inlining in the container + encourages using regular injection over injecting the container to use it as an opaque service locator. I'll all :+1: for making `public: false` the default with 3.3.
+
+---------------------------------------------------------------------------
+
+by GuilhemN at 2017-05-01T16:48:32Z
+
+When looking at the docs, using the container as a service locator is still a big thing, so i'm totally for `public: false` but @weaverryan has a point saying people are not ready for private services yet.
+So objectively, I think we should delay this change until we revamp the docs to push injecting dependencies.
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2017-05-01T16:51:03Z
+
+I'm also now leaning towards `public: false` here in the SE. I think this *will* cause some issues for users, but it's also easy to fix (i.e. add `public: true` to your service or [better] use DI / some of the new injection techniques). And since we're moving towards a type-based system (i.e. where you ask the container for a service by class/interface, not by id), this will push that forward.
+
+Of course, we should also add a comment above this new line - something like:
+
+```yml
+# this means you cannot fetch services directly from the container via $container->get()
+# if you need to do this, you can override this setting on individual services
+public: false
+```
+
+---------------------------------------------------------------------------
+
+by weaverryan at 2017-05-01T16:51:47Z
+
+@GuilhemN this would definitely force us to do that docs-revamping right now :) - but we *can* do that
+
+---------------------------------------------------------------------------
+
+by GuilhemN at 2017-05-01T16:54:17Z
+
+@weaverryan ok I'm adding it back with your comments :)
