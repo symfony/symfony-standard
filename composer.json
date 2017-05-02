@@ -28,6 +28,10 @@
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
+    "suggest": {
+        "jms/security-extra-bundle": "Enhances the Symfony2 Security Component with several new features.",
+        "jms/di-extra-bundle": "Provides Advanced Dependency Injection Features for Symfony2."
+    },
     "scripts": {
         "symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
