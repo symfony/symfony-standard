@@ -1,0 +1,6 @@
+<table>
+{% for task in tasks %}
+	<tr><td>{{ task.dueDate|date('Y-m-d')}}</td><td>{{ task.task }}</td></tr>
+{% endfor %}
+</table>
+<a href="{{ path('create_task') }}">Create new task</a>
