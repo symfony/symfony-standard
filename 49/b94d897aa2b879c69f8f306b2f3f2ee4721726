@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2017-05-12T17:32:34Z
+
+Awesome! I tweaked the description of importing from `src/` and also updated to the new glob exclude pattern in symfony/symfony#22680
+
+I also found an even more necessary reason for this change. Suppose you have:
+
+```php
+class IceCreamGenerator
+{
+    public function __construct(LoggerInterface $logger) {}
+}
+```
+
+But you do *not* register this as a service. Instead, you just type-hint this in a controller:
+```php
+public function indexAction(IceCreamGenerator $generator)
+```
+
+This will work: autowiring will auto-register `IceCreamGenerator` as a service. But, suppose now that you add a un-autowireable arg to it:
+
+```php
+class IceCreamGenerator
+{
+    public function __construct(LoggerInterface $logger, $foo) {}
+}
+```
+
+This is the error the user sees (only when they visit this page) is:
+
+> Controller "AppBundle\Controller\BlogController::indexAction()" requires that you provide a value for the "$generator" argument. Either the argument is nullable and no null value has been provided, no default value has been provided or because there is a non optional argument after this one.
+
+The error is *very* unclear. The reason is due to how the "controller args" feature works: if it has any issue autowiring an arg, it just skips it (it needs to do this, due to things like entities). That's fine, but the error is a problem.
+
+But instead, if you load all services from `src/AppBundle` as I suggest in this PR, then you get correct error (and at compile time):
+
+> Cannot autowire service "AppBundle\Delicious\IceCreamGenerator": argument "$foo" of method "__construct()" must have a type-hint or be given a value explicitly.
