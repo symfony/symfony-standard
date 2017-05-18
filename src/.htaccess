@@ -1,5 +1,13 @@
 <IfModule mod_authz_core.c>
-    Require all denied
+    <IfModule mod_authz_host.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_host.c>
+        <IfModule mod_access_compat.c>
+            Order deny,allow
+            Deny from all
+        </IfModule>
+    </IfModule>
 </IfModule>
 <IfModule !mod_authz_core.c>
     Order deny,allow
