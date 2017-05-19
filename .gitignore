@@ -1,6 +1,9 @@
 /.web-server-pid
 /app/config/parameters.yml
 /build/
+/bin/*
+!/bin/console
+!/bin/symfony_requirements
 /phpunit.xml
 /var/*
 !/var/cache
