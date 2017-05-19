@@ -27,7 +27,6 @@ services:
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
-        tags: ['controller.service_arguments']
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
