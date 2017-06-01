@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "620010b4a6c5f00f26dd7a5230eff84d",
+    "content-hash": "53f89ef50b344eb1f18bff6de3ddbd06",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2032,16 +2032,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.3.0",
+            "version": "3.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "5a7e31c48e7cd4831efa409fffb661beb9995174"
+                "reference": "c82fe6016810e79edbf3c9928ba8b252d1d3fb46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/5a7e31c48e7cd4831efa409fffb661beb9995174",
-                "reference": "5a7e31c48e7cd4831efa409fffb661beb9995174",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c82fe6016810e79edbf3c9928ba8b252d1d3fb46",
+                "reference": "c82fe6016810e79edbf3c9928ba8b252d1d3fb46",
                 "shasum": ""
             },
             "require": {
@@ -2095,6 +2095,7 @@
                 "symfony/inflector": "self.version",
                 "symfony/intl": "self.version",
                 "symfony/ldap": "self.version",
+                "symfony/lock": "self.version",
                 "symfony/monolog-bridge": "self.version",
                 "symfony/options-resolver": "self.version",
                 "symfony/process": "self.version",
@@ -2142,7 +2143,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -2181,7 +2182,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-05-29T21:02:32+00:00"
+            "time": "2017-05-29 18:41:56"
         },
         {
             "name": "twig/twig",
@@ -2366,7 +2367,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "symfony/symfony": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
