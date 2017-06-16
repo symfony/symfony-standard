@@ -47,8 +47,11 @@ It comes pre-configured with the following bundles:
   * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
     configuring and working with Symfony distributions
 
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
+  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
     capabilities
+
+  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
+    using the PHP built-in web servep
 
   * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
     integration
@@ -58,12 +61,12 @@ released under the MIT or BSD license.
 
 Enjoy!
 
-[1]:  https://symfony.com/doc/3.2/setup.html
+[1]:  https://symfony.com/doc/3.3/setup.html
 [6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
+[7]:  https://symfony.com/doc/3.3/doctrine.html
+[8]:  https://symfony.com/doc/3.3/templating.html
+[9]:  https://symfony.com/doc/3.3/security.html
+[10]: https://symfony.com/doc/3.3/email.html
+[11]: https://symfony.com/doc/3.3/logging.html
 [13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
