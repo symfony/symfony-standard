@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by Tobion at 2017-05-16T19:10:25Z
+
+👍  Should be merged in 2.7 since #964 is also in 2.7 that removed the $loader usage.
+
+---------------------------------------------------------------------------
+
+by MacDada at 2017-05-16T19:13:15Z
+
+@Tobion I'm gonna split it into two PRs, as `2.7` does not have `$loader` in `console`: https://github.com/symfony/symfony-standard/blob/2.7/app/console
+
+EDIT: …or not. I don't know how to split it :/
