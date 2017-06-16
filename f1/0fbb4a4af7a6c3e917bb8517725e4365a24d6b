@@ -1,0 +1,88 @@
+---------------------------------------------------------------------------
+
+by stof at 2017-02-28T09:54:14Z
+
+Optimizing the autoloader should not be in the project-level composer.json. This is not a setting that you want to use in development. ``classmap-authoritative`` is particularly annoying in dev as it requires redumping the autoloader each time you add a class). ``optimize-autoloader`` is a bit better, but it still lead to weird errors when you delete a class (as the composer classloader will still assume the file exist and will try to require it when asking for the class).
+
+Such settings should be turned on only in prod environments (and ``classmap-authoritative`` requires makign sure that your project works fine with it, which may not always be the case depending of what your code does)
+
+---------------------------------------------------------------------------
+
+by stof at 2017-02-28T09:55:46Z
+
+To be clear, ``classmap-authoritative`` should be used in prod as soon as you can. And ``optimize-autoloader`` is just a must-have in prod. Not using it means you don't care about performance at all, as it is a performance boost without drawback (it has drawbacks in dev, but not in prod)
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-02-28T09:58:35Z
+
+So you recommend nor `classmap-authoritative` nor `optimize-autoloader` for the SE?
+
+---------------------------------------------------------------------------
+
+by stof at 2017-02-28T10:06:58Z
+
+@Pierstoval I never recommend putting them in the project itself (unless you never develop in it).
+this setting should either be enabled in the system-level config on prod server (in ``$COMPOSER_HOME/config.json``) or through the CLI flags in your deployment scripts.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-02-28T12:35:32Z
+
+@stof:
+> `optimize-autoloader` is a bit better, but it still lead to weird errors when you delete a class (as the composer classloader will still assume the file exist and will try to require it when asking for the class).
+
+I find this argument very interesting: if you delete a class, it shouldn't be used in your application, therefore the `class not found` error would still be triggered by the autoloader, wouldn't it?
+
+In this case, it means that `optimize-autoloader` would trigger errors only for mistakes that are already handled without optimizing the autoloader, so I would still suggest we may use it by default (instead of `classmap-authoritative` that sounds more production-specific)
+
+---------------------------------------------------------------------------
+
+by stof at 2017-02-28T12:45:54Z
+
+@Pierstoval there are case like ``class_exists`` where passing a non-existent class to the autoloader is expected.
+An outdated optimized autoloader will not be silent in this case, but will require the removed file.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-02-28T13:19:07Z
+
+Hmm... That makes me re-think about default autoload optimization in app. I may remove this part in this PR if it sounds too much for the SE.
+
+By the way, what about the `psr-4` changes? 😃
+
+---------------------------------------------------------------------------
+
+by bocharsky-bw at 2017-02-28T16:25:37Z
+
+I suppose `composer.lock` should be updated.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-03-01T08:27:49Z
+
+I removed the `classmap-authoritative` part and updated the lock file hash
+
+---------------------------------------------------------------------------
+
+by stof at 2017-03-07T11:47:20Z
+
+Composer now has a documentation page about optimizing the autoloader for production: https://getcomposer.org/doc/articles/autoloader-optimization.md
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-03-07T12:02:52Z
+
+@stof Great! Then, I guess the Symfony documentation about deployment best practices can also link this article from Composer's website, and we can still review explicit PSR-4 autoload rule for AppBundle, I tend to continue thinking it's a good practice 😃
+
+---------------------------------------------------------------------------
+
+by stof at 2017-03-07T12:14:58Z
+
+@Pierstoval linking to the composer doc from the Symfony one is the plan, yes. But we wanted to have the source of truth in the composer doc itself (as it is not specific to Symfony)
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2017-03-07T19:03:23Z
+
+Then this PR needs to be reviewed 😸
