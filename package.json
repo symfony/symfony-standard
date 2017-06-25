@@ -1,0 +1,30 @@
+{
+  "author": "Fabien Potencier <fabien@symfony.com>",
+  "bugs": {
+    "url": "https://github.com/symfony/framework-standard-edition/issues"
+  },
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.8.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6"
+  },
+  "description": "The \"Symfony Standard Edition\" distribution",
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "homepage": "https://github.com/symfony/framework-standard-edition",
+  "license": "MIT",
+  "name": "@symfony/framework-standard-edition",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/symfony/framework-standard-edition.git"
+  },
+  "scripts": {
+    "assets:build": "node_modules/.bin/encore production",
+    "assets:build:dev": "node_modules/.bin/encore dev",
+    "assets:watch": "node_modules/.bin/encore dev --watch"
+  }
+}
