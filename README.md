@@ -51,7 +51,7 @@ It comes pre-configured with the following bundles:
     capabilities
 
   * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web servep
+    using the PHP built-in web server
 
   * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
     integration
