@@ -1298,16 +1298,16 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b"
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/0241b135ff64c6031048c6425cd833a8300da46b",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/2e0a23a4874838e26de6f025e02fc63328921a4c",
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c",
                 "shasum": ""
             },
             "require": {
@@ -1364,7 +1364,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2016-11-22T11:42:57+00:00"
+            "time": "2017-07-14T07:26:46+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1599,20 +1599,21 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.31",
+            "version": "v2.7.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "7157a5e7745d0ccdd6a4e64a13701ec230f82a07"
+                "reference": "f3f7d550529d6c50fdc09256c3311d3e0e3cab18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/7157a5e7745d0ccdd6a4e64a13701ec230f82a07",
-                "reference": "7157a5e7745d0ccdd6a4e64a13701ec230f82a07",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f3f7d550529d6c50fdc09256c3311d3e0e3cab18",
+                "reference": "f3f7d550529d6c50fdc09256c3311d3e0e3cab18",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
+                "ext-xml": "*",
                 "paragonie/random_compat": "~1.0",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
@@ -1727,7 +1728,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-07-05T07:16:30+00:00"
+            "time": "2017-07-17T17:33:37+00:00"
         },
         {
             "name": "twig/twig",
@@ -1846,7 +1847,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.23",
+            "version": "v2.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
