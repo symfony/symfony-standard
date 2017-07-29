@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+$varName = 'var';
+$rootPath = dirname(__DIR__);
+$composerPath = $rootPath.'/composer.json';
+
+if (file_exists($composerPath) && is_readable($composerPath)) {
+    $composer = json_decode(file_get_contents($composerPath), JSON_OBJECT_AS_ARRAY);
+    if ($composer && isset($composer['extra']) && isset($composer['extra']['symfony-var-dir'])) {
+        $varName = $composer['extra']['symfony-var-dir'];
+    }
+}
+
+$cacheDir = $rootPath.'/'.$varName.'/cache';
+if (!is_dir($cacheDir) || !is_writable($cacheDir)) {
+    die (sprintf("Cache directory '%s' does not seem to exist or is not writable to the current user.\n", $cacheDir));
+}
+
+if ($argc > 1) {
+    $cacheDir .= '/' . $argv[1];
+    if (!is_dir($cacheDir) || !is_writable($cacheDir)) {
+        die (sprintf("Environment cache directory '%s' does not seem to exist or is not writable to the current user.\n", $cacheDir));
+    }
+}
+
+if ('/' === DIRECTORY_SEPARATOR) {
+    system('rm -rf '.escapeshellarg($cacheDir));
+} else {
+    system('rmdir /S /Q '.escapeshellarg($cacheDir));
+}
+
+die (sprintf("Cache directory '%s' successfully removed.\n", $cacheDir));
