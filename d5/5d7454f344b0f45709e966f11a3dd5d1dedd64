@@ -1,0 +1,12 @@
+---------------------------------------------------------------------------
+
+by nicolas-grekas at 2017-11-09T09:47:06Z
+
+Since this is a bit internal, I propose to do it in AppKernel::registerContainerConfiguration (as in Flex)
+Could you also add the `container.dumper.inline_class_loader` parameter meanwhile btw?
+
+---------------------------------------------------------------------------
+
+by xabbuh at 2017-11-09T12:51:30Z
+
+requires symfony/symfony#24872 now
