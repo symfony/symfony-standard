@@ -2038,16 +2038,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.1",
+            "version": "v3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "46d4a9027c752ce425f67c94e89e3e3098f3a488"
+                "reference": "29961b693fa2157a3f349d1a801f9f8742be4e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/46d4a9027c752ce425f67c94e89e3e3098f3a488",
-                "reference": "46d4a9027c752ce425f67c94e89e3e3098f3a488",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/29961b693fa2157a3f349d1a801f9f8742be4e03",
+                "reference": "29961b693fa2157a3f349d1a801f9f8742be4e03",
                 "shasum": ""
             },
             "require": {
@@ -2189,7 +2189,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-12-04T23:05:15+00:00"
+            "time": "2017-12-15T02:05:35+00:00"
         },
         {
             "name": "twig/twig",
@@ -2260,16 +2260,16 @@
     "packages-dev": [
         {
             "name": "sensio/generator-bundle",
-            "version": "v3.1.6",
+            "version": "v3.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "128bc5dabc91ca40b7445f094968dd70ccd58305"
+                "reference": "28cbaa244bd0816fd8908b93f90380bcd7b67a65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/128bc5dabc91ca40b7445f094968dd70ccd58305",
-                "reference": "128bc5dabc91ca40b7445f094968dd70ccd58305",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/28cbaa244bd0816fd8908b93f90380bcd7b67a65",
+                "reference": "28cbaa244bd0816fd8908b93f90380bcd7b67a65",
                 "shasum": ""
             },
             "require": {
@@ -2310,20 +2310,20 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2017-07-18T07:57:44+00:00"
+            "time": "2017-12-07T15:36:41+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.1",
+            "version": "v3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "9ecf83a2628b4668f02e680f65357c62600749fc"
+                "reference": "074c2e205c849a5fb37b1c24ade03cc975ac8079"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/9ecf83a2628b4668f02e680f65357c62600749fc",
-                "reference": "9ecf83a2628b4668f02e680f65357c62600749fc",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/074c2e205c849a5fb37b1c24ade03cc975ac8079",
+                "reference": "074c2e205c849a5fb37b1c24ade03cc975ac8079",
                 "shasum": ""
             },
             "require": {
@@ -2372,7 +2372,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-12-04T20:23:06+00:00"
+            "time": "2017-12-14T19:40:10+00:00"
         }
     ],
     "aliases": [],
