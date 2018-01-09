@@ -1,8 +1,9 @@
 Symfony Standard Edition
 ========================
 
-**WARNING**: This distribution does not support Symfony 4. Use [Symfony Skeleton][15]
-instead, which is a minimal Symfony project recommended to create new applications.
+**WARNING**: This distribution does not support Symfony 4. See the
+[Installing & Setting up the Symfony Framework][15] page to find a replacement
+that fits you best.
 
 Welcome to the Symfony Standard Edition - a fully-functional Symfony
 application that you can use as the skeleton for your new applications.
