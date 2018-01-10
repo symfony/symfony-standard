@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by weaverryan at 2018-01-08T18:14:32Z
+
+Ah, now maybe we should just link to the setup page but not mention the “minimalist” skeleton. This is becaue there are now multiple skeletons, so let’s be generic here.
+
+---------------------------------------------------------------------------
+
+by bocharsky-bw at 2018-01-09T09:16:44Z
+
+Done! How about this notice?
+
+Probably "Installing & Setting up the Symfony Framework" page also should be updated to mention "website-skeleton" and others if any
