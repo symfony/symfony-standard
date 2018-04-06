@@ -1037,16 +1037,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.4.2",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "965cdeb01fdcab7653253aa81d40441d261f1e66"
+                "reference": "9b3899e3c3ddde89016f576edb8c489708ad64cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/965cdeb01fdcab7653253aa81d40441d261f1e66",
-                "reference": "965cdeb01fdcab7653253aa81d40441d261f1e66",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/9b3899e3c3ddde89016f576edb8c489708ad64cd",
+                "reference": "9b3899e3c3ddde89016f576edb8c489708ad64cd",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1081,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-13T16:22:52+00:00"
+            "time": "2018-04-04T21:48:54+00:00"
         },
         {
             "name": "psr/log",
@@ -1667,16 +1667,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.44",
+            "version": "v2.7.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "dcc2650a94ae3d8ae249c22c787102954b5e50ab"
+                "reference": "42fb3a4371900e72796192f5adb8872cea6335b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/dcc2650a94ae3d8ae249c22c787102954b5e50ab",
-                "reference": "dcc2650a94ae3d8ae249c22c787102954b5e50ab",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/42fb3a4371900e72796192f5adb8872cea6335b9",
+                "reference": "42fb3a4371900e72796192f5adb8872cea6335b9",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1797,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-04-02T09:53:43+00:00"
+            "time": "2018-04-06T12:49:55+00:00"
         },
         {
             "name": "twig/twig",
