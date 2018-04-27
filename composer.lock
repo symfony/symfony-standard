@@ -1667,16 +1667,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.45",
+            "version": "v2.7.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "42fb3a4371900e72796192f5adb8872cea6335b9"
+                "reference": "994f06f704443c8a4458b814ba7ce0d70eeb19e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/42fb3a4371900e72796192f5adb8872cea6335b9",
-                "reference": "42fb3a4371900e72796192f5adb8872cea6335b9",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/994f06f704443c8a4458b814ba7ce0d70eeb19e3",
+                "reference": "994f06f704443c8a4458b814ba7ce0d70eeb19e3",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1797,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-04-06T12:49:55+00:00"
+            "time": "2018-04-27T05:41:53+00:00"
         },
         {
             "name": "twig/twig",
