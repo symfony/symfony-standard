@@ -1723,16 +1723,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.47",
+            "version": "v2.7.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f629de3af20aaa027741fdba9590a03871352b0a"
+                "reference": "34d6116e2b80351c5a6f591285a4e9381b0dd127"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f629de3af20aaa027741fdba9590a03871352b0a",
-                "reference": "f629de3af20aaa027741fdba9590a03871352b0a",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/34d6116e2b80351c5a6f591285a4e9381b0dd127",
+                "reference": "34d6116e2b80351c5a6f591285a4e9381b0dd127",
                 "shasum": ""
             },
             "require": {
@@ -1854,7 +1854,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-05-21T11:48:51+00:00"
+            "time": "2018-05-25T11:46:22+00:00"
         },
         {
             "name": "twig/twig",
@@ -1973,7 +1973,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.39",
+            "version": "v2.8.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
