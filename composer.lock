@@ -2104,16 +2104,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.24",
+            "version": "v3.4.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "4783969de06e5b8787b5e3ad2279f6b8aceeb81b"
+                "reference": "24454234816e061b4b9c5787eaa2bb6326ead1da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/4783969de06e5b8787b5e3ad2279f6b8aceeb81b",
-                "reference": "4783969de06e5b8787b5e3ad2279f6b8aceeb81b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/24454234816e061b4b9c5787eaa2bb6326ead1da",
+                "reference": "24454234816e061b4b9c5787eaa2bb6326ead1da",
                 "shasum": ""
             },
             "require": {
@@ -2255,7 +2255,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2019-04-02T13:48:13+00:00"
+            "time": "2019-04-16T06:02:31+00:00"
         },
         {
             "name": "twig/twig",
@@ -2381,16 +2381,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.23",
+            "version": "v3.4.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "b539f37134c10edbf85dc0567be4151c56870f5e"
+                "reference": "71fb02e83f0bdf9e83f4a557eec64abaf236284c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/b539f37134c10edbf85dc0567be4151c56870f5e",
-                "reference": "b539f37134c10edbf85dc0567be4151c56870f5e",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/71fb02e83f0bdf9e83f4a557eec64abaf236284c",
+                "reference": "71fb02e83f0bdf9e83f4a557eec64abaf236284c",
                 "shasum": ""
             },
             "require": {
@@ -2442,7 +2442,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2019-02-16T18:50:26+00:00"
+            "time": "2019-04-08T07:56:31+00:00"
         }
     ],
     "aliases": [],
