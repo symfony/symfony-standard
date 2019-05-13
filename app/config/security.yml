@@ -16,7 +16,7 @@ security:
         main:
             anonymous: ~
             # activate different ways to authenticate
-
+            logout_on_user_change: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
             #http_basic: ~
 
