@@ -111,8 +111,7 @@ $hasMinorProblems = (bool) count($minorProblems);
 
             /*
             Copyright (c) 2010, Yahoo! Inc. All rights reserved.
-            Code licensed under the BSD License:
-            http://developer.yahoo.com/yui/license.html
+            Code licensed under the BSD License
             version: 3.1.2
             build: 56
             */
@@ -337,7 +336,7 @@ $hasMinorProblems = (bool) count($minorProblems);
                 </div>
 
                 <div class="search">
-                  <form method="get" action="http://symfony.com/search">
+                  <form method="get" action="https://symfony.com/search">
                     <div class="form-row">
 
                       <label for="search-id">
