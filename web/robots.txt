@@ -1,5 +1,5 @@
-# www.robotstxt.org/
-# support.google.com/webmasters/answer/6062608
+# https://www.robotstxt.org/
+# https://support.google.com/webmasters/answer/6062608
 
 User-agent: *
 Disallow:
