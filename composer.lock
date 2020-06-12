@@ -2230,16 +2230,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.41",
+            "version": "v3.4.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "a72c510fb3bc67d3ba67981178d78be80360ede2"
+                "reference": "79b0cc53dfc1bc69509d91c4a967b659a9540910"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/a72c510fb3bc67d3ba67981178d78be80360ede2",
-                "reference": "a72c510fb3bc67d3ba67981178d78be80360ede2",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/79b0cc53dfc1bc69509d91c4a967b659a9540910",
+                "reference": "79b0cc53dfc1bc69509d91c4a967b659a9540910",
                 "shasum": ""
             },
             "require": {
@@ -2396,7 +2396,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-31T05:14:34+00:00"
+            "time": "2020-06-12T10:57:23+00:00"
         },
         {
             "name": "twig/twig",
@@ -2521,16 +2521,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.40",
+            "version": "v3.4.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "58c7de42b8b13c3bec82dbb8a87d00e4d83dd7c2"
+                "reference": "ac355e1e9ebde4cf6ef5187f5cf4b43001f9a29f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/58c7de42b8b13c3bec82dbb8a87d00e4d83dd7c2",
-                "reference": "58c7de42b8b13c3bec82dbb8a87d00e4d83dd7c2",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/ac355e1e9ebde4cf6ef5187f5cf4b43001f9a29f",
+                "reference": "ac355e1e9ebde4cf6ef5187f5cf4b43001f9a29f",
                 "shasum": ""
             },
             "require": {
@@ -2596,7 +2596,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-25T12:18:34+00:00"
+            "time": "2020-06-04T15:36:03+00:00"
         }
     ],
     "aliases": [],
